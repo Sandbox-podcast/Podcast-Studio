@@ -154,7 +154,9 @@ Opaque hair luma ~204 across all variants — E darkening is **band-only**. “H
 
 **Trade-off (factual, box CPU):** E still best on gap + raw halo proxy, **worst colour**. E2 / E2b restore band colour (ΔE ~3.7–3.9, better than A) but raise band luma above A (hair stays light; spill not crushed like E). Soft erode (E2 / E2-fgr) trims gap α **0.594→0.584** vs C; full E still tighter (**0.559**). E2-fgr ≈ A on ΔE, ≈ C on halo, cheapest post. Arm/torso decor leak @45 s **unchanged** across A–E2 (post does not fix it).
 
-**Best pick (Media, pending Designer visual + Vision 3070 timings):** **E2-fgr** for régie/delivery matte (RVM fgr already decontaminated; soft erode; **+25 ms/fr** box CPU; no grey-hair crush). Prefer **E2** only if band ΔE must beat A and post cost is acceptable on GPU. Keep E only if Designer prioritizes max halo crush over colour.
+**Media default (box CPU):** **E2-fgr** — RVM fgr in band, soft erode, **+25 ms/fr**; aligns with metrics above. Vision **3070** timings still open.
+
+**Designer visual (Akasha, 01:35) — LOCK for POC look only (“chrome POC”):** **E2-fgr** = visual **LOCK**. **E** = **FAIL** on colour (greyed hair fringe). **E2b** = acceptable fallback. Arm/torso leak at **45** s unchanged → backlog **P1**. This lock applies to the POC chrome look only; **master HQ** remains **open** (Loïc decides).
 
 **Paths:**
 - [`run4/media/server-matte/variants/e2/contact-A-E-E2-checker.png`](./run4/media/server-matte/variants/e2/contact-A-E-E2-checker.png)
