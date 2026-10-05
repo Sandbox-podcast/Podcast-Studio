@@ -40,7 +40,7 @@
 | → Subscriber **`rtc-sub-take4`** · join **1589 ms** · **594** samples (**3 s**, run ends **01:13:41**) · screenshots **sub-shot-66..116** (00:47:00–00:49:32) show **matted silhouette** (dark green bg) live | Content through SFU **PASS** (loopback, **LOW** layer only) |
 | → Active numeric window **00:46:53–00:48:28**: video **94 / 155 / 196** kbps min/med/max, fps **12 / 14 / 20**, res **320×180**, **0** zero-kbps samples; loss med **0 %**; RTT med **~3 ms** | After **00:48:31** table bitrate often dash — post-window kbps **NOT VALIDATED** from table (screenshots still change until 00:49:32) |
 | → Audio inbound (last_rows): track present **~2 kbps**, loss **0 %** | Series is video-only; dedicated WAV speech soak **in progress** |
-| **Overnight soak 5-pax HD** room **`s1-soak`** **01:14:11–01:44:34** Paris | **FAIL HD sustained** — see below; connectivity **6/6** held 30 min loopback |
+| **Overnight soak 5-pax** room **`s1-soak`** **01:14:11–01:44:34** Paris | connectivity **6/6** held 30 min; **HD = NOT VALIDATED** (env limit, not product FAIL) — see QLR |
 | Harness **`pickRtpReport` fix** | Commit **`e512cb5`** — [`public/harness.js`](s1-lab/livekit-oss/public/harness.js) |
 | **DEV CORS** LAN | [`server.mjs`](s1-lab/livekit-oss/server.mjs) — `192.168.x.x` origins + localhost |
 
@@ -62,14 +62,14 @@
 | **SFU transport (canvas/smoke or matted, loopback)** | **PASS** | Take 1 idle **0 bps**; Take 2 smoke canvas through SFU; Take 4 matted silhouette through SFU |
 | **Cam / matted **content** through SFU (Take 2)** | **NOT VALIDATED** | Take 2 was smoke, not MediaPipe |
 | **Cam / matted **content** through SFU (Take 4)** | **PASS** (loopback, LOW **320×180**) | Screenshots + getStats; **HD** layer **NOT VALIDATED** on take 4 sub |
-| **5-pax overnight soak (30 min)** | **connectivity PASS / HD FAIL** | **01:14:11–01:44:34** Paris · room **`s1-soak`** · 5 file pubs + 1 sub · HD samples **3** @ fps **8** only · mid **106** · low **595** · loss last **0** · LiveKit CPU ~**25%** |
+| **5-pax overnight soak (30 min)** | **connectivity PASS** · **HD NOT VALIDATED** (env) | **01:14–01:44** Paris · `s1-soak` · 5 pubs+1 sub on **one machine** · sub HD samples **3** @ fps **8** · LiveKit CPU med **~25%** · pub `qualityLimitationReason` CSV: **cpu 487 / none 362 / bandwidth 31** (n=880) — [#7](https://github.com/Sandbox-podcast/Podcast-Studio/issues/7) audio kbps NaN |
 | **Audio speech (take4 WAV) 5 min** room **`s1-soak-audio`** | **PASS speech energy** · bitrate kbps **NOT VALIDATED** | **01:45:08–01:50:19** · 3 pubs · energy **0.13→7.35** · audioLevel med **0.066** (n=177) · loss **0%** · jitter med **6 ms** · 3 SSRCs |
 | **Production-readiness** | **NOT VALIDATED** | No SLO / prod sign-off |
 | **WAN / France participants** | **NOT VALIDATED** | No WAN path measured |
 | **LAN multi-device (≥2 machines)** | **INCOMPLETE** | Host-local on laptop OK; **Windows Private firewall** rules still needed for peers (TCP 7880/7881/5190, UDP 50000–50200; Media MinIO TCP 9000/9001 noted) |
 | **Real cameras / MediaPipe / FPS gates** | **NOT VALIDATED** | Edge publish confirmed by Loïc; inbound getStats window **not** proof of active video; MediaPipe/FPS **not** gated here |
 | **LOW-END inventory (i5 pass)** | **NOT VALIDATED** | Laptop run = **MID** (i7+RTX3070) |
-| **AC-RTC-001 (≥ 20 min stable 5 pax)** | **PASS connectivity (loopback)** / **FAIL HD layer** | 30 min · 6/6 joined · no disconnect · HD not sustained |
+| **AC-RTC-001 (≥ 20 min stable 5 pax)** | **PASS connectivity (loopback)** · **HD NOT VALIDATED** | 30 min · 6/6 · QLR dominated by **`cpu`** on single-host 5-pub+sub → real HD check = **multi-machine LAN** after Loïc firewall OK |
 | **AC-RTC-002 on WAN** | **INCOMPLETE** | Do not extrapolate loopback / host-local metrics |
 | **Cost gate €/h** | **N/A** | POC self-host lock |
 

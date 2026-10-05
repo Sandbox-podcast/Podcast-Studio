@@ -1,0 +1,375 @@
+{
+  "captured_scope": {
+    "qualityLimitationReason": "YES — in raw.out[].qlr (last snapshot + samples-tail last 5/actor + CSV out_qlr when non-empty)",
+    "qualityLimitationDurations": "NOT CAPTURED — soak-5pax-hd.mjs rawPcStats never read qualityLimitationDurations",
+    "full_30min_per_sample_raw": "NOT CAPTURED — only samples-tail (last 5) persisted; full series discarded"
+  },
+  "samples_tail_qlr_distribution": {
+    "cpu": 45,
+    "none": 30
+  },
+  "samples_tail_sample_count": 75,
+  "samples_tail_t_s": [
+    1771,
+    1781,
+    1791,
+    1801,
+    1811
+  ],
+  "samples_tail_qlr_by_t": {
+    "1771": {
+      "cpu": 9,
+      "none": 6
+    },
+    "1781": {
+      "cpu": 9,
+      "none": 6
+    },
+    "1791": {
+      "cpu": 9,
+      "none": 6
+    },
+    "1801": {
+      "cpu": 9,
+      "none": 6
+    },
+    "1811": {
+      "cpu": 9,
+      "none": 6
+    }
+  },
+  "layer_wh_fps_from_tail": {
+    "q": {
+      "w": {
+        "n": 25,
+        "min": 160,
+        "med": 240,
+        "max": 320
+      },
+      "h": {
+        "n": 25,
+        "min": 90,
+        "med": 135,
+        "max": 180
+      },
+      "fps": {
+        "n": 25,
+        "min": 16,
+        "med": 21,
+        "max": 31
+      },
+      "qlr": {
+        "cpu": 15,
+        "none": 10
+      }
+    },
+    "f": {
+      "w": {
+        "n": 5,
+        "min": 960,
+        "med": 960,
+        "max": 960
+      },
+      "h": {
+        "n": 5,
+        "min": 540,
+        "med": 540,
+        "max": 540
+      },
+      "fps": {
+        "n": 5,
+        "min": 21,
+        "med": 25,
+        "max": 30
+      },
+      "qlr": {
+        "cpu": 15,
+        "none": 10
+      }
+    },
+    "h": {
+      "w": {
+        "n": 15,
+        "min": 320,
+        "med": 320,
+        "max": 480
+      },
+      "h": {
+        "n": 15,
+        "min": 180,
+        "med": 180,
+        "max": 270
+      },
+      "fps": {
+        "n": 15,
+        "min": 17,
+        "med": 30,
+        "max": 31
+      },
+      "qlr": {
+        "cpu": 15,
+        "none": 10
+      }
+    }
+  },
+  "last_snapshot_qlr": {
+    "cpu": 9,
+    "none": 6
+  },
+  "last_snapshot_layers": [
+    {
+      "id": "soak-pub-1",
+      "layers": [
+        {
+          "rid": "q",
+          "wh": "240x135",
+          "fps": 18,
+          "active": true,
+          "qlr": "cpu",
+          "framesSent": 42367,
+          "bytesSent": 31341464
+        },
+        {
+          "rid": "f",
+          "wh": "960x540",
+          "fps": 21,
+          "active": true,
+          "qlr": "cpu",
+          "framesSent": 17956,
+          "bytesSent": 127585258
+        },
+        {
+          "rid": "h",
+          "wh": "480x270",
+          "fps": 18,
+          "active": true,
+          "qlr": "cpu",
+          "framesSent": 41662,
+          "bytesSent": 87911325
+        }
+      ]
+    },
+    {
+      "id": "soak-pub-2",
+      "layers": [
+        {
+          "rid": "q",
+          "wh": "160x90",
+          "fps": 30,
+          "active": true,
+          "qlr": "cpu",
+          "framesSent": 47220,
+          "bytesSent": 31997935
+        },
+        {
+          "rid": "h",
+          "wh": "320x180",
+          "fps": 30,
+          "active": true,
+          "qlr": "cpu",
+          "framesSent": 47233,
+          "bytesSent": 96609128
+        },
+        {
+          "rid": "f",
+          "wh": null,
+          "fps": null,
+          "active": true,
+          "qlr": "cpu",
+          "framesSent": 3832,
+          "bytesSent": 25677378
+        }
+      ]
+    },
+    {
+      "id": "soak-pub-3",
+      "layers": [
+        {
+          "rid": "q",
+          "wh": "160x90",
+          "fps": 30,
+          "active": true,
+          "qlr": "cpu",
+          "framesSent": 48413,
+          "bytesSent": 31557436
+        },
+        {
+          "rid": "h",
+          "wh": "320x180",
+          "fps": 30,
+          "active": true,
+          "qlr": "cpu",
+          "framesSent": 47640,
+          "bytesSent": 93123136
+        },
+        {
+          "rid": "f",
+          "wh": null,
+          "fps": null,
+          "active": true,
+          "qlr": "cpu",
+          "framesSent": 3939,
+          "bytesSent": 25778411
+        }
+      ]
+    },
+    {
+      "id": "soak-pub-4",
+      "layers": [
+        {
+          "rid": "f",
+          "wh": null,
+          "fps": null,
+          "active": false,
+          "qlr": "none",
+          "framesSent": 0,
+          "bytesSent": 0
+        },
+        {
+          "rid": "h",
+          "wh": null,
+          "fps": null,
+          "active": false,
+          "qlr": "none",
+          "framesSent": 23,
+          "bytesSent": 110699
+        },
+        {
+          "rid": "q",
+          "wh": "320x180",
+          "fps": 20,
+          "active": true,
+          "qlr": "none",
+          "framesSent": 35704,
+          "bytesSent": 35216080
+        }
+      ]
+    },
+    {
+      "id": "soak-pub-5",
+      "layers": [
+        {
+          "rid": "h",
+          "wh": null,
+          "fps": null,
+          "active": false,
+          "qlr": "none",
+          "framesSent": 22,
+          "bytesSent": 101657
+        },
+        {
+          "rid": "q",
+          "wh": "320x180",
+          "fps": 21,
+          "active": true,
+          "qlr": "none",
+          "framesSent": 35736,
+          "bytesSent": 35211409
+        },
+        {
+          "rid": "f",
+          "wh": null,
+          "fps": null,
+          "active": false,
+          "qlr": "none",
+          "framesSent": 0,
+          "bytesSent": 0
+        }
+      ]
+    }
+  ],
+  "csv_out_qlr_distribution": {
+    "none": 362,
+    "bandwidth": 31,
+    "cpu": 487
+  },
+  "csv_out_qlr_n": 880,
+  "csv_res_fps": {
+    "1280x720": {
+      "fps": {
+        "n": 11,
+        "min": 6,
+        "med": 9,
+        "max": 21
+      },
+      "qlr": {
+        "none": 10,
+        "bandwidth": 1
+      }
+    },
+    "320x180": {
+      "fps": {
+        "n": 731,
+        "min": 1,
+        "med": 22,
+        "max": 31
+      },
+      "qlr": {
+        "none": 352,
+        "cpu": 372,
+        "bandwidth": 7
+      }
+    },
+    "640x360": {
+      "fps": {
+        "n": 17,
+        "min": 8,
+        "med": 14,
+        "max": 20
+      },
+      "qlr": {
+        "bandwidth": 17
+      }
+    },
+    "960x540": {
+      "fps": {
+        "n": 115,
+        "min": 2,
+        "med": 22,
+        "max": 30
+      },
+      "qlr": {
+        "cpu": 115
+      }
+    },
+    "480x270": {
+      "fps": {
+        "n": 2,
+        "min": 16,
+        "med": 17.5,
+        "max": 19
+      },
+      "qlr": {
+        "bandwidth": 2
+      }
+    },
+    "240x135": {
+      "fps": {
+        "n": 2,
+        "min": 1,
+        "med": 5,
+        "max": 9
+      },
+      "qlr": {
+        "bandwidth": 2
+      }
+    },
+    "160x90": {
+      "fps": {
+        "n": 2,
+        "min": 30,
+        "med": 30,
+        "max": 30
+      },
+      "qlr": {
+        "bandwidth": 2
+      }
+    }
+  },
+  "host_livekit_cpu_pct": {
+    "min": 1.77,
+    "med": 25.29,
+    "max": 35.41,
+    "n": 31
+  }
+}

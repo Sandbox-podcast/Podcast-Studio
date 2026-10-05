@@ -343,11 +343,52 @@ Artifacts: laptop `C:\Users\azero\s1-livekit-oss\scripts\cam-sub-getstats.json`,
 | Room | **`s1-soak`** (isolated from `vision-s3`) |
 | Load | **5** file pubs + **1** sub · sample **10 s** · all joins OK (1.6–3.5 s) |
 | Source | take4 raw → Y4M/WAV; harness **`file`** CaptureStream (gum blocked on non-secure `host.docker.internal`) |
-| Subscriber inbound | video samples **880** · res seen: 160×90 … **1280×720** · HD samples **3** only (fps **8/8/8**) · mid **106** · low **595** · packetsLost last **0** · freezeCount last **76** |
-| HD verdict | **FAIL** — 1280×720 not sustained (adaptiveStream/dynacast + 5 tiles; forceHigh insufficient) |
-| Connectivity | **PASS** 6/6 for full 30 min, no scripted disconnect |
-| Host | LiveKit CPU ~**22–35%**, mem ~**110 MiB** (`host-metrics.csv`) |
+| Subscriber inbound | video samples **880** · res seen: 160×90 … **1280×720** · HD samples **3** (fps **8**) · mid **106** · low **595** · packetsLost last **0** |
+| **HD verdict** | **NOT VALIDATED** — **environment limit**, not product FAIL: 5 publish+subscribe on **one** laptop; LiveKit container CPU med **~25.3%** (min 1.8 / max 35.4, n=31) |
+| Connectivity | **PASS** 6/6 for full 30 min |
 | Caveat | **Single-machine loopback** — not LAN/WAN |
+
+#### Publisher outbound `qualityLimitationReason` (verbatim)
+
+**Capture limits (honest):**
+
+- `qualityLimitationDurations` → **NOT CAPTURED** (`soak-5pax-hd.mjs` never read that field).
+- Full 30 min per-sample per-rid raw series → **NOT CAPTURED** (only `samples-tail` last **5** samples/actor + final `publishers_outbound_last` snapshot).
+- CSV `out_qlr` / `out_res` / `out_fps` = **one “best” outbound row per publisher sample** (not full simulcast rid set).
+
+**CSV distribution (publisher rows, n=880 `out_qlr` non-empty):**
+
+| reason | count |
+| --- | --- |
+| **cpu** | **487** |
+| **none** | **362** |
+| **bandwidth** | **31** |
+
+**samples-tail** (t_s 1771–1811 only, last ~40 s): qlr **cpu 45 / none 30** (stable 9 cpu + 6 none per tick across 5 pubs × 3 layers).
+
+**Last snapshot per rid (sent dims/fps when present):**
+
+| pub | rid q | rid h | rid f | qlr |
+| --- | --- | --- | --- | --- |
+| soak-pub-1 | 240×135 @18 | 480×270 @18 | 960×540 @21 | all **cpu** |
+| soak-pub-2 | 160×90 @30 | 320×180 @30 | (wh/fps null, bytes>0) | all **cpu** |
+| soak-pub-3 | 160×90 @30 | 320×180 @30 | (wh/fps null) | all **cpu** |
+| soak-pub-4 | 320×180 @20 active | inactive | inactive | **none** |
+| soak-pub-5 | 320×180 @21 active | inactive | inactive | **none** |
+
+**Per-rid from samples-tail only** (min/med/max):
+
+| rid | width | height | fps | qlr mix |
+| --- | --- | --- | --- | --- |
+| q | 160 / 240 / 320 | 90 / 135 / 180 | 16 / 21 / 31 | cpu 15 / none 10 |
+| h | 320 / 320 / 480 | 180 / 180 / 270 | 17 / 30 / 31 | cpu 15 / none 10 |
+| f | 960 / 960 / 960 (n=5 with dims) | 540 / 540 / 540 | 21 / 25 / 30 | cpu 15 / none 10 |
+
+CSV “best layer” when labeled **1280×720**: n=11, fps **6 / 9 / 21**, qlr mostly **none** (10) + bandwidth (1) — rare; top sustained pub encode in tail was **960×540** under **cpu** limit.
+
+**Lead implication:** because QLR is dominated by **`cpu`**, real HD validation moves to a **multi-machine LAN** test after Loïc’s firewall OK — not another single-host soak (Vision holds the 3070).
+
+Artifact: laptop `scripts/soak-20261006-011411/QLR-ANALYSIS.json` · box `/workspace/s1-soak/docs/QLR-ANALYSIS.json`.
 
 ### Audio speech soak 5 min — FINAL (take4 WAV)
 
@@ -356,7 +397,7 @@ Artifacts: laptop `C:\Users\azero\s1-livekit-oss\scripts\cam-sub-getstats.json`,
 | Window | **01:45:08 → 01:50:19** Paris · room **`s1-soak-audio`** · **3** pubs + 1 sub |
 | Audio source | `/media/take4-20s.wav` (from take4 raw Opus) via harness file audio `captureStream`; Chrome `--use-file-for-fake-audio-capture` also set (unused for file mode) |
 | Inbound audio | **177** samples · **3** SSRCs · loss **0%** · jitter **2–13 ms** (med **6**) · audioLevel med **0.066** max **1.0** · totalAudioEnergy **0.13 → 7.35** (grew) · concealedSamples last **1440** / events **1** |
-| Bitrate kbps | **NOT VALIDATED** (NaN delta bug in `soak-audio-5min.mjs`) — do not invent |
+| Bitrate kbps | **NOT VALIDATED** (NaN delta bug) — tracked in [#7](https://github.com/Sandbox-podcast/Podcast-Studio/issues/7) — do not invent / do not fix yet |
 | Speech verdict | **PASS** (energy + audioLevel proof of real speech on all 3 remotes) |
 | Video note (same run) | HD **23** samples, fps **14/22/30** — better than 5-pax 30 min |
 

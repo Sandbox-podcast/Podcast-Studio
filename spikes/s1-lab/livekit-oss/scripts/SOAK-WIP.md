@@ -6,7 +6,7 @@ Lab dir on laptop: `C:\Users\azero\s1-livekit-oss\scripts\`
 
 | Run | Path | Verdict |
 | --- | --- | --- |
-| 30 min 5-pax HD | `soak-20261006-011411/` | connectivity PASS / **HD FAIL** (3×1280×720@8fps) |
+| 30 min 5-pax | `soak-20261006-011411/` | connectivity PASS / **HD NOT VALIDATED** (env: QLR cpu-dominated, LiveKit CPU~25%) · see QLR-ANALYSIS.json |
 | 5 min audio WAV | `soak-audio-20261006-014508/` | **speech PASS**; bitrate kbps NOT VALIDATED |
 
 ## Scripts
