@@ -1,0 +1,526 @@
+{
+  "label": "localhost / headless / synthetic — NOT Sandbox-hardware pass",
+  "pass": "S4 pass 1b — resume timing",
+  "resumeDefinition": "reconnect (page setOnline(true) right after page.unroute of 127.0.0.1:9000) → every part not uploaded at reconnect is re-uploaded (ETag OK) = catch-up complete",
+  "thresholdMs": 15000,
+  "startedAt": "2026-10-05T16:43:29.577Z",
+  "finishedAt": "2026-10-05T16:44:45.888Z",
+  "browser": "131.0.6778.33",
+  "durationSecTarget": 75,
+  "networkCutMethod": "Playwright route.abort on **://127.0.0.1:9000/** (presigned PUTs only); lab API :3320 stays up",
+  "cutsRequested": [
+    "cut-10s",
+    "cut-30s"
+  ],
+  "cuts": [
+    {
+      "label": "cut-10s",
+      "requestedMs": 10000,
+      "actualMs": 10079,
+      "wallStartIso": "2026-10-05T16:43:40.802Z",
+      "wallEndIso": "2026-10-05T16:43:50.881Z",
+      "method": "page.route abort 127.0.0.1:9000"
+    },
+    {
+      "label": "cut-30s",
+      "requestedMs": 30000,
+      "actualMs": 30185,
+      "wallStartIso": "2026-10-05T16:44:02.881Z",
+      "wallEndIso": "2026-10-05T16:44:33.066Z",
+      "method": "page.route abort 127.0.0.1:9000"
+    }
+  ],
+  "resumeTiming": [
+    {
+      "label": "cut-10s",
+      "cutStartIso": "2026-10-05T16:43:40.811Z",
+      "reconnectIso": "2026-10-05T16:43:50.829Z",
+      "catchUpCompleteIso": "2026-10-05T16:43:50.878Z",
+      "offlineMs": 10017.6,
+      "resumeMs": 48.8,
+      "missingAtReconnect": [
+        2
+      ],
+      "partsResent": [
+        2
+      ],
+      "resendAttempts": [
+        {
+          "partNumber": 2,
+          "attempt": 2,
+          "size": 5242880,
+          "start": {
+            "perf": 21125.2,
+            "wallMs": 1791218630843,
+            "iso": "2026-10-05T16:43:50.843Z"
+          },
+          "end": {
+            "perf": 21159.4,
+            "wallMs": 1791218630878,
+            "iso": "2026-10-05T16:43:50.878Z"
+          },
+          "ok": true,
+          "error": null,
+          "ms": 34.2
+        }
+      ],
+      "listParts": [
+        {
+          "request": {
+            "perf": 21113,
+            "wallMs": 1791218630831,
+            "iso": "2026-10-05T16:43:50.831Z"
+          },
+          "response": {
+            "perf": 21124.5,
+            "wallMs": 1791218630843,
+            "iso": "2026-10-05T16:43:50.843Z"
+          },
+          "remoteParts": [
+            1
+          ],
+          "error": null,
+          "ms": 11.5
+        }
+      ],
+      "notUploadedAtCatchUp": [],
+      "catchUpReason": "part-uploaded",
+      "catchUpDuringFlush": false,
+      "thresholdMs": 15000,
+      "verdict": "PASS",
+      "cutStartPerf": 11093.2,
+      "reconnectPerf": 21110.8,
+      "catchUpCompletePerf": 21159.6
+    },
+    {
+      "label": "cut-30s",
+      "cutStartIso": "2026-10-05T16:44:02.885Z",
+      "reconnectIso": "2026-10-05T16:44:32.898Z",
+      "catchUpCompleteIso": "2026-10-05T16:44:33.064Z",
+      "offlineMs": 30013.6,
+      "resumeMs": 165.6,
+      "missingAtReconnect": [
+        4,
+        5,
+        6
+      ],
+      "partsResent": [
+        4,
+        5,
+        6
+      ],
+      "resendAttempts": [
+        {
+          "partNumber": 4,
+          "attempt": 2,
+          "size": 5242880,
+          "start": {
+            "perf": 63216.2,
+            "wallMs": 1791218672934,
+            "iso": "2026-10-05T16:44:32.934Z"
+          },
+          "end": {
+            "perf": 63257,
+            "wallMs": 1791218672975,
+            "iso": "2026-10-05T16:44:32.975Z"
+          },
+          "ok": true,
+          "error": null,
+          "ms": 40.8
+        },
+        {
+          "partNumber": 5,
+          "attempt": 2,
+          "size": 5242880,
+          "start": {
+            "perf": 63257.3,
+            "wallMs": 1791218672975,
+            "iso": "2026-10-05T16:44:32.975Z"
+          },
+          "end": {
+            "perf": 63299,
+            "wallMs": 1791218673017,
+            "iso": "2026-10-05T16:44:33.017Z"
+          },
+          "ok": true,
+          "error": null,
+          "ms": 41.7
+        },
+        {
+          "partNumber": 6,
+          "attempt": 2,
+          "size": 5242880,
+          "start": {
+            "perf": 63299.2,
+            "wallMs": 1791218673017,
+            "iso": "2026-10-05T16:44:33.017Z"
+          },
+          "end": {
+            "perf": 63345.7,
+            "wallMs": 1791218673064,
+            "iso": "2026-10-05T16:44:33.064Z"
+          },
+          "ok": true,
+          "error": null,
+          "ms": 46.5
+        }
+      ],
+      "listParts": [
+        {
+          "request": {
+            "perf": 63182.7,
+            "wallMs": 1791218672901,
+            "iso": "2026-10-05T16:44:32.901Z"
+          },
+          "response": {
+            "perf": 63214.3,
+            "wallMs": 1791218672933,
+            "iso": "2026-10-05T16:44:32.933Z"
+          },
+          "remoteParts": [
+            1,
+            2,
+            3
+          ],
+          "error": null,
+          "ms": 31.6
+        }
+      ],
+      "notUploadedAtCatchUp": [],
+      "catchUpReason": "part-uploaded",
+      "catchUpDuringFlush": false,
+      "thresholdMs": 15000,
+      "verdict": "PASS",
+      "cutStartPerf": 33166.6,
+      "reconnectPerf": 63180.2,
+      "catchUpCompletePerf": 63345.8
+    }
+  ],
+  "recording": {
+    "source": "canvas.captureStream(30) + WebAudio oscillator (sawtooth+LFO) via MediaStreamDestination",
+    "mimeType": "video/webm;codecs=vp8,opus",
+    "videoBitsPerSecond": 8000000,
+    "audioBitsPerSecond": 128000,
+    "timesliceMs": 1000,
+    "partSizeBytes": 5242880,
+    "durationSecTarget": 75,
+    "timeOrigin": 1791218609718.8,
+    "tStartPerf": 648.3000000119209,
+    "wallStartIso": "2026-10-05T16:43:30.366Z",
+    "firstChunkAt": 1700.6000000238419,
+    "chromeFakeDeviceFlags": true,
+    "tStopPerf": 75689.20000001788,
+    "chunkCount": 74,
+    "totalBytesLocal": 41650820,
+    "elapsedMs": 75040.90000000596,
+    "measuredBitrateBps": 4440332.671915895
+  },
+  "parts": [
+    {
+      "partNumber": 1,
+      "byteStart": 0,
+      "byteEnd": 5242880,
+      "size": 5242880,
+      "etag": "\"10e1e0b55433dfcc6daaeb183ee5c23b\"",
+      "status": "uploaded",
+      "uploadMs": 41.79999998211861,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "partNumber": 2,
+      "byteStart": 5242880,
+      "byteEnd": 10485760,
+      "size": 5242880,
+      "etag": "\"75d2af6e5f6706286b5022e53a6070b2\"",
+      "status": "uploaded",
+      "uploadMs": 33.19999998807907,
+      "attempts": 2,
+      "error": null
+    },
+    {
+      "partNumber": 3,
+      "byteStart": 10485760,
+      "byteEnd": 15728640,
+      "size": 5242880,
+      "etag": "\"6992762db227a3d0f7b0fbbfd12b6965\"",
+      "status": "uploaded",
+      "uploadMs": 52.900000005960464,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "partNumber": 4,
+      "byteStart": 15728640,
+      "byteEnd": 20971520,
+      "size": 5242880,
+      "etag": "\"9e095858ae3ba2b29c7f14bd585cc49d\"",
+      "status": "uploaded",
+      "uploadMs": 39.79999998211861,
+      "attempts": 2,
+      "error": null
+    },
+    {
+      "partNumber": 5,
+      "byteStart": 20971520,
+      "byteEnd": 26214400,
+      "size": 5242880,
+      "etag": "\"a01c00b2b91f76e167d19088d84386aa\"",
+      "status": "uploaded",
+      "uploadMs": 40.599999994039536,
+      "attempts": 2,
+      "error": null
+    },
+    {
+      "partNumber": 6,
+      "byteStart": 26214400,
+      "byteEnd": 31457280,
+      "size": 5242880,
+      "etag": "\"e15e00c6b93cb6a1b871283cf747471d\"",
+      "status": "uploaded",
+      "uploadMs": 45.5,
+      "attempts": 2,
+      "error": null
+    },
+    {
+      "partNumber": 7,
+      "byteStart": 31457280,
+      "byteEnd": 36700160,
+      "size": 5242880,
+      "etag": "\"9a158b86ee9fd621144a2c3750de8e26\"",
+      "status": "uploaded",
+      "uploadMs": 43,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "partNumber": 8,
+      "byteStart": 36700160,
+      "byteEnd": 41650820,
+      "size": 4950660,
+      "etag": "\"bd0e0b6b9fc220f58ba52cf656d8d3f1\"",
+      "status": "uploaded",
+      "uploadMs": 45,
+      "attempts": 1,
+      "error": null
+    }
+  ],
+  "integrity": {
+    "key": "spike/s4-lab/rec/lab-resume-1791218610366.webm",
+    "localSha256": "ab7ab895080f7b6899b0eb980ce594a55af9fc16e655ac29db0ed9452757b649",
+    "localBytes": 41650820,
+    "remoteSha256": "ab7ab895080f7b6899b0eb980ce594a55af9fc16e655ac29db0ed9452757b649",
+    "remoteBytes": 41650820,
+    "shaMatch": true,
+    "sizeMatch": true,
+    "remotePath": "artifacts/lab-resume-remote.webm"
+  },
+  "cleanup": {
+    "abortedIncomplete": [],
+    "abortedCount": 0,
+    "incompleteMpuCountAfter": 0
+  },
+  "verdict": {
+    "resume": "PASS",
+    "integrity": "PASS",
+    "cleanup": "PASS",
+    "overall": "PASS"
+  },
+  "errors": [],
+  "events": [
+    {
+      "type": "cut-start",
+      "perf": 11093.3,
+      "wallMs": 1791218620812,
+      "iso": "2026-10-05T16:43:40.812Z",
+      "label": "cut-10s",
+      "notUploaded": []
+    },
+    {
+      "type": "reconnect",
+      "perf": 21111,
+      "wallMs": 1791218630829,
+      "iso": "2026-10-05T16:43:50.829Z",
+      "label": "cut-10s",
+      "online": true,
+      "missingAtReconnect": [
+        2
+      ],
+      "offlineMs": 10017.6
+    },
+    {
+      "type": "list-parts-request",
+      "perf": 21113,
+      "wallMs": 1791218630831,
+      "iso": "2026-10-05T16:43:50.831Z",
+      "label": "cut-10s"
+    },
+    {
+      "type": "list-parts-response",
+      "perf": 21124.5,
+      "wallMs": 1791218630843,
+      "iso": "2026-10-05T16:43:50.843Z",
+      "label": "cut-10s",
+      "remoteParts": [
+        1
+      ],
+      "ms": 11.5
+    },
+    {
+      "type": "resend-put-start",
+      "perf": 21125.2,
+      "wallMs": 1791218630843,
+      "iso": "2026-10-05T16:43:50.843Z",
+      "label": "cut-10s",
+      "partNumber": 2,
+      "attempt": 2,
+      "size": 5242880
+    },
+    {
+      "type": "resend-put-end",
+      "perf": 21159.5,
+      "wallMs": 1791218630878,
+      "iso": "2026-10-05T16:43:50.878Z",
+      "label": "cut-10s",
+      "partNumber": 2,
+      "ok": true,
+      "ms": 34.2
+    },
+    {
+      "type": "catch-up-complete",
+      "perf": 21159.7,
+      "wallMs": 1791218630878,
+      "iso": "2026-10-05T16:43:50.878Z",
+      "label": "cut-10s",
+      "resumeMs": 48.8,
+      "partsResent": [
+        2
+      ],
+      "missingAtReconnect": [
+        2
+      ],
+      "reason": "part-uploaded"
+    },
+    {
+      "type": "cut-start",
+      "perf": 33166.6,
+      "wallMs": 1791218642885,
+      "iso": "2026-10-05T16:44:02.885Z",
+      "label": "cut-30s",
+      "notUploaded": []
+    },
+    {
+      "type": "reconnect",
+      "perf": 63180.2,
+      "wallMs": 1791218672899,
+      "iso": "2026-10-05T16:44:32.899Z",
+      "label": "cut-30s",
+      "online": true,
+      "missingAtReconnect": [
+        4,
+        5,
+        6
+      ],
+      "offlineMs": 30013.6
+    },
+    {
+      "type": "list-parts-request",
+      "perf": 63182.7,
+      "wallMs": 1791218672901,
+      "iso": "2026-10-05T16:44:32.901Z",
+      "label": "cut-30s"
+    },
+    {
+      "type": "list-parts-response",
+      "perf": 63214.5,
+      "wallMs": 1791218672933,
+      "iso": "2026-10-05T16:44:32.933Z",
+      "label": "cut-30s",
+      "remoteParts": [
+        1,
+        2,
+        3
+      ],
+      "ms": 31.6
+    },
+    {
+      "type": "resend-put-start",
+      "perf": 63216.2,
+      "wallMs": 1791218672934,
+      "iso": "2026-10-05T16:44:32.934Z",
+      "label": "cut-30s",
+      "partNumber": 4,
+      "attempt": 2,
+      "size": 5242880
+    },
+    {
+      "type": "resend-put-end",
+      "perf": 63257.1,
+      "wallMs": 1791218672975,
+      "iso": "2026-10-05T16:44:32.975Z",
+      "label": "cut-30s",
+      "partNumber": 4,
+      "ok": true,
+      "ms": 40.8
+    },
+    {
+      "type": "resend-put-start",
+      "perf": 63257.3,
+      "wallMs": 1791218672975,
+      "iso": "2026-10-05T16:44:32.975Z",
+      "label": "cut-30s",
+      "partNumber": 5,
+      "attempt": 2,
+      "size": 5242880
+    },
+    {
+      "type": "resend-put-end",
+      "perf": 63299.1,
+      "wallMs": 1791218673017,
+      "iso": "2026-10-05T16:44:33.017Z",
+      "label": "cut-30s",
+      "partNumber": 5,
+      "ok": true,
+      "ms": 41.7
+    },
+    {
+      "type": "resend-put-start",
+      "perf": 63299.2,
+      "wallMs": 1791218673017,
+      "iso": "2026-10-05T16:44:33.017Z",
+      "label": "cut-30s",
+      "partNumber": 6,
+      "attempt": 2,
+      "size": 5242880
+    },
+    {
+      "type": "resend-put-end",
+      "perf": 63345.7,
+      "wallMs": 1791218673064,
+      "iso": "2026-10-05T16:44:33.064Z",
+      "label": "cut-30s",
+      "partNumber": 6,
+      "ok": true,
+      "ms": 46.5
+    },
+    {
+      "type": "catch-up-complete",
+      "perf": 63345.9,
+      "wallMs": 1791218673064,
+      "iso": "2026-10-05T16:44:33.064Z",
+      "label": "cut-30s",
+      "resumeMs": 165.6,
+      "partsResent": [
+        4,
+        5,
+        6
+      ],
+      "missingAtReconnect": [
+        4,
+        5,
+        6
+      ],
+      "reason": "part-uploaded"
+    }
+  ]
+}

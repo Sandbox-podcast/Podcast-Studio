@@ -1,9 +1,9 @@
 # Spike S4 — enregistrement local HQ + upload S3-compatible
 
-> **Pass 1 — localhost, Chromium headless, synthetic media (canvas + oscillator); NOT Sandbox hardware, NOT multi-machine; no verdict.**  
+> **Pass 1 + 1b — localhost, Chromium headless, synthetic media (canvas + oscillator); NOT Sandbox hardware, NOT multi-machine; no hardware verdict.**  
 > Préliminaire · 2026-10-05 · Podcast Media · D-01 / [ARCHITECTURE](../docs/ARCHITECTURE.md) §6–7 · MinIO POC : [`spikes/s4/minio/README.md`](./s4/minio/README.md) (**pgsty/minio** verrouillé).
 
-**Overall (pass 1 local/synthetic):** **3/4 thresholds PASS**, resume time to be measured; caveats: remux needed (duration N/A), in-memory buffer, no real hardware.
+**Overall (pass 1 + 1b local/synthetic):** **4/4 locked thresholds PASS on loopback**; caveats: remux needed (duration N/A), in-memory buffer, no real hardware/network; **resume must be re-measured on real uplink**.
 
 ## Draft PASS/FAIL (pass 1, local)
 
@@ -24,9 +24,11 @@
 | Sync offset | **≤ 100 ms** | **PASS** — measured `firstChunkAbsDeltaMs` **+57.7 ms** and `timeOriginDeltaMs` **−65.8 ms** (2 contexts, 45 s, same box, headless). Baseline only; real devices / multi-machine not tested. |
 | Bitrate | **≥ 1 Mbps** | **PASS** — measured **~4.435 Mbps** (4 435 194 bit/s); synthetic canvas source, not a camera characterization. |
 | Data loss | **≤ 1 %** | **PASS** — **0 %** (sha256 local == remote, **99 812 767** B both sides). |
-| Resume time (reconnect → all missing parts uploaded) | **≤ 15 s** | **PARTIAL** — storage cuts **10 s** and **30 s** both survived (recording continued, list-parts + re-send missing parts only, no loss). Time from reconnect to completion of missing parts **not measured** in pass 1 (loopback; logs lack resume-phase timing) → instrumentation for **pass 2**. **Do not invent a figure.** |
+| Resume time (reconnect → all missing parts uploaded) | **≤ 15 s** | **PASS (local loopback)** — pass **1b** (`out/resume-results.json`): cut-10s offline **10 017.6 ms**, **resumeMs 48.8 ms**, parts re-sent **[2]**; cut-30s offline **30 013.6 ms**, **resumeMs 165.6 ms**, parts re-sent **[4, 5, 6]**; list-parts **11.5** / **31.6 ms**; each 5 MiB re-PUT **34–47 ms**. Integrity sha256 local==remote (**41 650 820** B, **75 040.9 ms** rec, **~4.44 Mbps**, **8** parts); **0** incomplete MPUs. |
 
-Raw artefacts : [`spikes/s4/lab-pass1/`](./s4/lab-pass1/) (`RESULT.md`, `out/summary.json`, `out/main-results.json`, …).
+> **Arithmetic caveat (not a measurement):** on loopback, re-send is near-instant. On a real link, **resumeMs ≈ buffered bytes / uplink**. At **~4.4 Mbps**, a **30 s** cut buffers **~15 MiB** → **~6.3 s** at **20 Mbps** uplink, **~12.6 s** at **10 Mbps**; below roughly **8–9 Mbps** uplink a 30 s cut would exceed **15 s**. The lab also signals reconnect itself, so **network-detection latency is not included**. Re-measure on Sandbox LAN / real uplink (pass 2).
+
+Raw artefacts : [`spikes/s4/lab-pass1/`](./s4/lab-pass1/) (`RESULT.md`, `out/summary.json`, `out/resume-results.json`, …).
 
 ---
 
@@ -65,7 +67,7 @@ Network cut : Playwright `route.abort` on `**://127.0.0.1:9000/**` only (lab API
 | Complete ETag | `"2225ec373385ed323222ff309473b0df-20"` |
 | Per-part PUT (loopback) | **14.2–54.5 ms** |
 
-### 3. Cuts + resume + integrity
+### 3. Cuts + resume + integrity (pass 1)
 
 | Cut | Requested | Actual |
 | --- | --- | --- |
@@ -78,6 +80,10 @@ After cut-10s: list-parts `[1]`; part **2** re-uploaded. After cut-30s: list-par
 | --- | --- |
 | Remote ContentLength | **99 812 767** |
 | sha256 local / remote | **match** (`c7ee6282…babfc0`) |
+
+### 3b. Resume timing (pass 1b — instrumented)
+
+Dedicated run: `node run-lab.mjs --resume-only` → `out/resume-results.json`. See [Numeric thresholds](#numeric-thresholds-locked-option-b--loïc-2026-10-05) for **resumeMs** vs **≤ 15 s** and loopback caveat.
 
 ### 4. ffprobe readability
 
@@ -112,13 +118,14 @@ Incomplete MPUs under `spike/s4-lab/rec/` after run: **0**.
 
 ## Open decisions
 
-- **S4 numeric thresholds** — locked (option B, Loïc 2026-10-05); see [Numeric thresholds](#numeric-thresholds-locked-option-b--loïc-2026-10-05). Resume wall-clock still needs pass 2 measurement.
+- **S4 numeric thresholds** — locked (option B, Loïc 2026-10-05); pass **1b** measured resume on loopback only — **pass 2** on real uplink required.
 - **Container strategy** — timesliced WebM + server remux vs WebCodecs / fragmented MP4.
 - **Durable client buffer** — OPFS / IndexedDB / File System Access for real network cuts (pass 1: in-memory only).
 - **Cut fidelity** — route abort vs NIC / firewall vs Docker partition on Sandbox LAN.
 
 ## Next steps (pass 2)
 
-- Run on **Sandbox LAN host** with [`spikes/s4/minio/`](./s4/minio/) compose and real **`MINIO_LAN_HOST`**.
+- Run on **Sandbox LAN host** with [`spikes/s4/minio/`](./s4/minio/) compose and real **`MINIO_LAN_HOST`**; **re-measure resumeMs** on real uplink (not loopback).
 - Real camera/mic, **multi-machine**, include **low-end i5** laptop target.
-- Apply Loïc thresholds once defined; update this report (remove “preliminary” when hardware pass is complete).
+- **`ffmpeg -c copy` remux** and **OPFS / IndexedDB durable buffer** — pending Loïc OK on WebM + server remux path.
+- Update this report (remove “preliminary” when hardware pass is complete).

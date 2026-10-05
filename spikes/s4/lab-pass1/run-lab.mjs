@@ -19,6 +19,10 @@ import {
 import { loadMinioEnv } from './load-env.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ARGV = new Set(process.argv.slice(2));
+const RESUME_ONLY = ARGV.has('--resume-only');
+const NO_CUTS = ARGV.has('--no-cuts'); // smoke: short record, no cuts
+const RESUME_THRESHOLD_MS = 15000;     // Loïc lock "B": resume <= 15 s
 const LAB_PORT = Number(process.env.LAB_PORT || 3320);
 const BASE = `http://127.0.0.1:${LAB_PORT}`;
 const OUT = path.join(__dirname, 'out');
@@ -132,10 +136,10 @@ async function cutMinio(page, durationMs, label) {
   const appliedAt = Date.now();
   const handler = (route) => route.abort('internetdisconnected');
   await page.route('**://127.0.0.1:9000/**', handler);
-  await page.evaluate(() => window.__s4?.setOnline?.(false));
+  await page.evaluate((l) => window.__s4?.setOnline?.(false, l), label);
   await new Promise((r) => setTimeout(r, durationMs));
   await page.unroute('**://127.0.0.1:9000/**', handler);
-  await page.evaluate(() => window.__s4?.setOnline?.(true));
+  await page.evaluate((l) => window.__s4?.setOnline?.(true, l), label);
   // Kick resume of any buffered/failed parts
   await page.evaluate(async () => {
     if (window.__s4?.uploader) await window.__s4.uploader.resumeMissing();
@@ -156,7 +160,7 @@ async function runMainPass(browser) {
   const page = await context.newPage();
   page.on('console', (msg) => {
     const t = msg.text();
-    if (t.includes('[s4]') || t.includes('part ') || t.includes('resume')) {
+    if (t.includes('[s4') || t.includes('part ') || t.includes('resume')) {
       fs.appendFileSync(path.join(OUT, 'browser-console.log'), `[${msg.type()}] ${t}\n`);
     }
   });
@@ -305,8 +309,170 @@ async function runSyncPass(browser) {
   return { r1, r2, offset };
 }
 
+/**
+ * Pass 1b — resume timing only.
+ * ~75 s record, cut-10s + cut-30s (same page.route mechanism), sha256 local vs
+ * remote, abort incomplete MPUs. resumeMs is measured IN THE PAGE:
+ * reconnect (setOnline(true), after unroute) → all parts missing at reconnect
+ * re-uploaded (catch-up complete).
+ */
+async function runResumeOnly() {
+  const durationSec = Number(process.env.S4_RESUME_DURATION_SEC || (NO_CUTS ? 15 : 75));
+  const outName = NO_CUTS ? 'resume-smoke.json' : 'resume-results.json';
+  const consoleLog = path.join(OUT, NO_CUTS ? 'resume-smoke-console.log' : 'resume-console.log');
+  fs.writeFileSync(consoleLog, '');
+  const report = {
+    label: 'localhost / headless / synthetic — NOT Sandbox-hardware pass',
+    pass: NO_CUTS ? 'S4 pass 1b smoke (no cuts)' : 'S4 pass 1b — resume timing',
+    resumeDefinition: 'reconnect (page setOnline(true) right after page.unroute of 127.0.0.1:9000) → every part not uploaded at reconnect is re-uploaded (ETag OK) = catch-up complete',
+    thresholdMs: RESUME_THRESHOLD_MS,
+    startedAt: new Date().toISOString(),
+    finishedAt: null,
+    browser: null,
+    durationSecTarget: durationSec,
+    networkCutMethod: summary.networkCutMethod,
+    cutsRequested: NO_CUTS ? [] : ['cut-10s', 'cut-30s'],
+    cuts: [],
+    resumeTiming: [],
+    recording: null,
+    parts: null,
+    integrity: null,
+    cleanup: null,
+    verdict: null,
+    errors: [],
+  };
+
+  const browser = await chromium.launch(launchOpts());
+  report.browser = await browser.version();
+  const context = await browser.newContext();
+  const page = await context.newPage();
+  page.on('console', (msg) => {
+    const t = msg.text();
+    if (t.includes('[s4')) fs.appendFileSync(consoleLog, `[${msg.type()}] ${t}\n`);
+    if (t.includes('[s4-resume]')) console.log(t);
+  });
+  page.on('pageerror', (err) => fs.appendFileSync(consoleLog, `[pageerror] ${err}\n`));
+
+  try {
+    await page.goto(`${BASE}/recorder.html`, { waitUntil: 'networkidle' });
+    const startPromise = page.evaluate((opts) => window.__s4.startRecording(opts), {
+      participant: NO_CUTS ? 'lab-resume-smoke' : 'lab-resume',
+      durationSec,
+      partMiB: 5,
+      vBitrate: 8_000_000,
+      timeslice: 1000,
+      mimeType: 'video/webm;codecs=vp8,opus',
+      chromeFakeDeviceFlags: true,
+    });
+
+    if (!NO_CUTS) {
+      // Start cut-10s once ≥1 part is uploaded (or 15 s cap) so a part is in flight/buffered.
+      await page.waitForFunction(() => {
+        const parts = window.__s4?.results?.parts || [];
+        const rec = window.__s4?.results?.recording;
+        return parts.some((p) => p.status === 'uploaded') ||
+          (rec && performance.now() - rec.tStartPerf > 15000);
+      }, null, { timeout: 60000, polling: 250 }).catch((e) => report.errors.push(`wait first part: ${e.message}`));
+      report.cuts.push(await cutMinio(page, 10_000, 'cut-10s'));
+      await new Promise((r) => setTimeout(r, 12_000));
+      report.cuts.push(await cutMinio(page, 30_000, 'cut-30s'));
+    }
+
+    const results = await startPromise;
+    report.recording = results.recording;
+    report.parts = results.parts;
+    report.resumeTiming = (results.resumeTiming || []).map((c) => ({
+      label: c.label,
+      cutStartIso: c.cutStart?.iso ?? null,
+      reconnectIso: c.reconnect?.iso ?? null,
+      catchUpCompleteIso: c.catchUpComplete?.iso ?? null,
+      offlineMs: c.offlineMs ?? null,
+      resumeMs: c.resumeMs ?? null,
+      missingAtReconnect: c.missingAtReconnect,
+      partsResent: (c.resent || []).filter((r) => r.ok).map((r) => r.partNumber),
+      resendAttempts: c.resent,
+      listParts: c.listParts,
+      notUploadedAtCatchUp: c.notUploadedAtCatchUp ?? null,
+      catchUpReason: c.catchUpReason ?? null,
+      catchUpDuringFlush: c.catchUpDuringFlush ?? null,
+      thresholdMs: RESUME_THRESHOLD_MS,
+      verdict: c.resumeMs == null ? 'NOT_MEASURED' : (c.resumeMs <= RESUME_THRESHOLD_MS ? 'PASS' : 'FAIL'),
+      cutStartPerf: c.cutStart?.perf ?? null,
+      reconnectPerf: c.reconnect?.perf ?? null,
+      catchUpCompletePerf: c.catchUpComplete?.perf ?? null,
+    }));
+    report.events = results.events;
+    if (results.errors?.length) report.errors.push(...results.errors);
+
+    const key = results.integrity?.key;
+    const localSha = results.integrity?.localSha256;
+    const localBytes = results.integrity?.localBytes;
+    report.integrity = { key, localSha256: localSha, localBytes, remoteSha256: null, remoteBytes: null, shaMatch: false, sizeMatch: false };
+    if (key && results.integrity?.complete) {
+      try {
+        const remotePath = path.join(ARTIFACTS, NO_CUTS ? 'lab-resume-smoke-remote.webm' : 'lab-resume-remote.webm');
+        const buf = await downloadKey(key, remotePath);
+        report.integrity.remoteSha256 = sha256(buf);
+        report.integrity.remoteBytes = buf.length;
+        report.integrity.shaMatch = report.integrity.remoteSha256 === localSha;
+        report.integrity.sizeMatch = buf.length === localBytes;
+        report.integrity.remotePath = path.relative(__dirname, remotePath);
+      } catch (e) {
+        report.integrity.error = String(e.message || e);
+      }
+    } else {
+      report.integrity.error = 'multipart not completed';
+    }
+  } catch (e) {
+    report.errors.push(String(e.stack || e));
+  } finally {
+    await context.close().catch(() => {});
+    await browser.close().catch(() => {});
+  }
+
+  try {
+    const aborted = await abortAllIncomplete();
+    const after = await s3.send(new ListMultipartUploadsCommand({ Bucket: cfg.bucket, Prefix: cfg.keyPrefix }));
+    report.cleanup = {
+      abortedIncomplete: aborted,
+      abortedCount: aborted.length,
+      incompleteMpuCountAfter: (after.Uploads || []).length,
+    };
+  } catch (e) {
+    report.cleanup = { error: String(e.message || e) };
+  }
+
+  const rt = report.resumeTiming;
+  const cutsOk = NO_CUTS ? true : (rt.length === 2 && rt.every((c) => c.verdict === 'PASS'));
+  const integrityOk = !!(report.integrity?.shaMatch && report.integrity?.sizeMatch);
+  const cleanupOk = report.cleanup?.incompleteMpuCountAfter === 0;
+  report.verdict = {
+    resume: NO_CUTS ? 'N/A (smoke)' : (cutsOk ? 'PASS' : (rt.some((c) => c.verdict === 'FAIL') ? 'FAIL' : 'NOT_MEASURED')),
+    integrity: integrityOk ? 'PASS' : 'FAIL',
+    cleanup: cleanupOk ? 'PASS' : 'FAIL',
+    overall: cutsOk && integrityOk && cleanupOk ? 'PASS' : 'FAIL',
+  };
+  report.finishedAt = new Date().toISOString();
+  fs.writeFileSync(path.join(OUT, outName), JSON.stringify(report, null, 2));
+  console.log('RESUME-ONLY DONE', JSON.stringify({
+    out: `out/${outName}`,
+    resume: rt.map((c) => ({ label: c.label, reconnectIso: c.reconnectIso, catchUpCompleteIso: c.catchUpCompleteIso, resumeMs: c.resumeMs, partsResent: c.partsResent, verdict: c.verdict })),
+    integrity: { shaMatch: report.integrity?.shaMatch, sizeMatch: report.integrity?.sizeMatch, bytes: report.integrity?.localBytes },
+    incompleteMpuCountAfter: report.cleanup?.incompleteMpuCountAfter,
+    errors: report.errors,
+    verdict: report.verdict,
+  }, null, 2));
+  return report;
+}
+
 async function main() {
   console.log('waiting for lab server…');
+  if (RESUME_ONLY) {
+    console.log('health', await waitHealth());
+    const r = await runResumeOnly();
+    process.exitCode = r.verdict?.overall === 'PASS' ? 0 : 2;
+    return;
+  }
   const health = await waitHealth();
   console.log('health', health);
 

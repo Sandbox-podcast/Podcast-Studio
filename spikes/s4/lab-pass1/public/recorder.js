@@ -19,7 +19,25 @@ const results = {
   integrity: null,
   sync: null,
   errors: [],
+  // Pass 1b instrumentation
+  events: [],        // high-res timeline (cut/reconnect/list-parts/resend/catch-up)
+  resumeTiming: [],  // one entry per cut, resumeMs = catchUpComplete - reconnect
 };
+
+/** High-resolution timestamp: performance.now() + wall clock ISO (Date.now()). */
+function ts() {
+  const perf = performance.now();
+  const wallMs = Date.now();
+  return { perf: Math.round(perf * 1000) / 1000, wallMs, iso: new Date(wallMs).toISOString() };
+}
+
+/** Record a structured event and emit one machine-parseable console line. */
+function ev(type, data = {}) {
+  const e = { type, ...ts(), ...data };
+  results.events.push(e);
+  console.log('[s4-ev] ' + JSON.stringify(e));
+  return e;
+}
 
 function log(...args) {
   const line = args.map((a) => (typeof a === 'string' ? a : JSON.stringify(a))).join(' ');
@@ -222,11 +240,79 @@ class PartUploader {
     this.stopped = false;
     this.online = true;
     this.pendingRetry = false;
+    this.cuts = [];          // instrumentation, shared with results.resumeTiming
+    this.currentCut = null;  // cut awaiting catch-up (or still offline)
+    this._resumePromise = null;
+    results.resumeTiming = this.cuts;
   }
 
-  setOnline(v) {
+  /** Parts not yet confirmed uploaded (buffered offline / error / pending). */
+  notUploaded() {
+    return this.manifest.filter((m) => m.status !== 'uploaded').map((m) => m.partNumber);
+  }
+
+  /** Called after any state change; closes the current cut once catch-up is done. */
+  checkCatchUp(reason) {
+    const cut = this.currentCut;
+    if (!cut || cut.reconnect == null || cut.catchUpComplete) return;
+    const still = cut.missingAtReconnect.filter((n) => {
+      const m = this.manifest.find((x) => x.partNumber === n);
+      return !m || m.status !== 'uploaded';
+    });
+    if (still.length > 0) return;
+    const t = ts();
+    cut.catchUpComplete = t;
+    cut.resumeMs = Math.round((t.perf - cut.reconnect.perf) * 1000) / 1000;
+    cut.notUploadedAtCatchUp = this.notUploaded();
+    cut.catchUpReason = reason;
+    cut.catchUpDuringFlush = !!this.stopped;
+    cut.thresholdMs = 15000;
+    cut.verdict = cut.resumeMs <= 15000 ? 'PASS' : 'FAIL';
+    ev('catch-up-complete', {
+      label: cut.label, resumeMs: cut.resumeMs, partsResent: cut.resent.filter((r) => r.ok).map((r) => r.partNumber),
+      missingAtReconnect: cut.missingAtReconnect, reason,
+    });
+    console.log('[s4-resume] ' + JSON.stringify({
+      label: cut.label,
+      cutStartIso: cut.cutStart?.iso,
+      reconnectIso: cut.reconnect.iso,
+      catchUpCompleteIso: t.iso,
+      resumeMs: cut.resumeMs,
+      partsResent: cut.resent.filter((r) => r.ok).map((r) => r.partNumber),
+      missingAtReconnect: cut.missingAtReconnect,
+      thresholdMs: 15000,
+      verdict: cut.verdict,
+    }));
+    this.currentCut = null;
+  }
+
+  setOnline(v, label) {
+    if (!v) {
+      const cut = {
+        label: label || `cut-${this.cuts.length + 1}`,
+        cutStart: ts(),
+        notUploadedAtCutStart: this.notUploaded(),
+        reconnect: null,
+        missingAtReconnect: null,
+        listParts: [],
+        resent: [],
+        catchUpComplete: null,
+        resumeMs: null,
+        verdict: null,
+      };
+      this.cuts.push(cut);
+      this.currentCut = cut;
+      ev('cut-start', { label: cut.label, notUploaded: cut.notUploadedAtCutStart });
+    } else if (this.currentCut && this.currentCut.reconnect == null) {
+      const cut = this.currentCut;
+      cut.reconnect = ts();
+      cut.missingAtReconnect = this.notUploaded();
+      cut.offlineMs = Math.round((cut.reconnect.perf - cut.cutStart.perf) * 1000) / 1000;
+      ev('reconnect', { label: cut.label, online: true, missingAtReconnect: cut.missingAtReconnect, offlineMs: cut.offlineMs });
+    }
     this.online = v;
     log(`network online=${v}`);
+    if (v) this.checkCatchUp('reconnect-nothing-missing');
     if (v && this.pendingRetry) {
       this.pendingRetry = false;
       this.uploadQueue = this.uploadQueue.then(() => this.resumeMissing());
@@ -315,6 +401,14 @@ class PartUploader {
       return;
     }
 
+    const cut = this.currentCut;
+    const isResend = !!(cut && cut.reconnect && cut.missingAtReconnect?.includes(partNumber));
+    let resendRec = null;
+    if (isResend) {
+      resendRec = { partNumber, attempt, size: blob.size, start: ts(), end: null, ok: false, error: null };
+      cut.resent.push(resendRec);
+      ev('resend-put-start', { label: cut.label, partNumber, attempt, size: blob.size });
+    }
     try {
       this.inflight++;
       const { url } = await api('/api/multipart/presign-part', {
@@ -330,11 +424,20 @@ class PartUploader {
       entry.status = 'uploaded';
       entry.uploadMs = entry.tUploadEnd - entry.tUploadStart;
       log(`part ${partNumber} uploaded size=${blob.size} etag=${etag} ms=${entry.uploadMs.toFixed(0)}`);
+      if (resendRec) {
+        resendRec.end = ts(); resendRec.ok = true;
+        resendRec.ms = Math.round((resendRec.end.perf - resendRec.start.perf) * 1000) / 1000;
+        ev('resend-put-end', { label: cut.label, partNumber, ok: true, ms: resendRec.ms });
+      }
     } catch (e) {
       entry.status = 'error';
       entry.error = String(e.message || e);
       entry.tUploadEnd = performance.now();
       log(`part ${partNumber} ERROR: ${entry.error}`);
+      if (resendRec) {
+        resendRec.end = ts(); resendRec.error = entry.error;
+        ev('resend-put-end', { label: cut.label, partNumber, ok: false, error: entry.error });
+      }
       this.pendingRetry = true;
       // If network-looking failure, mark offline-ish; runner may also flip via CDP
       if (/Failed to fetch|NetworkError|ERR_INTERNET|offline/i.test(entry.error)) {
@@ -343,15 +446,32 @@ class PartUploader {
     } finally {
       this.inflight--;
       results.parts = this.manifest.map(publicPart);
+      this.checkCatchUp('part-uploaded');
     }
   }
 
-  async resumeMissing() {
+  /** Single-flight: concurrent callers (queue + runner kick) share one pass. */
+  resumeMissing() {
+    if (this._resumePromise) return this._resumePromise;
+    this._resumePromise = this._resumeMissing().finally(() => { this._resumePromise = null; });
+    return this._resumePromise;
+  }
+
+  async _resumeMissing() {
     log('resume: list-parts…');
+    const cut = (this.currentCut && this.currentCut.reconnect) ? this.currentCut : null;
+    const lp = { request: ts(), response: null, remoteParts: null, error: null };
+    if (cut) { cut.listParts.push(lp); ev('list-parts-request', { label: cut.label }); }
     let remote;
     try {
       remote = await api(`/api/multipart/list-parts?key=${encodeURIComponent(this.key)}&uploadId=${encodeURIComponent(this.uploadId)}`);
+      lp.response = ts();
+      lp.remoteParts = (remote.parts || []).map((p) => p.PartNumber);
+      lp.ms = Math.round((lp.response.perf - lp.request.perf) * 1000) / 1000;
+      if (cut) ev('list-parts-response', { label: cut.label, remoteParts: lp.remoteParts, ms: lp.ms });
     } catch (e) {
+      lp.response = ts(); lp.error = String(e.message || e);
+      if (cut) ev('list-parts-response', { label: cut.label, error: lp.error });
       log('resume list-parts failed:', String(e.message || e));
       this.pendingRetry = true;
       return;
@@ -375,6 +495,7 @@ class PartUploader {
       await this.uploadOne(m.partNumber, m.blob, m.byteStart, m.byteEnd, (m.attempts || 1) + 1);
     }
     results.parts = this.manifest.map(publicPart);
+    this.checkCatchUp('resume-pass-done');
   }
 }
 
@@ -398,6 +519,8 @@ async function startRecording(opts = {}) {
   results.done = false;
   results.errors = [];
   results.parts = [];
+  results.events = [];
+  results.resumeTiming = [];
   results.cuts = opts.cuts || results.cuts || [];
   const participant = opts.participant || $('participant').value || 'p1';
   const durationSec = Number(opts.durationSec ?? $('durationSec').value);
@@ -506,6 +629,7 @@ async function startRecording(opts = {}) {
   };
 
   active = { recorder, synth, uploader, stopped };
+  window.__s4.uploader = uploader;
 
   // Auto-stop after duration
   const stopTimer = setTimeout(() => {
@@ -576,8 +700,8 @@ async function startRecording(opts = {}) {
 }
 
 window.__s4.startRecording = startRecording;
-window.__s4.setOnline = (v) => {
-  if (active?.uploader) active.uploader.setOnline(v);
+window.__s4.setOnline = (v, label) => {
+  if (active?.uploader) active.uploader.setOnline(v, label);
 };
 window.__s4.probe = async () => {
   const mime = probeMimeTypes();

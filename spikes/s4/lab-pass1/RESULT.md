@@ -175,7 +175,7 @@ Interpretation: same wall start; first MediaRecorder chunk abs times differ by t
 4. **WebM timeslice container** — duration N/A, DTS warnings, seek fragility.
 5. **Resume buffer = in-memory Blobs** — page crash would lose pending parts (OPFS/IDB not exercised).
 6. **Network cut = app-level block of MinIO host** — not a NIC unplug / Docker network partition.
-7. MinIO image for POC locked to **`pgsty/minio`** (see `spikes/s4/minio/README.md`); this lab used the already-running container on the dev box.
+7. Prior MinIO image decision (`pgsty/minio` vs `silo`) still open at product level; this lab used the already-running container.
 
 ---
 
@@ -186,7 +186,7 @@ Interpretation: same wall start; first MediaRecorder chunk abs times differ by t
 3. Durable local buffer: **OPFS vs IndexedDB vs File System Access** on Windows target laptops?
 4. Cut model: browser route abort vs OS/firewall vs docker network — which matches Sandbox failure modes?
 5. Multi-participant sync: NTP / LiveKit RTP timestamps / shared server clock — firstChunk offsets alone are insufficient.
-6. Revisit storage server only before **non-LAN / prod** exposure (POC image locked to `pgsty/minio`).
+6. Confirm **MinIO image** (`pgsty/minio` frozen vs `pgsty/silo`) before LAN exposure.
 7. Real cams @ target resolution/bitrate on Sandbox machines (this pass’s 4.4 Mbps synthetic is not a camera characterization).
 
 ---
@@ -200,4 +200,54 @@ node server.mjs          # :3320
 # other terminal:
 S4_DURATION_SEC=180 S4_SYNC_DURATION_SEC=45 node run-lab.mjs
 # results → RESULT.md / out/*.json / artifacts/lab-main-remote.webm
+```
+
+---
+
+## Pass 1b — resume timing
+
+**Label:** localhost / headless / synthetic, on the shared box. **NOT** the Sandbox-hardware pass.
+**Run by:** Podcast Media · **2026-10-05 18:43:29–18:44:45 CEST (UTC+2)** · Playwright Chromium 131.0.6778.33
+**Raw:** `out/resume-results.json` (per-cut timeline + `events[]`), `out/resume-console.log`, `artifacts/lab-resume-remote.webm`
+**Threshold (Loïc lock B):** resume ≤ 15 000 ms. **Resume** means the time from the network reconnect until every part missing at reconnect has been re-uploaded (catch-up complete).
+
+### How it was measured
+- `recorder.js` logs high-resolution timestamps (`performance.now()` plus `Date.now()` ISO) for: cut start, reconnect (`online=true`), list-parts request/response, each missing-part PUT start/end, and catch-up complete. Each cut also writes one `[s4-resume] {json}` console line.
+- **Reconnect** = the page's `setOnline(true)`, called right after `page.unroute('**://127.0.0.1:9000/**')`. **Catch-up complete** = every part that wasn't uploaded at reconnect now has an ETag.
+- Recording: 75 s, `video/webm;codecs=vp8,opus`, 8 Mbps hint, 1000 ms timeslice, 5 MiB parts. Cuts used the same mechanism as pass 1 (page.route abort on MinIO only; the lab API stays up).
+
+### Per cut
+
+| Cut | Cut start (CEST) | Reconnect (CEST) | Catch-up complete (CEST) | Offline | list-parts | Parts re-sent | **resumeMs** | Verdict (≤ 15 000 ms) |
+|---|---|---|---|---|---|---|---|---|
+| cut-10s | 18:43:40.811 | 18:43:50.829 | 18:43:50.878 | 10 017.6 ms | 11.5 ms (remote had [1]) | **[2]** (1 × 5 MiB, PUT 34.2 ms) | **48.8** | **PASS** |
+| cut-30s | 18:44:02.885 | 18:44:32.898 | 18:44:33.064 | 30 013.6 ms | 31.6 ms (remote had [1,2,3]) | **[4, 5, 6]** (3 × 5 MiB, PUTs 40.8 / 41.7 / 46.5 ms) | **165.6** | **PASS** |
+
+UTC ISO (as logged): cut-10s reconnect `2026-10-05T16:43:50.829Z` → catch-up `2026-10-05T16:43:50.878Z`; cut-30s reconnect `2026-10-05T16:44:32.898Z` → catch-up `2026-10-05T16:44:33.064Z`.
+
+### Integrity and cleanup
+
+| Item | Value |
+|---|---|
+| Recording | 75 040.9 ms, 74 chunks, 41 650 820 B, measured 4.44 Mbps, 8 parts (7 × 5 MiB + 4 950 660 B) |
+| sha256 local | `ab7ab895080f7b6899b0eb980ce594a55af9fc16e655ac29db0ed9452757b649` |
+| sha256 remote | `ab7ab895080f7b6899b0eb980ce594a55af9fc16e655ac29db0ed9452757b649` → **match**, size match 41 650 820 B |
+| Incomplete MPUs | 0 aborted · **0 remaining** under `spike/s4-lab/rec/` |
+| Overall (lab) | resume **PASS** · integrity **PASS** · cleanup **PASS** |
+
+### Caveats (read before quoting)
+1. **Loopback, not a real network.** Re-sending is LAN/loopback-fast (~35–47 ms per 5 MiB). On a real uplink, resume is roughly the buffered bytes divided by uplink speed: at ~4.4 Mbps, a 30 s cut buffers ~15 MiB, which takes ~6.3 s at 20 Mbps and ~12.6 s at 10 Mbps. **On an uplink under ~8–9 Mbps, a 30 s cut would exceed 15 s.** This has to be re-measured on Sandbox hardware and the real network.
+2. Reconnect is signalled by the app (the runner calls `setOnline(true)`), not detected through the browser `online` event or a NIC change, so it doesn't include detection latency.
+3. Resume counts only the parts that were missing at reconnect. Bytes still in the buffer (< 5 MiB, not yet a part) aren't counted; they go up with the next normal part.
+4. The pending-part buffer is still in memory (no OPFS/IDB), the same as pass 1.
+5. Lab fix found while instrumenting: in pass 1, `window.__s4.uploader` was only set after recording, so the runner's post-cut `resumeMissing()` call did nothing (the resume ran through the uploader's own queue instead). The uploader is now exposed during recording, and `resumeMissing()` is single-flight so the two paths can't double-send.
+
+### Re-run
+```bash
+# MinIO already up (never docker compose down -v)
+cd /workspace/podcast-studio/s4-lab
+node server.mjs &                                   # :3320
+node run-lab.mjs --resume-only                      # 75 s (S4_RESUME_DURATION_SEC to override) → out/resume-results.json
+# smoke: S4_RESUME_DURATION_SEC=15 node run-lab.mjs --resume-only --no-cuts → out/resume-smoke.json
+kill %1
 ```

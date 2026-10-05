@@ -1,0 +1,10 @@
+(node:2330389) Warning: NodeVersionSupportWarning: The AWS SDK for JavaScript (v3)
+versions published after the first week of January 2027
+will require node >=22. You are running node v20.19.2.
+
+To continue receiving updates to AWS services, bug fixes,
+and security updates please upgrade to node >=22.
+
+More information can be found at: https://a.co/c895JFp
+(Use `node --trace-warnings ...` to show where the warning was created)
+{"event":"lab-server-up","listen":"http://127.0.0.1:3320","s3":"http://127.0.0.1:9000","bucket":"podcast-recordings-poc","keyPrefix":"spike/s4-lab/rec/"}
