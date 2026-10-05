@@ -32,6 +32,20 @@ createServer(async (req, res) => {
   try {
     const url = new URL(req.url ?? "/", `http://${HOST}:${PORT}`);
 
+    // DEV: allow S3 harness on :8080 (and other localhost) to mint tokens without pasted JWT
+    const origin = req.headers.origin;
+    if (origin && /^https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/.test(origin)) {
+      res.setHeader("Access-Control-Allow-Origin", origin);
+      res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+      res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+      res.setHeader("Vary", "Origin");
+    }
+    if (req.method === "OPTIONS") {
+      res.writeHead(204);
+      res.end();
+      return;
+    }
+
     if (url.pathname === "/api/token" && req.method === "GET") {
       if (!apiKey || !apiSecret) {
         sendJson(res, 500, { error: "Missing LIVEKIT_API_KEY / LIVEKIT_API_SECRET in .env" });
@@ -82,7 +96,8 @@ async function mintToken(room, identity) {
 }
 
 function sendJson(res, status, body) {
-  res.writeHead(status, { "Content-Type": "application/json" });
+  res.setHeader("Content-Type", "application/json");
+  res.writeHead(status);
   res.end(JSON.stringify(body));
 }
 
