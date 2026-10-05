@@ -4,7 +4,7 @@ Loïc decision (2026-10-05): **POC storage locked** to self-hosted **MinIO** on 
 
 | Path | Purpose |
 | --- | --- |
-| [`minio/`](./minio/) | Docker Compose S3 POC + bucket init (`mc`); server-wide CORS / stale MPU via env (image choice **open**) |
+| [`minio/`](./minio/) | Docker Compose **`pgsty/minio`** (digest-pinned) + `mc` init; server-wide CORS / stale MPU via env |
 | [`multipart-proto/`](./multipart-proto/) | Next.js 15 lab helper + browser multipart/resume sketch |
 
 Canonical protocol: [`../S4-protocol-prep.md`](../S4-protocol-prep.md).

@@ -14,7 +14,7 @@ Décision Loïc (2026-10-05) : pour le **POC S4**, l’object storage est **MinI
 - Compose + init bucket : [`spikes/s4/minio/`](./s4/minio/) (credentials via `.env` local, jamais commitées).
 - Helper multipart lab : [`spikes/s4/multipart-proto/`](./s4/multipart-proto/) (Next.js 15 + AWS SDK v3, `forcePathStyle`).
 - Candidats cloud R2/S3/GCS et delivery Mux/Stream : **après POC** — voir [`S4-S5-candidates-prep.md`](./S4-S5-candidates-prep.md).
-- Images Docker : **décision ouverte** (fork `pgsty/minio` vs `pgsty/silo` vs autre) — voir [`s4/minio/README.md`](./s4/minio/README.md).
+- **Image decision (locked 2026-10-05, Loïc)** : fork gelé **`pgsty/minio`** (+ `pgsty/mc`) — seule image smoke-testée (multipart presigné, CORS, reprise, abort PASS) ; risque = fork figé sans correctifs long terme, OK POC LAN interne ; revoir avant exposition hors LAN / prod — voir [`s4/minio/README.md`](./s4/minio/README.md).
 
 ## Dev run 2026-10-05 (localhost — prep, pas le lab LAN)
 

@@ -4,18 +4,18 @@
 
 Runs on the **same LAN host** as self-hosted **LiveKit OSS** (S1). `MINIO_LAN_HOST` is a placeholder until that machine’s IP/hostname is known.
 
-## Container images (OPEN DECISION — no winner in this repo)
+## Image decision (locked 2026-10-05, Loïc)
 
-Official `minio/minio` and `minio/mc` are **no longer pullable** from Docker Hub (2026-10-05 dev check); `quay.io/minio/*` denied; `dl.min.io` binaries return HTTP 410.
+S4 POC uses the frozen community fork **`pgsty/minio`** (with matching **`pgsty/mc`** for init). Official `minio/minio` / `minio/mc` are no longer pullable from Docker Hub (2026-10-05); `quay.io/minio/*` denied; `dl.min.io` → HTTP 410.
 
-Compose defaults (overridable via `.env`):
+**Why this image:** only build **smoke-tested** on the dev box (multipart presigned PUT, CORS, resume after kill, abort — all PASS). **Known risk:** frozen fork, no long-term security fixes — acceptable for a **LAN-only internal POC**. **Revisit** before any non-LAN or prod exposure (candidates then: another maintained S3-compatible server).
 
-| Variable | Default used in dev |
+Compose pins tag **and** digest (override via `.env` if needed):
+
+| Variable | Pinned default |
 | --- | --- |
-| `MINIO_IMAGE` | `pgsty/minio:RELEASE.2026-08-04T00-00-00Z` |
-| `MC_IMAGE` | `pgsty/mc:RELEASE.2026-09-16T00-00-00Z` |
-
-**Pending lead / Loïc:** frozen community fork `pgsty/minio` vs maintained successor `pgsty/silo` vs another S3-compatible server. Do not treat the default tags as a product decision.
+| `MINIO_IMAGE` | `pgsty/minio:RELEASE.2026-08-04T00-00-00Z@sha256:b6bfe7239bfc83fb90d31612d9704d86039dd714f7904b3f1ad68f211e602372` |
+| `MC_IMAGE` | `pgsty/mc:RELEASE.2026-09-16T00-00-00Z@sha256:cfc83108c3abb371f8fb84d99c1fdc88f8c237e022409b0081fb7c0a3be634dd` |
 
 ## CORS and incomplete multipart uploads
 
