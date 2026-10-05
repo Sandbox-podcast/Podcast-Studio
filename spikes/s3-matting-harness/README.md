@@ -51,7 +51,7 @@ Si le token API est sur une autre origine (CORS), coller un JWT dans le champ pr
 
 Décocher **Smoke synthétique**, démarrer la caméra, lancer la boucle matting : la piste publiée suit le canvas matting (ou la caméra brute si fallback).
 
-**Ce smoke ≠ pass S3** — ne pas reporter de FPS officiels ici. Pass officiel : **LOW-END** Windows · i5 + iGPU · `LAPTOP-BI8P2KF3` ; profil **MID** (i7 + dGPU, SKU TBD) documenté dans `spikes/S3-matting.md`. Notes box optionnelles : section **BOX-ONLY provisional** du même fichier (mesures vides, smoke synthétique seulement).
+**Ce smoke ≠ pass S3** — ne pas reporter de FPS officiels ici. Pass officiel : **LOW-END** Windows · i5 + iGPU (unité à confirmer avec Loïc). `LAPTOP-BI8P2KF3` connecté (`http://127.0.0.1:8088/`, Edge) = inventaire réel **MID-like** — voir **Inventaire matériel** dans `spikes/S3-matting.md`. Notes box : section **BOX-ONLY provisional** (mesures vides tant qu’il n’y a pas d’export JSON).
 
 ## Ce qu’il ne faut **pas** faire (PREP)
 
