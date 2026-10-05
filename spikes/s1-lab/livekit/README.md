@@ -1,4 +1,8 @@
-# LiveKit — S1 lab harness (POC free tier)
+# ARCHIVED — LiveKit **Cloud** harness (superseded)
+
+> **Do not run.** SaaS SFU stopped per Loïc pivot. Use [`../mediasoup/`](../mediasoup/) or [`../livekit-oss/`](../livekit-oss/). See [`../ARCHIVED-SaaS.md`](../ARCHIVED-SaaS.md).
+
+# LiveKit — S1 lab harness (POC free tier) — ARCHIVED
 
 Minimal browser lab for spike S1. **Not** Phase 1 product code. See also [`../README.md`](../README.md).
 

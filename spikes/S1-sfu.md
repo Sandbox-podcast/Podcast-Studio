@@ -1,136 +1,124 @@
-# Spike S1 — SFU cloud 5 participants + diagnostics
+# Spike S1 — SFU self-host (RTC serveur interne) + diagnostics
 
 | | |
 | --- | --- |
-| **Date** | 2026-10-05 |
+| **Date** | 2026-10-05 (pivot Loïc via lead) |
 | **Auteur** | Podcast RTC |
-| **Statut** | **LAB STARTED (free tier)** — harnais `spikes/s1-lab/` (LiveKit, Daily, Agora) |
-| **Décision SFU** | **pending mesures lab + QCM Loïc** (aucune option verrouillée) |
-| **Prérequis** | Go lead post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)) pour décision formelle ; **POC = SFU free tier uniquement** (pas de projet/upsell payant S1) ; plafond coût €/h Loïc requis avant pass/fail coût **hors POC** |
+| **Statut** | **PIVOTED — self-host prep** ; lab SaaS free-tier **annulé** |
+| **Décision stack** | **Aucun verrouillage** — vote salon QCM ([`S1-QCM.md`](S1-QCM.md)) en attente |
+| **D-04** | Override **POC uniquement** — voir [`S1-D04-POC-override.md`](S1-D04-POC-override.md) |
 
-> **Périmètre de ce document**  
-> - Sections **PREP** : recherche desk (pricing public, DX docs, egress, diagnostics, EU). Aucun compte cloud payant créé.  
-> - Sections **LAB** : protocole mesures ; exécution **free tier POC uniquement** (contrainte Loïc : pas de SFU payant). Décision SFU formelle / pass-fail coût payant : après go S0 + seuil €/h Loïc.  
-> - IdP / SSO : **hors scope S1** (bloque S0, pas ce spike).
+> **Pivot Loïc (explicite)**  
+> - **Stop** tout push cloud SFU SaaS : pas de clés / comptes / runs LiveKit Cloud, Daily, Agora.  
+> - POC = **RTC serveur interne self-host** sur infra Sandbox (**LAN** et/ou **VPS EU**). Participants en **France**.  
+> - **D-04** : le SFU cloud managé reste l’**hypothèse produit post-POC** ; override POC documenté, pas d’effacement de D-04.  
+> - **Ne pas verrouiller** mediasoup / LiveKit OSS / DIY avant le vote salon A/B/C/D — **comparaison et prep seulement**.
 
 ---
 
 ## Hypothèse testée
 
-Un SFU cloud managé (candidats : LiveKit Cloud, Daily, Agora) permet de :
+Un **SFU self-hosté** sur infra Sandbox (candidats POC : **mediasoup**, **LiveKit OSS** ; option **DIY WebRTC** si le vote le retient) permet de :
 
-1. Tenir **≥ 5 participants** A/V simultanés stables ≥ 20 min (AC-RTC-001).
-2. Exposer un dashboard diag avec **bitrate, packet loss, jitter, RTT, résolution, FPS** (AC-RTC-002) via `getStats()` + events SFU.
-3. Rester compatible avec la stratégie **local-first masters** (AC-RTC-003) : l’egress SFU est un bonus, jamais le seul master.
-4. Avoir un coût horaire **acceptable pour usage interne Sandbox** — le seuil €/h est à fixer avec Loïc (**ne pas inventer** ; pas de pass/fail coût tant que non fixé).
+1. Tenir **≥ 5 participants** A/V simultanés stables ≥ 20 min (AC-RTC-001), clients en **France**.
+2. Exposer les métriques AC-RTC-002 (**bitrate, packet loss, jitter, RTT, résolution, FPS**) via `getStats()` navigateur + instrumentation serveur si besoin.
+3. Rester compatible **local-first masters** (AC-RTC-003) : egress serveur = bonus, jamais seul master.
+4. Garder le **trafic média sur infra Sandbox** (LAN ou VPS EU) — pas de minutes SFU SaaS en POC.
+
+Coût POC : **ESTIMATION VPS €/h** uniquement (pas de facturation minutes cloud) — **pas de pass/fail coût inventé**.
 
 ---
 
-## État PREP vs LAB
+## État des phases
 
-| Phase | Contenu | Quand | Actions autorisées |
-| --- | --- | --- | --- |
-| **PREP (livré)** | Comparatif desk, formules de coût, protocole lab, grille mesures vide, QCM | 2026-10-05 | Lecture docs publiques ; rédaction ; coordination lead |
-| **LAB (en cours, POC free tier)** | Harnais navigateur + room 5 pax, throttling, mesures | Démarré — **strictement free tier** (Build / free Daily / free Agora) | Voir [`spikes/s1-lab/README.md`](s1-lab/README.md) ; quota épuisé → **stop** (pas d’upgrade payant) ; **pas de PR produit** |
+| Phase | Contenu | Statut |
+| --- | --- | --- |
+| **PREP SaaS (archivé)** | Desk LiveKit Cloud / Daily / Agora | **Superseded** — POC SaaS abandonné ([annexe](#annexe--desk-saas-superseded)) |
+| **PREP self-host (actif)** | Grille mediasoup vs LiveKit OSS, protocole VPS/LAN, QCM salon | **En cours** |
+| **LAB self-host** | Déploiement VPS/LAN, 5 pax FR, ≥20 min, throttling | **À démarrer** après accès infra + vote (pas de stack lock avant vote) |
 
-**Interdit (POC S1)** : tout **SFU payant** (création projet payant, upsell, dépassement quota avec upgrade) sans **OK écrit Loïc** ; verrouiller un choix SFU avant QCM ; code Phase 1 produit dans ce repo spike.
+**Interdit** : créer des projets / clés **SFU SaaS** ; verrouiller une stack sans vote salon ; code Phase 1 produit dans ce repo spike.
 
 ---
 
 ## Setup (LAB — à remplir pendant le lab)
 
-*(Colonnes vides volontairement — ne pas inventer de chiffres de lab.)*
+*(Ne pas inventer de chiffres.)*
 
-**POC free tier uniquement** (contrainte Loïc) : comptes et projets **gratuits** seulement ; pas de mesure lab nécessitant un plan payant. Coûts dans ce spike = **ESTIMATION desk** tant qu’aucun lab payant n’est autorisé — **aucun pass/fail coût** ne peut exiger un upgrade payant pour le POC.
-
-**Région EU privilégiée** (contrainte Loïc via lead) : participants lab en **France** → créer/configurer les projets et rooms SFU sur des **endpoints EU** documentés (ex. LiveKit **eu-central** / Frankfurt, Daily `eu-central-1`, edge Agora Europe). Noter la région réelle dans le tableau ci-dessous. **Residency EU stricte** ≠ simple geo latency — **TBD** QCM (B4) ; ne pas inventer de policy Sandbox ici.
+**Cible lab** : participants en **France** ; SFU sur **LAN Sandbox** et/ou **VPS EU** (hébergement et accès à confirmer avec Loïc / lead).
 
 | Champ | Valeur |
 | --- | --- |
-| Devices / OS | |
+| Hôte SFU (LAN IP / VPS EU FQDN) | |
+| Région / datacenter VPS | |
+| TURN / STUN (coturn, LiveKit TURN, autre) | |
+| Devices / OS clients | |
 | Navigateurs (versions) | |
 | Nb machines physiques (≥ 2) | |
-| Réseau (fibre / Wi‑Fi / VPN) | |
-| Région SFU utilisée | |
-| SDK / versions | |
-| Compte (free / trial — noter plan) | |
+| Réseau clients (fibre / Wi‑Fi / VPN) | |
+| Stack candidat (mediasoup / LiveKit OSS / DIY) | |
+| Versions serveur + SDK client | |
 | Date début / fin lab | |
 
 ---
 
-## Comparatif candidats (PREP — desk research)
+## Comparatif principal — self-host POC
 
-Sources consultées le **2026-10-05**. Estimations clairement marquées **ESTIMATION** ; formules documentées. Chiffres de lab = à mesurer plus tard.
+Comparaison **préparatoire** pour le salon — **pas de recommandation**, **pas de lock** avant vote.
 
-### Formules coût (minutes participant)
-
-Convention commune : **1 participant-minute** = 1 personne connectée pendant 1 minute.
-
-| Scénario (1 h wall-clock, vidéo 720p) | Participant-minutes |
-| --- | --- |
-| 3 pax | \(3 \times 60 = 180\) |
-| 5 pax | \(5 \times 60 = 300\) |
-
-### Tableau comparatif
-
-| Critère | A — LiveKit Cloud | B — Daily | C — Agora |
+| Critère | **mediasoup** (self-host) | **LiveKit OSS** (self-host) | **DIY WebRTC** (note) |
 | --- | --- | --- | --- |
-| **Coût estimé /h 3 pax 720p** | **ESTIMATION** : ~**$0.09–0.18/h** hors free (Ship overage WebRTC **$0.0005**/participant-min → \(180 \times 0.0005 = \$0.09\) ; estimate LiveKit « connection + data » **$0.001**/min → \(180 \times 0.001 = \$0.18\)). Free Build : 5 000 WebRTC min/mois (hard cap). | **ESTIMATION** : ~**$0.72/h** hors free (taux list **$0.004**/participant-min → \(180 \times 0.004 = \$0.72\)). Free : 10 000 participant-min/mois. | **ESTIMATION** : ~**$0.72/h** hors free (Video HD list **$3.99 / 1 000** participant-min → \(180 \times 0.00399 ≈ \$0.72\)). Free : 10 000 *standard minutes*/mois (HD convertie ×4 → **attention** consommation accélérée). |
-| **Coût estimé /h 5 pax 720p** | **ESTIMATION** : ~**$0.15–0.30/h** (300 × 0.0005 / 0.001). | **ESTIMATION** : ~**$1.20/h** (300 × 0.004). | **ESTIMATION** : ~**$1.20/h** (300 × 0.00399) ; vérifier si agrégat résolutions reçues pousse en Full HD (×9 standard min). |
-| **Sources pricing** | [livekit.com/pricing](https://livekit.com/pricing) / [pricing.md](https://livekit.com/pricing.md) — consulté 2026-10-05 | [daily.co/pricing/video-sdk](https://www.daily.co/pricing/video-sdk/) — consulté 2026-10-05 | [agora.io pricing RTC](https://www.agora.io/en/pricing/agora-rtc/) / [docs pricing](https://docs.agora.io/en/realtime-media/rtc/reference/pricing) — consulté 2026-10-05 |
-| **Opaque ?** | Partiellement : data transfer **$0.12/GB** (Ship) peut faire varier le réel selon bitrate SFU ; estimate « $0.001/min » = approximation vendeur. | Clair sur participant-min + recording séparé. | Conversion *standard minutes* (HD 1:4) à bien modéliser ; packages prépayés vs list. |
-| **DX JS/TS** | `livekit-client` + `@livekit/components-react` ; tokens JWT server-side ; rooms explicites ; data channels. | `daily-js` + `@daily-co/daily-react` ; rooms REST ; tokens meeting ; DX rooms très documentée. | Agora Web SDK 4.x + React Video SDK ; App ID + tokens RTC ; API plus « channel » que « room ». |
-| **Diagnostics vs AC-RTC-002** | `ConnectionQuality` + stats internes tracks (`packetsLost`, `jitter`, `roundTripTime`, bitrate dérivé) ; dashboard Cloud. **À mapper** bitrate / loss / jitter / RTT / résolution / FPS via getStats navigateur + events. | `getNetworkStats()` + `useNetwork` : bitrate, packet loss, jitter, RTT, `networkState` — **très proche** AC-RTC-002 ; résolution/FPS via tracks/`getStats` WebRTC. | `network-quality` (score 0–6) + `getLocal/RemoteVideo/AudioStats` + `getRTCStats` — métriques riches ; mapping dashboard à construire. |
-| **Egress / recording** | RoomComposite, TrackComposite, Track egress, webhooks ; sortie S3/fichier/RTMP. **Bonus** program — pas master unique. | `cloud`, `cloud-audio-only`, **`local`** (client), **`raw-tracks`** → S3. Mode `local` aligné esprit local-first ; raw-tracks = bonus tracks. | Cloud Recording (REST, régions EU API) → stockage tiers. Bonus serveur ; masters restent côté client (S4). |
-| **Fit local-first** | Egress optionnel, ne remplace pas MediaRecorder client (S4). | `local` + masters client S4 + raw-tracks optionnels. | Cloud Recording ≠ master HQ client ; OK si traité comme bonus. |
-| **Free / trial** | Build $0 : 5 000 WebRTC min/mois, hard cap. | 10 000 participant-min/mois free. | 10 000 standard min/mois free (suspension si dépassement). |
-| **EU / latence Europe (docs vendeur)** | Edge global ; region agents `eu-central` (Frankfurt) documentée ; **region pinning** plan Scale+. Residency stricte : à vérifier en lab / avec vendeur. | Call servers `eu-central-1` (Frankfurt) via `geo` ; blog Daily : certaines dépendances US encore possibles — **pas de garantie residency EU totale** dans la doc publique citée. GDPR / DPA disponibles. | Endpoints REST EU (`api-eu-central-1`, `api-eu-west-1`) pour Cloud Recording ; edge Agora Europe. Residency : confirmer subprocessors / DPA. |
-| **Risques** | Coût réel sensible au **bandwidth** ; pinning EU = plan supérieur. | Coût participant-min plus élevé que LiveKit list ; recording cloud payant. | Pricing par résolution agrégée peut surprendre à 5 pax ; DX plus « télécom ». |
-| **Observations desk (sans verdict)** | Pricing WebRTC list bas ; egress riche ; DX React solide ; AC-RTC-002 nécessite assemblage getStats. | DX diag native très proche AC-RTC-002 ; recording `local` intéressant ; EU geo dispo avec caveats residency. | Métriques natives fortes ; modèle standard-minutes à maîtriser ; fit podcast moins « room-first ». |
+| **DX Node/TS** | Bibliothèque C++/Node ; API rooms/producers/consumers ; courbe d’apprentissage | Stack LiveKit complète ; `livekit-server` + `livekit-client` ; similaire au modèle cloud mais ops à nous | Signalisation + SFU maison — **risque élevé**, effort important |
+| **Déploiement VPS/LAN** | Process Node + workers ; Docker communautaire ; config ports UDP/TCP | Binaire/docker `livekit-server` ; config YAML ; Redis optionnel selon topo | À concevoir entièrement |
+| **TURN / ICE** | Besoin **coturn** (ou équivalent) pour clients derrière NAT ; à documenter en lab | TURN intégré / documenté côté OSS ; même besoin réseau | Idem, sans guide produit |
+| **CPU / bande passante 5×720p** | Charge SFU sur CPU (simulcast/SVC selon config) ; dimensionner VPS — **à mesurer** | Idem ; dépend config room et codecs | Imprévisible |
+| **Diagnostics AC-RTC-002** | `getStats()` WebRTC côté client ; stats mediasoup côté serveur (à brancher UI lab) | `getStats()` + events LiveKit ; proche harnais client existant (archivé SaaS) | Variable |
+| **Recording / egress vs local-first** | Pas d’egress managé ; enregistrement **client** (S4) ; egress serveur = bonus optionnel | Egress OSS possible (composite/track) — traiter comme **bonus**, pas master unique | Dépend implémentation |
+| **Charge ops** | Nous : patch, scale, monitoring, certifs TLS, TURN | Nous : idem + config LiveKit ; docs OSS | Maximale |
+| **Licence** | ISC (mediasoup) | Apache 2.0 (serveur OSS) | N/A |
+| **Données EU** | Trafic sur **notre** VPS EU / LAN — pas de tiers SFU SaaS en POC | Idem | Idem |
+| **Coût POC** | **EST.** coût **VPS €/h** + bande passante (pas de minutes SaaS) — chiffres **non inventés** ici | Idem | Idem |
+| **Risques** | Expertise SFU ; NAT/TURN mal configuré | Complexité déploiement ; dérive vs Cloud si on confond POC et prod | **Hors défaut** — seulement si vote **C** |
 
-**Rappel coût** : aucune colonne ci-dessus ne constitue un **pass/fail**. Le plafond €/h (3 pax et 5 pax) est une **question ouverte pour Loïc** (voir QCM).
+**Option DIY** : ligne fine uniquement — à n’envisager que si le salon coche **C** ; sinon hors chemin par défaut.
 
 ---
 
-## Protocole de lab détaillé (LAB — checklist jours 1–5)
+## Protocole de lab (self-host — VPS/LAN)
 
-> **POC free tier only** : harnais `spikes/s1-lab/` — comptes **gratuits** uniquement ; quota épuisé → **arrêt** (pas d’upgrade payant). Les chiffres **ESTIMATION** du comparatif desk ne sont pas des coûts observés et **ne imposent pas** de lab payant. Pour **pass/fail coût** (hors POC) et décision SFU formelle : (1) go post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)), (2) plafond coût Loïc, (3) mesures remplies — éventuellement sur infra payante **seulement** si Loïc l’autorise explicitement (hors scope POC actuel).
+> Prérequis : accès **VPS EU** et/ou **LAN** fourni par Loïc/lead ; candidat serveur aligné sur le **vote salon** (en attendant, prep doc + squelettes [`s1-lab/mediasoup/`](s1-lab/mediasoup/), [`s1-lab/livekit-oss/`](s1-lab/livekit-oss/)).
 
-### Jour 1 — Harnais minimal (1 candidat prioritaire desk, puis les autres)
+### Jour 1 — Déploiement minimal
 
-- [ ] Compte **free/trial** uniquement (ne pas upgrader sans OK Loïc)
-- [x] Harnais minimal LiveKit : `spikes/s1-lab/livekit/` (token local + join navigateur)
-- [ ] App hello : join 2 navigateurs (2 machines si possible) — **à exécuter avec compte Cloud**
-- [ ] Publier caméra/micro 720p ; subscribe croisé
-- [x] Polling `getStats()` → tableau UI (AC-RTC-002)
-- [ ] Checklist AC-RTC-002 validée sur run réel (marquer écarts)
+- [ ] Obtenir détails VPS/LAN (IP, ports UDP, TLS, firewall)
+- [ ] Déployer **un** candidat (selon vote ou branche lab parallèle **sans lock**)
+- [ ] TURN/STUN opérationnel ; 2 navigateurs join (2 machines si possible)
+- [ ] Publier cam/mic 720p ; subscribe croisé
+- [ ] Brancher tableau AC-RTC-002 (`getStats()`)
 
-### Jour 2 — Dashboard diag minimal + 3 pax
+### Jour 2 — 3 pax + diag
 
-- [ ] UI opérateur : tableau live des 6 métriques AC-RTC-002
-- [ ] Session 3 pax ≥ 20 min stable
-- [ ] Noter versions SDK, région, RTT baseline Europe/Paris
+- [ ] UI ou tableau live 6 métriques AC-RTC-002
+- [ ] Session 3 pax (France) ≥ 20 min stable
+- [ ] RTT baseline Paris → hôte SFU
 
-### Jour 3 — 5 pax + dégradation réseau
+### Jour 3 — 5 pax + dégradation
 
-- [ ] Room 5 clients navigateurs réels, **≥ 2 machines physiques**
-- [ ] Session A/V ≥ 20 min (critère pass stabilité)
-- [ ] Chrome throttling (Slow 3G / custom) + éventuellement `tc` sur 1 machine
-- [ ] Vérifier : live dégradé ≠ corruption masters locaux (smoke MediaRecorder court — foreshadow S4 ; pas remplacer S4)
+- [ ] 5 clients réels, ≥ 2 machines, **France**
+- [ ] Session ≥ 20 min (AC-RTC-001)
+- [ ] Chrome throttling (Slow 3G / custom) ; option `tc`
+- [ ] Smoke : masters locaux intacts si dégradation réseau
 
-### Jour 4 — Egress bonus (optionnel) + coûts
+### Jour 4 — Egress bonus (optionnel)
 
-- [ ] Tester **un** egress composite **ou** raw-tracks / track egress (selon candidat) → fichier test
-- [ ] Confirmer explicitement : egress ≠ master unique
-- [ ] Relever usage dashboard vendeur (minutes, GB) vs formules ESTIMATION
-- [ ] Remplir tableau « Mesures » + « Coûts observés »
+- [ ] Un flux egress **serveur** (si stack le permet) → fichier test
+- [ ] Confirmer : egress ≠ master unique
+- [ ] Noter charge CPU / bande passante observée (pas de chiffres inventés)
 
-### Jour 5 — Comparaison courte candidat #2 (si temps) + synthèse
+### Jour 5 — 2ᵉ candidat (si temps) + synthèse
 
-- [ ] Smoke 5 pax 10–15 min sur 2ᵉ candidat si free tier le permet
-- [ ] Remplir Pass/Fail stabilité + diag (toujours **pas** pass/fail coût sans plafond)
-- [ ] Mettre à jour ce doc + préparer réponses QCM pour Loïc via le lead
-- [ ] **Stop** : pas de PR produit ; pas de verrouillage SFU sans QCM Loïc
+- [ ] Smoke 10–15 min sur l’autre stack self-host si infra le permet
+- [ ] Remplir mesures ; alimenter QCM salon — **sans verrouiller** sans vote
 
 ---
 
@@ -138,87 +126,69 @@ Convention commune : **1 participant-minute** = 1 personne connectée pendant 1 
 
 ### Stabilité
 
-| Run | Candidat | Pax | Durée | A/V OK ? | Décos | Notes |
-| --- | --- | --- | --- | --- | --- | --- |
-| | | | | | | |
-| | | | | | | |
+| Run | Stack | Hôte (LAN/VPS EU) | Pax | Durée | A/V OK ? | Décos | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| | | | | | | | |
+| | | | | | | | |
 
-### Diagnostics AC-RTC-002 (échantillon médiane / p95)
+### Diagnostics AC-RTC-002
 
-| Candidat | Pax | Bitrate ↓/↑ | Packet loss % | Jitter | RTT | Résolution | FPS | Source (getStats / SDK) |
+| Stack | Pax | Bitrate ↓/↑ | Packet loss % | Jitter | RTT | Résolution | FPS | Source |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | | | | | | | | | |
 | | | | | | | | | |
 
 ### Dégradation réseau
 
-| Condition | Candidat | Effet live | Masters locaux intacts ? | Notes |
+| Condition | Stack | Effet live | Masters locaux intacts ? | Notes |
 | --- | --- | --- | --- | --- |
 | Throttle Chrome | | | | |
 | tc / loss simulé | | | | |
 
----
+### Coût infra (EST. / observé — VPS uniquement)
 
-## Pass / Fail
-
-### Pass (techniques — hors coût)
-
-- [ ] 5 pax A/V stables ≥ 20 min (AC-RTC-001)
-- [ ] Métriques AC-RTC-002 exposées (bitrate, packet loss, jitter, RTT, résolution, FPS)
-- [ ] DX / recording **compatible** local-first (egress = bonus, pas seul master)
-
-### Fail
-
-- [ ] Instabilité au-delà de 3 pax
-- [ ] DX / recording incompatible avec local-first masters
-
-### Coût
-
-- **POC S1** : lab **free tier uniquement** — pas de pass/fail coût basé sur un lab **payant** ; les montants desk restent **ESTIMATION** (non observés tant que POC free only).
-- **Hors POC** : non évalué en pass/fail tant que Loïc n’a pas fixé le plafond €/h (3 pax et 5 pax).
-- Après seuil + autorisation éventuelle infra payante : comparer **coûts observés** (+ ESTIMATION desk) au plafond — alors seulement marquer OK / hors budget.
-
----
-
-## Décision
-
-**État : pending mesures lab + QCM Loïc.**
-
-- Aucune option A / B / C / D **verrouillée** dans ce document PREP.
-- Les *observations desk* du tableau ne constituent **pas** une recommandation.
-- Le choix final SFU sera tranché **après** lab et réponse QCM (transmis via le lead Podcast Studio).
-
----
-
-## Coûts observés
-
-### ESTIMATION desk uniquement (2026-10-05) — pas de coût lab payant en POC
-
-| Candidat | 3 pax / h (720p) | 5 pax / h (720p) | Notes |
-| --- | --- | --- | --- |
-| LiveKit Cloud | **EST.** $0.09–0.18 | **EST.** $0.15–0.30 | Hors free ; + data transfer réel à mesurer |
-| Daily | **EST.** $0.72 | **EST.** $1.20 | Hors free 10k ; recording cloud non inclus |
-| Agora | **EST.** ~$0.72 | **EST.** ~$1.20 | HD list ; vérifier conversion standard-min & agrégat résolutions |
-
-**Plafond €/h** : à fixer explicitement avec Loïc — **non inventé ici**.
-
-### Observés lab (après go)
-
-| Candidat | Minutes facturées | $ / € relevés | Écart vs EST. | Notes |
+| Stack | VPS spec | €/h EST. | € observés session | Notes |
 | --- | --- | --- | --- | --- |
 | | | | | |
 
 ---
 
+## Pass / Fail
+
+### Pass (techniques uniquement)
+
+- [ ] 5 pax A/V stables ≥ 20 min (AC-RTC-001)
+- [ ] AC-RTC-002 exposé (6 métriques)
+- [ ] Compatible local-first (egress serveur = bonus)
+
+### Fail
+
+- [ ] Instabilité > 3 pax non résolue
+- [ ] Incompatible local-first
+
+### Coût
+
+- **Pas de pass/fail coût inventé** pour le POC.
+- EST. VPS documentées si disponibles ; comparaison budget = **après** indications Loïc (hors scope lock salon).
+
+---
+
+## Décision
+
+- **Stack POC** : **en attente vote salon** (mediasoup / LiveKit OSS / DIY / reprise cloud — option D hors POC actuel).
+- **Aucune option verrouillée** par ce document.
+- **D-04 produit** : cloud public managé = hypothèse **post-POC** ; override POC = [`S1-D04-POC-override.md`](S1-D04-POC-override.md).
+
+---
+
 ## Blockers
 
-| ID | Blocker | Bloque | Owner | Statut |
-| --- | --- | --- | --- | --- |
-| B1 | Spike **S0** non pass / pas de go lead post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)) | Décision SFU formelle ; pass/fail coût | Lead Podcast Studio | Ouvert — lab free tier autorisé en parallèle |
-| B2 | **Plafond coût €/h** (3 pax et 5 pax) non fixé avec Loïc | Pass/fail coût ; décision budget | Loïc via lead + QCM | Ouvert |
-| B3 | Lab **POC free only** — pas d’upgrade payant si quota épuisé | Suite lab au-delà des caps free | Loïc | **Fermé pour POC** — stop ou OK écrit Loïc pour tout payant |
-| B4 | Clarifier **exigence residency EU** Sandbox (si stricte) vs geo latency seule | Choix région / plan (ex. LiveKit pinning Scale) | Loïc / legal — **ne pas inventer policy** | Ouvert (question) |
-| — | IdP / SSO | **S0 uniquement** — hors scope S1 | — | N/A S1 |
+| ID | Blocker | Owner | Statut |
+| --- | --- | --- | --- |
+| B1 | **Vote salon** A/B/C/D ([`S1-QCM.md`](S1-QCM.md)) | Lead / salon | Ouvert — **pas de stack lock** avant vote |
+| B2 | Détails **VPS EU** et/ou **LAN** (ports, TLS, TURN) | Loïc / lead | Ouvert |
+| B3 | Go formel post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)) pour enchaînement produit | Lead | Ouvert (parallèle prep OK) |
+| B4 | ~~SFU SaaS free tier~~ | — | **Annulé** — SaaS stop per Loïc |
 
 ---
 
@@ -226,28 +196,22 @@ Convention commune : **1 participant-minute** = 1 personne connectée pendant 1 
 
 ```text
 ┌─────────────────────────────────────────────────────────────┐
-│ PREP (livré)                                                │
-│  ✓ Desk research pricing / DX / egress / diag / EU          │
-│  ✓ Draft spikes/S1-sfu.md + QCM                             │
-│  → Transmettre QCM à Loïc via lead (pas exécuter la décision)│
+│ PIVOT (actuel)                                              │
+│  ✓ Stop SaaS SFU (pas de clés / runs cloud)                 │
+│  ✓ Doc self-host + D-04 override POC only                   │
+│  → Vote salon QCM (pas de lock avant vote)                  │
+│  → Prep s1-lab/mediasoup + livekit-oss                      │
 └───────────────────────────┬─────────────────────────────────┘
-                            │ lab free tier (en cours)
+                            │ vote + accès VPS/LAN
                             ▼
 ┌─────────────────────────────────────────────────────────────┐
-│ LAB (free tier — en cours)                                  │
-│  ✓ Harnais spikes/s1-lab/ (LiveKit + Daily + Agora)         │
-│  J1–J5 protocole ci-dessus (free/trial d’abord)             │
-│  Remplir mesures + coûts observés                           │
-│  Pass/Fail techniques ; coût seulement si plafond connu     │
-│  Réponses QCM → lead → Loïc                                 │
-│  ✗ Stop avant verrouillage unilatéral et avant PR produit   │
+│ LAB self-host (VPS EU / LAN, participants FR)               │
+│  5 pax · ≥20 min · throttling · grilles mesures             │
 └───────────────────────────┬─────────────────────────────────┘
-                            │ QCM Loïc répondu
+                            │ post-POC produit (hors ce spike)
                             ▼
 ┌─────────────────────────────────────────────────────────────┐
-│ DÉCISION (post-lab)                                         │
-│  Choix SFU A/B/C/D verrouillé + ADR si besoin               │
-│  Déblocage Phase 1 RTC / couplage S3–S4                     │
+│ Produit : hypothèse D-04 cloud public sauf nouvel OK Loïc   │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -255,49 +219,22 @@ Convention commune : **1 participant-minute** = 1 personne connectée pendant 1 
 
 ## Suite
 
-| Après… | Action |
+| Étape | Action |
 | --- | --- |
-| PREP livré | Lead transmet QCM Loïc ; lab free tier via `s1-lab/` ; attendre go S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)) + seuil coût pour décision |
-| LAB pass technique | Amender ADR / ARCHITECTURE §4 avec SFU choisi |
-| LAB fail | Documenter no-go ; option D / re-spike ; pas d’enchaînement Phase 1 RTC |
-| SFU verrouillé | Débloque chemin S4 (recording local) couplé au même SFU ; S3 matting peut paralléliser |
-
-**ADR** : à amender **après** décision post-lab uniquement.  
-**Roadmap** : Phase 1 produit RTC **non** engagée tant que S1 n’est pas pass (SPIKES.md).
+| Maintenant | Lead + salon : QCM self-host ; ping avec PR #3 |
+| Après vote | Déployer stack choisie sur VPS/LAN ; exécuter protocole lab |
+| Post-POC | ADR / D-04 : cloud managé reste hypothèse produit sauf amendement Loïc |
 
 ---
 
-## Annexes PREP — détails sources
+## Annexe — desk SaaS (superseded)
 
-### LiveKit — points salients
+> **Statut : superseded** — recherche desk 2026-10-05 sur LiveKit Cloud, Daily, Agora. Le POC SaaS (free tier) est **abandonné** ; conservé comme contexte historique uniquement. **Ne pas** créer de comptes ni exécuter [`s1-lab/livekit/`](s1-lab/livekit/) (Cloud), [`daily/`](s1-lab/daily/), [`agora/`](s1-lab/agora/) contre les vendeurs.
 
-- WebRTC participant minutes : Build 5 000 inclus ; Ship 150 000 puis **$0.0005/min** ; Scale 1.5M puis **$0.0004/min**.
-- Downstream data : Ship 250 GB puis **$0.12/GB**.
-- Recording/export (RoomComposite etc.) : transcode minutes partagées (Ship 600 puis **$0.02/min** vidéo).
-- Track egress : **$0.001/min** au-delà de l’included.
-- Docs egress : RoomComposite / TrackComposite / Track ; sortie S3 possible.
+Résumé archivé :
 
-### Daily — points salients
+- Comparatif pricing participant-minute et free tiers (Build / 10k min) — voir commit git antérieur ou PR #3 historique.
+- AC-RTC-002 : Daily `getNetworkStats` proche ; LiveKit/Agora via getStats + SDK.
+- **Aucune** de ces options n’est le chemin POC actuel.
 
-- Video calls : **$0.004**/participant-min (premier palier après 10k free) ; paliers volume jusqu’à **$0.0015**.
-- Cloud recording : **$0.01349**/recorded-min (+ **$0.003**/min storage Daily) — facturé wall-clock, pas × pax.
-- `getNetworkStats` / `useNetwork` alignés diag.
-- Recording `local` et `raw-tracks` (S3) documentés.
-
-### Agora — points salients
-
-- Video HD : **$3.99 / 1 000** participant-min (list) ; conversion standard-min HD **1:4**.
-- Free 10 000 standard min ; packages Starter+ avec overage.
-- Monitoring : `network-quality`, stats audio/vidéo locales et remote.
-- Cloud Recording via REST ; domaines régionaux EU documentés pour API.
-
-### Mapping AC-RTC-002 (cible lab)
-
-| Métrique | LiveKit (approche) | Daily (approche) | Agora (approche) |
-| --- | --- | --- | --- |
-| Bitrate | stats track / getStats | `*BitsPerSecond` | `getLocal/RemoteVideoStats` |
-| Packet loss | packetsLost | `*PacketLoss` | stats + quality |
-| Jitter | jitter stats | `*Jitter` | stats video/audio |
-| RTT | roundTripTime | `networkRoundTripTime` | `getRTCStats` / delay |
-| Résolution | dimensions publication / track | track settings + getStats | video stats |
-| FPS | framesPerSecond getStats | getStats / track | video stats |
+Harnais navigateur SaaS : **gelés** sous `spikes/s1-lab/` — voir [`s1-lab/README.md`](s1-lab/README.md).

@@ -1,4 +1,8 @@
-# Daily — S1 lab harness (POC free tier)
+# ARCHIVED — Daily SaaS harness (superseded)
+
+> **Do not run.** See [`../ARCHIVED-SaaS.md`](../ARCHIVED-SaaS.md) and [`../README.md`](../README.md).
+
+# Daily — S1 lab harness (POC free tier) — ARCHIVED
 
 Minimal browser lab mirroring [`../livekit/`](../livekit/). **Not** Phase 1 product code.
 

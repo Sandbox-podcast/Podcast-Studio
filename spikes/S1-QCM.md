@@ -1,133 +1,120 @@
-# QCM décisionnel — SFU Podcast Studio (post-S1)
+# QCM décisionnel — SFU POC self-host (salon / Loïc)
 
 | | |
 | --- | --- |
-| **Date** | 2026-10-05 |
+| **Date** | 2026-10-05 (aligné pivot S1) |
 | **Auteur** | Podcast RTC |
-| **Statut** | **Brouillon prêt à transmettre via le lead** — **ne pas exécuter** comme décision maintenant |
-| **Contexte** | OPEN-QUESTIONS : SFU après S1 = A LiveKit Cloud / B Daily / C Autre. Seuil coût à fixer avec Loïc. |
-| **Préalable** | Réponses **après** lab S1 (go post-S0). Ce QCM peut être **lu** en PREP pour cadrer ; le **vote** attend les mesures. |
+| **Statut** | **Vote salon en cours** — **ne pas verrouiller** de stack côté spike |
+| **Contexte** | Pivot Loïc : POC **sans SFU SaaS** ; comparaison self-host avant décision |
+| **D-04** | Override POC seulement — cloud managé = **hypothèse produit post-POC** ([`S1-D04-POC-override.md`](S1-D04-POC-override.md)) |
 
-> Style aligné PRODUCT-VISION §6.  
-> **Pas de recommandation A/B/C verrouillée** en PREP. Observations desk ≠ verdict.
+> **Pas de recommandation** A/B/C/D par l’équipe spike. Ce QCM prépare le **salon** ; la décision attend le vote.
 
 ---
 
 ## 1. Problème
 
-Choisir le **SFU cloud managé** pour le live Podcast Studio (usage interne Sandbox, clients typiquement en Europe / Paris), capable de :
+Choisir la **stack SFU pour le POC** Podcast Studio (sessions internes Sandbox, participants en **France**, SFU sur **LAN** et/ou **VPS EU**), capable de :
 
 - ≥ 5 participants simultanés (AC-RTC-001)
-- Dashboard diag : bitrate, packet loss, jitter, RTT, résolution, FPS (AC-RTC-002)
-- Compatibilité **local-first masters** (AC-RTC-003) — egress SFU = complément, jamais seul master
-- Coût horaire acceptable pour sessions internes 3 et 5 pax 720p — **plafond à définir**
+- Diagnostics AC-RTC-002 (bitrate, packet loss, jitter, RTT, résolution, FPS)
+- Compatibilité **local-first masters** (AC-RTC-003)
+- Coût infra = **VPS / LAN** (EST. €/h) — pas de minutes SFU cloud en POC
 
-Mesh exclu ; mediasoup self-managed hors scope v1 (ARCHITECTURE §4).
+Mesh exclu pour le produit ; ce QCM concerne le **POC self-host** uniquement.
 
 ## 2. Impacts si on se trompe
 
 | Impact | Conséquence |
 | --- | --- |
-| Instabilité > 3 pax | Blocage Phase 1 RTC / AC-RTC-001 fail |
-| Diag incomplets | AC-RTC-002 non tenu ; régie aveugle |
-| Egress seul master | Contradiction D-01 / AC-RTC-003 ; perte qualité si réseau dégrade |
-| Coût hors plafond | Usage interne non viable ; renegociation ou re-spike |
-| Mauvaise région / residency | Latence Europe dégradée ou écart vs attentes compliance Sandbox (à clarifier — **ne pas inventer policy**) |
+| Stack trop lourde à opérer | Retard POC ; surcharge ops Sandbox |
+| TURN/NAT mal dimensionné | Échec join clients France |
+| Diag insuffisants | AC-RTC-002 non tenu |
+| Egress serveur comme seul master | Contradiction AC-RTC-003 |
+| DIY sous-estimé | Dette et instabilité si option C sans bande passante équipe |
 
-## 3. Options
+## 3. Options (vote salon)
 
 | Option | Description |
 | --- | --- |
-| **A — LiveKit Cloud** | SFU managé LiveKit ; SDK JS/TS + React components ; egress Room/Track |
-| **B — Daily** | SFU managé Daily ; daily-js / daily-react ; recording cloud / local / raw-tracks |
-| **C — Agora** | RTC Agora Web ; tokens + channels ; Cloud Recording REST |
-| **D — Autre** | Préciser (ex. autre vendeur managé). Self-hosted mediasoup = hors v1 sauf dérogation explicite |
+| **A — mediasoup (self-host)** | SFU Node sur VPS EU / LAN Sandbox ; coturn ; client WebRTC / protoo ou équivalent |
+| **B — LiveKit OSS (self-host)** | `livekit-server` sur VPS EU / LAN ; clients `livekit-client` ; tokens maison |
+| **C — DIY / autre (préciser)** | Stack WebRTC custom ou autre OSS — **risque plus élevé** ; préciser : _______________ |
+| **D — Revenir cloud managé** | LiveKit Cloud / Daily / Agora ou autre SaaS — **hors POC actuel** ; nécessite **OK Loïc explicite** + révision override D-04 POC |
 
-## 4. Avantages / inconvénients (desk + à compléter post-lab)
+**Ancien QCM SaaS (LiveKit Cloud / Daily / Agora)** : **retiré comme chemin de lock POC** — archivé dans [`S1-sfu.md`](S1-sfu.md) annexe.
 
-### A — LiveKit Cloud
+## 4. Avantages / inconvénients (prep — à compléter post-lab)
 
-| + | − |
-| --- | --- |
-| Pricing WebRTC list bas (EST. desk ~$0.09–0.30/h pour 3–5 pax hors free) | Coût réel dépend du **data transfer** ($/GB) — à mesurer en lab |
-| Egress riche (composite + track) → S3 | Region pinning documenté surtout plans élevés |
-| DX TypeScript / React mature ; data channels | AC-RTC-002 : assemblage getStats + ConnectionQuality (moins « tout-en-un » que Daily network stats) |
-| Free Build 5 000 min (hard cap) utile PREP/lab court | |
-
-### B — Daily
+### A — mediasoup
 
 | + | − |
 | --- | --- |
-| `getNetworkStats` / `useNetwork` très proches AC-RTC-002 | EST. desk ~$0.72–1.20/h (3–5 pax) hors free — plus cher list que LiveKit |
-| Recording `local` + `raw-tracks` S3 alignés esprit dual-track | Residency EU : geo Frankfurt dispo ; doc publique indique encore des services US possibles |
-| DX rooms/tokens claire ; React helpers | Cloud recording facturé à part si utilisé |
-| 10 000 min free / mois | |
+| Contrôle total ; trafic sur infra Sandbox | Ops + TURN + monitoring à notre charge |
+| Licence permissive ; écosystème Node | DX plus bas niveau que LiveKit « room » |
+| Bon fit SFU pur | AC-RTC-002 : assembly UI / getStats |
 
-### C — Agora
-
-| + | − |
-| --- | --- |
-| Métriques natives riches (network-quality + stats A/V) | Modèle *standard minutes* (HD ×4) — surprise coût possible à 5 pax |
-| Edge / API EU documentés | DX plus « channel télécom » que room podcast |
-| Free 10 000 standard min | Cloud Recording = bonus serveur, pas master HQ client |
-| EST. list HD ~$0.72–1.20/h (3–5 pax) | |
-
-### D — Autre
+### B — LiveKit OSS
 
 | + | − |
 | --- | --- |
-| Flexibilité si A/B/C échouent le lab | Délai ; re-spike ; mediasoup self-host = hors scope v1 |
+| Parité conceptuelle avec hypothèse cloud D-04 post-POC | Déploiement et config serveur non triviaux |
+| SDK client mature ; rooms | Redis/dépendances selon topology |
+| Egress OSS possible (bonus) | Risque de confondre POC self-host et produit cloud |
 
-## 5. Observations desk (PREP) — pas une recommandation
+### C — DIY / autre
 
-Forces relatives **documentées** (sans classer un gagnant) :
+| + | − |
+| --- | --- |
+| Flexibilité maximale | **Risque élevé** ; délai |
+| | À reserver si vote explicite |
 
-- **Coût list (hors free)** : LiveKit paraît le plus bas sur le papier ; Daily et Agora HD du même ordre (~$0.004/participant-min).
-- **Diag AC-RTC-002** : Daily expose le mapping le plus direct out-of-the-box ; LiveKit et Agora couvrent via getStats / stats SDK avec un peu plus d’assemblage UI.
-- **Local-first** : les trois permettent de ne **pas** dépendre de l’egress comme master ; Daily a en plus un mode recording `local` documenté.
-- **EU** : les trois documentent une présence Europe (Frankfurt / EU endpoints). **Residency stricte** ≠ geo latency — à clarifier avec Loïc si besoin Sandbox.
+### D — Cloud managé (hors POC actuel)
 
-**Incertitudes** (à lever en LAB) : stabilité 5 pax réelle, écart EST. vs facturation (surtout bandwidth LiveKit et standard-min Agora), RTT depuis Paris, qualité DX tokens dans *notre* stack S0.
+| + | − |
+| --- | --- |
+| Aligné **hypothèse produit D-04 post-POC** | **Interdit POC** sans OK Loïc |
+| Moins ops immédiat | Coût minutes + données ; SaaS stop pour l’instant |
 
-**Décision SFU** : **pending mesures lab** — aucune option cochée ici.
+## 5. Observations prep (pas une recommandation)
 
-## 6. Questions pour Loïc (à répondre après lab, via le lead)
+- Comparaison détaillée : [`S1-sfu.md`](S1-sfu.md) grille mediasoup vs LiveKit OSS.
+- **Vote salon en cours** — l’équipe spike **ne coche pas** d’option.
+- Lab cible : **France** ; hôte **LAN ou VPS EU**.
 
-### Q1 — Choix SFU
+## 6. Questions pour le salon / Loïc
 
-Après lecture du rapport `spikes/S1-sfu.md` (mesures lab remplies) :
+### Q1 — Choix stack POC
 
-- [ ] **A** LiveKit Cloud  
-- [ ] **B** Daily  
-- [ ] **C** Agora  
-- [ ] **D** Autre : _______________  
+Après lecture de [`S1-sfu.md`](S1-sfu.md) (grille + mesures lab quand remplies) :
 
-Commentaire (optionnel) : _________________________________
+- [ ] **A** mediasoup (self-host)  
+- [ ] **B** LiveKit OSS (self-host)  
+- [ ] **C** DIY / autre : _______________  
+- [ ] **D** Revenir cloud managé (hors POC actuel — OK Loïc requis)  
 
-### Q2 — Plafond coût / heure (réponse libre — **obligatoire avant pass/fail coût**)
+Commentaire : _________________________________
 
-Le spike **n’invente pas** de seuil. Indiquer un plafond acceptable pour usage interne Sandbox :
+### Q2 — Infra lab
 
-| Scénario | Plafond proposé (€/h ou $/h — préciser devise) | Fourchettes candidates (indicatif desk, **non imposées**) |
-| --- | --- | --- |
-| 3 pax 720p | _______________ | ex. ≤ 0,50 / ≤ 1 / ≤ 2 / autre |
-| 5 pax 720p | _______________ | ex. ≤ 1 / ≤ 2 / ≤ 3 / autre |
+| Question | Réponse |
+| --- | --- |
+| VPS EU (fournisseur, spec, €/h EST.) | _______________ |
+| LAN Sandbox (IP, ports) | _______________ |
+| TURN (coturn / intégré) | _______________ |
 
-Notes Loïc (volume sessions/mois, free tier OK, contrainte budget) : _________________________________
+### Q3 — Post-POC produit (rappel D-04)
 
-### Q3 — EU (optionnel mais utile)
+Confirmer que l’**hypothèse produit** reste le **SFU cloud public managé** (D-04) **après POC**, sauf nouvel OK Loïc pour amendement :
 
-Exigence Sandbox pour le SFU (cocher une) — **policy à fournir par Loïc, pas inventée par l’équipe spike** :
-
-- [ ] Latence Europe suffisante (geo EU OK)  
-- [ ] Residency / traitement données EU strict (DPA + confirmation vendeur)  
-- [ ] À préciser avec legal : _______________  
+- [ ] Oui, rappel accepté  
+- [ ] À discuter (préciser) : _______________  
 
 ---
 
 ## 7. Suite process
 
-1. Lead Podcast Studio transmet ce QCM (+ lien `S1-sfu.md`) à Loïc.  
-2. Lab S1 s’exécute après go S0 **et** (idéalement) réponse Q2 sur les plafonds.  
-3. Après lab : mise à jour mesures → Loïc répond Q1 (+ Q3 si besoin).  
-4. Lead verrouille SFU + ADR ; **pas** de verrouillage unilatéral par Podcast RTC.
+1. Lead partage ce QCM + PR #3 / `S1-sfu.md` au **salon**.  
+2. **Vote** → stack POC (pas de lock unilatéral spike).  
+3. Lab self-host VPS/LAN ; remplir mesures.  
+4. Post-POC : produit selon D-04 sauf amendement formel.
