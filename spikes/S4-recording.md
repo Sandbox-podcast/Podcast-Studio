@@ -123,7 +123,40 @@ At part cut, the manifest was written with `byteCursor` advanced **without** reg
 
 **vs run 1:** Foreground tab — **no** **27.221** s `requestAnimationFrame` freeze reproduced; watchdog gaps empty.
 
-**Master-HQ decision:** still **open** — pending **take 3** with confirmed MediaPipe `previewCanvas` + in-frame clap for measurable A/V sync.
+**Master-HQ decision:** still **open** — pending **take 4** after take 3 findings below.
+
+---
+
+## Real-cam pass 3 (laptop, run 3)
+
+**Label:** Edge `?v=s4-matfix2` · dual raw/matted · tab foreground · ~**00:06:29–00:07:29** Paris **2026-10-05**. Full analysis: [`spikes/s4/REALCAM-RUN3-RESULT.md`](./s4/REALCAM-RUN3-RESULT.md).
+
+| Area | raw | matted |
+| --- | --- | --- |
+| **Duration / fps** | **~59.934** s remux; **~30.000** fps | **~60.024** s; **~30.005** fps |
+| **Gaps** | max **52** ms; none **>200** ms | max **48** ms; same |
+| **Upload** | **0** byte loss (**17 797 685** B) | **0** byte loss (**18 272 786** B) |
+| **Loss / bitrate (option B)** | **PASS** / **~2.376** Mbps | **PASS** / **~2.435** Mbps |
+| **Smoke canvas (run 2 bug)** | — | **PASS** (fixed) |
+| **Content (HQ master)** | Real full-frame cam | **FAIL** — **Mock backend** ellipse (fixed circular crop, opaque RGB outside); **not** MediaPipe person matte |
+| **Audio in WebM** | **None** (despite `audioTracks:1` in telemetry) | **None** |
+| **Sync** | **N/A** (no audio stream) | **N/A** |
+
+**Root cause (Vision):** shared mic track with LiveKit — fix path: **dedicated mic clones** + Mock→MediaPipe default (`?v=s4-matfix3`).
+
+**Visual clap (cross-file, moderate confidence):** raw **1667** ms vs matted **1567** ms → Δ **−100** ms (matted earlier). Not an audio-lag measurement (no Opus in files).
+
+### Recorder v2.1 audio guard (box tests)
+
+[`run-audio-guard-test.mjs`](./s4/dropin/run-audio-guard-test.mjs) on the shared box:
+
+| Case | Result |
+| --- | --- |
+| **Live** WebAudio mic-like | **600** samples seen; first at **44** ms; **vp8+opus** in output |
+| **Ended-at-start** track | `audioMissing`; completion refused |
+| **Stop mid-take** | `track_ended` issue at **2515** ms |
+
+**Master-HQ decision:** still **open** — pending **take 4** (MediaPipe matte + mic clones + in-file Opus).
 
 ---
 

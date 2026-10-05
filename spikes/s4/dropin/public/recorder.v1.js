@@ -308,8 +308,7 @@ class OpfsStore {
 }
 
 class PartUploader {
-  constructor({ partSize, key, uploadId, participant, ctx }) {
-    this.ctx = ctx || { results, api, ev, log };
+  constructor({ partSize, key, uploadId, participant }) {
     this.partSize = partSize;
     this.key = key;
     this.uploadId = uploadId;
@@ -334,7 +333,7 @@ class PartUploader {
     this.cuts = [];          // instrumentation, shared with results.resumeTiming
     this.currentCut = null;  // cut awaiting catch-up (or still offline)
     this._resumePromise = null;
-    this.ctx.results.resumeTiming = this.cuts;
+    results.resumeTiming = this.cuts;
   }
 
   manifestObj() {
@@ -360,8 +359,8 @@ class PartUploader {
       const ms = await this.store.writeFile(name, blob);
       this.persistedChunks.push({ name, byteStart, byteEnd: byteStart + blob.size });
       this.opfsStats.chunkWrites.push(ms);
-      this.ctx.ev('opfs-chunk-write', { byteStart, size: blob.size, ms });
-    }).catch((e) => this.ctx.ev('opfs-error', { op: 'chunk', error: String(e.message || e) }));
+      ev('opfs-chunk-write', { byteStart, size: blob.size, ms });
+    }).catch((e) => ev('opfs-error', { op: 'chunk', error: String(e.message || e) }));
   }
   /** Persist a cut part BEFORE upload; then manifest; then drop consumed chunk files. */
   async persistPart(partNumber, blob, byteStart, byteEnd) {
@@ -376,8 +375,8 @@ class PartUploader {
         if (c.byteEnd <= this.byteCursor) { await this.store.remove(c.name); deleted++; } else keep.push(c);
       }
       this.persistedChunks = keep;
-      this.ctx.ev('opfs-part-write', { partNumber, size: blob.size, ms, manifestMs: mms, chunkFilesDeleted: deleted });
-    }).catch((e) => this.ctx.ev('opfs-error', { op: 'part', partNumber, error: String(e.message || e) }));
+      ev('opfs-part-write', { partNumber, size: blob.size, ms, manifestMs: mms, chunkFilesDeleted: deleted });
+    }).catch((e) => ev('opfs-error', { op: 'part', partNumber, error: String(e.message || e) }));
     this.persistQueue = p;
     await p;
   }
@@ -388,7 +387,7 @@ class PartUploader {
       await this.writeManifestNow('part-uploaded');
       await this.store.remove(`part-${pad(partNumber, 5)}.bin`);
       this.opfsStats.partDeletes++;
-    }).catch((e) => this.ctx.ev('opfs-error', { op: 'uploaded', partNumber, error: String(e.message || e) }));
+    }).catch((e) => ev('opfs-error', { op: 'uploaded', partNumber, error: String(e.message || e) }));
   }
 
   /** Parts not yet confirmed uploaded (buffered offline / error / pending). */
@@ -413,7 +412,7 @@ class PartUploader {
     cut.catchUpDuringFlush = !!this.stopped;
     cut.thresholdMs = 15000;
     cut.verdict = cut.resumeMs <= 15000 ? 'PASS' : 'FAIL';
-    this.ctx.ev('catch-up-complete', {
+    ev('catch-up-complete', {
       label: cut.label, resumeMs: cut.resumeMs, partsResent: cut.resent.filter((r) => r.ok).map((r) => r.partNumber),
       missingAtReconnect: cut.missingAtReconnect, reason,
     });
@@ -447,16 +446,16 @@ class PartUploader {
       };
       this.cuts.push(cut);
       this.currentCut = cut;
-      this.ctx.ev('cut-start', { label: cut.label, notUploaded: cut.notUploadedAtCutStart });
+      ev('cut-start', { label: cut.label, notUploaded: cut.notUploadedAtCutStart });
     } else if (this.currentCut && this.currentCut.reconnect == null) {
       const cut = this.currentCut;
       cut.reconnect = ts();
       cut.missingAtReconnect = this.notUploaded();
       cut.offlineMs = Math.round((cut.reconnect.perf - cut.cutStart.perf) * 1000) / 1000;
-      this.ctx.ev('reconnect', { label: cut.label, online: true, missingAtReconnect: cut.missingAtReconnect, offlineMs: cut.offlineMs });
+      ev('reconnect', { label: cut.label, online: true, missingAtReconnect: cut.missingAtReconnect, offlineMs: cut.offlineMs });
     }
     this.online = v;
-    this.ctx.log(`network online=${v}`);
+    log(`network online=${v}`);
     if (v) this.checkCatchUp('reconnect-nothing-missing');
     if (v && this.pendingRetry) {
       this.pendingRetry = false;
@@ -479,14 +478,14 @@ class PartUploader {
     await this.drain(true);
     await this.resumeMissing();
     // complete
-    const remote = await this.ctx.api(`/api/multipart/list-parts?key=${encodeURIComponent(this.key)}&uploadId=${encodeURIComponent(this.uploadId)}`);
+    const remote = await api(`/api/multipart/list-parts?key=${encodeURIComponent(this.key)}&uploadId=${encodeURIComponent(this.uploadId)}`);
     const parts = remote.parts.map((p) => ({ PartNumber: p.PartNumber, ETag: p.ETag }));
     if (parts.length === 0) throw new Error('no parts to complete');
-    const done = await this.ctx.api('/api/multipart/complete', {
+    const done = await api('/api/multipart/complete', {
       method: 'POST',
       body: JSON.stringify({ key: this.key, uploadId: this.uploadId, parts }),
     });
-    if (this.store) { await this.persistQueue; await this.store.destroy(); this.ctx.ev('opfs-session-destroyed', { key: this.key }); }
+    if (this.store) { await this.persistQueue; await this.store.destroy(); ev('opfs-session-destroyed', { key: this.key }); }
     return { done, parts, remote };
   }
 
@@ -545,13 +544,13 @@ class PartUploader {
     const existing = this.manifest.findIndex((m) => m.partNumber === partNumber);
     if (existing >= 0) this.manifest[existing] = entry;
     else this.manifest.push(entry);
-    this.ctx.results.parts = this.manifest.map(publicPart);
+    results.parts = this.manifest.map(publicPart);
 
     if (!this.online) {
       entry.status = 'buffered-offline';
-      this.ctx.results.parts = this.manifest.map(publicPart); // keep snapshot fresh (was stale since pass 1)
+      results.parts = this.manifest.map(publicPart); // keep snapshot fresh (was stale since pass 1)
       this.pendingRetry = true;
-      this.ctx.log(`part ${partNumber} buffered offline (${blob.size} B)`);
+      log(`part ${partNumber} buffered offline (${blob.size} B)`);
       return;
     }
 
@@ -561,11 +560,11 @@ class PartUploader {
     if (isResend) {
       resendRec = { partNumber, attempt, size: blob.size, start: ts(), end: null, ok: false, error: null };
       cut.resent.push(resendRec);
-      this.ctx.ev('resend-put-start', { label: cut.label, partNumber, attempt, size: blob.size });
+      ev('resend-put-start', { label: cut.label, partNumber, attempt, size: blob.size });
     }
     try {
       this.inflight++;
-      const { url } = await this.ctx.api('/api/multipart/presign-part', {
+      const { url } = await api('/api/multipart/presign-part', {
         method: 'POST',
         body: JSON.stringify({ key: this.key, uploadId: this.uploadId, partNumber }),
       });
@@ -578,20 +577,20 @@ class PartUploader {
       entry.status = 'uploaded';
       entry.uploadMs = entry.tUploadEnd - entry.tUploadStart;
       this.persistUploaded(partNumber);
-      this.ctx.log(`part ${partNumber} uploaded size=${blob.size} etag=${etag} ms=${entry.uploadMs.toFixed(0)}`);
+      log(`part ${partNumber} uploaded size=${blob.size} etag=${etag} ms=${entry.uploadMs.toFixed(0)}`);
       if (resendRec) {
         resendRec.end = ts(); resendRec.ok = true;
         resendRec.ms = Math.round((resendRec.end.perf - resendRec.start.perf) * 1000) / 1000;
-        this.ctx.ev('resend-put-end', { label: cut.label, partNumber, ok: true, ms: resendRec.ms });
+        ev('resend-put-end', { label: cut.label, partNumber, ok: true, ms: resendRec.ms });
       }
     } catch (e) {
       entry.status = 'error';
       entry.error = String(e.message || e);
       entry.tUploadEnd = performance.now();
-      this.ctx.log(`part ${partNumber} ERROR: ${entry.error}`);
+      log(`part ${partNumber} ERROR: ${entry.error}`);
       if (resendRec) {
         resendRec.end = ts(); resendRec.error = entry.error;
-        this.ctx.ev('resend-put-end', { label: cut.label, partNumber, ok: false, error: entry.error });
+        ev('resend-put-end', { label: cut.label, partNumber, ok: false, error: entry.error });
       }
       this.pendingRetry = true;
       // If network-looking failure, mark offline-ish; runner may also flip via CDP
@@ -600,7 +599,7 @@ class PartUploader {
       }
     } finally {
       this.inflight--;
-      this.ctx.results.parts = this.manifest.map(publicPart);
+      results.parts = this.manifest.map(publicPart);
       this.checkCatchUp('part-uploaded');
     }
   }
@@ -613,26 +612,26 @@ class PartUploader {
   }
 
   async _resumeMissing() {
-    this.ctx.log('resume: list-parts…');
+    log('resume: list-parts…');
     const cut = (this.currentCut && this.currentCut.reconnect) ? this.currentCut : null;
     const lp = { request: ts(), response: null, remoteParts: null, error: null };
-    if (cut) { cut.listParts.push(lp); this.ctx.ev('list-parts-request', { label: cut.label }); }
+    if (cut) { cut.listParts.push(lp); ev('list-parts-request', { label: cut.label }); }
     let remote;
     try {
-      remote = await this.ctx.api(`/api/multipart/list-parts?key=${encodeURIComponent(this.key)}&uploadId=${encodeURIComponent(this.uploadId)}`);
+      remote = await api(`/api/multipart/list-parts?key=${encodeURIComponent(this.key)}&uploadId=${encodeURIComponent(this.uploadId)}`);
       lp.response = ts();
       lp.remoteParts = (remote.parts || []).map((p) => p.PartNumber);
       lp.ms = Math.round((lp.response.perf - lp.request.perf) * 1000) / 1000;
-      if (cut) this.ctx.ev('list-parts-response', { label: cut.label, remoteParts: lp.remoteParts, ms: lp.ms });
+      if (cut) ev('list-parts-response', { label: cut.label, remoteParts: lp.remoteParts, ms: lp.ms });
     } catch (e) {
       lp.response = ts(); lp.error = String(e.message || e);
-      if (cut) this.ctx.ev('list-parts-response', { label: cut.label, error: lp.error });
-      this.ctx.log('resume list-parts failed:', String(e.message || e));
+      if (cut) ev('list-parts-response', { label: cut.label, error: lp.error });
+      log('resume list-parts failed:', String(e.message || e));
       this.pendingRetry = true;
       return;
     }
     const have = new Set((remote.parts || []).map((p) => p.PartNumber));
-    this.ctx.log(`resume: remote parts=[${[...have].sort((a,b)=>a-b).join(',')}]`);
+    log(`resume: remote parts=[${[...have].sort((a,b)=>a-b).join(',')}]`);
     // Update etags from server for known parts
     for (const p of remote.parts || []) {
       const m = this.manifest.find((x) => x.partNumber === p.PartNumber);
@@ -649,7 +648,7 @@ class PartUploader {
       this.online = true;
       await this.uploadOne(m.partNumber, m.blob, m.byteStart, m.byteEnd, (m.attempts || 1) + 1);
     }
-    this.ctx.results.parts = this.manifest.map(publicPart);
+    results.parts = this.manifest.map(publicPart);
     this.checkCatchUp('resume-pass-done');
   }
 }
@@ -668,644 +667,180 @@ function publicPart(m) {
   };
 }
 
+let active = null;
 
-let active = null; // v1: last startRecording handle
-const sessions = new Map();
-let sessionSeq = 0;
-
-function emptyResults() {
-  return {
-    participant: null,
-    label: null,
-    mimeType: null,
-    mimeTypesSupported: [],
-    webCodecs: null,
-    recording: null,
-    parts: [],
-    cuts: [],
-    integrity: null,
-    sync: null,
-    errors: [],
-    events: [],
-    resumeTiming: [],
-    gaps: [],
-    visibility: [],
-    audio: null,
-    audioMissing: false,
-    completeOk: null,
-    done: false,
-  };
-}
-
-function makeCtx(resultsBag, apiBaseOverride) {
-  const base = apiBaseOverride != null ? String(apiBaseOverride) : API_BASE;
-  return {
-    results: resultsBag,
-    api: async (path, opts = {}) => {
-      const prev = API_BASE;
-      API_BASE = base;
-      try { return await api(path, opts); }
-      finally { API_BASE = prev; }
-    },
-    ev: (type, data = {}) => {
-      const e = { type, ...ts(), ...data };
-      resultsBag.events.push(e);
-      console.log('[s4-ev] ' + JSON.stringify(e));
-      return e;
-    },
-    log,
-  };
-}
-
-class GapWatchdog {
-  constructor({ track, label, sessionStartPerf, onGap, results, thresholdMs = 500 }) {
-    this.label = label;
-    this.thresholdMs = thresholdMs;
-    this.onGap = onGap;
-    this.results = results;
-    this.sessionStartPerf = sessionStartPerf;
-    this._lastFramePerf = null;
-    this._stop = false;
-    this.mode = null;
-    this._cleanup = [];
-    this._start(track);
-  }
-  _recordFrame(now) {
-    if (this._stop) return;
-    if (this._lastFramePerf != null) {
-      const gap = now - this._lastFramePerf;
-      if (gap > this.thresholdMs) {
-        const g = {
-          label: this.label,
-          startMs: Math.round(this._lastFramePerf - this.sessionStartPerf),
-          durationMs: Math.round(gap),
-          endMs: Math.round(now - this.sessionStartPerf),
-        };
-        this.results.gaps.push(g);
-        try { this.onGap && this.onGap(g); } catch (e) { console.warn('[s4] onGap error', e); }
-        console.log('[s4-gap] ' + JSON.stringify(g));
-      }
-    }
-    this._lastFramePerf = now;
-  }
-  _start(track) {
-    if (!track || track.kind !== 'video') { this.mode = 'none'; return; }
-    if (typeof MediaStreamTrackProcessor === 'function') {
-      this.mode = 'MediaStreamTrackProcessor';
-      try {
-        const processor = new MediaStreamTrackProcessor({ track });
-        const reader = processor.readable.getReader();
-        this._cleanup.push(() => { try { reader.cancel(); } catch (_) {} });
-        (async () => {
-          while (!this._stop) {
-            let out;
-            try { out = await reader.read(); } catch (_) { break; }
-            if (!out || out.done) break;
-            this._recordFrame(performance.now());
-            try { out.value.close(); } catch (_) {}
-          }
-        })();
-        return;
-      } catch (e) {
-        console.warn('[s4] MediaStreamTrackProcessor failed, falling back', e);
-      }
-    }
-    if (typeof HTMLVideoElement !== 'undefined' && 'requestVideoFrameCallback' in HTMLVideoElement.prototype) {
-      this.mode = 'requestVideoFrameCallback';
-      const v = document.createElement('video');
-      v.muted = true;
-      v.playsInline = true;
-      v.setAttribute('playsinline', '');
-      v.style.cssText = 'position:fixed;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none';
-      v.srcObject = new MediaStream([track]);
-      document.body.appendChild(v);
-      this._cleanup.push(() => {
-        try { v.pause(); } catch (_) {}
-        try { v.srcObject = null; } catch (_) {}
-        try { v.remove(); } catch (_) {}
-      });
-      const tick = () => {
-        if (this._stop) return;
-        this._recordFrame(performance.now());
-        try { v.requestVideoFrameCallback(tick); } catch (_) {}
-      };
-      v.play().then(() => v.requestVideoFrameCallback(tick)).catch((e) => {
-        console.warn('[s4] watchdog video play failed', e);
-        this.mode = 'none';
-      });
-      return;
-    }
-    this.mode = 'none';
-  }
-  stop() {
-    this._stop = true;
-    for (const fn of this._cleanup) { try { fn(); } catch (_) {} }
-    this._cleanup = [];
-  }
-}
-
-/**
- * Audio presence watchdog (v2.1).
- * Logs track state at start; monitors samples via MediaStreamTrackProcessor
- * or AnalyserNode; fires onAudioIssue on mute/ended/silence/no-samples.
- */
-class AudioWatchdog {
-  constructor({ track, label, sessionStartPerf, onAudioIssue, results, silenceWindowMs = 2000 }) {
-    this.label = label;
-    this.results = results;
-    this.sessionStartPerf = sessionStartPerf;
-    this.onAudioIssue = onAudioIssue;
-    this.silenceWindowMs = silenceWindowMs;
-    this.samplesSeen = 0;
-    this.firstSampleMs = null;
-    this.mode = null;
-    this._stop = false;
-    this._cleanup = [];
-    this._rmsSum = 0;
-    this._rmsCount = 0;
-    this._nonZeroRms = 0;
-
-    results.audio = {
-      expected: true,
-      samplesSeen: 0,
-      firstSampleMs: null,
-      issues: [],
-      tracksAtStart: [],
-      mode: null,
-      meanRmsFirstWindow: null,
-      nonZeroRmsCount: 0,
-    };
-
-    this._inspectStart(track);
-    this._bindTrackEvents(track);
-    // Already-ended tracks: do not start a sample monitor (avoids phantom zero frames
-    // from MediaStreamTrackProcessor). samplesSeen stays 0 → audioMissing at finalize.
-    if (track.readyState === 'ended') {
-      this.mode = 'skipped_ended';
-      this.results.audio.mode = this.mode;
-      this._silenceTimer = setTimeout(() => this._checkFirstWindow(), silenceWindowMs);
-      this._cleanup.push(() => { try { clearTimeout(this._silenceTimer); } catch (_) {} });
-      return;
-    }
-    this._startMonitor(track);
-    this._silenceTimer = setTimeout(() => this._checkFirstWindow(), silenceWindowMs);
-    this._cleanup.push(() => { try { clearTimeout(this._silenceTimer); } catch (_) {} });
-  }
-
-  _issue(reason, extra = {}) {
-    const tMs = Math.round(performance.now() - this.sessionStartPerf);
-    // Collapse duplicate reasons within 500ms (poll + event + processor can all fire).
-    const last = this.results.audio.issues[this.results.audio.issues.length - 1];
-    if (last && last.reason === reason && Math.abs(tMs - (last.tMs || 0)) < 500) {
-      return last;
-    }
-    const issue = {
-      label: this.label,
-      reason,
-      tMs,
-      iso: new Date().toISOString(),
-      ...extra,
-    };
-    this.results.audio.issues.push(issue);
-    console.log('[s4-audio-issue] ' + JSON.stringify(issue));
-    try { this.onAudioIssue && this.onAudioIssue(issue); } catch (e) {
-      console.warn('[s4] onAudioIssue error', e);
-    }
-    return issue;
-  }
-
-  _inspectStart(track) {
-    let settings = {};
-    try { settings = track.getSettings ? track.getSettings() : {}; } catch (_) {}
-    const info = {
-      id: track.id,
-      kind: track.kind,
-      readyState: track.readyState,
-      muted: !!track.muted,
-      enabled: !!track.enabled,
-      label: track.label || '',
-      settings,
-    };
-    this.results.audio.tracksAtStart.push(info);
-    console.log('[s4-audio-track] ' + JSON.stringify(info));
-    if (track.readyState === 'ended') this._issue('track_ended_at_start', { track: info });
-    if (track.muted) this._issue('track_muted_at_start', { track: info });
-    if (!track.enabled) this._issue('track_disabled_at_start', { track: info });
-  }
-
-  _bindTrackEvents(track) {
-    const onMute = () => this._issue('track_mute');
-    const onEnded = () => this._issue('track_ended');
-    const onUnmute = () => {
-      console.log('[s4-audio] unmute label=' + this.label + ' tMs=' + Math.round(performance.now() - this.sessionStartPerf));
-    };
-    track.addEventListener('mute', onMute);
-    track.addEventListener('ended', onEnded);
-    track.addEventListener('unmute', onUnmute);
-    const poll = setInterval(() => {
-      if (this._stop) return;
-      if (track.readyState === 'ended') {
-        this._issue('track_ended', { via: 'poll' });
-        clearInterval(poll);
-      }
-    }, 200);
-    this._cleanup.push(() => {
-      clearInterval(poll);
-      try { track.removeEventListener('mute', onMute); } catch (_) {}
-      try { track.removeEventListener('ended', onEnded); } catch (_) {}
-      try { track.removeEventListener('unmute', onUnmute); } catch (_) {}
-    });
-  }
-
-  _noteSample(now, rms) {
-    this.samplesSeen++;
-    this.results.audio.samplesSeen = this.samplesSeen;
-    if (this.firstSampleMs == null) {
-      this.firstSampleMs = Math.round(now - this.sessionStartPerf);
-      this.results.audio.firstSampleMs = this.firstSampleMs;
-    }
-    if (typeof rms === 'number' && Number.isFinite(rms)) {
-      this._rmsSum += rms;
-      this._rmsCount++;
-      if (rms > 1e-5) {
-        this._nonZeroRms++;
-        this.results.audio.nonZeroRmsCount = this._nonZeroRms;
-      }
-    }
-  }
-
-  _checkFirstWindow() {
-    if (this._stop) return;
-    if (this._rmsCount > 0) {
-      this.results.audio.meanRmsFirstWindow = this._rmsSum / this._rmsCount;
-    }
-    if (this.samplesSeen === 0) {
-      this._issue('no_samples_first_2s');
-    } else if (this._rmsCount > 0 && this._nonZeroRms === 0) {
-      this._issue('all_zero_rms_first_2s', {
-        meanRms: this.results.audio.meanRmsFirstWindow,
-        samplesSeen: this.samplesSeen,
-      });
-    }
-  }
-
-  _startMonitor(track) {
-    if (typeof MediaStreamTrackProcessor === 'function') {
-      try {
-        const processor = new MediaStreamTrackProcessor({ track });
-        const reader = processor.readable.getReader();
-        this.mode = 'MediaStreamTrackProcessor';
-        this.results.audio.mode = this.mode;
-        this._cleanup.push(() => { try { reader.cancel(); } catch (_) {} });
-        (async () => {
-          while (!this._stop) {
-            let out;
-            try { out = await reader.read(); } catch (_) { break; }
-            if (!out || out.done) {
-              // Processor stream ended while session still running → treat as track loss
-              // (Chrome sometimes ends the readable without a reliable track "ended" event).
-              if (!this._stop) {
-                const rs = track.readyState;
-                this._issue(rs === 'ended' ? 'track_ended' : 'processor_stream_ended', {
-                  trackReadyState: rs,
-                  samplesSeen: this.samplesSeen,
-                });
-              }
-              break;
-            }
-            const frame = out.value;
-            let rms = null;
-            try {
-              if (frame && typeof frame.numberOfFrames === 'number') {
-                const frames = frame.numberOfFrames;
-                const buf = new Float32Array(frames);
-                // copy first channel
-                frame.copyTo(buf, { planeIndex: 0, format: 'f32-planar' });
-                let s = 0;
-                for (let i = 0; i < buf.length; i++) s += buf[i] * buf[i];
-                rms = Math.sqrt(s / Math.max(1, buf.length));
-              }
-            } catch (_) {
-              try {
-                if (frame && typeof frame.numberOfFrames === 'number') {
-                  const frames = frame.numberOfFrames;
-                  const buf = new Float32Array(frames);
-                  frame.copyTo(buf, { planeIndex: 0 });
-                  let s = 0;
-                  for (let i = 0; i < buf.length; i++) s += buf[i] * buf[i];
-                  rms = Math.sqrt(s / Math.max(1, buf.length));
-                }
-              } catch (_) { /* sample count still increments */ }
-            }
-            this._noteSample(performance.now(), rms);
-            try { frame.close(); } catch (_) {}
-          }
-        })();
-        return;
-      } catch (e) {
-        console.warn('[s4] audio MediaStreamTrackProcessor failed, AnalyserNode fallback', e);
-      }
-    }
-
-    // AnalyserNode fallback
-    try {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      const ac = new AudioCtx();
-      const src = ac.createMediaStreamSource(new MediaStream([track]));
-      const analyser = ac.createAnalyser();
-      analyser.fftSize = 2048;
-      src.connect(analyser);
-      const data = new Uint8Array(analyser.fftSize);
-      this.mode = 'AnalyserNode';
-      this.results.audio.mode = this.mode;
-      const iv = setInterval(() => {
-        if (this._stop) return;
-        try {
-          analyser.getByteTimeDomainData(data);
-          let s = 0;
-          for (let i = 0; i < data.length; i++) {
-            const x = (data[i] - 128) / 128;
-            s += x * x;
-          }
-          const rms = Math.sqrt(s / data.length);
-          this._noteSample(performance.now(), rms);
-        } catch (_) {}
-      }, 50);
-      this._cleanup.push(() => {
-        clearInterval(iv);
-        try { src.disconnect(); } catch (_) {}
-        try { analyser.disconnect(); } catch (_) {}
-        try { ac.close(); } catch (_) {}
-      });
-    } catch (e) {
-      this.mode = 'none';
-      this.results.audio.mode = 'none';
-      console.warn('[s4] audio monitor unavailable', e);
-      this._issue('monitor_unavailable', { error: String(e.message || e) });
-    }
-  }
-
-  stop() {
-    this._stop = true;
-    try { clearTimeout(this._silenceTimer); } catch (_) {}
-    for (const fn of this._cleanup) { try { fn(); } catch (_) {} }
-    this._cleanup = [];
-    this.results.audio.samplesSeen = this.samplesSeen;
-    this.results.audio.firstSampleMs = this.firstSampleMs;
-    if (this._rmsCount > 0 && this.results.audio.meanRmsFirstWindow == null) {
-      this.results.audio.meanRmsFirstWindow = this._rmsSum / this._rmsCount;
-    }
-  }
-}
-
-class Session {
-  constructor(opts) {
-    this.id = `s${++sessionSeq}-${Date.now()}`;
-    this.opts = opts;
-    this.label = String(opts.label || 'default').replace(/[^a-zA-Z0-9._-]/g, '_');
-    this.results = emptyResults();
-    this.results.label = this.label;
-    this.ctx = makeCtx(this.results, opts.apiBase != null ? opts.apiBase : undefined);
-    this.recorder = null;
-    this.uploader = null;
-    this.ownSynth = null;
-    this.watchdog = null;
-    this._visHandler = null;
-    this._stopTimer = null;
-    this._resolveDone = null;
-    this.donePromise = new Promise((r) => { this._resolveDone = r; });
-    this._readyResolve = null;
-    this.readyPromise = new Promise((r) => { this._readyResolve = r; });
-  }
-  stop() {
-    if (this.recorder && this.recorder.state !== 'inactive') {
-      try { this.recorder.stop(); } catch (_) {}
-      return true;
-    }
-    return false;
-  }
-  resultsSnapshot() { return structuredClone(this.results); }
-  async exportResults() {
-    const body = this.resultsSnapshot();
-    const key = body.integrity?.key || body.recording?.key || null;
-    if (!key) throw new Error('exportResults: no object key yet');
-    return this.ctx.api('/api/results', {
-      method: 'POST',
-      body: JSON.stringify({ key, results: body }),
-    });
-  }
-  handle() {
-    const self = this;
-    return {
-      id: this.id,
-      label: this.label,
-      stop: () => self.stop(),
-      results: () => self.resultsSnapshot(),
-      exportResults: () => self.exportResults(),
-      done: this.donePromise,
-    };
-  }
-}
-
-async function runSession(session) {
-  const opts = session.opts;
-  const results = session.results;
-  const ctx = session.ctx;
+async function startRecording(opts = {}) {
+  results.done = false;
+  results.errors = [];
+  results.parts = [];
+  results.events = [];
+  results.resumeTiming = [];
+  results.cuts = opts.cuts || results.cuts || [];
   if (opts.apiBase != null) API_BASE = String(opts.apiBase);
-
   const participant = opts.participant || elVal('participant', 'p1');
-  const durationSec = Number(opts.durationSec ?? elVal('durationSec', 0));
+  const durationSec = Number(opts.durationSec ?? elVal('durationSec', 20));
   const partSize = Math.max(5, Number(opts.partMiB ?? elVal('partMiB', 5))) * 1024 * 1024;
   const videoBitsPerSecond = Number(opts.vBitrate ?? elVal('vBitrate', 2500000));
   const timeslice = Number(opts.timeslice ?? elVal('timeslice', 1000));
   const preferredMime = opts.mimeType || null;
+  // Default OPFS on for drop-in (durable buffer); lab can pass opfs:false
   const useOpfs = opts.opfs !== false;
-  const onGap = typeof opts.onGap === 'function' ? opts.onGap : null;
 
   results.participant = participant;
-  setText('status', `starting:${session.label}`);
+  setText('status', 'starting');
 
   const supported = probeMimeTypes();
-  ctx.log('MediaRecorder.isTypeSupported:', supported);
+  log('MediaRecorder.isTypeSupported:', supported);
   const mimeType = pickMime(preferredMime);
   if (!mimeType) {
     results.errors.push('No supported MediaRecorder mimeType');
     results.done = true;
-    session._readyResolve(false);
-    session._resolveDone(results);
     throw new Error('No supported mimeType');
   }
   results.mimeType = mimeType;
-  results.mimeTypesSupported = supported;
+  log('using mimeType', mimeType);
 
   const wc = await probeWebCodecs();
-  results.webCodecs = wc;
+  log('WebCodecs probe', {
+    VideoEncoder: wc.VideoEncoder,
+    AudioEncoder: wc.AudioEncoder,
+    videoOk: wc.videoConfigs.filter((c) => c.supported).map((c) => c.config.codec),
+    audioOk: wc.audioConfigs.filter((c) => c.supported).map((c) => c.config.codec),
+  });
 
   let ownSynth = null;
   let stream;
   let streamSource;
   if (opts.stream) {
+    // Caller-owned MediaStream (e.g. canvas.captureStream() from harness).
+    // Use video + audio tracks if present. Do NOT stop caller's tracks on finish.
     stream = opts.stream;
     streamSource = 'external MediaStream (caller-owned; tracks not stopped)';
   } else {
     let canvas = $('cv');
     if (!canvas) {
       canvas = document.createElement('canvas');
-      canvas.width = 1280; canvas.height = 720;
+      canvas.width = 1280;
+      canvas.height = 720;
     }
     ownSynth = createSyntheticStream(canvas);
     stream = ownSynth.stream;
-    streamSource = 'canvas.captureStream(30) + WebAudio oscillator';
+    streamSource = 'canvas.captureStream(30) + WebAudio oscillator (sawtooth+LFO) via MediaStreamDestination';
   }
-  session.ownSynth = ownSynth;
-
-  const tStartPerf = performance.now();
   const timeOrigin = performance.timeOrigin;
+  const tStartPerf = performance.now();
   const wallStart = Date.now();
 
-  results.visibility.push({ state: document.visibilityState, tMs: 0, iso: new Date().toISOString() });
-  session._visHandler = () => {
-    results.visibility.push({
-      state: document.visibilityState,
-      tMs: Math.round(performance.now() - tStartPerf),
-      iso: new Date().toISOString(),
-    });
-    ctx.ev('visibility', { state: document.visibilityState });
-  };
-  document.addEventListener('visibilitychange', session._visHandler);
-
-  const safeLabel = session.label;
-  const filename = `${participant}-${safeLabel}-${Date.now()}.webm`;
-  const created = await ctx.api('/api/multipart/create', {
+  const filename = `${participant}-${Date.now()}.webm`;
+  const created = await api('/api/multipart/create', {
     method: 'POST',
     body: JSON.stringify({ filename, contentType: mimeType.split(';')[0] }),
   });
-  ctx.log('MPU created', created);
+  log('MPU created', created);
 
   const uploader = new PartUploader({
-    partSize, key: created.key, uploadId: created.uploadId, participant, ctx,
+    partSize,
+    key: created.key,
+    uploadId: created.uploadId,
+    participant,
   });
   uploader.mimeType = mimeType;
-  session.uploader = uploader;
   if (useOpfs) {
-    const sid = created.key.split('/').pop().replace(/[^a-zA-Z0-9._-]/g, '_');
-    uploader.store = await OpfsStore.open(sid);
+    const sessionId = created.key.split('/').pop().replace(/[^a-zA-Z0-9._-]/g, '_');
+    uploader.store = await OpfsStore.open(sessionId);
     const ms = await uploader.writeManifestNow('create');
-    ctx.ev('opfs-session-open', { sessionId: sid, manifestMs: ms });
+    ev('opfs-session-open', { sessionId, manifestMs: ms });
   }
   results.opfs = uploader.store ? uploader.opfsStats : null;
 
   const hasVideo = stream.getVideoTracks().length > 0;
-  const audioTracks = stream.getAudioTracks();
-  const hasAudio = audioTracks.length > 0;
-  const expectAudio = opts.expectAudio != null ? !!opts.expectAudio : hasAudio;
-  const onAudioIssue = typeof opts.onAudioIssue === 'function' ? opts.onAudioIssue : null;
-
+  const hasAudio = stream.getAudioTracks().length > 0;
   const recOpts = { mimeType };
   if (hasVideo) recOpts.videoBitsPerSecond = videoBitsPerSecond;
   if (hasAudio) recOpts.audioBitsPerSecond = 128000;
   if (hasVideo && hasAudio) recOpts.bitsPerSecond = videoBitsPerSecond + 128000;
-
   let recorder;
-  try { recorder = new MediaRecorder(stream, recOpts); }
-  catch (e) {
+  try {
+    recorder = new MediaRecorder(stream, recOpts);
+  } catch (e) {
     try {
-      const fb = { mimeType };
-      if (hasVideo) fb.videoBitsPerSecond = videoBitsPerSecond;
-      if (hasAudio) fb.audioBitsPerSecond = 128000;
-      recorder = new MediaRecorder(stream, fb);
-    } catch (e2) { recorder = new MediaRecorder(stream, { mimeType }); }
-  }
-  session.recorder = recorder;
-
-  const vTrack = stream.getVideoTracks()[0] || null;
-  if (vTrack) {
-    session.watchdog = new GapWatchdog({
-      track: vTrack, label: safeLabel, sessionStartPerf: tStartPerf,
-      onGap, results, thresholdMs: Number(opts.gapThresholdMs || 500),
-    });
-    results.watchdogMode = session.watchdog.mode;
+      const fallback = { mimeType };
+      if (hasVideo) fallback.videoBitsPerSecond = videoBitsPerSecond;
+      if (hasAudio) fallback.audioBitsPerSecond = 128000;
+      recorder = new MediaRecorder(stream, fallback);
+    } catch (e2) {
+      recorder = new MediaRecorder(stream, { mimeType });
+    }
   }
 
-  // Audio presence guard (v2.1)
-  if (expectAudio && audioTracks.length > 0) {
-    session.audioWatchdog = new AudioWatchdog({
-      track: audioTracks[0],
-      label: safeLabel,
-      sessionStartPerf: tStartPerf,
-      onAudioIssue,
-      results,
-      silenceWindowMs: Number(opts.audioSilenceWindowMs || 2000),
-    });
-  } else if (expectAudio && audioTracks.length === 0) {
-    results.audio = {
-      expected: true, samplesSeen: 0, firstSampleMs: null, issues: [],
-      tracksAtStart: [], mode: null, meanRmsFirstWindow: null, nonZeroRmsCount: 0,
-    };
-    const issue = {
-      label: safeLabel, reason: 'no_audio_track_on_stream',
-      tMs: 0, iso: new Date().toISOString(),
-    };
-    results.audio.issues.push(issue);
-    console.log('[s4-audio-issue] ' + JSON.stringify(issue));
-    try { onAudioIssue && onAudioIssue(issue); } catch (_) {}
-  } else {
-    results.audio = {
-      expected: false, samplesSeen: 0, firstSampleMs: null, issues: [],
-      tracksAtStart: audioTracks.map((t) => ({
-        readyState: t.readyState, muted: !!t.muted, enabled: !!t.enabled, label: t.label || '',
-      })),
-      mode: null, meanRmsFirstWindow: null, nonZeroRmsCount: 0,
-    };
-  }
+  let firstChunkAt = null;
+  let chunkCount = 0;
+  let totalBytes = 0;
 
-  let firstChunkAt = null, chunkCount = 0, totalBytes = 0;
-  recorder.ondataavailable = (evData) => {
-    if (!evData.data || evData.data.size === 0) return;
-    chunkCount++; totalBytes += evData.data.size;
+  recorder.ondataavailable = (ev) => {
+    if (!ev.data || ev.data.size === 0) return;
+    chunkCount++;
+    totalBytes += ev.data.size;
     if (firstChunkAt == null) firstChunkAt = performance.now();
-    uploader.pushChunk(evData.data, { chunkIndex: chunkCount });
+    if (opts.tap && typeof window.__s4Tap === 'function') {
+      // Ground truth for crash tests: ship every produced chunk to the runner.
+      const idx = chunkCount; const blob = ev.data;
+      const fr = new FileReader();
+      fr.onload = () => { const r = String(fr.result); const i = r.indexOf('base64,'); window.__s4Tap(idx, i >= 0 ? r.slice(i + 7) : ''); };
+      fr.readAsDataURL(blob);
+    }
+    uploader.pushChunk(ev.data, { chunkIndex: chunkCount });
   };
-  recorder.onerror = (evErr) => {
-    const msg = String(evErr.error?.message || evErr.error || 'MediaRecorder error');
+
+  recorder.onerror = (ev) => {
+    const msg = String(ev.error?.message || ev.error || 'MediaRecorder error');
     results.errors.push(msg);
-    ctx.log('recorder error', msg);
+    log('recorder error', msg);
   };
-  const stopped = new Promise((resolve) => { recorder.onstop = () => resolve(); });
+
+  const stopped = new Promise((resolve) => {
+    recorder.onstop = () => resolve();
+  });
 
   recorder.start(timeslice);
+  log(`recording started timeslice=${timeslice}ms partSize=${partSize} durationSec=${durationSec}`);
+
   results.recording = {
-    key: created.key, label: safeLabel, source: streamSource, mimeType,
+    source: streamSource,
+    mimeType,
     videoBitsPerSecond: hasVideo ? videoBitsPerSecond : null,
     audioBitsPerSecond: hasAudio ? 128000 : null,
-    timesliceMs: timeslice, partSizeBytes: partSize, durationSecTarget: durationSec,
-    timeOrigin, tStartPerf, wallStartIso: new Date(wallStart).toISOString(),
-    firstChunkAt: null, videoTracks: stream.getVideoTracks().length,
+    timesliceMs: timeslice,
+    partSizeBytes: partSize,
+    durationSecTarget: durationSec,
+    timeOrigin,
+    tStartPerf,
+    wallStartIso: new Date(wallStart).toISOString(),
+    firstChunkAt: null,
+    chromeFakeDeviceFlags: opts.chromeFakeDeviceFlags || false,
+    videoTracks: stream.getVideoTracks().length,
     audioTracks: stream.getAudioTracks().length,
   };
-  session._readyResolve(true);
-  ctx.log(`recording started label=${safeLabel} timeslice=${timeslice}ms durationSec=${durationSec}`);
 
+  active = { recorder, ownSynth, uploader, stopped, externalStream: !!opts.stream };
+  window.__s4.uploader = uploader;
+
+  // Auto-stop after duration (Infinity / <=0 = manual stop only)
+  let stopTimer = null;
   if (Number.isFinite(durationSec) && durationSec > 0) {
-    session._stopTimer = setTimeout(() => {
+    stopTimer = setTimeout(() => {
       if (recorder.state !== 'inactive') recorder.stop();
     }, durationSec * 1000);
   }
+
   setDisabled('btnStart', true);
   setDisabled('btnStop', false);
-  setText('status', `recording:${safeLabel}`);
+  setText('status', 'recording');
 
   await stopped;
-  if (session._stopTimer) clearTimeout(session._stopTimer);
-  ctx.log(`recorder stopped label=${safeLabel}; flushing…`);
-  setText('status', `flushing:${safeLabel}`);
-
-  if (session.watchdog) session.watchdog.stop();
-  if (session.audioWatchdog) session.audioWatchdog.stop();
-  if (session._visHandler) {
-    document.removeEventListener('visibilitychange', session._visHandler);
-    session._visHandler = null;
-  }
+  if (stopTimer) clearTimeout(stopTimer);
+  log('recorder stopped; flushing uploads…');
+  setText('status', 'flushing');
 
   results.recording.firstChunkAt = firstChunkAt;
   results.recording.tStopPerf = performance.now();
@@ -1313,105 +848,62 @@ async function runSession(session) {
   results.recording.totalBytesLocal = totalBytes;
   results.recording.elapsedMs = results.recording.tStopPerf - tStartPerf;
   results.recording.measuredBitrateBps = totalBytes > 0
-    ? (totalBytes * 8) / (results.recording.elapsedMs / 1000) : 0;
+    ? (totalBytes * 8) / (results.recording.elapsedMs / 1000)
+    : 0;
 
-  // Audio presence finalize (v2.1): still upload bytes, but refuse clean complete if expected audio missing
-  if (results.audio && results.audio.expected) {
-    if (!results.audio.samplesSeen || results.audio.samplesSeen <= 0) {
-      results.audioMissing = true;
-      if (!results.audio.issues.some((i) => i.reason === 'no_samples_at_finalize')) {
-        const issue = {
-          label: safeLabel, reason: 'no_samples_at_finalize',
-          tMs: Math.round(performance.now() - tStartPerf),
-          iso: new Date().toISOString(),
-        };
-        results.audio.issues.push(issue);
-        console.log('[s4-audio-issue] ' + JSON.stringify(issue));
-        try { onAudioIssue && onAudioIssue(issue); } catch (_) {}
-      }
-      results.errors.push('audioMissing: expected audio but samplesSeen=0');
-    }
-  }
-
+  // Only stop tracks we own (synthetic). Never stop the caller's harness tracks.
   if (ownSynth) ownSynth.stop();
 
   let completeOut = null;
   try {
     completeOut = await uploader.flushFinal();
-    ctx.log('complete', completeOut.done);
+    log('complete', completeOut.done);
   } catch (e) {
     results.errors.push(String(e.message || e));
-    ctx.log('complete FAILED', String(e.message || e));
+    log('complete FAILED', String(e.message || e));
   }
 
+  // Local assembly
   const assembled = new Blob(uploader.allChunks, { type: mimeType.split(';')[0] });
   const assembledBuf = await assembled.arrayBuffer();
+  const localSha = await sha256Hex(assembledBuf);
   results.integrity = {
     localBytes: assembled.byteLength ?? assembled.size,
-    localSha256: await sha256Hex(assembledBuf),
+    localSha256: localSha,
     key: created.key,
     uploadId: created.uploadId,
     complete: completeOut?.done || null,
     remoteContentLength: completeOut?.done?.contentLength ?? null,
   };
-  results.sync = { participant, label: safeLabel, timeOrigin, tStartPerf, firstChunkAt, wallStartMs: wallStart };
-  results.parts = uploader.manifest.map(publicPart);
-  results.completeOk = !results.audioMissing && results.errors.length === 0 && !!completeOut?.done;
+
+  // Expose blob for Playwright download/compare
+  window.__s4.lastBlob = assembled;
+  window.__s4.lastBlobBuffer = assembledBuf;
+  window.__s4.uploader = uploader;
+
+  results.sync = {
+    participant,
+    timeOrigin,
+    tStartPerf,
+    firstChunkAt,
+    wallStartMs: wallStart,
+  };
+
   results.done = true;
-  sessions.delete(session.id);
-  if (active && active.id === session.id) active = null;
-  setText('status', (!results.completeOk || results.errors.length) ? 'done-with-errors' : 'done');
-  if (sessions.size === 0) { setDisabled('btnStart', false); setDisabled('btnStop', true); }
-  session._resolveDone(results);
-  return results;
-}
-
-async function startSession(opts = {}) {
-  const session = new Session(opts);
-  sessions.set(session.id, session);
-  const run = runSession(session).catch((e) => {
-    console.error('[s4] session error', e);
-    if (!session.results.done) {
-      session.results.errors.push(String(e.message || e));
-      session.results.done = true;
-      try { session._readyResolve(false); } catch (_) {}
-      try { session._resolveDone(session.results); } catch (_) {}
-    }
-    sessions.delete(session.id);
-    return session.results;
-  });
-  // Wait until recorder actually started (or failed)
-  const ok = await session.readyPromise;
-  if (!ok && session.results.errors.length) {
-    await run;
-    throw new Error(session.results.errors[0] || 'startSession failed');
-  }
-  return session.handle();
-}
-
-async function startRecording(opts = {}) {
-  const h = await startSession({ ...opts, label: opts.label || 'default' });
-  active = { id: h.id, stop: h.stop };
-  const final = await h.done;
-  for (const k of Object.keys(results)) delete results[k];
-  Object.assign(results, structuredClone(final));
+  setText('status', results.errors.length ? 'done-with-errors' : 'done');
+  setDisabled('btnStart', false);
+  setDisabled('btnStop', true);
+  active = null;
   return results;
 }
 
 function stopRecording() {
-  if (active?.stop) return active.stop();
-  let n = 0;
-  for (const s of sessions.values()) { if (s.stop()) n++; }
-  return n > 0;
+  if (active?.recorder && active.recorder.state !== 'inactive') {
+    active.recorder.stop();
+    return true;
+  }
+  return false;
 }
-
-async function stopAll() {
-  const list = [...sessions.values()];
-  for (const s of list) s.stop();
-  await Promise.all(list.map((s) => s.donePromise));
-  return list.map((s) => s.resultsSnapshot());
-}
-
 
 /**
  * Restore every OPFS session left by a crashed page:
@@ -1504,13 +996,9 @@ window.__s4.opfsWipe = () => OpfsStore.wipeAll();
 window.__s4.opfsList = () => OpfsStore.listSessions();
 
 window.__s4.startRecording = startRecording;
-window.__s4.startSession = startSession;
 window.__s4.stopRecording = stopRecording;
-window.__s4.stopAll = stopAll;
 window.__s4.setOnline = (v, label) => {
-  for (const s of sessions.values()) {
-    if (s.uploader) s.uploader.setOnline(v, label);
-  }
+  if (active?.uploader) active.uploader.setOnline(v, label);
 };
 window.__s4.setApiBase = (base) => { API_BASE = String(base || ''); };
 window.__s4.probe = async () => {
@@ -1523,8 +1011,6 @@ window.__s4.probe = async () => {
 window.S4Recorder = {
   startRecording,
   stopRecording,
-  startSession,
-  stopAll,
   recoverAll,
   setApiBase: (base) => { API_BASE = String(base || ''); },
   getResults: () => structuredClone(results),

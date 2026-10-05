@@ -1,4 +1,4 @@
-# S4 drop-in recorder v2 (Vision harness)
+# S4 drop-in recorder v2.1 (Vision harness)
 
 MediaRecorder → OPFS → presigned multipart upload for the MediaPipe harness at `http://127.0.0.1:8088/`.
 
@@ -35,11 +35,30 @@ const h = await S4Recorder.startSession({
   timeslice: 1000,
   vBitrate: 2500000,
   onGap: (g) => { /* { label, startMs, durationMs } */ },
+  onAudioIssue: (i) => { /* { label, reason, tMs } — toast this */ },
+  // expectAudio: true|false  // default: true if stream has audio tracks
 });
 h.stop();
-h.results();              // snapshot
+h.results();              // snapshot — check results.audio / audioMissing / completeOk
 await h.exportResults();  // POST /api/results → <key>.results.json in bucket + out/
 await S4Recorder.stopAll(); // stop every session; resolves when all flushed/complete
+```
+
+### Audio presence guard (v2.1)
+
+At `startSession`, each audio track is logged (`readyState`, `muted`, `enabled`, `label`, `settings`). A watchdog (MediaStreamTrackProcessor, else AnalyserNode) counts real samples. Issues fire `onAudioIssue` and land in `results.audio.issues` when:
+
+- track already `ended` / `muted` / disabled at start
+- no samples (or all-zero RMS) in the first **2 s**
+- `mute` / `ended` mid-take
+
+At finalize, if audio was expected but `samplesSeen === 0`: `audioMissing: true`, `completeOk: false`, error string set — **bytes still upload** for diagnosis (same idea as gap reporting).
+
+```js
+onAudioIssue: (i) => {
+  console.warn('S4 audio', i);
+  // showToast(`Audio: ${i.reason}`);
+},
 ```
 
 v1 still works: `S4Recorder.startRecording(opts)` / `stopRecording()` (single session, awaits completion).
