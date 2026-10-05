@@ -156,7 +156,25 @@ At part cut, the manifest was written with `byteCursor` advanced **without** reg
 | **Ended-at-start** track | `audioMissing`; completion refused |
 | **Stop mid-take** | `track_ended` issue at **2515** ms |
 
-**Master-HQ decision:** still **open** — pending **take 4** (MediaPipe matte + mic clones + in-file Opus).
+---
+
+## Run 4 (real cam, MediaPipe, dual canvas)
+
+**Label:** Edge `?v=s4-matte7` · drop-in v2.1 · MediaPipe · per-recording mic clone · ~**60 s** Paris **2026-10-05**. Details: [`spikes/s4/RESULT-RUN4.md`](./s4/RESULT-RUN4.md).
+
+| Area | raw | matted |
+| --- | --- | --- |
+| **Option B sync** | **PASS** (~**25** ms intra A/V) | **PASS** (~**11** ms) |
+| **Loss ≤ 1 %** | **PASS** (**0.53** %) | **FAIL** (**53** % vs 30 fps; ~**14** fps effective, median frame Δ **74** ms — offscreen `recordCanvas` at MediaPipe paint rate; **no** holes **>200** ms; not fixed this night) |
+| **Bitrate ≥ 1 Mbps** | **PASS** (**2.63** Mbps) | **PASS** (**1.72** Mbps) |
+| **Upload / Opus** | **0** byte loss; Opus; **923** audio samples | same (**916** samples) |
+| **Alpha** | opaque | **real** VP8 alpha (~**47** % transparent / **24** % opaque / **30** % partial mean, libvpx decode) |
+
+**Master-HQ (OPEN — team recommendation, not a lock; Loïc decides):** **raw cam+mic** = master HQ; **async server re-matting** with RVM on raw; browser **matted canvas** = live / régie preview only. Cost/throughput: [`spikes/s4/S5-RVM-COST.md`](./s4/S5-RVM-COST.md) — measured box **RVM mobilenetv3** CPU Xeon 8c **17.26** fps / **104** s per minute; Vision RTX **3070** DirectML ~**19.8** fps / ~**91** s per minute under Edge load (EU GPU list prices fetched **2026-10-06**; L4/L40S throughput rows are **unsourced estimates**, labelled in that doc).
+
+**RVM checkerboard (Designer):** grade **near-PASS** (not a hard PASS) — halo on hair and a few leaks on arm/torso at **45** s visible on checker; hands OK; still clearly better than browser v8. Final quality call still **open** (flicker clip pending; Loïc decides). Assets: [`run4/media/server-matte/`](./s4/run4/media/server-matte/).
+
+**RVM variants (box CPU, Xeon 8c, no GPU — [`RESULT-RUN4.md` §8](./s4/RESULT-RUN4.md)):** mobilenetv3 ds0.375 **104** s/min; ds0.4 **112** s/min; resnet50 ~**191** s/min (extrapolated **15–55** s). Variant **E** (ds0.4 + white despill + 1 px alpha erosion) best on proxies: hair semi-transparent luma **−26** %, arm/torso gap alpha **0.61→0.56**, ~**+7** % compute vs baseline; resnet50 not worth it on this take. Designer grading on variants **pending**; master HQ still **open** (Loïc decides). [`run4/media/server-matte/variants/`](./s4/run4/media/server-matte/variants/).
 
 ---
 

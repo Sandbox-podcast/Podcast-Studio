@@ -98,7 +98,7 @@ Stills: `run4/raw-clap-1933ms.png`, `run4/matted-clap-1267ms.png`.
 **Checkerboard contact (missing from Vision’s green sheets):**  
 `/workspace/podcast-studio/s4-realcam/run4/media/server-matte/contact-rvm-mobilenetv3-checker-box.png`  
 Stills: `…/stills/rvm_mobilenetv3_t{05,15,25,35,45,55}_checker.png`  
-Factual alpha notes (heuristic): corner leak **false** all 6; partial_frac 0.015–0.045. **Designer grade (checkerboard sheet): near-PASS (not hard PASS)** — halo on hair, a few arm/torso leaks at 45 s on checker; hands OK; clearly better than browser v8. Final quality call open (flicker clip pending; Loïc decides).
+Factual alpha notes (heuristic): corner leak **false** all 6; partial_frac 0.015–0.045. Designer grades PASS/FAIL grid separately.
 
 ## 7. Artifacts
 
@@ -111,3 +111,26 @@ run4/media/server-matte/contact-rvm-mobilenetv3-checker-box.png
 run4/media/server-matte/result-rvm_mobilenetv3.json
 run4/ROOM-*.md  (drafts for parent → SendToAgent)
 ```
+
+## 8. RVM variants (box CPU)
+
+Designer near-PASS follow-up (soft hair halo FAIL soft; arm/torso decor leak @45s). **Xeon 8c, no GPU.**
+
+ROIs: gap `(760,200)–(860,300)`; hair `(480,40)–(780,180)`.
+
+| Var | What | ds | wallFps | s/min | partial̄ | gap45 ᾱ ↓better | hair luma ↓better |
+|---|---|---:|---:|---:|---:|---:|---:|
+| **A** | mnet baseline (prior full run) | 0.375 | 17.26 | 104.3 | 0.0264 | 0.6092 | 169.55 |
+| **B** | mnet (=A, not re-run) | 0.375 | 17.26 | 104.3 | 0.0264 | 0.6092 | 169.55 |
+| **C** | mnet full 1798 | 0.4 | 16.15 | 111.5 | 0.0257 | 0.5937 | 163.8 |
+| **D** | resnet50 EXTRAP timed 15–55s after warm | 0.375 | 9.41 | 191.3 | 0.0354 | 0.5797 | 170.33 |
+| **E** | despill+1px erode ←C | 0.4 | 16.15 | 111.5 | 0.0259 | 0.559 | 125.67 |
+
+**Paths:**
+- `/workspace/podcast-studio/s4-realcam/run4/media/server-matte/variants/contact-variants-A-E-checker.png`
+- `/workspace/podcast-studio/s4-realcam/run4/media/server-matte/variants/zoom-head-25-45-native.png`
+- `/workspace/podcast-studio/s4-realcam/run4/media/server-matte/variants/roi-arm-torso-gap-t45.png`
+- stills: `/workspace/podcast-studio/s4-realcam/run4/media/server-matte/variants/stills/{A..E}_t*_checker.png`
+
+**Factual (Designer grades):** E←C lowers hair semitrans luma **169.6→125.7** and gap45 α **0.609→0.559** vs A/B. C alone edges B on gap/halo at **111.5 vs 104.3 s/min**. D resnet50: see table (extrapolated segment). Visually E is the strongest halo control among A–E on these proxies; residual soft fringe may remain.
+

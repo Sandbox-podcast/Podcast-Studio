@@ -56,3 +56,13 @@ Assumptions:
 - Measured 3070-class (~7.6 h serial): if rented at ~€0.75–0.79/h → ~**€5.7–6.0 / episode**.
 - Box CPU alone is free here but **8.69 h serial / episode** — fine for spikes, not for prod SLA.
 - Always-on Hetzner GEX44 (~€234/mo) makes sense only if utilization is high (many episodes + other GPU work).
+
+## RVM variants cost (box CPU measured)
+
+| Variant | s/min footage | wallFps | Episode serial h (5 h footage) | notes |
+|---|---:|---:|---:|---|
+| A/B mnet ds=0.375 | 104.3 | 17.26 | 8.69 | full |
+| C mnet ds=0.4 | 111.5 | 16.15 | 9.29 | full; +7% vs A |
+| D resnet50 ds=0.375 | 191.3 | 9.41 | 15.94 | **EXTRAP** from 15–55s timed after warm |
+| E post on C | 111.5 (parent) | 16.15 | 9.29 | post stills-only negligible |
+
