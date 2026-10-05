@@ -30,6 +30,9 @@ export function createS3Client(): S3Client {
     region: process.env.S3_REGION ?? "us-east-1",
     endpoint,
     forcePathStyle: true,
+    // SDK >= 3.729 otherwise signs x-amz-checksum-crc32 of an EMPTY body into presigned UploadPart URLs.
+    requestChecksumCalculation: "WHEN_REQUIRED",
+    responseChecksumValidation: "WHEN_REQUIRED",
     credentials: {
       accessKeyId: requireEnv("S3_ACCESS_KEY_ID"),
       secretAccessKey: requireEnv("S3_SECRET_ACCESS_KEY"),

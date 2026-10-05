@@ -14,14 +14,31 @@ Décision Loïc (2026-10-05) : pour le **POC S4**, l’object storage est **MinI
 - Compose + init bucket : [`spikes/s4/minio/`](./s4/minio/) (credentials via `.env` local, jamais commitées).
 - Helper multipart lab : [`spikes/s4/multipart-proto/`](./s4/multipart-proto/) (Next.js 15 + AWS SDK v3, `forcePathStyle`).
 - Candidats cloud R2/S3/GCS et delivery Mux/Stream : **après POC** — voir [`S4-S5-candidates-prep.md`](./S4-S5-candidates-prep.md).
+- Images Docker : **décision ouverte** (fork `pgsty/minio` vs `pgsty/silo` vs autre) — voir [`s4/minio/README.md`](./s4/minio/README.md).
+
+## Dev run 2026-10-05 (localhost — prep, pas le lab LAN)
+
+Exécution locale Docker Compose sur une machine de dev (`127.0.0.1`, images `pgsty/minio` / `pgsty/mc` par défaut du compose). **Ne remplace pas** le spike S4 officiel ni les seuils pass/fail (**TODO** lab LAN).
+
+| Test | Résultat | Notes (localhost, non throttlé sauf mention) |
+| --- | --- | --- |
+| Init `minio-init` | OK | Bucket créé ; CORS / stale MPU via env serveur (`MINIO_API_CORS_ALLOW_ORIGIN`, `MINIO_API_STALE_UPLOADS_EXPIRY=168h`, cleanup 6h) |
+| Multipart 50 MiB, 7×8 MiB, presigned PUT | OK | ETag + sha256 local == distant |
+| CORS navigateur | OK | Preflight OPTIONS 204 ; `Access-Control-Expose-Headers` inclut ETag |
+| Reprise après kill client (part 4 en vol) | OK | ListParts 1–3 ; reprise parts 4–7 puis Complete |
+| Abort MPU | OK | Upload absent après Abort |
+| Flux API `multipart-proto` | OK | create → presign → list → complete ; abort testé via API |
+| UI navigateur (`page.tsx`) | Non testé | — |
+
+Timings loopback (ex. create+presign+7 PUT ~689 ms) : **indicatifs dev uniquement**, pas une mesure lab.
 
 ## Runbook MinIO LAN (prep — pas de mesures dans ce doc)
 
 ### 1. Bring-up
 
 1. Sur l’hôte LAN (co-localisé LiveKit OSS), copier `spikes/s4/minio/.env.example` → `.env`.
-2. Renseigner `MINIO_LAN_HOST`, `MINIO_ROOT_USER`, `MINIO_ROOT_PASSWORD`, ports si besoin (défaut **9000** API / **9001** console — éviter conflit avec LiveKit **7880** / **7881**).
-3. `docker compose up -d` dans `spikes/s4/minio/` ; vérifier logs `minio-init` (bucket, CORS, règle ILM abort MPU incomplets après `MINIO_ABORT_INCOMPLETE_MPU_DAYS` — placeholder **TODO** tuning lab).
+2. Renseigner `MINIO_LAN_HOST`, `MINIO_ROOT_USER`, `MINIO_ROOT_PASSWORD`, `MINIO_BIND_ADDR` (souvent `0.0.0.0` sur LAN), ports si besoin (défaut **9000** API / **9001** console — éviter conflit avec LiveKit **7880** / **7881**).
+3. `docker compose up -d` dans `spikes/s4/minio/` ; vérifier logs `minio-init` (bucket + lignes CORS / stale uploads). Ajuster `MINIO_API_STALE_UPLOADS_EXPIRY` si la fenêtre de reprise pause-upload doit être différente (**TODO** lab).
 
 ### 2. Smoke test multipart (avant navigateur)
 
