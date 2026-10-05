@@ -32,6 +32,8 @@ The Grok Bot host has **no camera/microphone** — default `getUserMedia` fails 
 
 Static assets: `styles.css`, `favicon.png` / `favicon.ico` (fixes harness tab 404 noise).
 
+**DEV CORS** (`server.mjs`): for matching `http(s)://127.0.0.1|localhost(:port)` origins only — `GET /api/token` from another local harness (e.g. S3 on `:8080`) without pasting JWT. `OPTIONS` → 204. Not for production or public hosts.
+
 | | |
 | --- | --- |
 | **Vote** | **B — LiveKit OSS self-host** (2026-10-05, lead / Loïc) |
