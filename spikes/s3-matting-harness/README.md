@@ -51,7 +51,7 @@ Si le token API est sur une autre origine (CORS), coller un JWT dans le champ pr
 
 Décocher **Smoke synthétique**, démarrer la caméra, lancer la boucle matting : la piste publiée suit le canvas matting (ou la caméra brute si fallback).
 
-**Ce smoke ≠ pass S3** — ne pas confondre avec le pass **LOW-END** (i5 + iGPU). `LAPTOP-BI8P2KF3` = inventaire **MID-like** ; **python-mediapipe 720p** (`exports/mid-mediapipe-720.json`) + **Edge** navigateur (`exports/mid-edge-matte8-720.json` : live ~34.5 · Playwright run4-raw **24.6**/p5Worst **18**) — voir **Mesures** dans `spikes/S3-matting.md`. **A/B égal source v7 vs v8 sur run4-raw PENDING** (ne pas traiter 34.5→24.6 comme coût v8).
+**Ce smoke ≠ pass S3** — ne pas confondre avec le pass **LOW-END** (i5 + iGPU). `LAPTOP-BI8P2KF3` = inventaire **MID-like** ; **python-mediapipe 720p** + **Edge** A/B égal source (`exports/v7-v8-ab-measure.json` : v7 **34**/27.2 · v8 **30**/24.3 · v8b **30**/24.2 · Δ v8−v7 **−4**/−2.9) — voir **Mesures** dans `spikes/S3-matting.md`. Historique unfair matte8 24.6/18 supersédé.
 
 **DRAFT (2026-10-05)** : smoke **host-local pub/sub** mesuré sur le laptop (Python `VideoSource` synthétique, pas MediaPipe) — **`PASS`** publish + pub/sub, **sans caméra / sans FPS** — voir **`spikes/S3-matting.md` → BOX-ONLY → DRAFT — LiveKit laptop host-local pub/sub (2026-10-05)**.
 

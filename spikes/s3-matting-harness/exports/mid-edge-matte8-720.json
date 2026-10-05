@@ -46,7 +46,8 @@
       "pass": "N/A (MID inventaire; quality hair fringe FAIL designer criteria)"
     }
   ],
-  "comparisonCaveat": "pending equal-source A/B: v7 vs v8 both on run4-raw Playwright. Do not publish causal FPS delta until that lands.",
+  "comparisonCaveat": "SUPERSEDED for causal v8 cost claims by equal-source A/B in exports/v7-v8-ab-measure.json (v7 34/27.2 vs v8 30/24.3 on same run4-raw). This file keeps the earlier unfair live~34.5 vs file-loop 24.6/18 observations for history only.",
   "softLean": "master HQ = cam raw; browser matte = live/preview only",
-  "samples": []
+  "samples": [],
+  "supersededBy": "exports/v7-v8-ab-measure.json"
 }
