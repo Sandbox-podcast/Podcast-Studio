@@ -1,0 +1,506 @@
+{
+  "label": "localhost / headless / synthetic — NOT Sandbox-hardware pass",
+  "startedAt": "2026-10-05T16:34:55.758Z",
+  "finishedAt": "2026-10-05T16:38:44.120Z",
+  "browser": {
+    "playwrightChromium": "131.0.6778.33",
+    "systemChrome": "Google Chrome 154.0.8037.57"
+  },
+  "flags": [
+    "--use-fake-device-for-media-stream",
+    "--use-fake-ui-for-media-stream"
+  ],
+  "sourceType": "canvas.captureStream(30) + WebAudio oscillator (sawtooth+LFO)",
+  "networkCutMethod": "Playwright route.abort on **://127.0.0.1:9000/** (presigned PUTs only); lab API :3320 stays up",
+  "items": {
+    "recording": {
+      "status": "PASS",
+      "mimeType": "video/webm;codecs=vp8,opus",
+      "mimeTypesSupported": [
+        "video/webm;codecs=vp8,opus",
+        "video/webm;codecs=vp9,opus",
+        "video/webm;codecs=vp9",
+        "video/webm;codecs=vp8",
+        "video/webm",
+        "video/mp4",
+        "audio/webm;codecs=opus"
+      ],
+      "source": "canvas.captureStream(30) + WebAudio oscillator (sawtooth+LFO)",
+      "durationSecTarget": 180,
+      "elapsedMs": 180037.69999998808,
+      "chunkCount": 177,
+      "totalBytesLocal": 99812767,
+      "measuredBitrateBps": 4435194.051024051,
+      "errors": []
+    },
+    "webCodecs": {
+      "status": "FEASIBILITY_ONLY",
+      "VideoEncoder": true,
+      "AudioEncoder": true,
+      "videoConfigs": [
+        {
+          "config": {
+            "codec": "vp8",
+            "width": 1280,
+            "height": 720,
+            "bitrate": 2500000,
+            "framerate": 30
+          },
+          "supported": true,
+          "configReturned": {
+            "alpha": "discard",
+            "bitrate": 2500000,
+            "bitrateMode": "variable",
+            "codec": "vp8",
+            "contentHint": "",
+            "framerate": 30,
+            "hardwareAcceleration": "no-preference",
+            "height": 720,
+            "latencyMode": "quality",
+            "width": 1280
+          }
+        },
+        {
+          "config": {
+            "codec": "vp09.00.10.08",
+            "width": 1280,
+            "height": 720,
+            "bitrate": 2500000,
+            "framerate": 30
+          },
+          "supported": true,
+          "configReturned": {
+            "alpha": "discard",
+            "bitrate": 2500000,
+            "bitrateMode": "variable",
+            "codec": "vp09.00.10.08",
+            "contentHint": "",
+            "framerate": 30,
+            "hardwareAcceleration": "no-preference",
+            "height": 720,
+            "latencyMode": "quality",
+            "width": 1280
+          }
+        },
+        {
+          "config": {
+            "codec": "avc1.42E01E",
+            "width": 1280,
+            "height": 720,
+            "bitrate": 2500000,
+            "framerate": 30
+          },
+          "supported": false,
+          "configReturned": {
+            "alpha": "discard",
+            "bitrate": 2500000,
+            "bitrateMode": "variable",
+            "codec": "avc1.42E01E",
+            "contentHint": "",
+            "framerate": 30,
+            "hardwareAcceleration": "no-preference",
+            "height": 720,
+            "latencyMode": "quality",
+            "width": 1280
+          }
+        },
+        {
+          "config": {
+            "codec": "av01.0.04M.08",
+            "width": 1280,
+            "height": 720,
+            "bitrate": 2500000,
+            "framerate": 30
+          },
+          "supported": true,
+          "configReturned": {
+            "alpha": "discard",
+            "bitrate": 2500000,
+            "bitrateMode": "variable",
+            "codec": "av01.0.04M.08",
+            "contentHint": "",
+            "framerate": 30,
+            "hardwareAcceleration": "no-preference",
+            "height": 720,
+            "latencyMode": "quality",
+            "width": 1280
+          }
+        }
+      ],
+      "audioConfigs": [
+        {
+          "config": {
+            "codec": "opus",
+            "numberOfChannels": 1,
+            "sampleRate": 48000,
+            "bitrate": 128000
+          },
+          "supported": true,
+          "configReturned": {
+            "bitrate": 128000,
+            "bitrateMode": "variable",
+            "codec": "opus",
+            "numberOfChannels": 1,
+            "sampleRate": 48000
+          }
+        },
+        {
+          "config": {
+            "codec": "mp4a.40.2",
+            "numberOfChannels": 1,
+            "sampleRate": 48000,
+            "bitrate": 128000
+          },
+          "supported": false,
+          "configReturned": {
+            "bitrate": 128000,
+            "bitrateMode": "variable",
+            "codec": "mp4a.40.2",
+            "numberOfChannels": 1,
+            "sampleRate": 48000
+          }
+        }
+      ]
+    },
+    "segmentsUpload": {
+      "status": "PASS",
+      "partCount": 20,
+      "parts": [
+        {
+          "partNumber": 1,
+          "byteStart": 0,
+          "byteEnd": 5242880,
+          "size": 5242880,
+          "etag": "\"d98aacae8d02d37c36cab9d087239596\"",
+          "status": "uploaded",
+          "uploadMs": 53.599999994039536,
+          "attempts": 1,
+          "error": null
+        },
+        {
+          "partNumber": 2,
+          "byteStart": 5242880,
+          "byteEnd": 10485760,
+          "size": 5242880,
+          "etag": "\"67cbaf936fa4668f248bdc3599ed59f3\"",
+          "status": "uploaded",
+          "uploadMs": 53.099999994039536,
+          "attempts": 2,
+          "error": null
+        },
+        {
+          "partNumber": 3,
+          "byteStart": 10485760,
+          "byteEnd": 15728640,
+          "size": 5242880,
+          "etag": "\"7abbaef1298b1880f4f0ff89c3cd946c\"",
+          "status": "uploaded",
+          "uploadMs": 36.20000001788139,
+          "attempts": 1,
+          "error": null
+        },
+        {
+          "partNumber": 4,
+          "byteStart": 15728640,
+          "byteEnd": 20971520,
+          "size": 5242880,
+          "etag": "\"e46c87923a8db324cc7e3c98cf476924\"",
+          "status": "uploaded",
+          "uploadMs": 33.89999997615814,
+          "attempts": 2,
+          "error": null
+        },
+        {
+          "partNumber": 5,
+          "byteStart": 20971520,
+          "byteEnd": 26214400,
+          "size": 5242880,
+          "etag": "\"baaf336681cb07a11c18aefe4b533e0d\"",
+          "status": "uploaded",
+          "uploadMs": 50.79999998211861,
+          "attempts": 2,
+          "error": null
+        },
+        {
+          "partNumber": 6,
+          "byteStart": 26214400,
+          "byteEnd": 31457280,
+          "size": 5242880,
+          "etag": "\"85065738ef51d5bbbe1e7c7b4c7e9148\"",
+          "status": "uploaded",
+          "uploadMs": 44.900000005960464,
+          "attempts": 2,
+          "error": null
+        },
+        {
+          "partNumber": 7,
+          "byteStart": 31457280,
+          "byteEnd": 36700160,
+          "size": 5242880,
+          "etag": "\"810cf0db7eebe97433c70599a6ff3ad1\"",
+          "status": "uploaded",
+          "uploadMs": 54.5,
+          "attempts": 1,
+          "error": null
+        },
+        {
+          "partNumber": 8,
+          "byteStart": 36700160,
+          "byteEnd": 41943040,
+          "size": 5242880,
+          "etag": "\"90308ff6eacbd11a5ba72e3fc3113cba\"",
+          "status": "uploaded",
+          "uploadMs": 45.10000002384186,
+          "attempts": 1,
+          "error": null
+        },
+        {
+          "partNumber": 9,
+          "byteStart": 41943040,
+          "byteEnd": 47185920,
+          "size": 5242880,
+          "etag": "\"d27abc4d967b84147c0f5822ef7bfd91\"",
+          "status": "uploaded",
+          "uploadMs": 46.5,
+          "attempts": 1,
+          "error": null
+        },
+        {
+          "partNumber": 10,
+          "byteStart": 47185920,
+          "byteEnd": 52428800,
+          "size": 5242880,
+          "etag": "\"9581f5da790763426622260d461cb103\"",
+          "status": "uploaded",
+          "uploadMs": 43.79999998211861,
+          "attempts": 1,
+          "error": null
+        },
+        {
+          "partNumber": 11,
+          "byteStart": 52428800,
+          "byteEnd": 57671680,
+          "size": 5242880,
+          "etag": "\"6955b6174a8c7b6e7f4c1b939d65f968\"",
+          "status": "uploaded",
+          "uploadMs": 51,
+          "attempts": 1,
+          "error": null
+        },
+        {
+          "partNumber": 12,
+          "byteStart": 57671680,
+          "byteEnd": 62914560,
+          "size": 5242880,
+          "etag": "\"7bb3daffa225e21899c3a4d4e9fbce57\"",
+          "status": "uploaded",
+          "uploadMs": 53,
+          "attempts": 1,
+          "error": null
+        },
+        {
+          "partNumber": 13,
+          "byteStart": 62914560,
+          "byteEnd": 68157440,
+          "size": 5242880,
+          "etag": "\"7cdfd04de3db9fcdcbf6c5ece5e12f6c\"",
+          "status": "uploaded",
+          "uploadMs": 39.19999998807907,
+          "attempts": 1,
+          "error": null
+        },
+        {
+          "partNumber": 14,
+          "byteStart": 68157440,
+          "byteEnd": 73400320,
+          "size": 5242880,
+          "etag": "\"a886b8fbdc904c5dfc2252cf6edb47c5\"",
+          "status": "uploaded",
+          "uploadMs": 47.099999994039536,
+          "attempts": 1,
+          "error": null
+        },
+        {
+          "partNumber": 15,
+          "byteStart": 73400320,
+          "byteEnd": 78643200,
+          "size": 5242880,
+          "etag": "\"1d0ee6c372e5a46bf47b1a370e7737b7\"",
+          "status": "uploaded",
+          "uploadMs": 53.19999998807907,
+          "attempts": 1,
+          "error": null
+        },
+        {
+          "partNumber": 16,
+          "byteStart": 78643200,
+          "byteEnd": 83886080,
+          "size": 5242880,
+          "etag": "\"f553e347f65e5f0726dc8b099ac5f8c2\"",
+          "status": "uploaded",
+          "uploadMs": 45.5,
+          "attempts": 1,
+          "error": null
+        },
+        {
+          "partNumber": 17,
+          "byteStart": 83886080,
+          "byteEnd": 89128960,
+          "size": 5242880,
+          "etag": "\"91d689897da2dd9a26d29d2266037a89\"",
+          "status": "uploaded",
+          "uploadMs": 35.599999994039536,
+          "attempts": 1,
+          "error": null
+        },
+        {
+          "partNumber": 18,
+          "byteStart": 89128960,
+          "byteEnd": 94371840,
+          "size": 5242880,
+          "etag": "\"e11f416129a16070eba90594a7c6870c\"",
+          "status": "uploaded",
+          "uploadMs": 45.5,
+          "attempts": 1,
+          "error": null
+        },
+        {
+          "partNumber": 19,
+          "byteStart": 94371840,
+          "byteEnd": 99614720,
+          "size": 5242880,
+          "etag": "\"d7cdd3e4a2ede5a0baa2ecb6713cf4d6\"",
+          "status": "uploaded",
+          "uploadMs": 32,
+          "attempts": 1,
+          "error": null
+        },
+        {
+          "partNumber": 20,
+          "byteStart": 99614720,
+          "byteEnd": 99812767,
+          "size": 198047,
+          "etag": "\"2cfabebb6d8a64393c52e3f73284b67d\"",
+          "status": "uploaded",
+          "uploadMs": 14.200000017881393,
+          "attempts": 1,
+          "error": null
+        }
+      ],
+      "key": "spike/s4-lab/rec/lab-main-1791218096742.webm",
+      "remote": {
+        "key": "spike/s4-lab/rec/lab-main-1791218096742.webm",
+        "path": "/workspace/podcast-studio/s4-lab/artifacts/lab-main-remote.webm",
+        "bytes": 99812767,
+        "sha256": "c7ee6282c5bb8724a4eb392e7d8d25b89baacad5c9a84bb8a2e22682eebabfc0",
+        "headContentLength": 99812767,
+        "shaMatchLocal": true,
+        "sizeMatchLocal": true
+      },
+      "localSha": "c7ee6282c5bb8724a4eb392e7d8d25b89baacad5c9a84bb8a2e22682eebabfc0",
+      "localBytes": 99812767
+    },
+    "networkCutResume": {
+      "status": "PASS",
+      "cuts": [
+        {
+          "label": "cut-10s",
+          "requestedMs": 10000,
+          "actualMs": 10063,
+          "wallStartIso": "2026-10-05T16:35:07.042Z",
+          "wallEndIso": "2026-10-05T16:35:17.105Z",
+          "method": "page.route abort 127.0.0.1:9000"
+        },
+        {
+          "label": "cut-30s",
+          "requestedMs": 30000,
+          "actualMs": 30028,
+          "wallStartIso": "2026-10-05T16:35:29.106Z",
+          "wallEndIso": "2026-10-05T16:35:59.134Z",
+          "method": "page.route abort 127.0.0.1:9000"
+        }
+      ],
+      "shaMatchLocal": true,
+      "sizeMatchLocal": true
+    },
+    "ffprobe": {
+      "status": "PASS",
+      "summary": {
+        "format": {
+          "format_name": "matroska,webm",
+          "size": "99812767"
+        },
+        "streams": [
+          {
+            "codec_type": "video",
+            "codec_name": "vp8",
+            "width": 1920,
+            "height": 1080
+          },
+          {
+            "codec_type": "audio",
+            "codec_name": "opus"
+          }
+        ]
+      }
+    },
+    "multiTrackSync": {
+      "status": "MEASURED",
+      "offset": {
+        "timeOriginDeltaMs": -65.7998046875,
+        "wallStartDeltaMs": 0,
+        "firstChunkAbsA": 1791218279484,
+        "firstChunkAbsB": 1791218279426.2998,
+        "firstChunkAbsDeltaMs": 57.7001953125,
+        "goAt": 1791218278821,
+        "durationSec": 45
+      },
+      "a": {
+        "key": "spike/s4-lab/rec/lab-sync-a-1791218278891.webm",
+        "firstChunkAt": 1591.4000000059605,
+        "totalBytesLocal": 9998227,
+        "parts": 2,
+        "errors": []
+      },
+      "b": {
+        "key": "spike/s4-lab/rec/lab-sync-b-1791218278891.webm",
+        "firstChunkAt": 1467.8999999761581,
+        "totalBytesLocal": 10070942,
+        "parts": 2,
+        "errors": []
+      }
+    },
+    "abortCleanup": {
+      "status": "PASS",
+      "abortedIncomplete": [],
+      "remainingObjectsUnderPrefix": [
+        {
+          "key": "spike/s4-lab/rec/brate-1791218070476.webm",
+          "size": 11072727,
+          "lastModified": "2026-10-05T16:34:50.557Z"
+        },
+        {
+          "key": "spike/s4-lab/rec/lab-main-1791218096742.webm",
+          "size": 99812767,
+          "lastModified": "2026-10-05T16:37:56.854Z"
+        },
+        {
+          "key": "spike/s4-lab/rec/lab-sync-a-1791218278891.webm",
+          "size": 9998227,
+          "lastModified": "2026-10-05T16:38:44.012Z"
+        },
+        {
+          "key": "spike/s4-lab/rec/lab-sync-b-1791218278891.webm",
+          "size": 10070942,
+          "lastModified": "2026-10-05T16:38:44.009Z"
+        },
+        {
+          "key": "spike/s4-lab/rec/smoke25-1791218024005.webm",
+          "size": 5203793,
+          "lastModified": "2026-10-05T16:34:09.137Z"
+        }
+      ]
+    }
+  },
+  "errors": []
+}
