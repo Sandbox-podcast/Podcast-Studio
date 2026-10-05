@@ -4,12 +4,14 @@ Issues volontairement **non tranchées** dans l’architecture v0 — à résoud
 
 ## Auth / identité interne
 
-Quel IdP / mécanisme pour les comptes Sandbox ?
+**Décide — 2026-10-05 (Loïc)** : **Google Sign-In** via auth managée — option **C** (Auth.js / NextAuth v5 + provider Google OAuth, allowlist email/domaine). Voir spike [`spikes/S0-stack.md`](../spikes/S0-stack.md).
 
-- A — SSO entreprise existant (nommer le fournisseur)
-- B — Magic link / email OTP
-- C — Auth managée (Clerk, Auth0, Cognito…)
-- D — Autre
+~~Quel IdP / mécanisme pour les comptes Sandbox ?~~
+
+- ~~A — SSO entreprise existant (nommer le fournisseur)~~
+- ~~B — Magic link / email OTP~~
+- ~~C — Auth managée (Clerk, Auth0, Cognito…)~~ → **retenu** avec Google IdP
+- ~~D — Autre~~
 
 ## SFU (après S1)
 
