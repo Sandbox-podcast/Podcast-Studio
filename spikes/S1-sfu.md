@@ -86,7 +86,9 @@ Hôte verrouillé : **`LAPTOP-BI8P2KF3`**. Déploiement : `C:\Users\azero\s1-liv
 | Pare-feu | Chemin **host-local** : pas besoin d’ouvrir le pare-feu Windows (profil Private). **Multi-appareils LAN** : règles Private — TCP **7880/7881/5190** + UDP **50000–50200** (+ Media TCP **9000/9001** MinIO noté) |
 | CORS harnais | DEV : `localhost` + **`192.168.x.x`** — [`server.mjs`](s1-lab/livekit-oss/server.mjs) |
 
-#### Edge publisher → harness subscribe getStats (~23:05 Europe/Paris)
+#### Edge `vision-s3` → harness subscribe getStats (laptop loopback, room `s1-lab`)
+
+##### Take 1 (2026-10-05 ~23:05 Europe/Paris)
 
 | Item | Valeur |
 | --- | --- |
@@ -96,7 +98,18 @@ Hôte verrouillé : **`LAPTOP-BI8P2KF3`**. Déploiement : `C:\Users\azero\s1-liv
 | Join | Connecté subscribe-only **~2046 ms** |
 | Échantillons | **9** sur **~25 s** (table AC-RTC-002 harnais) |
 | Inbound getStats | Audio **~1 kbps**, loss **0 %**, RTT **~2 ms** ; vidéo **0 bps**, loss **0 %**, RTT **~2 ms**, **320×180** (dynacast LOW), fps **—** |
-| Verdict doc | **Connectivité PASS** (join + remote vu) ; bitrate/fps vidéo active **NOT VALIDATED** cette fenêtre — ne pas passer cam/getStats global en PASS |
+| Verdict doc | **Connectivité PASS** ; vidéo active **NOT VALIDATED** — cause racine Take 2 : **onglet Edge en arrière-plan** (pause `rAF` / `captureStream`) |
+
+##### Take 2 (2026-10-05 23:29–23:36 Europe/Paris, Edge tab foreground, matted canvas publish `vision-s3`, room `s1-lab`, laptop loopback)
+
+| Item | Valeur |
+| --- | --- |
+| Publisher | Edge **au premier plan** ; publish matted canvas **`vision-s3`** |
+| Subscriber | Headless Chromium, harnais **`mode=none`** (getStats) |
+| Join | **1872 ms** |
+| Échantillons | **140** (intervalle **3 s**) ; **0** erreurs console ; seuls les **derniers échantillons par piste** conservés — continuité pleine minute **non** prouvée par RTC (enregistrements côté Media) |
+| Inbound getStats | Vidéo **121–178 kbps**, **20 fps**, **320×180** (dynacast LOW), loss **0 %**, RTT **2–3 ms** ; audio **~1 kbps** |
+| Verdict doc | **Vidéo cam/matted active via SFU = PASS** (foreground) ; couche **HD** simulcast et **LAN/WAN** toujours **NOT VALIDATED** |
 
 *(Les mesures multi-pax **loopback** du poste dev restent dans [§ Mesures](#mesures-lab) — couche de validation distincte.)*
 
