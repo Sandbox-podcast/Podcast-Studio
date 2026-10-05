@@ -51,7 +51,7 @@ Si le token API est sur une autre origine (CORS), coller un JWT dans le champ pr
 
 Décocher **Smoke synthétique**, démarrer la caméra, lancer la boucle matting : la piste publiée suit le canvas matting (ou la caméra brute si fallback).
 
-**Ce smoke ≠ pass S3** — ne pas reporter de FPS officiels ici. Pass officiel : **LOW-END** Windows · i5 + iGPU (unité à confirmer avec Loïc). `LAPTOP-BI8P2KF3` connecté (`http://127.0.0.1:8088/`, Edge) = inventaire réel **MID-like** — voir **Inventaire matériel** dans `spikes/S3-matting.md`. Notes box : section **BOX-ONLY provisional** (mesures vides tant qu’il n’y a pas d’export JSON).
+**Ce smoke ≠ pass S3** — ne pas confondre avec le pass **LOW-END** (i5 + iGPU). `LAPTOP-BI8P2KF3` = inventaire **MID-like** ; **python-mediapipe 720p** mesuré (export `exports/mid-mediapipe-720.json`) — voir **Mesures** dans `spikes/S3-matting.md`. Harness **Edge** matting (`:8088`) : **bloqué** (frames n’avancent pas).
 
 **DRAFT (2026-10-05)** : smoke **host-local pub/sub** mesuré sur le laptop (Python `VideoSource` synthétique, pas MediaPipe) — **`PASS`** publish + pub/sub, **sans caméra / sans FPS** — voir **`spikes/S3-matting.md` → BOX-ONLY → DRAFT — LiveKit laptop host-local pub/sub (2026-10-05)**.
 
