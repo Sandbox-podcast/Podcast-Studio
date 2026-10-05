@@ -178,6 +178,26 @@ At part cut, the manifest was written with `byteCursor` advanced **without** reg
 
 **E2 colour (box CPU):** Loïc’s hair is naturally grey-white; E’s despill **darkens the semi-transparent band** (CIEDE2000 ΔE band **16.1** vs **5.6** for A at t=**45** s; opaque pixels unchanged, ΔE ~**1.46**) — the “halo luma” proxy conflates spill removal with real hair colour ([§8 E2](./s4/RESULT-RUN4.md)). **E2-fgr** (RVM `fgr` in band + erosion only where α&lt;0.5): ΔE band **5.2**, halo luma **163**, gap α **0.58**, ~**156** s/min box CPU (C **111.5** + **25** ms/frame post). **Designer (Akasha, 01:35, POC look only):** **E2-fgr** visual **LOCK** (“chrome POC”); **E** = colour **FAIL** (greyed hair fringe); **E2b** acceptable fallback; arm/torso leak @**45** s → backlog **P1**. **E2b** (temporal bg, no erosion): best ΔE band (**3.7**) at **213** s/min box CPU. [`run4/media/server-matte/variants/e2/`](./s4/run4/media/server-matte/variants/e2/) · [`rvm-variants/e2/`](./s4/rvm-variants/e2/). Master HQ still **open** (Loïc decides).
 
+## LAN multi-machine pass
+
+### Protocol (pending Loïc’s firewall OK)
+
+**Status:** not run — **no numbers yet**. Blocks on laptop **Private** firewall approval so other LAN clients can reach MinIO + LiveKit (see [Open decisions](#open-decisions)).
+
+**Context (RTC):** PR **#3** five-person soak ([commit `82eaa91`](https://github.com/Sandbox-podcast/Podcast-Studio/commit/82eaa91)) showed live HD often capped by **client CPU**, not SFU headroom: `outbound-rtp` `qualityLimitationReason` dominated by **`cpu`** (**55** % of **880** samples); LiveKit SFU CPU ~**25** % on that run.
+
+**Load model (each real client):** two encoders at once — (1) **local HQ** `MediaRecorder` (raw cam+mic, optionally matted preview path) and (2) **simulcast publish** to the SFU.
+
+**Protocol (per client machine, same time window):** **A/B** — local HQ recording **on** vs **off**. While publishing, capture:
+
+- `outbound-rtp` **`qualityLimitationReason`** and **`qualityLimitationDurations`**
+- Sent **resolution / fps** per simulcast layer
+- **Browser process CPU**
+
+On the HQ file (when recording is on), run the **S4 gates**: sync **≤ 100 ms**, loss **≤ 1 %**, bitrate **≥ 1 Mbps**, plus the shared **distinct-frame** criterion (**≥ 24** distinct fps in **1 s** windows; measure with `tools/distinct_fps.py` — **to be added**).
+
+**Goal:** determine whether local HQ recording taxes live HD simulcast, and whether heavy live publish limits HQ capture quality — bidirectional interaction, not assumed.
+
 ---
 
 > **Pass 1 + 1b + 2a/2b — mostly localhost / headless / synthetic; laptop MinIO smoke only; NOT full Sandbox multi-machine hardware pass.**  
