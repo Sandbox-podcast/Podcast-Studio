@@ -101,7 +101,7 @@ Commentaire : Vote salon / lead + Loïc — **B** pour exécution lab.
 | Question | Réponse |
 | --- | --- |
 | **Ordre de déploiement** | **LAN Sandbox d’abord** ; VPS EU plus tard si nécessaire (Loïc) |
-| LAN Sandbox (IP, SSH, ports) | **TBD** — à fournir par Loïc (ne pas inventer) |
+| LAN Sandbox (IP, SSH, ports) | **192.168.1.68** — `LAPTOP-BI8P2KF3` (Wi‑Fi, 2026-10-05) ; SSH / multi-device pare-feu **à suivre** |
 | VPS EU (fournisseur, spec, €/h EST.) | *Reporté* — seulement si LAN insuffisant |
 | TURN (coturn / intégré) | _______________ (après IP LAN connue) |
 

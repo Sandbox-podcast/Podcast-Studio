@@ -2,7 +2,7 @@
 
 Self-hosted **`livekit-server`** on Sandbox **LAN** (default path per Q2 Loïc). **EU VPS** only later if needed. Participants **France**. **Not** LiveKit Cloud. **Not** production.
 
-**Sandbox LAN host IP** still **TBD** from Loïc for multi-client lab on Sandbox network — **do not invent**.
+**Sandbox LAN host (Loïc, 2026-10-05):** **`LAPTOP-BI8P2KF3`** @ **`192.168.1.68`** (Wi‑Fi). Multi-**device** LAN lab still needs Windows Private firewall rules — see [LAB LAN LAPTOP](#lab-lan-laptop-loïc--2026-10-05) below.
 
 ## Dev instance running (2026-10-05)
 

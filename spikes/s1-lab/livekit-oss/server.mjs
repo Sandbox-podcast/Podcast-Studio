@@ -1,5 +1,5 @@
 /**
- * S1 LiveKit OSS lab — static UI + token endpoint (localhost by default).
+ * S1 LiveKit OSS lab — static UI + token endpoint (localhost + LAN dev CORS).
  */
 import { config } from "dotenv";
 import { createServer } from "node:http";
@@ -32,9 +32,12 @@ createServer(async (req, res) => {
   try {
     const url = new URL(req.url ?? "/", `http://${HOST}:${PORT}`);
 
-    // DEV: allow S3 harness on :8080 (and other localhost) to mint tokens without pasted JWT
+    // DEV: localhost + RFC1918 192.168.x.x (LAN laptop lab) — mint tokens without pasted JWT
     const origin = req.headers.origin;
-    if (origin && /^https?:\/\/(127\.0\.0\.1|localhost)(:\d+)?$/.test(origin)) {
+    const devOrigin =
+      origin &&
+      /^https?:\/\/(127\.0\.0\.1|localhost|192\.168\.\d{1,3}\.\d{1,3})(:\d+)?$/.test(origin);
+    if (devOrigin) {
       res.setHeader("Access-Control-Allow-Origin", origin);
       res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
       res.setHeader("Access-Control-Allow-Headers", "Content-Type");

@@ -4,7 +4,7 @@
 | --- | --- |
 | **Date** | 2026-10-05 (pivot Loïc via lead) |
 | **Auteur** | Podcast RTC |
-| **Statut** | **LAB DEV LOCAL UP** — stack **LiveKit OSS (B)** ; instance Docker Compose sur poste dev (2026-10-05) |
+| **Statut** | **LAB DEV LOCAL UP** + **LAN laptop host-local UP** (2026-10-05) — stack **LiveKit OSS (B)** |
 | **Décision stack POC** | **B — LiveKit OSS self-host** (vote locked 2026-10-05, lead / Loïc) ; A/C/D non retenus |
 | **D-04** | Override **POC uniquement** — voir [`S1-D04-POC-override.md`](S1-D04-POC-override.md) |
 | **Plafond SFU €/h** | **N/A (POC self-host)** — Loïc via lead, 2026-10-05 ; plafond **cloud** reporté post-POC |
@@ -14,7 +14,7 @@
 > - **Stop** tout push cloud SFU SaaS : pas de clés / comptes / runs LiveKit Cloud, Daily, Agora.  
 > - POC = **RTC serveur interne self-host** sur infra Sandbox (**LAN** et/ou **VPS EU**). Participants en **France**.  
 > - **D-04** : le SFU cloud managé reste l’**hypothèse produit post-POC** ; override POC documenté, pas d’effacement de D-04.  
-> - **Vote B** : lab via [`s1-lab/livekit-oss/`](s1-lab/livekit-oss/). **Q2** : **LAN Sandbox first** (VPS EU plus tard si besoin) — **IP/hôte/SSH TBD** Loïc.
+> - **Vote B** : lab via [`s1-lab/livekit-oss/`](s1-lab/livekit-oss/). **Q2** : **LAN Sandbox first** — hôte Loïc **LAPTOP-BI8P2KF3** @ **192.168.1.68** (Wi‑Fi, 2026-10-05) ; multi-device LAN + SSH **à suivre**.
 
 ---
 
@@ -37,7 +37,7 @@ Coût POC : **plafond SFU €/h = N/A** pour self-host (lock Loïc) — poursuiv
 | --- | --- | --- |
 | **PREP SaaS (archivé)** | Desk LiveKit Cloud / Daily / Agora | **Superseded** — POC SaaS abandonné ([annexe](#annexe--desk-saas-superseded)) |
 | **PREP self-host** | Grille comparatif (historique) + QCM | Vote **B** |
-| **LAB LiveKit OSS** | `docker compose` + harnais [`livekit-oss/`](s1-lab/livekit-oss/) | **DEV local UP** (Loïc unblocked) ; **LAN Sandbox IP** reporté pour multi-pax FR |
+| **LAB LiveKit OSS** | `docker compose` + harnais [`livekit-oss/`](s1-lab/livekit-oss/) | **DEV local UP** + **LAN laptop host-local UP** (`192.168.1.68`) ; multi-device LAN **à faire** |
 
 **Interdit** : **SFU SaaS** (Cloud/Daily/Agora) ; code Phase 1 produit dans ce repo spike.
 
@@ -47,11 +47,11 @@ Coût POC : **plafond SFU €/h = N/A** pour self-host (lock Loïc) — poursuiv
 
 *(Ne pas inventer de chiffres.)*
 
-**Cible lab** : participants en **France** ; SFU sur **LAN Sandbox en priorité** (VPS EU en repli). **Dev local** : pas d’attente IP Sandbox pour smoke (Loïc, 2026-10-05). **IP LAN Sandbox** : **TBD** pour sessions multi-pax sur le réseau Sandbox (ne pas inventer).
+**Cible lab** : participants en **France** ; SFU sur **LAN Sandbox en priorité** (VPS EU en repli). **Dev local** : poste partagé (loopback). **LAN laptop Loïc** : **192.168.1.68** (host-local validé 2026-10-05) ; **multi-machine LAN** (pare-feu) pas encore validé.
 
 | Champ | Valeur |
 | --- | --- |
-| Hôte SFU (LAN IP / VPS EU FQDN) | **dev** : `127.0.0.1` (localhost) — **LAN Sandbox IP : TBD** Loïc |
+| Hôte SFU (LAN IP / VPS EU FQDN) | **dev box** : `127.0.0.1` · **LAN laptop** : `192.168.1.68` (`LAPTOP-BI8P2KF3`, Wi‑Fi) |
 | Région / datacenter VPS | n/a (dev local) |
 | TURN / STUN (coturn, LiveKit TURN, autre) | non testé (dev localhost) |
 | Devices / OS clients | Poste dev partagé (« Grok Bot computer ») — smoke local |
@@ -66,6 +66,27 @@ Coût POC : **plafond SFU €/h = N/A** pour self-host (lock Loïc) — poursuiv
 | Smoke 2026-10-05 | Token mint + HTTP **200** LiveKit vérifiés |
 | Répertoire sur la box | `/workspace/s1-livekit-oss` (équivalent [`s1-lab/livekit-oss/`](s1-lab/livekit-oss/)) |
 | Date début / fin lab | début dev **2026-10-05** ; fin — |
+
+### LAB LAN LAPTOP (Loïc — 2026-10-05, Europe/Paris)
+
+Hôte verrouillé : **`LAPTOP-BI8P2KF3`**. Déploiement : `C:\Users\azero\s1-livekit-oss`.
+
+| Item | Valeur |
+| --- | --- |
+| IPv4 LAN utilisée | **192.168.1.68** (Wi‑Fi) |
+| Adresses ignorées | 169.254.x (APIPA), **192.168.56.1** (VirtualBox), **172.30.144.1** (WSL/Hyper-V) |
+| LiveKit | Docker `livekit/livekit-server:v1.8.4` — TCP **7880/7881**, UDP **50000–50200** ; config **`rtc.node_ip: 192.168.1.68`** |
+| MinIO (Media) | Déjà sur l’hôte **9000/9001** — LiveKit évite ces ports |
+| Harnais | Conteneur Docker **`s1-harness`** (`node:20-bookworm`), écoute **0.0.0.0:5190** (npm hôte cassé sur la machine) |
+| URLs | Harness `http://192.168.1.68:5190` · SFU `ws://192.168.1.68:7880` · room **`s1-lab`** |
+| Smoke RTC | Harness HTTP **200** ; token mint → `ws://192.168.1.68:7880` + JWT ; LiveKit HTTP **200** ; log serveur **`nodeIP=192.168.1.68`** |
+| Vision (même laptop, synth — pas de caméra) | **Publish PASS** `vision-s3-laptop` / track `vision-s3-synth` ; **pub+sub PASS** `vision-s3-pub` → `vision-s3-sub`, track reçu, **22 frames**, `connection_quality=2` |
+| Inventaire | **MID** (i7 + RTX3070) — **pas** un pass LOW-END i5 |
+| MediaPipe / FPS | **Reporté** jusqu’à caméra réelle |
+| Pare-feu | Chemin **host-local** : pas besoin d’ouvrir le pare-feu Windows (profil Private). **Multi-appareils LAN** : règles Private — TCP **7880/7881/5190** + UDP **50000–50200** (+ Media TCP **9000/9001** MinIO noté) |
+| CORS harnais | DEV : `localhost` + **`192.168.x.x`** — [`server.mjs`](s1-lab/livekit-oss/server.mjs) |
+
+*(Les mesures multi-pax **loopback** du poste dev restent dans [§ Mesures](#mesures-lab) — couche de validation distincte.)*
 
 ---
 
@@ -93,7 +114,7 @@ Comparaison **historique** (pré-vote). **POC retenu : colonne LiveKit OSS (B).*
 
 ## Protocole de lab — LiveKit OSS uniquement
 
-> Harnais : [`s1-lab/livekit-oss/README.md`](s1-lab/livekit-oss/README.md). **Blocker** : **IP / hôte / SSH LAN Sandbox** manquants (Loïc) — Q2 = LAN first, pas d’hostname inventé.
+> Harnais : [`s1-lab/livekit-oss/README.md`](s1-lab/livekit-oss/README.md). **LAN laptop** : **192.168.1.68** (host-local OK) — **multi-device LAN** + pare-feu + **≥2 machines** encore à exécuter.
 
 ### Jour 1 — Déploiement minimal
 
@@ -209,7 +230,7 @@ Script : [`s1-lab/livekit-oss/scripts/multi-pax-smoke.mjs`](s1-lab/livekit-oss/s
 
 - **Stack POC (locked)** : **B — LiveKit OSS self-host** (2026-10-05, lead / Loïc).
 - **Non retenus POC** : A mediasoup, C DIY, D cloud managé (hors POC actuel ; OK Loïc explicite pour SaaS).
-- **Infra** : **LAN Sandbox first** (Q2 lock Loïc) ; VPS EU si besoin plus tard ; **IP/hôte TBD**.
+- **Infra** : **LAN Sandbox first** — laptop **`192.168.1.68`** (2026-10-05) ; VPS EU si besoin plus tard.
 - **D-04 produit** : cloud public managé = hypothèse **post-POC** ; override POC = [`S1-D04-POC-override.md`](S1-D04-POC-override.md).
 
 ---
@@ -219,7 +240,7 @@ Script : [`s1-lab/livekit-oss/scripts/multi-pax-smoke.mjs`](s1-lab/livekit-oss/s
 | ID | Blocker | Owner | Statut |
 | --- | --- | --- | --- |
 | B1 | Vote stack POC | — | **Fermé** — **B LiveKit OSS** |
-| B2 | **IP / hôte / SSH LAN Sandbox** pour lab **multi-pax France** (Q2 = LAN first) | Loïc | **Reporté** — dev local **UP** sans IP Sandbox |
+| B2 | **LAN multi-device** + pare-feu + lab **multi-pax France** (≥2 machines) | Loïc | **Partiel** — hôte **192.168.1.68** host-local **PASS** ; peers LAN + SSH **ouverts** |
 | B3 | Go formel post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)) pour enchaînement produit | Lead | Ouvert (parallèle prep OK) |
 | B4 | ~~SFU SaaS free tier~~ | — | **Annulé** — SaaS stop per Loïc |
 | B5 | Plafond **€/h** SFU (gate lab) | Loïc | **Fermé** — **N/A POC self-host** ; cloud €/h plus tard |
