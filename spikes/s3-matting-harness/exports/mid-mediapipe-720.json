@@ -1,0 +1,212 @@
+{
+  "harness": "s3-matting-harness",
+  "note": "Spike PREP - python-mediapipe (ffmpeg dshow -> ImageSegmenter). NOT Edge harness.",
+  "exportedAt": "2026-10-05T19:46:56.113708+00:00",
+  "resolutionPreset": "720p",
+  "backend": "mediapipe",
+  "fallbackLast": false,
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "summary": {
+    "fpsAvg": 174.0,
+    "frameMsAvg": 5.75,
+    "frameMsP5": 5.15,
+    "fpsP5": 194.3,
+    "sampleCount": 600
+  },
+  "samples": [
+    {
+      "t": "2026-10-05T19:46:36.997050+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 177.6,
+      "frameMs": 8.06
+    },
+    {
+      "t": "2026-10-05T19:46:38.015403+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 175.0,
+      "frameMs": 5.7
+    },
+    {
+      "t": "2026-10-05T19:46:39.003193+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 173.0,
+      "frameMs": 6.66
+    },
+    {
+      "t": "2026-10-05T19:46:40.000688+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 173.3,
+      "frameMs": 5.51
+    },
+    {
+      "t": "2026-10-05T19:46:41.004082+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 174.5,
+      "frameMs": 8.05
+    },
+    {
+      "t": "2026-10-05T19:46:41.999999+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 174.9,
+      "frameMs": 5.73
+    },
+    {
+      "t": "2026-10-05T19:46:43.001527+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 174.5,
+      "frameMs": 6.09
+    },
+    {
+      "t": "2026-10-05T19:46:44.017547+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 174.4,
+      "frameMs": 5.62
+    },
+    {
+      "t": "2026-10-05T19:46:45.002386+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 173.8,
+      "frameMs": 6.48
+    },
+    {
+      "t": "2026-10-05T19:46:46.019017+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 172.4,
+      "frameMs": 6.41
+    },
+    {
+      "t": "2026-10-05T19:46:46.995462+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 172.8,
+      "frameMs": 5.53
+    },
+    {
+      "t": "2026-10-05T19:46:47.999599+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 172.6,
+      "frameMs": 5.43
+    },
+    {
+      "t": "2026-10-05T19:46:49.000685+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 173.1,
+      "frameMs": 5.6
+    },
+    {
+      "t": "2026-10-05T19:46:50.016721+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 173.3,
+      "frameMs": 5.63
+    },
+    {
+      "t": "2026-10-05T19:46:50.995762+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 174.0,
+      "frameMs": 6.11
+    },
+    {
+      "t": "2026-10-05T19:46:52.017265+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 173.7,
+      "frameMs": 6.58
+    },
+    {
+      "t": "2026-10-05T19:46:52.996815+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 174.3,
+      "frameMs": 5.94
+    },
+    {
+      "t": "2026-10-05T19:46:54.013709+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 174.0,
+      "frameMs": 5.4
+    },
+    {
+      "t": "2026-10-05T19:46:54.997842+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 174.0,
+      "frameMs": 5.34
+    },
+    {
+      "t": "2026-10-05T19:46:56.015287+00:00",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 174.0,
+      "frameMs": 5.23
+    }
+  ],
+  "runtime": "python-mediapipe",
+  "delegate": "CPU",
+  "cameraDevice": "Microsoft\u00ae LifeCam Cinema(TM)",
+  "host": "LAPTOP-BI8P2KF3",
+  "os": "Windows",
+  "inventoryLabel": "MID inventaire reel (i7-11370H + RTX 3070) - NOT LOW-END",
+  "ffmpegFramesTotal": 733,
+  "error": null,
+  "userAgent": "python/3.9.13 mediapipe/0.10.14 ffmpeg-dshow",
+  "measurementScope": "segment_for_video only (ImageSegmenter selfie, CPU/XNNPACK). Does NOT include canvas composite/RAF like Edge harness.",
+  "wallClockNote": "Capture+infer loop ~29 FPS (camera 30fps capped); inference headroom fpsAvg=174."
+}
