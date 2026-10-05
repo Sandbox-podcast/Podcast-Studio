@@ -1,43 +1,43 @@
-# Daily — S1 lab stub
+# Daily — S1 lab harness (free tier)
 
-**Status:** not implemented in this PR. Use LiveKit harness first ([`../livekit/`](../livekit/)).
+Minimal browser lab mirroring [`../livekit/`](../livekit/). **Not** Phase 1 product code.
 
-## Planned scope (same as LiveKit lab)
+## Prerequisites
 
-- Browser harness: join room, publish cam/mic, subscribe peers.
-- Poll diagnostics aligned with **AC-RTC-002**:
-  - Bitrate (up/down)
-  - Packet loss %
-  - Jitter (ms)
-  - RTT (ms)
-  - Resolution (width × height)
-  - FPS
+- [Daily.co](https://www.daily.co/) account on the **free** plan (10 000 participant-minutes/month).
+- Either:
+  - **`DAILY_API_KEY`** — REST API key from the [Daily dashboard](https://dashboard.daily.co/developers) (creates/fetches rooms by name), or
+  - **`DAILY_ROOM_URL`** — a fixed room URL from the dashboard (skip API create; good for quick smoke tests).
 
-## Expected SDK hooks (desk research)
+No meeting token is required for **open** rooms created via API with default properties. For **private** rooms, generate a meeting token in the Daily dashboard and extend this harness (out of scope for the minimal skeleton).
 
-| Metric | Daily API (target) |
-| --- | --- |
-| Bitrate | `getNetworkStats()` / `useNetwork` `*BitsPerSecond` |
-| Packet loss | `*PacketLoss` |
-| Jitter | `*Jitter` |
-| RTT | `networkRoundTripTime` |
-| Resolution | track `getSettings()` + `getStats` |
-| FPS | `getStats` inbound/outbound video |
-
-## Env (when implemented)
+## Run
 
 ```bash
-# .env.example (future) — do not commit secrets
-DAILY_API_KEY=
-DAILY_DOMAIN=your-subdomain.daily.co
+cd spikes/s1-lab/daily
+cp .env.example .env   # fill DAILY_API_KEY or DAILY_ROOM_URL
+npm install
+npm run dev
 ```
 
-Free tier: 10 000 participant-minutes/month per [`S1-sfu.md`](../../S1-sfu.md).
+Open `http://127.0.0.1:5180` (default), enter room name + display name, **Join**.
 
-## Run parity
+## AC-RTC-002
 
-When this stub is replaced by a harness, follow the parent [`../README.md`](../README.md):
+Stats panel (2s poll):
 
-- 5 clients / 2 machines
-- Chrome throttling notes
-- 20-minute stability checklist
+| Metric | Source |
+| --- | --- |
+| Bitrate | `getNetworkStats()` `*BitsPerSecond` + WebRTC fallback |
+| Packet loss | `video/audio *PacketLoss` + `getStats()` |
+| Jitter | WebRTC `inbound-rtp` / `outbound-rtp` |
+| RTT | `networkRoundTripTime` |
+| Resolution / FPS | WebRTC video `getStats()` |
+
+## Multi-client protocol
+
+Same as parent [`../README.md`](../README.md): 5 tabs or 2 machines, same room name, distinct display names, 20 min checklist.
+
+## Paid infra
+
+Do **not** upgrade Daily plan or enable paid add-ons without Loïc + lead approval.

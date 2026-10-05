@@ -2,41 +2,40 @@
 
 Spike **S1** browser lab for SFU evaluation ([`S1-sfu.md`](../S1-sfu.md)). **Not** Phase 1 product code.
 
-| Provider | Status | Path |
-| --- | --- | --- |
-| **LiveKit Cloud** | Implemented (Build free tier) | [`livekit/`](./livekit/) |
-| **Daily** | Stub — same AC-RTC-002 metrics contract | [`daily/`](./daily/) |
-| **Agora** | Stub — same AC-RTC-002 metrics contract | [`agora/`](./agora/) |
+| Provider | Status | Path | Default port |
+| --- | --- | --- | --- |
+| **LiveKit Cloud** | Runnable (Build free tier) | [`livekit/`](./livekit/) | `5179` |
+| **Daily** | Runnable skeleton (free tier) | [`daily/`](./daily/) | `5180` |
+| **Agora** | Runnable skeleton (free tier) | [`agora/`](./agora/) | `5181` |
 
 ## Constraints
 
 - **Free / trial accounts only** — do not upgrade to paid plans without Loïc + lead approval.
-- **No secrets in git** — copy [`livekit/.env.example`](./livekit/.env.example) to `livekit/.env` locally.
+- **No secrets in git** — copy each provider’s `.env.example` → `.env` locally (see table above).
 - Lab may run on **free tier before** formal go post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)); cost pass/fail still requires a €/h ceiling from Loïc.
+- **SFU choice not locked** — these harnesses are for measurements only.
 
-## Quick start (LiveKit)
+## Quick start
 
-1. Create a [LiveKit Cloud](https://cloud.livekit.io/) project on the **Build** (free) plan.
-2. Copy `livekit/.env.example` → `livekit/.env` and fill `LIVEKIT_URL`, `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET`.
-3. Install and start the local dev server (static UI + token endpoint bound to localhost):
+### LiveKit
 
-   ```bash
-   cd spikes/s1-lab/livekit
-   npm install
-   npm run dev
-   ```
+1. [LiveKit Cloud](https://cloud.livekit.io/) project on **Build** (free).
+2. `cd spikes/s1-lab/livekit && cp .env.example .env` — fill `LIVEKIT_URL`, `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET`.
+3. `npm install && npm run dev` → `http://127.0.0.1:5179`
 
-4. Open the URL printed in the terminal (default `http://127.0.0.1:5179`).
-5. Enter a **room name** and **display name**, click **Join**, allow camera/microphone.
+### Daily
 
-### CLI token (optional)
+1. [Daily.co](https://www.daily.co/) free account.
+2. `cd spikes/s1-lab/daily && cp .env.example .env` — set `DAILY_API_KEY` **or** a fixed `DAILY_ROOM_URL` from the dashboard.
+3. `npm install && npm run dev` → `http://127.0.0.1:5180`
 
-Mint a JWT without the dev server:
+### Agora
 
-```bash
-cd spikes/s1-lab/livekit
-node scripts/mint-token.mjs --room s1-lab --identity tester-1
-```
+1. [Agora Console](https://console.agora.io/) free project + App Certificate enabled.
+2. `cd spikes/s1-lab/agora && cp .env.example .env` — `AGORA_APP_ID` + `AGORA_APP_CERTIFICATE` (or short-lived `AGORA_TEMP_TOKEN` from console).
+3. `npm install && npm run dev` → `http://127.0.0.1:5181`
+
+Each harness: room/channel name + display name → **Join** → allow camera/microphone.
 
 ## Running 5 clients / 2 machines
 
@@ -44,13 +43,13 @@ Goal: exercise **AC-RTC-001** (≥ 5 participants, ≥ 20 min stable A/V).
 
 | Setup | How |
 | --- | --- |
-| **5 tabs on one machine** | Open the harness URL in 5 Chrome profiles or 5 windows; use distinct **display names** (`p1`…`p5`). Prefer **720p** capture (harness requests 1280×720 when the device allows). |
-| **2 physical machines** | Run `npm run dev` on one machine **or** serve `public/` from any static host; all clients must reach the **same** `LIVEKIT_URL` room. Use the same room name on every client. |
-| **Mixed** | e.g. 3 clients on laptop A + 2 on laptop B — still one room name, five unique identities. |
+| **5 tabs on one machine** | Open the harness URL in 5 Chrome profiles or windows; distinct **display names** (`p1`…`p5`). Prefer **720p** where the harness requests it. |
+| **2 physical machines** | Run `npm run dev` on one machine; all clients use the **same** room/channel name and reach the same SFU project. |
+| **Mixed** | e.g. 3 clients on laptop A + 2 on laptop B — one room/channel, five identities. |
 
 Tips:
 
-- Mute speakers on secondary tabs to avoid feedback, or use headphones on the “main” operator tab.
+- Mute speakers on secondary tabs to avoid feedback, or use headphones on the operator tab.
 - Note SDK version, browser versions, and SFU region in [`S1-sfu.md`](../S1-sfu.md) setup table when you start a run.
 
 ## Chrome network throttling (degradation runs)
@@ -60,7 +59,7 @@ For degradation experiments (S1 protocol day 3):
 1. Open **DevTools** → **Network**.
 2. Set throttling to **Slow 3G** or **Custom** (e.g. 1 Mbps down / 500 Kbps up, 50 ms RTT).
 3. Apply throttling **per tab** (each participant can use different profiles).
-4. Keep the **stats panel** in the harness visible — AC-RTC-002: bitrate, packet loss, jitter, RTT, resolution, FPS.
+4. Keep the **stats panel** visible — AC-RTC-002: bitrate, packet loss, jitter, RTT, resolution, FPS.
 
 Optional: Linux `tc netem` on one machine for loss/latency at the OS level (document conditions in S1-sfu).
 
@@ -74,20 +73,18 @@ Use this during a 5-participant session; record results in `S1-sfu.md` (measurem
 - [ ] Remote video/audio remains **usable** on the operator tab (subjective + stats).
 - [ ] Stats panel shows for local + each remote: **bitrate**, **packet loss**, **jitter**, **RTT**, **resolution**, **FPS** (AC-RTC-002).
 - [ ] Note any disconnects, frozen video, or one-way audio with timestamp.
-- [ ] After session: check LiveKit Cloud **usage** (WebRTC minutes) — stay within Build free cap.
+- [ ] After session: check vendor dashboard **usage** — stay within free caps.
 
 ## AC-RTC-002 metrics contract (all candidates)
 
-The harness and future Daily/Agora stubs must surface the same six fields per participant / track (local + remote):
-
-| Metric | Source (LiveKit harness) |
-| --- | --- |
-| Bitrate | Derived from `bytesSent` / `bytesReceived` deltas on `outbound-rtp` / `inbound-rtp` |
-| Packet loss | `packetsLost` (inbound-rtp) |
-| Jitter | `jitter` (seconds → ms in UI) |
-| RTT | `roundTripTime` on candidate-pair or remote-inbound-rtp |
-| Resolution | `frameWidth` × `frameHeight` |
-| FPS | `framesPerSecond` |
+| Metric | LiveKit | Daily | Agora |
+| --- | --- | --- | --- |
+| Bitrate | WebRTC `getStats()` deltas | `getNetworkStats()` + fallback | SDK `*Bitrate` |
+| Packet loss | `packetsLost` | `*PacketLoss` + fallback | `*PacketsLost` |
+| Jitter | WebRTC jitter | WebRTC fallback | WebRTC fallback |
+| RTT | candidate-pair / remote-inbound | `networkRoundTripTime` | `getRTCStats().RTT` |
+| Resolution | frameWidth × height | WebRTC video stats | `*Resolution*` |
+| FPS | `framesPerSecond` | WebRTC video stats | `*FrameRate` |
 
 ## Related docs
 

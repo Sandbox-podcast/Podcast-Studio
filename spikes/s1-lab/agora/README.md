@@ -1,34 +1,53 @@
-# Agora — S1 lab stub
+# Agora — S1 lab harness (free tier)
 
-**Status:** not implemented in this PR. Use LiveKit harness first ([`../livekit/`](../livekit/)).
+Minimal browser lab mirroring [`../livekit/`](../livekit/). **Not** Phase 1 product code.
 
-## Planned scope (same metrics contract)
+## Prerequisites
 
-- Browser harness on Agora Web SDK 4.x: join channel, publish A/V, subscribe remotes.
-- Surface **AC-RTC-002** in the same table shape as the LiveKit UI:
-  - Bitrate, packet loss, jitter, RTT, resolution, FPS
+- [Agora](https://console.agora.io/) project on the **free** tier (10 000 standard minutes/month).
+- Enable **App Certificate** in the project (required for secure tokens in lab).
 
-## Expected SDK hooks (desk research)
+## Credentials (pick one)
 
-| Metric | Agora API (target) |
-| --- | --- |
-| Bitrate | `getLocalVideoStats` / `getRemoteVideoStats` |
-| Packet loss | audio/video stats + `network-quality` |
-| Jitter | video/audio stats |
-| RTT | `getRTCStats` / delay fields |
-| Resolution | `sendResolutionWidth/Height` stats |
-| FPS | `sendFrameRate` / `receiveFrameRate` |
+| Method | `.env` keys | Notes |
+| --- | --- | --- |
+| **Local mint (recommended)** | `AGORA_APP_ID`, `AGORA_APP_CERTIFICATE` | Server + CLI mint RTC tokens (never commit certificate). |
+| **Console temp token** | `AGORA_APP_ID`, `AGORA_TEMP_TOKEN` | Agora Console → Project → **Generate temp token** (short-lived smoke test only). |
 
-## Env (when implemented)
+## Run
 
 ```bash
-# .env.example (future) — do not commit secrets
-AGORA_APP_ID=
-AGORA_APP_CERTIFICATE=   # token mint server-side only
+cd spikes/s1-lab/agora
+cp .env.example .env
+npm install
+npm run dev
 ```
 
-Free tier: 10 000 standard minutes/month (HD consumes faster) — see [`S1-sfu.md`](../../S1-sfu.md).
+Open `http://127.0.0.1:5181`, enter channel + display name, **Join**.
 
-## Run parity
+### CLI token (optional)
 
-Mirror [`../README.md`](../README.md) protocol when implemented.
+```bash
+npm run mint-token -- --channel s1-lab --identity tester-1
+```
+
+## AC-RTC-002
+
+Stats panel (2s poll):
+
+| Metric | Source |
+| --- | --- |
+| Bitrate | `sendBitrate` / `receiveBitrate` |
+| Packet loss | `sendPacketsLost` / `receivePacketsLost` |
+| Jitter | WebRTC `getStats()` fallback on local video |
+| RTT | `client.getRTCStats().RTT` |
+| Resolution | `sendResolution*` / `receiveResolution*` |
+| FPS | `sendFrameRate` / `receiveFrameRate` |
+
+## Multi-client protocol
+
+Same as parent [`../README.md`](../README.md): 5 tabs or 2 machines, **same channel name**, distinct display names (each maps to a stable numeric `uid` for token mint).
+
+## Paid infra
+
+Do **not** enable paid packages or exceed free quota without Loïc + lead approval.

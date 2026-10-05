@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>S1 lab — Agora harness</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>S1 SFU lab — Agora (free tier)</h1>
+      <p class="sub">
+        Spike harness only — AC-RTC-002 via Agora stats APIs + WebRTC <code>getStats()</code>. Not Phase
+        1 product.
+      </p>
+    </header>
+
+    <section class="panel join">
+      <label>
+        Channel
+        <input id="channel" type="text" value="s1-lab" autocomplete="off" />
+      </label>
+      <label>
+        Display name
+        <input id="identity" type="text" placeholder="p1" autocomplete="off" />
+      </label>
+      <button id="join" type="button">Join</button>
+      <button id="leave" type="button" disabled>Leave</button>
+      <span id="status" class="status">disconnected</span>
+    </section>
+
+    <section class="panel media">
+      <h2>Local preview</h2>
+      <div class="tiles">
+        <div class="tile">
+          <div id="local-video" class="video-host"></div>
+          <span class="label">You (muted preview)</span>
+        </div>
+      </div>
+      <h2>Remote participants</h2>
+      <div id="remote-tiles" class="tiles"></div>
+    </section>
+
+    <section class="panel stats">
+      <h2>Diagnostics (AC-RTC-002)</h2>
+      <p class="sub">
+        Polled every 2s from <code>getLocal/RemoteVideoStats</code>, <code>getRTCStats()</code>, and track
+        <code>getStats()</code>.
+      </p>
+      <table id="stats-table">
+        <thead>
+          <tr>
+            <th>Participant</th>
+            <th>Track</th>
+            <th>Dir</th>
+            <th>Bitrate</th>
+            <th>Loss</th>
+            <th>Jitter (ms)</th>
+            <th>RTT (ms)</th>
+            <th>Resolution</th>
+            <th>FPS</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <script type="module" src="/harness.js"></script>
+  </body>
+</html>

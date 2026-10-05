@@ -4,7 +4,7 @@
 | --- | --- |
 | **Date** | 2026-10-05 |
 | **Auteur** | Podcast RTC |
-| **Statut** | **LAB STARTED (free tier)** — harnais `spikes/s1-lab/` (LiveKit) ; Daily/Agora en stub |
+| **Statut** | **LAB STARTED (free tier)** — harnais `spikes/s1-lab/` (LiveKit, Daily, Agora) |
 | **Décision SFU** | **pending mesures lab + QCM Loïc** (aucune option verrouillée) |
 | **Prérequis** | Go lead post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)) pour décision formelle ; **lab free tier** démarré sans infra payante ; plafond coût €/h Loïc requis avant pass/fail coût |
 

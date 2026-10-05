@@ -1,0 +1,13 @@
+{
+  "name": "@podcast-studio/s1-lab-daily",
+  "private": true,
+  "version": "0.0.0",
+  "description": "S1 spike lab harness — Daily.co (free tier), not product code",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7"
+  }
+}
