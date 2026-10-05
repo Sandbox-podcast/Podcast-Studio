@@ -10,6 +10,7 @@ Loïc decision (2026-10-05): **POC storage locked** to self-hosted **`pgsty/mini
 | [`lab-pass2/`](./lab-pass2/) | Pass 2a remux scripts + 2b OPFS crash harness |
 | [`dropin/`](./dropin/) | S4 drop-in recorder v2 (Vision / studio integration) |
 | [`REALCAM-RUN1-RESULT.md`](./REALCAM-RUN1-RESULT.md) | Real-cam pass 3 run 1 analysis (laptop) |
+| [`REALCAM-RUN2-RESULT.md`](./REALCAM-RUN2-RESULT.md) | Real-cam pass 3 run 2 — dual raw/matted |
 | [`webcodecs/`](./webcodecs/) | WebCodecs / fMP4 parallel sketch (sources + `RESULT.md`) |
 | [`../S4-recording.md`](../S4-recording.md) | **Preliminary** report + **locked** POC verdict (Loïc 2026-10-05) |
 | [`../S4-webcodecs.md`](../S4-webcodecs.md) | WebCodecs spike summary (parallel track) |

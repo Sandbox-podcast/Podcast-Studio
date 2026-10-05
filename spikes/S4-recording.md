@@ -101,7 +101,29 @@ At part cut, the manifest was written with `byteCursor` advanced **without** reg
 
 **Drop-in v2** ([`spikes/s4/dropin/`](./s4/dropin/)): concurrent `startSession` / `stopAll`, gap watchdog (>500 ms via `MediaStreamTrackProcessor`), visibility logging, `exportResults()` → `<key>.results.json`.
 
-**Open decision:** **HQ master = matted canvas vs raw cam+mic + server matte** — decide after take 2 (dual record, v2).
+**Open decision (run 1):** **HQ master = matted canvas vs raw cam+mic + server matte** — take 2 completed below; **still open pending take 3** (fixed matted canvas + in-frame clap).
+
+---
+
+## Real-cam pass 3 (laptop, run 2 — dual raw/matted)
+
+**Label:** Edge harness `?v=s4-dual2` · S4 drop-in v2 dual session · tab **foreground** · ~**23:28–23:29** Paris **2026-10-05**. Full analysis: [`spikes/s4/REALCAM-RUN2-RESULT.md`](./s4/REALCAM-RUN2-RESULT.md).
+
+| Area | raw | matted |
+| --- | --- | --- |
+| **Duration / fps** | **60.008** s remux; **~30.007** fps effective | **60.029** s; **~30.016** fps |
+| **Gaps** | max **53** ms; none **>200** ms; watchdog `[]` | max **47** ms; same |
+| **Upload** | **0** byte loss (**19 484 895** B) | **0** byte loss (**14 756 998** B) |
+| **Loss / bitrate (option B)** | **PASS** / **2.598** Mbps | **PASS** / **1.967** Mbps |
+| **Content (HQ master)** | **PASS** (real LifeCam) | **FAIL** — Vision **S3 synthetic smoke** canvas, not MediaPipe composite |
+| **Sync** | **N/A** (intra-file clap: hands out of frame) | **N/A** (no subject in video) |
+| **Resume** | **N/A** | **N/A** |
+
+**Cross-file audio (shared mic):** matted lags raw by **+80.0** ms (normalized cross-correlation). Not a locked threshold verdict.
+
+**vs run 1:** Foreground tab — **no** **27.221** s `requestAnimationFrame` freeze reproduced; watchdog gaps empty.
+
+**Master-HQ decision:** still **open** — pending **take 3** with confirmed MediaPipe `previewCanvas` + in-frame clap for measurable A/V sync.
 
 ---
 
