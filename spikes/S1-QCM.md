@@ -8,7 +8,7 @@
 | **Contexte** | Soft consensus RTC/Vision/Media + lead ; **lock Loïc / lead Podcast Studio** |
 | **D-04** | Override POC seulement — cloud managé = **hypothèse produit post-POC** ([`S1-D04-POC-override.md`](S1-D04-POC-override.md)) |
 
-> **Option B retenue pour le POC.** A / C / D non sélectionnés pour ce POC. **Q2 infra (LAN vs VPS EU)** reste **ouverte**.
+> **Option B retenue pour le POC.** A / C / D non sélectionnés pour ce POC. **Q2 infra : LAN Sandbox d’abord** (VPS EU plus tard si besoin) — **IP / hôte encore TBD** (Loïc).
 
 ---
 
@@ -80,7 +80,7 @@ Mesh exclu pour le produit ; ce QCM concerne le **POC self-host** uniquement.
 
 - Stack POC : **LiveKit OSS** — lab [`s1-lab/livekit-oss/`](s1-lab/livekit-oss/).
 - Grille historique mediasoup vs OSS : [`S1-sfu.md`](S1-sfu.md).
-- Lab cible : **France** ; hôte **LAN ou VPS EU** — **Q2 non tranché**.
+- Lab cible : **France** ; déploiement **LAN Sandbox first** ; VPS EU en repli ultérieur si besoin.
 
 ## 6. Questions pour le salon / Loïc
 
@@ -95,13 +95,14 @@ Après lecture de [`S1-sfu.md`](S1-sfu.md) (grille + mesures lab quand remplies)
 
 Commentaire : Vote salon / lead + Loïc — **B** pour exécution lab.
 
-### Q2 — Infra lab
+### Q2 — Infra lab (**répondu — LAN first**)
 
 | Question | Réponse |
 | --- | --- |
-| VPS EU (fournisseur, spec, €/h EST.) | _______________ |
-| LAN Sandbox (IP, ports) | _______________ |
-| TURN (coturn / intégré) | _______________ |
+| **Ordre de déploiement** | **LAN Sandbox d’abord** ; VPS EU plus tard si nécessaire (Loïc) |
+| LAN Sandbox (IP, SSH, ports) | **TBD** — à fournir par Loïc (ne pas inventer) |
+| VPS EU (fournisseur, spec, €/h EST.) | *Reporté* — seulement si LAN insuffisant |
+| TURN (coturn / intégré) | _______________ (après IP LAN connue) |
 
 ### Q3 — Post-POC produit (rappel D-04)
 
@@ -115,6 +116,6 @@ Confirmer que l’**hypothèse produit** reste le **SFU cloud public managé** (
 ## 7. Suite process
 
 1. **Vote B** → lab **GO** ([`livekit-oss/`](s1-lab/livekit-oss/)).  
-2. Clore **Q2** (LAN vs VPS EU) avec lead / Loïc.  
+2. Obtenir **IP / accès hôte LAN** (Loïc) — Q2 mode = LAN first.  
 3. Exécuter protocole `S1-sfu.md` ; remplir mesures.  
 4. Post-POC : hypothèse produit D-04 cloud sauf amendement Loïc.

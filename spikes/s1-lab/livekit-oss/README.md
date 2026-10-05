@@ -1,6 +1,8 @@
 # LiveKit OSS — S1 POC lab (vote **B** locked)
 
-Self-hosted **`livekit-server`** on Sandbox **LAN** or **EU VPS** (participants **France**). **Not** LiveKit Cloud. **Not** production.
+Self-hosted **`livekit-server`** on Sandbox **LAN** (default path per Q2 Loïc). **EU VPS** only later if needed. Participants **France**. **Not** LiveKit Cloud. **Not** production.
+
+**Awaiting Sandbox LAN host IP** (and SSH/access details) from Loïc — **do not invent**; set `LIVEKIT_URL` once provided.
 
 | | |
 | --- | --- |
@@ -22,10 +24,20 @@ Open these on the host firewall when using **LAN** or **VPS EU** (exact host/IP 
 ## TURN / NAT
 
 - Same-LAN lab: often works without TURN if clients reach the host UDP range.
-- Participants in **France** on home NAT typically need **TURN** (LiveKit embedded TURN with TLS, or **coturn**) — configure after infra Q2 (LAN vs VPS) is answered in [`S1-QCM.md`](../../S1-QCM.md).
+- Participants in **France** on home NAT may need **TURN** (LiveKit embedded TURN with TLS, or **coturn**) — plan after **LAN host IP** is known.
 - Do not use LiveKit Cloud / Daily / Agora for this POC.
 
-## Quick start (local docker + harness)
+## Default path — LAN Sandbox deploy
+
+1. Loïc provides **LAN host IP** (and SSH if remote ops) — **TBD in repo**.
+2. On that host: clone repo path, `docker compose up -d` in this directory.
+3. Set client `.env`: `LIVEKIT_URL=ws://<lan-ip-from-loic>:7880` (replace when known).
+4. Run harness (`npm run dev`) on same host or operator machine that can reach the LAN IP.
+5. Open firewall: TCP 7880/7881, UDP 50000–50200 on the LAN host.
+
+**VPS EU** : fallback only if LAN cannot meet 5-pax lab — not the default.
+
+## Quick start (local docker + harness — dev on one machine)
 
 1. Copy env (placeholder dev keys — **rotate** before any shared host):
 
@@ -57,21 +69,9 @@ CLI token:
 npm run mint-token -- --room s1-lab --identity tester-1
 ```
 
-## LAN deploy (outline)
+## VPS EU (later, if needed)
 
-1. Run `docker compose` on a Sandbox LAN machine (lead provides **IP**).
-2. Set in `.env` on the harness machine (or same host):
-   - `LIVEKIT_URL=ws://<lan-ip>:7880`
-   - If clients on other machines need the UI: `LAB_HOST=0.0.0.0` (lab only; not public internet without TLS).
-3. Ensure UDP **50000–50200** and TCP **7880/7881** are reachable on the LAN.
-4. Five browsers in France, distinct display names — see 5-pax checklist below.
-
-## VPS EU deploy (outline)
-
-1. Lead provides **EU VPS** hostname/IP (not documented in repo).
-2. In `config/livekit.yaml`: set `rtc.use_external_ip: true` and `rtc.node_ip` to the VPS public IP (per [LiveKit self-hosting](https://docs.livekit.io/home/self-hosting/)).
-3. `LIVEKIT_URL=ws://<vps-ip>:7880` or `wss://…` when TLS terminates in front.
-4. Firewall/security group: same ports as above.
+Only if LAN Sandbox is insufficient. Hostname/IP from lead when applicable — not documented in this repo. See [LiveKit self-hosting](https://docs.livekit.io/home/self-hosting/) for `use_external_ip` / `node_ip`.
 
 ## 5-participant checklist (AC-RTC-001 / 002)
 
@@ -87,7 +87,8 @@ npm run mint-token -- --room s1-lab --identity tester-1
 
 | Need | Owner |
 | --- | --- |
-| **LAN IP or VPS EU FQDN/IP** | Lead / Loïc (QCM Q2 open) |
+| **LAN Sandbox host IP** (+ SSH) | **TBD** — Loïc (Q2 = LAN first) |
+| **VPS EU** | Later if needed |
 | **Firewall / UDP range** | Ops on chosen host |
 | **TURN** (likely for FR home clients) | After host known |
 | **TLS** (`wss://`) if exposed beyond trusted LAN | Lead decision |

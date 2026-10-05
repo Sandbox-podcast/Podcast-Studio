@@ -12,7 +12,7 @@
 > - **Stop** tout push cloud SFU SaaS : pas de clés / comptes / runs LiveKit Cloud, Daily, Agora.  
 > - POC = **RTC serveur interne self-host** sur infra Sandbox (**LAN** et/ou **VPS EU**). Participants en **France**.  
 > - **D-04** : le SFU cloud managé reste l’**hypothèse produit post-POC** ; override POC documenté, pas d’effacement de D-04.  
-> - **Vote B** : exécuter le lab via [`s1-lab/livekit-oss/`](s1-lab/livekit-oss/). **Q2 infra LAN vs VPS EU** encore ouvert ([`S1-QCM.md`](S1-QCM.md)).
+> - **Vote B** : lab via [`s1-lab/livekit-oss/`](s1-lab/livekit-oss/). **Q2** : **LAN Sandbox first** (VPS EU plus tard si besoin) — **IP/hôte/SSH TBD** Loïc.
 
 ---
 
@@ -35,7 +35,7 @@ Coût POC : **ESTIMATION VPS €/h** uniquement (pas de facturation minutes clou
 | --- | --- | --- |
 | **PREP SaaS (archivé)** | Desk LiveKit Cloud / Daily / Agora | **Superseded** — POC SaaS abandonné ([annexe](#annexe--desk-saas-superseded)) |
 | **PREP self-host** | Grille comparatif (historique) + QCM | Vote **B** |
-| **LAB LiveKit OSS** | `docker compose` + harnais [`livekit-oss/`](s1-lab/livekit-oss/) | **GO** — hôte LAN/VPS à fixer (Q2) |
+| **LAB LiveKit OSS** | `docker compose` + harnais [`livekit-oss/`](s1-lab/livekit-oss/) | **GO** — déploiement **LAN first** ; IP hôte **TBD** Loïc |
 
 **Interdit** : **SFU SaaS** (Cloud/Daily/Agora) ; code Phase 1 produit dans ce repo spike.
 
@@ -45,7 +45,7 @@ Coût POC : **ESTIMATION VPS €/h** uniquement (pas de facturation minutes clou
 
 *(Ne pas inventer de chiffres.)*
 
-**Cible lab** : participants en **France** ; SFU sur **LAN Sandbox** et/ou **VPS EU** (hébergement et accès à confirmer avec Loïc / lead).
+**Cible lab** : participants en **France** ; SFU sur **LAN Sandbox en priorité** (VPS EU en repli si besoin). **IP / SSH / hôte** : **TBD** — fournis par Loïc (ne pas inventer).
 
 | Champ | Valeur |
 | --- | --- |
@@ -86,11 +86,11 @@ Comparaison **historique** (pré-vote). **POC retenu : colonne LiveKit OSS (B).*
 
 ## Protocole de lab — LiveKit OSS uniquement
 
-> Harnais : [`s1-lab/livekit-oss/README.md`](s1-lab/livekit-oss/README.md). **Blocker ouvert** : **LAN vs VPS EU** (QCM Q2) — pas d’hostname inventé dans le repo.
+> Harnais : [`s1-lab/livekit-oss/README.md`](s1-lab/livekit-oss/README.md). **Blocker** : **IP / hôte / SSH LAN Sandbox** manquants (Loïc) — Q2 = LAN first, pas d’hostname inventé.
 
 ### Jour 1 — Déploiement minimal
 
-- [ ] `docker compose up` sur hôte lead (LAN ou VPS EU quand connu)
+- [ ] `docker compose up` sur hôte **LAN Sandbox** (IP fournie par Loïc)
 - [ ] `.env` : `LIVEKIT_URL` pointe vers `ws://<host>:7880` (host fourni par lead)
 - [ ] `npm run dev` harnais ; 2 navigateurs join (2 machines si possible)
 - [ ] Publier cam/mic 720p ; subscribe croisé
@@ -118,7 +118,7 @@ Comparaison **historique** (pré-vote). **POC retenu : colonne LiveKit OSS (B).*
 ### Jour 5 — Synthèse
 
 - [ ] Remplir grilles mesures
-- [ ] Remonter blockers infra Q2 au lead
+- [ ] Documenter TURN si requis une fois IP LAN connue
 
 ---
 
@@ -177,7 +177,7 @@ Comparaison **historique** (pré-vote). **POC retenu : colonne LiveKit OSS (B).*
 
 - **Stack POC (locked)** : **B — LiveKit OSS self-host** (2026-10-05, lead / Loïc).
 - **Non retenus POC** : A mediasoup, C DIY, D cloud managé (hors POC actuel ; OK Loïc explicite pour SaaS).
-- **Infra** : LAN **ou** VPS EU — **Q2 QCM ouvert** (pas de choix documenté ici).
+- **Infra** : **LAN Sandbox first** (Q2 lock Loïc) ; VPS EU si besoin plus tard ; **IP/hôte TBD**.
 - **D-04 produit** : cloud public managé = hypothèse **post-POC** ; override POC = [`S1-D04-POC-override.md`](S1-D04-POC-override.md).
 
 ---
@@ -187,7 +187,7 @@ Comparaison **historique** (pré-vote). **POC retenu : colonne LiveKit OSS (B).*
 | ID | Blocker | Owner | Statut |
 | --- | --- | --- | --- |
 | B1 | Vote stack POC | — | **Fermé** — **B LiveKit OSS** |
-| B2 | **LAN vs VPS EU** + IP/ports/TURN ([`S1-QCM.md`](S1-QCM.md) Q2) | Loïc / lead | **Ouvert** |
+| B2 | **IP / hôte / SSH LAN Sandbox** + ports/TURN ([`S1-QCM.md`](S1-QCM.md) Q2 = LAN first) | Loïc | **Ouvert** — Q2 mode tranché ; IP **TBD** |
 | B3 | Go formel post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)) pour enchaînement produit | Lead | Ouvert (parallèle prep OK) |
 | B4 | ~~SFU SaaS free tier~~ | — | **Annulé** — SaaS stop per Loïc |
 
@@ -202,7 +202,7 @@ Comparaison **historique** (pré-vote). **POC retenu : colonne LiveKit OSS (B).*
 │  ✓ Doc self-host + D-04 override POC only                   │
 │  ✓ Vote B — LiveKit OSS                                     │
 └───────────────────────────┬─────────────────────────────────┘
-                            │ LAB GO (+ Q2 infra)
+                            │ LAB GO (LAN first; IP TBD)
                             ▼
 ┌─────────────────────────────────────────────────────────────┐
 │ LAB LiveKit OSS (livekit-oss/, participants FR)             │

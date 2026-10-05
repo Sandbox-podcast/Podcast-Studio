@@ -19,5 +19,5 @@ POC SFU stack: **[`livekit-oss/`](./livekit-oss/)** — **LAB GO** ([`S1-sfu.md`
 
 - **Vote B locked** — LiveKit OSS self-host only for S1 lab.
 - **No** LiveKit Cloud / Daily / Agora.
-- Participants **France**; host **LAN or EU VPS** — **Q2 infra still open** in QCM (no invented hostnames).
+- Participants **France**; **LAN Sandbox first** (Q2 locked); **host IP TBD** from Loïc (no invented hostnames).
 - **D-04 POC override** only ([`S1-D04-POC-override.md`](../S1-D04-POC-override.md)).
