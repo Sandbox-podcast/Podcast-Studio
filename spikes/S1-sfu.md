@@ -306,6 +306,47 @@ Script : [`s1-lab/livekit-oss/scripts/multi-pax-smoke.mjs`](s1-lab/livekit-oss/s
 
 ---
 
+
+
+---
+
+## Take 2 correction + Take 4 (2026-10-06, Europe/Paris) — WIP
+
+### Take 2 correction (Media RUN2)
+
+Media remux of take 2 **matted** WebM showed **S3 synthetic smoke** (“no camera”), not MediaPipe detourage. The LiveKit publish measured in Take 2 getStats was therefore the **same smoke canvas**.
+
+| Claim | Corrected |
+| --- | --- |
+| SFU forwards video (bitrate/fps > 0, loss ~0, loopback) | **PASS** (transport) |
+| Content = real matted camera | **NOT VALIDATED** (smoke) |
+
+### Take 4 — matted content through SFU
+
+| Item | Value |
+| --- | --- |
+| When | ~**00:47** Paris · harness `?v=s4-matfix7` · Edge foreground · publisher **`vision-s3`** · room **`s1-lab`** |
+| Subscriber | **`rtc-sub-take4`** · harness `mode=none` · join **1589 ms** · **594** samples @ 3 s · JSON written **01:13:41** |
+| Screenshots | `sub-shot-66..116` (**00:47:00–00:49:32**) — matted silhouette on dark green (live, not freeze-frame) |
+| Active numeric window | **00:46:53–00:48:28**: video **94 / 155 / 196** kbps · fps **12 / 14 / 20** · **320×180** LOW · **0** zero-kbps · loss **0 %** · RTT **~3 ms** |
+| Audio (last_rows) | inbound audio track **~2 kbps**, loss **0 %** (series is video-only) |
+| After 00:48:31 | table bitrate often dash — kbps **NOT VALIDATED** from table; screenshots still change until 00:49:32 |
+| Verdict | **content PASS** through SFU on **loopback**, **LOW** layer only · **HD** **NOT VALIDATED** on this sub |
+
+Artifacts: laptop `C:\Users\azero\s1-livekit-oss\scripts\cam-sub-getstats.json`, `take4-window-stats-refined.json`; box `/workspace/s1-soak/`.
+
+### Overnight soak (IN PROGRESS)
+
+| Item | Value |
+| --- | --- |
+| Start | **2026-10-06T01:14:11** Paris · container started **01:14:22** |
+| Room | **`s1-soak`** (isolated from `vision-s3` / `s1-lab`) |
+| Load | **5** publishers + **1** HD subscriber · HOLD **1800 s** · sample **10 s** |
+| Source | take 4 raw `vision-host-raw-1791240416301.webm` → 20 s Y4M/WAV; pubs use harness **`file`** mode (`<video>/<audio>.captureStream`) — gum fake-device blocked on `host.docker.internal` (non-secure origin) |
+| Status | **IN PROGRESS** at WIP commit time (~01:40, ~t=1540 s, 6/6 connected). Final HD/audio numbers in follow-up commit. |
+| Host metrics | `scripts/soak-*/host-metrics.csv` + `participants.log` |
+
+
 ## Annexe — desk SaaS (superseded)
 
 > **Statut : superseded** — recherche desk 2026-10-05 sur LiveKit Cloud, Daily, Agora. Le POC SaaS (free tier) est **abandonné** ; conservé comme contexte historique uniquement. **Ne pas** créer de comptes ni exécuter [`s1-lab/livekit/`](s1-lab/livekit/) (Cloud), [`daily/`](s1-lab/daily/), [`agora/`](s1-lab/agora/) contre les vendeurs.

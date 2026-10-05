@@ -33,16 +33,22 @@
 | **Edge `vision-s3` subscribe getStats — Take 1** **~23:05 Europe/Paris** | [`S1-sfu.md`](S1-sfu.md) § Edge getStats |
 | → Room **`s1-lab`** · publisher **`vision-s3`** (Loïc: LiveKit publish on Edge **:8088** Vision harness) | Same |
 | → Join **~2046 ms** · **9** samples **~25 s** · video **0 bps**, fps **—** on LOW **320×180** | **Take 2 root cause:** background tab paused `rAF` / `captureStream` |
-| **Take 2 (2026-10-05 23:29–23:36 Paris)** Edge **foreground**, matted canvas **`vision-s3`**, laptop loopback | [`S1-sfu.md`](S1-sfu.md) § Take 2 |
-| → Subscriber: headless Chromium, harness **`mode=none`** · join **1872 ms** · **140** samples (**3 s**), **0** console errors | Tail samples per track only — full-minute continuity **not** proven by RTC (Media recordings) |
-| → Inbound: video **121–178 kbps**, **20 fps**, **320×180** LOW, loss **0 %**, RTT **2–3 ms**; audio **~1 kbps** | Active matted video through SFU **PASS** (foreground); **HD** layer + **LAN/WAN** **NOT VALIDATED** |
+| **Take 2 (2026-10-05 23:29–23:36 Paris)** Edge **foreground**, publisher **`vision-s3`**, laptop loopback | [`S1-sfu.md`](S1-sfu.md) § Take 2 |
+| → Subscriber: headless Chromium, harness **`mode=none`** · join **1872 ms** · **140** samples (**3 s**), **0** console errors | Tail samples per track only |
+| → Inbound: video **121–178 kbps**, **20 fps**, **320×180** LOW, loss **0 %**, RTT **2–3 ms**; audio **~1 kbps** | **CORRECTION:** content was S3 **synthetic smoke** canvas (Media RUN2), **not** MediaPipe matted cam → **transport PASS**, **cam content NOT VALIDATED** |
+| **Take 4 (2026-10-06 ~00:47 Paris)** `?v=s4-matfix7` MediaPipe + LiveKit publish · Edge foreground · room **`s1-lab`** | [`S1-sfu.md`](S1-sfu.md) § Take 4 · artifacts `/workspace/s1-soak/` |
+| → Subscriber **`rtc-sub-take4`** · join **1589 ms** · **594** samples (**3 s**, run ends **01:13:41**) · screenshots **sub-shot-66..116** (00:47:00–00:49:32) show **matted silhouette** (dark green bg) live | Content through SFU **PASS** (loopback, **LOW** layer only) |
+| → Active numeric window **00:46:53–00:48:28**: video **94 / 155 / 196** kbps min/med/max, fps **12 / 14 / 20**, res **320×180**, **0** zero-kbps samples; loss med **0 %**; RTT med **~3 ms** | After **00:48:31** table bitrate often dash — post-window kbps **NOT VALIDATED** from table (screenshots still change until 00:49:32) |
+| → Audio inbound (last_rows): track present **~2 kbps**, loss **0 %** | Series is video-only; dedicated WAV speech soak **in progress** |
+| **Overnight soak 5-pax HD** room **`s1-soak`** | **IN PROGRESS** as of **01:14:11–~01:45** Paris (HOLD 1800 s) — WIP commit; final numbers in follow-up |
 | Harness **`pickRtpReport` fix** | Commit **`e512cb5`** — [`public/harness.js`](s1-lab/livekit-oss/public/harness.js) |
 | **DEV CORS** LAN | [`server.mjs`](s1-lab/livekit-oss/server.mjs) — `192.168.x.x` origins + localhost |
 
 ### What “PASS” means here
 
 - **PASS** = measured connectivity / publish / subscribe on the **stated host path** (dev box loopback multi-pax **or** laptop LAN smoke / Vision synth **or** subscribe-only join to Edge publisher **`vision-s3`** with remote seen).
-- **Not implied** : WAN France, **second physical device** on LAN (firewall), **active cam/matted video bitrate or FPS** from a single getStats window (e.g. **0 bps** inbound on LOW layer), overall **cam/getStats PASS**, MediaPipe/FPS gates, **20 min** soak, **LOW-END** inventory profile.
+- **Not implied** : WAN France, **second physical device** on LAN (firewall), **HD simulcast layer** on take 4 sub, MediaPipe edge quality, **LOW-END** inventory, WAN AC-RTC-002.
+- **Take 2 lesson:** non-zero bitrate ≠ matted cam — always cross-check content (Media contact sheet / subscriber screenshot).
 
 ---
 
@@ -53,13 +59,17 @@
 | **Connectivity / SFU self-host POC (dev box)** | **PASS** | **5** canvas clients; connectivity-only script — loopback |
 | **LAN laptop — host-local smoke + Vision synth pub/sub** | **PASS** | **192.168.1.68**; RTC smoke + Vision on **same** machine; synth video |
 | **LAN laptop — subscribe Edge publisher `vision-s3` (getStats window)** | **connectivity PASS** | Join **~2046 ms**, remote seen; Playwright harness subscribe-only |
-| **Active cam / matted video bitrate & FPS (that window)** | **NOT VALIDATED** | Video in **0 bps**, fps **—** on LOW **320×180** — likely idle/paused after S4 record / dynacast; **do not** flip overall cam/getStats to PASS |
+| **SFU transport (canvas/smoke or matted, loopback)** | **PASS** | Take 1 idle **0 bps**; Take 2 smoke canvas through SFU; Take 4 matted silhouette through SFU |
+| **Cam / matted **content** through SFU (Take 2)** | **NOT VALIDATED** | Take 2 was smoke, not MediaPipe |
+| **Cam / matted **content** through SFU (Take 4)** | **PASS** (loopback, LOW **320×180**) | Screenshots + getStats; **HD** layer **NOT VALIDATED** on take 4 sub |
+| **5-pax overnight soak + HD layer** | **IN PROGRESS** | Started **01:14 Paris**; results pending |
+| **Audio speech (take4 WAV) inbound metrics** | **IN PROGRESS** | Planned 5 min post-soak |
 | **Production-readiness** | **NOT VALIDATED** | No SLO / prod sign-off |
 | **WAN / France participants** | **NOT VALIDATED** | No WAN path measured |
 | **LAN multi-device (≥2 machines)** | **INCOMPLETE** | Host-local on laptop OK; **Windows Private firewall** rules still needed for peers (TCP 7880/7881/5190, UDP 50000–50200; Media MinIO TCP 9000/9001 noted) |
 | **Real cameras / MediaPipe / FPS gates** | **NOT VALIDATED** | Edge publish confirmed by Loïc; inbound getStats window **not** proof of active video; MediaPipe/FPS **not** gated here |
 | **LOW-END inventory (i5 pass)** | **NOT VALIDATED** | Laptop run = **MID** (i7+RTX3070) |
-| **AC-RTC-001 (≥ 20 min stable 5 pax)** | **INCOMPLETE** | Dev smoke hold **50 s** only |
+| **AC-RTC-001 (≥ 20 min stable 5 pax)** | **IN PROGRESS** | Overnight soak **30 min / 5 pubs** running **01:14 Paris** (loopback) |
 | **AC-RTC-002 on WAN** | **INCOMPLETE** | Do not extrapolate loopback / host-local metrics |
 | **Cost gate €/h** | **N/A** | POC self-host lock |
 
