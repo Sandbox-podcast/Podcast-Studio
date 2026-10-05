@@ -9,7 +9,7 @@ Loïc decision (2026-10-05): **POC storage locked** to self-hosted **`pgsty/mini
 | [`lab-pass1/`](./lab-pass1/) | Pass 1 + 1b lab harness (localhost 2026-10-05) |
 | [`lab-pass2/`](./lab-pass2/) | Pass 2a remux scripts + 2b OPFS crash harness |
 | [`webcodecs/`](./webcodecs/) | WebCodecs / fMP4 parallel sketch (sources + `RESULT.md`) |
-| [`../S4-recording.md`](../S4-recording.md) | **Preliminary** report + soft-lock verdict |
+| [`../S4-recording.md`](../S4-recording.md) | **Preliminary** report + **locked** POC verdict (Loïc 2026-10-05) |
 | [`../S4-webcodecs.md`](../S4-webcodecs.md) | WebCodecs spike summary (parallel track) |
 
 Canonical protocol: [`../S4-protocol-prep.md`](../S4-protocol-prep.md).

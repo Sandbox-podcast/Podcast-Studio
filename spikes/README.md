@@ -7,7 +7,7 @@
 | `s4/multipart-proto/` | **WIP prep** — helper multipart presigned (lab, not product) |
 | `S4-S5-candidates-prep.md` | **WIP prep** — grille candidats cloud/delivery **post-POC** |
 | `S4-S5-plan-prep.md` | **WIP prep** — vue d’ensemble S4/S5, **non exécuté** |
-| `S4-recording.md` | **Préliminaire** — pass 1–2 + soft-lock (awaiting Loïc) |
+| `S4-recording.md` | **Préliminaire** — pass 1–2 + **locked** POC path (Loïc 2026-10-05) |
 | `S4-webcodecs.md` | WebCodecs / fMP4 parallel track summary |
 | `S5-delivery.md` | *(à produire après lab)* — rapport spike S5 exécuté |
 

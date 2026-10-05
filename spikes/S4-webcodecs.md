@@ -2,7 +2,7 @@
 
 > Summarized from the localhost / headless / synthetic sketch (`spikes/s4/webcodecs/RESULT.md`).
 > **Correction vs that RESULT.md:** WebM remux is **proven** by S4 pass 2a — comparison rows below are updated.
-> Soft-lock POC path remains WebM + remux + OPFS pending Loïc OK — see [`S4-recording.md`](./S4-recording.md) §Verdict.
+> POC path **locked** (MediaRecorder WebM timeslice + server remux + OPFS, Loïc 2026-10-05). This doc is a **parallel documentation track only** — see [`S4-recording.md`](./S4-recording.md) §Verdict.
 
 **Label: localhost / headless / synthetic.** Everything ran on the shared box. This is **not** the Sandbox-hardware pass.
 **Run by:** Podcast Media · **2026-10-05, 18:49–19:07 CEST (UTC+2)**

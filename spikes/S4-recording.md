@@ -2,20 +2,18 @@
 
 ## Verdict / recommendation
 
-> **Soft-lock, awaiting Loïc OK** · consensus Podcast Media / RTC / Vision · **2026-10-05 ~20:17 CEST**
+> **LOCKED** · Loïc confirmed · **2026-10-05 ~20:49 CEST** (consensus Media / RTC / Vision from ~20:17)
 
-**POC path (soft-locked):** MediaRecorder **WebM** + server remux (`ffmpeg -map 0 -c copy -bsf:a setts=…`) + **OPFS** durable buffer.
+**POC = MediaRecorder WebM timeslice + server remux (`-map 0 -c copy -bsf:a setts=…`) + OPFS buffer — locked by Loïc 2026-10-05.** WebCodecs/fMP4 = **parallel documentation track only** — see [`spikes/S4-webcodecs.md`](./S4-webcodecs.md).
 
-**Parallel track (documented, not discarded):** WebCodecs + fragmented MP4 — see [`spikes/S4-webcodecs.md`](./S4-webcodecs.md).
-
-| Why soft-lock WebM + remux + OPFS now | What fMP4 still wins on |
+| Why this POC path (locked) | What fMP4 still wins on |
 | --- | --- |
 | Browser-handled A/V mux/sync on the MediaRecorder path | Playable **without** a remux step (`format.duration` present) |
 | Avoids owning the encode timeline (WebCodecs spike hit **4 silent** A/V bugs before marker tests caught them) | Crash/truncation-safe down to the last complete fragment |
 | Remux proven in pass **2a** (~0.3 s CPU / 180 s; duration + Cues; 0 seek warnings) | Native seek in ffmpeg and `<video>` without repair |
 | OPFS crash recovery proven in pass **2b** (348 ms, 0 % loss vs delivered chunks) | — |
 
-This is a **soft-lock pending Loïc's confirmation**, not a DECISIONS.md hard lock.
+Spike-level lock for the S4 POC; promote to [DECISIONS.md](../docs/DECISIONS.md) only if the lead wants a repo-wide ADR.
 
 ---
 
@@ -91,7 +89,7 @@ At part cut, the manifest was written with `byteCursor` advanced **without** reg
 > **Pass 1 + 1b + 2a/2b — mostly localhost / headless / synthetic; laptop MinIO smoke only; NOT full Sandbox multi-machine hardware pass.**  
 > Préliminaire · 2026-10-05 · Podcast Media · D-01 / [ARCHITECTURE](../docs/ARCHITECTURE.md) §6–7 · MinIO POC : [`spikes/s4/minio/README.md`](./s4/minio/README.md) (**pgsty/minio** verrouillé).
 
-**Overall:** Pass **1 + 1b**: **4/4 locked thresholds PASS on loopback** (resume must still be **re-measured on real uplink**). Pass **2a/2b**: remux + OPFS crash recovery **PASS** on box (localhost). **Soft-lock** WebM + remux + OPFS pending Loïc OK.
+**Overall:** Pass **1 + 1b**: **4/4 locked thresholds PASS on loopback** (resume must still be **re-measured on real uplink**). Pass **2a/2b**: remux + OPFS crash recovery **PASS** on box (localhost). **POC path locked** (Loïc 2026-10-05).
 
 ## Draft PASS/FAIL (pass 1, local)
 
@@ -206,14 +204,14 @@ Incomplete MPUs under `spike/s4-lab/rec/` after run: **0**.
 
 ## Open decisions
 
-- **Soft-lock POC path** — WebM + remux + OPFS; **awaiting Loïc OK** (see [Verdict](#verdict--recommendation)).
+- **POC path** — **locked** (see [Verdict](#verdict--recommendation)); WebCodecs/fMP4 documentation only.
 - **S4 numeric thresholds** — locked option B; **resumeMs** on **real uplink** still required (loopback pass 1b only).
-- **WebCodecs / fMP4** — parallel track documented in [`S4-webcodecs.md`](./S4-webcodecs.md); not selected for POC pending Loïc.
+- **WebCodecs / fMP4** — parallel documentation in [`S4-webcodecs.md`](./S4-webcodecs.md); not the POC implementation path.
 - **Windows firewall (laptop)** — Private profile rule for MinIO + LiveKit — pending Loïc.
 
 ## Next steps
 
-- **Loïc:** confirm soft-lock; approve laptop **Private** firewall rule if other LAN devices must reach MinIO/LiveKit.
+- **Loïc:** approve laptop **Private** firewall rule if other LAN devices must reach MinIO/LiveKit.
 - **Pass 2 (hardware):** real camera/mic, **multi-machine**, low-end **i5** laptop; **re-measure resumeMs** against `192.168.1.68` or production LAN uplink.
-- **Productionize remux:** server job using pass **2a** `ffmpeg` recipe; OPFS path from pass **2b** (pending Loïc OK).
+- **Productionize remux:** server job using pass **2a** `ffmpeg` recipe; OPFS path from pass **2b** (per locked POC path).
 - Remove “preliminary” when Sandbox hardware pass is complete.
