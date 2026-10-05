@@ -1,6 +1,10 @@
-# LiveKit — S1 lab harness (free tier)
+# LiveKit — S1 lab harness (POC free tier)
 
 Minimal browser lab for spike S1. **Not** Phase 1 product code. See also [`../README.md`](../README.md).
+
+## POC — free tier only (no paid SFU)
+
+Use LiveKit Cloud **Build ($0)** only. Do **not** create Ship/Scale projects, enable paid add-ons, or accept upsell for S1. If the **5 000 WebRTC min/month** cap is hit, **stop** and record in `S1-sfu.md` — no upgrade without **explicit Loïc OK**.
 
 ## Region (France participants)
 
@@ -19,6 +23,3 @@ npm run dev
 
 Open `http://127.0.0.1:5179` (default). Optional CLI: `npm run mint-token`.
 
-## Paid infra
-
-Stay on **Build (free)** unless Loïc + lead approve otherwise.

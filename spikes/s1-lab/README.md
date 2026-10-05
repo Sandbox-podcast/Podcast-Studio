@@ -1,6 +1,8 @@
-# S1 lab harness — free tier only
+# S1 lab harness — POC free tier only
 
 Spike **S1** browser lab for SFU evaluation ([`S1-sfu.md`](../S1-sfu.md)). **Not** Phase 1 product code.
+
+**POC constraint (Loïc via lead): no paid SFU.** This lab is **strictly free tier** — free plans/projects only (LiveKit Build, Daily free, Agora free quota). No paid upsell, no paid project creation, no Ship/Scale upgrades for S1. If a vendor **free quota is exhausted**, **stop** the lab run and document it — do **not** upgrade to paid without **explicit written OK from Loïc**.
 
 | Provider | Status | Path | Default port |
 | --- | --- | --- | --- |
@@ -10,7 +12,7 @@ Spike **S1** browser lab for SFU evaluation ([`S1-sfu.md`](../S1-sfu.md)). **Not
 
 ## Constraints
 
-- **Free / trial accounts only** — do not upgrade to paid plans without Loïc + lead approval.
+- **POC = free tier only** (see above) — no paid SFU for S1 lab measurements.
 - **No secrets in git** — copy each provider’s `.env.example` → `.env` locally (see table above).
 - Lab may run on **free tier before** formal go post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)); cost pass/fail still requires a €/h ceiling from Loïc.
 - **SFU choice not locked** — these harnesses are for measurements only.
@@ -74,7 +76,7 @@ Use this during a 5-participant session; record results in `S1-sfu.md` (measurem
 - [ ] Remote video/audio remains **usable** on the operator tab (subjective + stats).
 - [ ] Stats panel shows for local + each remote: **bitrate**, **packet loss**, **jitter**, **RTT**, **resolution**, **FPS** (AC-RTC-002).
 - [ ] Note any disconnects, frozen video, or one-way audio with timestamp.
-- [ ] After session: check vendor dashboard **usage** — stay within free caps.
+- [ ] After session: check vendor dashboard **usage** — stay within free caps; **stop** if quota is exhausted (no paid upgrade for POC).
 
 ## AC-RTC-002 metrics contract (all candidates)
 

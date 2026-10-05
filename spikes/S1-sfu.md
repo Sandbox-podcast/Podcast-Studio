@@ -6,11 +6,11 @@
 | **Auteur** | Podcast RTC |
 | **Statut** | **LAB STARTED (free tier)** — harnais `spikes/s1-lab/` (LiveKit, Daily, Agora) |
 | **Décision SFU** | **pending mesures lab + QCM Loïc** (aucune option verrouillée) |
-| **Prérequis** | Go lead post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)) pour décision formelle ; **lab free tier** démarré sans infra payante ; plafond coût €/h Loïc requis avant pass/fail coût |
+| **Prérequis** | Go lead post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)) pour décision formelle ; **POC = SFU free tier uniquement** (pas de projet/upsell payant S1) ; plafond coût €/h Loïc requis avant pass/fail coût **hors POC** |
 
 > **Périmètre de ce document**  
 > - Sections **PREP** : recherche desk (pricing public, DX docs, egress, diagnostics, EU). Aucun compte cloud payant créé.  
-> - Sections **LAB** : protocole à exécuter **après** go S0 + seuil coût Loïc. Ne pas lancer tant que ces blockers ne sont pas levés.  
+> - Sections **LAB** : protocole mesures ; exécution **free tier POC uniquement** (contrainte Loïc : pas de SFU payant). Décision SFU formelle / pass-fail coût payant : après go S0 + seuil €/h Loïc.  
 > - IdP / SSO : **hors scope S1** (bloque S0, pas ce spike).
 
 ---
@@ -31,15 +31,17 @@ Un SFU cloud managé (candidats : LiveKit Cloud, Daily, Agora) permet de :
 | Phase | Contenu | Quand | Actions autorisées |
 | --- | --- | --- | --- |
 | **PREP (livré)** | Comparatif desk, formules de coût, protocole lab, grille mesures vide, QCM | 2026-10-05 | Lecture docs publiques ; rédaction ; coordination lead |
-| **LAB (en cours, free tier)** | Harnais navigateur + room 5 pax, throttling, mesures | Démarré — comptes **Build / free** uniquement | Voir [`spikes/s1-lab/README.md`](s1-lab/README.md) ; **pas de PR produit** ; décision SFU après mesures + QCM |
+| **LAB (en cours, POC free tier)** | Harnais navigateur + room 5 pax, throttling, mesures | Démarré — **strictement free tier** (Build / free Daily / free Agora) | Voir [`spikes/s1-lab/README.md`](s1-lab/README.md) ; quota épuisé → **stop** (pas d’upgrade payant) ; **pas de PR produit** |
 
-**Interdit** : projet SFU **payant** sans OK Loïc ; verrouiller un choix SFU avant QCM ; code Phase 1 produit dans ce repo spike.
+**Interdit (POC S1)** : tout **SFU payant** (création projet payant, upsell, dépassement quota avec upgrade) sans **OK écrit Loïc** ; verrouiller un choix SFU avant QCM ; code Phase 1 produit dans ce repo spike.
 
 ---
 
 ## Setup (LAB — à remplir pendant le lab)
 
 *(Colonnes vides volontairement — ne pas inventer de chiffres de lab.)*
+
+**POC free tier uniquement** (contrainte Loïc) : comptes et projets **gratuits** seulement ; pas de mesure lab nécessitant un plan payant. Coûts dans ce spike = **ESTIMATION desk** tant qu’aucun lab payant n’est autorisé — **aucun pass/fail coût** ne peut exiger un upgrade payant pour le POC.
 
 **Région EU privilégiée** (contrainte Loïc via lead) : participants lab en **France** → créer/configurer les projets et rooms SFU sur des **endpoints EU** documentés (ex. LiveKit **eu-central** / Frankfurt, Daily `eu-central-1`, edge Agora Europe). Noter la région réelle dans le tableau ci-dessous. **Residency EU stricte** ≠ simple geo latency — **TBD** QCM (B4) ; ne pas inventer de policy Sandbox ici.
 
@@ -92,7 +94,7 @@ Convention commune : **1 participant-minute** = 1 personne connectée pendant 1 
 
 ## Protocole de lab détaillé (LAB — checklist jours 1–5)
 
-> **Free tier** : le harnais LiveKit sous `spikes/s1-lab/livekit/` peut être exécuté dès maintenant (compte Build). Pour **pass/fail coût** et décision SFU formelle : (1) go lead post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)), (2) plafond coût Loïc, (3) mesures lab remplies ci-dessous.
+> **POC free tier only** : harnais `spikes/s1-lab/` — comptes **gratuits** uniquement ; quota épuisé → **arrêt** (pas d’upgrade payant). Les chiffres **ESTIMATION** du comparatif desk ne sont pas des coûts observés et **ne imposent pas** de lab payant. Pour **pass/fail coût** (hors POC) et décision SFU formelle : (1) go post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)), (2) plafond coût Loïc, (3) mesures remplies — éventuellement sur infra payante **seulement** si Loïc l’autorise explicitement (hors scope POC actuel).
 
 ### Jour 1 — Harnais minimal (1 candidat prioritaire desk, puis les autres)
 
@@ -172,8 +174,9 @@ Convention commune : **1 participant-minute** = 1 personne connectée pendant 1 
 
 ### Coût
 
-- **Non évalué en pass/fail** tant que Loïc n’a pas fixé le plafond €/h (3 pax et 5 pax).
-- Après fixation du seuil : comparer **coûts observés lab** (+ ESTIMATION desk) au plafond — alors seulement marquer OK / hors budget.
+- **POC S1** : lab **free tier uniquement** — pas de pass/fail coût basé sur un lab **payant** ; les montants desk restent **ESTIMATION** (non observés tant que POC free only).
+- **Hors POC** : non évalué en pass/fail tant que Loïc n’a pas fixé le plafond €/h (3 pax et 5 pax).
+- Après seuil + autorisation éventuelle infra payante : comparer **coûts observés** (+ ESTIMATION desk) au plafond — alors seulement marquer OK / hors budget.
 
 ---
 
@@ -189,7 +192,7 @@ Convention commune : **1 participant-minute** = 1 personne connectée pendant 1 
 
 ## Coûts observés
 
-### ESTIMATION desk uniquement (2026-10-05)
+### ESTIMATION desk uniquement (2026-10-05) — pas de coût lab payant en POC
 
 | Candidat | 3 pax / h (720p) | 5 pax / h (720p) | Notes |
 | --- | --- | --- | --- |
@@ -213,7 +216,7 @@ Convention commune : **1 participant-minute** = 1 personne connectée pendant 1 
 | --- | --- | --- | --- | --- |
 | B1 | Spike **S0** non pass / pas de go lead post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)) | Décision SFU formelle ; pass/fail coût | Lead Podcast Studio | Ouvert — lab free tier autorisé en parallèle |
 | B2 | **Plafond coût €/h** (3 pax et 5 pax) non fixé avec Loïc | Pass/fail coût ; décision budget | Loïc via lead + QCM | Ouvert |
-| B3 | Accords comptes free/trial vs éventuel payant | Lab multi-candidats prolongé | Loïc / lead | Ouvert |
+| B3 | Lab **POC free only** — pas d’upgrade payant si quota épuisé | Suite lab au-delà des caps free | Loïc | **Fermé pour POC** — stop ou OK écrit Loïc pour tout payant |
 | B4 | Clarifier **exigence residency EU** Sandbox (si stricte) vs geo latency seule | Choix région / plan (ex. LiveKit pinning Scale) | Loïc / legal — **ne pas inventer policy** | Ouvert (question) |
 | — | IdP / SSO | **S0 uniquement** — hors scope S1 | — | N/A S1 |
 

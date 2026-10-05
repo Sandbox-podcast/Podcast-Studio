@@ -1,6 +1,10 @@
-# Daily — S1 lab harness (free tier)
+# Daily — S1 lab harness (POC free tier)
 
 Minimal browser lab mirroring [`../livekit/`](../livekit/). **Not** Phase 1 product code.
+
+## POC — free tier only (no paid SFU)
+
+Stay on Daily’s **free** plan (10 000 participant-minutes/month). No paid plan upgrade, no paid recording add-ons for S1. If free quota is **exhausted**, **stop** the lab — do **not** upgrade without **explicit Loïc OK**.
 
 ## Region (France participants)
 
@@ -42,6 +46,3 @@ Stats panel (2s poll):
 
 Same as parent [`../README.md`](../README.md): 5 tabs or 2 machines, same room name, distinct display names, 20 min checklist.
 
-## Paid infra
-
-Do **not** upgrade Daily plan or enable paid add-ons without Loïc + lead approval.

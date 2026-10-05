@@ -1,6 +1,10 @@
-# Agora — S1 lab harness (free tier)
+# Agora — S1 lab harness (POC free tier)
 
 Minimal browser lab mirroring [`../livekit/`](../livekit/). **Not** Phase 1 product code.
+
+## POC — free tier only (no paid SFU)
+
+Use Agora **free** tier only (10 000 standard minutes/month). No prepaid packages or paid overage for S1 lab. If quota is **exhausted** or the project would require payment, **stop** — no upgrade without **explicit Loïc OK**.
 
 ## Region (France participants)
 
@@ -52,6 +56,3 @@ Stats panel (2s poll):
 
 Same as parent [`../README.md`](../README.md): 5 tabs or 2 machines, **same channel name**, distinct display names (each maps to a stable numeric `uid` for token mint).
 
-## Paid infra
-
-Do **not** enable paid packages or exceed free quota without Loïc + lead approval.
