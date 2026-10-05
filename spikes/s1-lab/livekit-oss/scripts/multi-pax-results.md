@@ -1,7 +1,8 @@
 # S1 multi-pax smoke — LiveKit OSS (localhost)
 
 - **Verdict: PASS** — connected 5/5 · saw ≥1 out or in video 5/5
-- Run: 2026-10-05T18:28:38 Europe/Paris → 2026-10-05T18:29:33 Europe/Paris
+- **post-pickRtpReport fix** — harness outbound bitrate med **115 kbps** (73–2410), no longer stuck at 0 bps
+- Run: 2026-10-05T18:40:56 Europe/Paris → 2026-10-05T18:41:51 Europe/Paris
 - Config: room `s1-lab` · 5 isolated contexts · publish mode `canvas` · hold 50s · sample every 5s · headless=true · Chrome `/usr/bin/google-chrome`
 - Script: `scripts/multi-pax-smoke.mjs` · raw: `scripts/multi-pax-results.json`
 
@@ -12,44 +13,44 @@
 ## Per participant
 | id | join (ms) | final status | out video | remotes seen (in video) | out RTT ms min/med/max | in bitrate kbps min/med/max | left cleanly |
 |---|---|---|---|---|---|---|---|
-| mp-1 | 1511 | connected — s1-lab (canvas, no cam) | yes | 5 (mp-2, mp-3, mp-4, mp-5, vision-s3) | 0 / 0.5 / 1 (n=10) | 73 / 112 / 162 (n=50) | yes |
-| mp-2 | 1443 | connected — s1-lab (canvas, no cam) | yes | 5 (mp-1, mp-3, mp-4, mp-5, vision-s3) | 0 / 1 / 2 (n=10) | 65 / 117 / 172 (n=50) | yes |
-| mp-3 | 1391 | connected — s1-lab (canvas, no cam) | yes | 5 (mp-1, mp-2, mp-4, mp-5, vision-s3) | 0 / 0.5 / 1 (n=10) | 59 / 118.5 / 180 (n=50) | yes |
-| mp-4 | 1481 | connected — s1-lab (canvas, no cam) | yes | 5 (mp-1, mp-2, mp-3, mp-5, vision-s3) | 0 / 0.5 / 1 (n=10) | 78 / 116.5 / 174 (n=50) | yes |
-| mp-5 | 1402 | connected — s1-lab (canvas, no cam) | yes | 5 (mp-1, mp-2, mp-3, mp-4, vision-s3) | 0 / 0 / 1 (n=10) | 79 / 118 / 162 (n=50) | yes |
+| mp-1 | 1549 | connected — s1-lab (canvas, no cam) | yes | 4 (mp-2, mp-3, mp-4, mp-5) | 0 / 1 / 1 (n=10) | 74 / 110.5 / 164 (n=40) | yes |
+| mp-2 | 1366 | connected — s1-lab (canvas, no cam) | yes | 4 (mp-1, mp-3, mp-4, mp-5) | 0 / 1 / 1 (n=10) | 74 / 112.5 / 159 (n=40) | yes |
+| mp-3 | 1509 | connected — s1-lab (canvas, no cam) | yes | 4 (mp-1, mp-2, mp-4, mp-5) | 0 / 1 / 3 (n=10) | 73 / 111.5 / 157 (n=40) | yes |
+| mp-4 | 1378 | connected — s1-lab (canvas, no cam) | yes | 4 (mp-1, mp-2, mp-3, mp-5) | 0 / 1 / 1 (n=10) | 81 / 114 / 164 (n=40) | yes |
+| mp-5 | 1453 | connected — s1-lab (canvas, no cam) | yes | 4 (mp-1, mp-2, mp-3, mp-4) | 0 / 0.5 / 2 (n=10) | 82 / 112 / 158 (n=40) | yes |
 
 ## Aggregate getStats samples (min / median / max, all sampled rows)
 | metric | outbound video | inbound video |
 |---|---|---|
-| rows sampled | 50 | 250 |
-| RTT (ms) | 0 / 0 / 2 (n=50) | 0 / 0 / 2 (n=250) |
-| bitrate (kbps) | 0 / 0 / 1260 (n=50) | 59 / 117 / 180 (n=250) |
-| loss (%) | n/a | 0 / 0 / 0 (n=250) |
-| jitter (ms) | n/a | 0 / 0 / 9 (n=250) |
-| fps | 9 / 15 / 15 (n=23) | 12 / 15 / 21 (n=250) |
-| resolutions | 640×360, —, 320×180 | 320×180 |
+| rows sampled | 50 | 200 |
+| RTT (ms) | 0 / 1 / 3 (n=50) | 0 / 1 / 3 (n=200) |
+| bitrate (kbps) | 73 / 115 / 2410 (n=48) | 73 / 112 / 164 (n=200) |
+| loss (%) | n/a | 0 / 0 / 0 (n=200) |
+| jitter (ms) | n/a | 0 / 0 / 9 (n=200) |
+| fps | 15 / 15 / 15 (n=50) | 14 / 15 / 16 (n=200) |
+| resolutions | 320×180, 1280×720 | 320×180 |
 
 ## Raw outbound simulcast layers (script-side RTCPeerConnection getStats, harness untouched)
-The harness table shows only the *first* outbound-rtp layer; with dynacast, unsubscribed layers pause → "0 bps" there is not a publish failure.
+Harness `pickRtpReport` now prefers active/max-bytes layer (fix on PR #3). Raw layers below still listed for dynacast detail.
 | id | layer | bitrate kbps min/med/max | fps min/med/max | last res | active | qualityLimitation |
 |---|---|---|---|---|---|---|
+| mp-1 | q | 102.6 / 116.3 / 134.2 (n=9) | 15 / 15 / 15 (n=10) | 320x180 | true | none |
 | mp-1 | h | 0 / 0 / 0 (n=9) | — | — | false | none |
-| mp-1 | q | 99.3 / 116.1 / 130 (n=9) | 14 / 15 / 15 (n=10) | 320x180 | true | none |
 | mp-1 | f | 0 / 0 / 0 (n=9) | — | — | false | none |
-| mp-2 | q | 99.4 / 113.4 / 134.5 (n=9) | 15 / 15 / 15 (n=10) | 320x180 | true | none |
 | mp-2 | h | 0 / 0 / 0 (n=9) | — | — | false | none |
 | mp-2 | f | 0 / 0 / 0 (n=9) | — | — | false | none |
-| mp-3 | h | 0 / 0 / 0 (n=9) | 5 / 5 / 5 (n=1) | — | false | none |
-| mp-3 | q | 92.9 / 110.8 / 129.1 (n=9) | 14 / 15 / 16 (n=10) | 320x180 | true | none |
-| mp-3 | f | 0 / 0 / 0 (n=9) | 5 / 5 / 5 (n=1) | — | false | none |
-| mp-4 | q | 88 / 118.3 / 129.7 (n=9) | 14 / 15 / 15 (n=10) | 320x180 | true | none |
-| mp-4 | h | 0 / 0 / 0 (n=9) | 13 / 13 / 13 (n=1) | — | false | none |
-| mp-4 | f | 0 / 0 / 0 (n=9) | 13 / 13 / 13 (n=1) | — | false | none |
-| mp-5 | h | 0 / 0 / 15.5 (n=9) | 15 / 15 / 15 (n=1) | — | false | none |
-| mp-5 | q | 82.8 / 119 / 128.4 (n=9) | 14 / 15 / 15 (n=10) | 320x180 | true | none |
-| mp-5 | f | 0 / 0 / 71.5 (n=9) | 15 / 15 / 15 (n=1) | — | false | none |
+| mp-2 | q | 100.2 / 120 / 136.4 (n=9) | 15 / 15 / 15 (n=10) | 320x180 | true | none |
+| mp-3 | q | 97.6 / 119.1 / 130.2 (n=9) | 15 / 15 / 16 (n=10) | 320x180 | true | none |
+| mp-3 | h | 0 / 0 / 0 (n=9) | 6 / 6 / 6 (n=1) | — | false | none |
+| mp-3 | f | 0 / 0 / 0 (n=9) | 6 / 6 / 6 (n=1) | — | false | none |
+| mp-4 | q | 87.7 / 116.5 / 126.5 (n=9) | 15 / 15 / 16 (n=10) | 320x180 | true | none |
+| mp-4 | f | 0 / 0 / 0 (n=9) | 12 / 12 / 12 (n=1) | — | false | none |
+| mp-4 | h | 0 / 0 / 0 (n=9) | 11 / 11 / 11 (n=1) | — | false | none |
+| mp-5 | h | 0 / 0 / 19.5 (n=9) | 15 / 15 / 15 (n=1) | — | false | none |
+| mp-5 | q | 83.4 / 116.9 / 131.7 (n=9) | 15 / 15 / 16 (n=10) | 320x180 | true | none |
+| mp-5 | f | 0 / 0 / 52.9 (n=9) | 15 / 15 / 15 (n=1) | — | false | none |
 
-Raw ICE RTT (nominated pairs, all PCs) per pax: mp-1 0 / 0.5 / 1 (n=20) · mp-2 0 / 1 / 2 (n=20) · mp-3 0 / 0.5 / 1 (n=20) · mp-4 0 / 0 / 1 (n=20) · mp-5 0 / 0 / 1 (n=20)
+Raw ICE RTT (nominated pairs, all PCs) per pax: mp-1 0 / 1 / 1 (n=20) · mp-2 0 / 1 / 1 (n=20) · mp-3 0 / 1 / 3 (n=20) · mp-4 0 / 1 / 1 (n=20) · mp-5 0 / 0.5 / 2 (n=20)
 
 ## Caveats
 - localhost only (browser + SFU on same box)
@@ -57,7 +58,5 @@ Raw ICE RTT (nominated pairs, all PCs) per pax: mp-1 0 / 0.5 / 1 (n=20) · mp-2 
 - not 5 real cams
 - not LAN / multi-machine
 - headless Chrome in one process; stats scraped from harness table (polled 2s)
-- room was shared: non-script participant(s) also present: vision-s3
 - Harness RTT = ICE candidate-pair currentRoundTripTime (browser↔SFU), ~loopback here; says nothing about WAN.
 - Bitrate column is the harness's 2s delta; first poll per track is "—" and excluded.
-- **Harness fix (post-run):** `pickRtpReport` now picks the active simulcast layer (max bytes, then FPS) — outbound 0 bps false negative from this run is addressed in `public/harness.js`; re-run smoke to refresh outbound aggregates.

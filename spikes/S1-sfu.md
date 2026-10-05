@@ -131,39 +131,38 @@ Comparaison **historique** (pré-vote). **POC retenu : colonne LiveKit OSS (B).*
 
 ## Mesures (LAB)
 
-### Multi-pax local smoke — PASS connectivité (2026-10-05 ~18:28 Europe/Paris)
+### Multi-pax local smoke — PASS connectivité (re-run post-`pickRtpReport`, 2026-10-05 18:40:56–18:41:51 Europe/Paris)
 
 Script : [`s1-lab/livekit-oss/scripts/multi-pax-smoke.mjs`](s1-lab/livekit-oss/scripts/multi-pax-smoke.mjs) · artefacts : `multi-pax-results.md` / `.json`.
 
 | Fait mesuré | Valeur |
 | --- | --- |
 | Hôte | **localhost** (`127.0.0.1`) — dev box, pas LAN Sandbox |
-| Room | `s1-lab` |
+| Room | `s1-lab` (clean — **4** remotes script / client) |
 | Clients script | **5/5** connectés (mode **canvas**, ~**1,4–1,5 s** join) |
-| Remotes vus / client | **4** autres script + participant **`vision-s3`** déjà en room → **5** remotes |
 | Durée hold | **50 s** (pas 20 min AC-RTC-001) |
 | Verdict doc | **PASS** critères **connectivité** uniquement (pas de seuils perf inventés) |
 
-**Inbound video `getStats` (agrégat, 250 lignes échantillonnées)** : bitrate **59 / 117 / 180** kbps min/med/max ; loss **0 %** ; jitter **0 / 0 / 9** ms ; FPS **12 / 15 / 21** ; résolution **320×180** (couche dynacast la plus basse).
+**Outbound video `getStats` (harnais, n=48)** : bitrate **73 / 115 / 2410** kbps min/med/max — fix **`pickRtpReport`** validé (plus bloqué à 0 bps).
 
-**RTT** (harnais, ICE loopback) : **0–2 ms** — localhost uniquement, pas WAN France.
+**Inbound video `getStats` (agrégat, 200 lignes)** : bitrate **73 / 112 / 164** kbps min/med/max ; loss **0 %** ; jitter **0 / 0 / 9** ms ; FPS **14 / 15 / 16** ; résolution **320×180**.
 
-**Caveats** : vidéo **canvas synthétique ~15 fps**, **pas d’audio** ; **une** machine, Chrome headless ; **pas** LAN / **pas** 5 vraies caméras ; room partagée avec `vision-s3`.
+**RTT** (harnais, ICE loopback) : **0–3 ms** — localhost uniquement, pas WAN France.
 
-**Harnais (corrigé PR #3)** : `pickRtpReport` choisit la couche simulcast **active** (max `bytesSent`/`bytesReceived`, puis FPS) — le run ci-dessus a été mesuré avec l’ancien harnais (outbound agrégat 0/med/0 kbps dans `multi-pax-results.md`).
+**Caveats** : vidéo **canvas synthétique ~15 fps**, **pas d’audio** ; **une** machine, Chrome headless ; **pas** LAN / **pas** 5 vraies caméras.
 
 ### Stabilité
 
 | Run | Stack | Hôte (LAN/VPS EU) | Pax | Durée | A/V OK ? | Décos | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| multi-pax-smoke 2026-10-05 | LiveKit OSS | localhost dev | 5 script (+vision-s3) | 50 s | connectivité OK | 0 | voir ci-dessus ; AC-RTC-001 20 min **non** exécuté |
+| multi-pax-smoke 2026-10-05 (re-run 18:40) | LiveKit OSS | localhost dev | 5 script | 50 s | connectivité OK | 0 | voir ci-dessus ; AC-RTC-001 20 min **non** exécuté |
 | | | | | | | | |
 
 ### Diagnostics AC-RTC-002
 
 | Stack | Pax | Bitrate ↓/↑ | Packet loss % | Jitter | RTT | Résolution | FPS | Source |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| LiveKit OSS | 5 local smoke | ↓ 59–180 kbps (in vid.) | 0 % (in) | 0–9 ms (in) | 0–2 ms loopback | 320×180 (in) | 12–21 (in) | harness `getStats` + script |
+| LiveKit OSS | 5 local smoke | ↓ 73–164 / ↑ 73–2410 kbps (in/out vid.) | 0 % (in) | 0–9 ms (in) | 0–3 ms loopback | 320×180 (in) | ~15 (in/out) | harness `getStats` + script |
 | | | | | | | | | |
 
 ### Dégradation réseau

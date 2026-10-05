@@ -17,13 +17,12 @@
 | Plafond SFU **€/h = N/A** (POC self-host) | Loïc via lead **2026-10-05** — [`S1-QCM.md`](S1-QCM.md) Vote 2, [`S1-sfu.md`](S1-sfu.md) |
 | **LAB DEV local UP** | Harness **:5190**, SFU **:7880**, room **`s1-lab`** — [`S1-sfu.md`](S1-sfu.md) setup, [`s1-lab/livekit-oss/README.md`](s1-lab/livekit-oss/README.md) |
 | Smoke **canvas join PASS** (no camera) | Headless / dev box fixes — [`s1-lab/livekit-oss/`](s1-lab/livekit-oss/) |
-| **Multi-pax local smoke** **2026-10-05 ~18:28 Europe/Paris** | [`s1-lab/livekit-oss/scripts/multi-pax-results.md`](s1-lab/livekit-oss/scripts/multi-pax-results.md) · raw [`multi-pax-results.json`](s1-lab/livekit-oss/scripts/multi-pax-results.json) |
-| → **5/5 connected** (~1,4–1,5 s join) | Same |
-| → Inbound video: bitrate med **~117 kbps** (min/med/max **59 / 117 / 180** kbps, n=250) | Same |
-| → Loss **0 %**; FPS med **15**; resolution **320×180** (dynacast lowest layer) | Same |
-| → RTT **0–2 ms** | **Loopback only** (localhost) — not WAN France |
+| **Multi-pax local smoke (re-run post-fix)** **2026-10-05 18:40:56–18:41:51 Europe/Paris** | [`s1-lab/livekit-oss/scripts/multi-pax-results.md`](s1-lab/livekit-oss/scripts/multi-pax-results.md) · raw [`multi-pax-results.json`](s1-lab/livekit-oss/scripts/multi-pax-results.json) |
+| → **5/5 connected**; **4 remotes each** (clean room) | Same |
+| → **Outbound** harness bitrate **73 / 115 / 2410** kbps min/med/max (n=48) — **`pickRtpReport` fix validated** (`e512cb5`) | Same |
+| → **Inbound** video: **73 / 112 / 164** kbps; loss **0 %**; FPS med **15**; res **320×180** | Same |
+| → RTT **0–3 ms** | **Loopback only** (localhost) — not WAN France |
 | Harness **`pickRtpReport` fix** | Commit **`e512cb5`** — [`public/harness.js`](s1-lab/livekit-oss/public/harness.js) |
-| **Outbound post-fix** | **Pending** — update when RTC posts re-run numbers |
 
 ---
 

@@ -101,7 +101,7 @@ With `docker compose` + `npm run dev` running:
 node scripts/multi-pax-smoke.mjs
 ```
 
-Requires **playwright-core** + Chrome (dev box used `PW_CORE=/workspace/tools/pw/node_modules/playwright-core/index.mjs`). Writes `scripts/multi-pax-results.md` and `.json`. Latest run **PASS** 2026-10-05 — see [`S1-sfu.md`](../../S1-sfu.md) mesures. Harness `pickRtpReport` fix (active simulcast layer) landed after that run; re-run to refresh outbound stats in results.
+Requires **playwright-core** + Chrome (dev box used `PW_CORE=/workspace/tools/pw/node_modules/playwright-core/index.mjs`). Writes `scripts/multi-pax-results.md` and `.json`. Latest **PASS** re-run **2026-10-05 18:40** (post-`pickRtpReport` fix) — see [`S1-verdict.md`](../../S1-verdict.md) / [`S1-sfu.md`](../../S1-sfu.md).
 
 CLI token:
 
