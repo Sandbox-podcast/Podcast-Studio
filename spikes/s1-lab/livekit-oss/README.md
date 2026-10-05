@@ -28,7 +28,9 @@ The Grok Bot host has **no camera/microphone** — default `getUserMedia` fails 
 | --- | --- |
 | **canvas** (default) | Animated canvas → `captureStream` → `LocalVideoTrack` (no `getUserMedia`) |
 | **none** | Join + subscribe only; no local publish |
-| **camera** | Previous `createLocalTracks` path (needs real devices) |
+| **camera** | `createLocalTracks` via **dynamic import** only when joining in camera mode (no `getUserMedia` on page load) |
+
+Static assets: `styles.css`, `favicon.png` / `favicon.ico` (fixes harness tab 404 noise).
 
 | | |
 | --- | --- |
