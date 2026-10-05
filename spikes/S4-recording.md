@@ -3,7 +3,7 @@
 > **Pass 1 — localhost, Chromium headless, synthetic media (canvas + oscillator); NOT Sandbox hardware, NOT multi-machine; no verdict.**  
 > Préliminaire · 2026-10-05 · Podcast Media · D-01 / [ARCHITECTURE](../docs/ARCHITECTURE.md) §6–7 · MinIO POC : [`spikes/s4/minio/README.md`](./s4/minio/README.md) (**pgsty/minio** verrouillé).
 
-**Overall (pass 1 local):** functional **PASS**, numeric verdict **pending thresholds**.
+**Overall (pass 1 local/synthetic):** **3/4 thresholds PASS**, resume time to be measured; caveats: remux needed (duration N/A), in-memory buffer, no real hardware.
 
 ## Draft PASS/FAIL (pass 1, local)
 
@@ -14,17 +14,17 @@
 | (c) Resume after 10 s / 30 s storage cut; only missing parts re-sent | **PASS** | MinIO route abort; list-parts then parts 2 / 4–6 only |
 | (d) Integrity sha256 local == remote | **PASS** | `c7ee6282c5bb8724a4eb392e7d8d25b89baacad5c9a84bb8a2e22682eebabfc0` |
 | (e) No orphan incomplete uploads after cleanup | **PASS** | 0 incomplete MPUs under lab prefix |
-| (f) Multi-track sync | **MEASURED** | First-chunk offset **+57.7 ms** (A−B); product verdict **TODO** |
+| (f) Multi-track sync | **PASS** (baseline) | vs threshold ≤ 100 ms: `firstChunkAbsDeltaMs` **+57.7 ms**, `timeOriginDeltaMs` **−65.8 ms** (2 contexts, 45 s, same box, headless); real devices / multi-machine **not tested** |
 | (g) Real devices / Sandbox hardware / multi-machine | **NOT TESTED** | — |
 
-### Numeric thresholds
+### Numeric thresholds (locked option B — Loïc, 2026-10-05)
 
-| Threshold | Status |
-| --- | --- |
-| Max sync offset | **TODO — Loïc via lead** |
-| Min bitrate | **TODO — Loïc via lead** |
-| Max resume time | **TODO — Loïc via lead** |
-| Max data loss | **TODO — Loïc via lead** |
+| Threshold | Limit | Pass 1 vs limit |
+| --- | --- | --- |
+| Sync offset | **≤ 100 ms** | **PASS** — measured `firstChunkAbsDeltaMs` **+57.7 ms** and `timeOriginDeltaMs` **−65.8 ms** (2 contexts, 45 s, same box, headless). Baseline only; real devices / multi-machine not tested. |
+| Bitrate | **≥ 1 Mbps** | **PASS** — measured **~4.435 Mbps** (4 435 194 bit/s); synthetic canvas source, not a camera characterization. |
+| Data loss | **≤ 1 %** | **PASS** — **0 %** (sha256 local == remote, **99 812 767** B both sides). |
+| Resume time (reconnect → all missing parts uploaded) | **≤ 15 s** | **PARTIAL** — storage cuts **10 s** and **30 s** both survived (recording continued, list-parts + re-send missing parts only, no loss). Time from reconnect to completion of missing parts **not measured** in pass 1 (loopback; logs lack resume-phase timing) → instrumentation for **pass 2**. **Do not invent a figure.** |
 
 Raw artefacts : [`spikes/s4/lab-pass1/`](./s4/lab-pass1/) (`RESULT.md`, `out/summary.json`, `out/main-results.json`, …).
 
@@ -112,7 +112,7 @@ Incomplete MPUs under `spike/s4-lab/rec/` after run: **0**.
 
 ## Open decisions
 
-- **S4 pass/fail thresholds** — **TODO**, Loïc via lead (see [Numeric thresholds](#numeric-thresholds)).
+- **S4 numeric thresholds** — locked (option B, Loïc 2026-10-05); see [Numeric thresholds](#numeric-thresholds-locked-option-b--loïc-2026-10-05). Resume wall-clock still needs pass 2 measurement.
 - **Container strategy** — timesliced WebM + server remux vs WebCodecs / fragmented MP4.
 - **Durable client buffer** — OPFS / IndexedDB / File System Access for real network cuts (pass 1: in-memory only).
 - **Cut fidelity** — route abort vs NIC / firewall vs Docker partition on Sandbox LAN.
