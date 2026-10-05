@@ -86,6 +86,25 @@ At part cut, the manifest was written with `byteCursor` advanced **without** reg
 
 ---
 
+## Real-cam pass 3 (laptop, run 1)
+
+**Label:** Sandbox laptop · Edge harness `:8088` · MediaPipe matted canvas `captureStream(30)` → S4 drop-in v2 → MinIO localhost. **2026-10-05** (~23:03 Paris). Full analysis: [`spikes/s4/REALCAM-RUN1-RESULT.md`](./s4/REALCAM-RUN1-RESULT.md).
+
+| Area | Verdict | Measured facts |
+| --- | --- | --- |
+| **Pipeline** | **PASS** | Object `spike/s4-dropin/vision-host-1791233953193.webm` **5 304 090** B, **COMPLETE**, 0 incomplete MPUs; download size = list size (**0** byte upload loss). Remux `-map 0 -c copy`: **59.989** s + Cues, wall **0.096** s / CPU **0.099** s |
+| **Capture** | **FAIL** | **27.221** s frame hole (PTS **8.061 → 35.282**) from `requestAnimationFrame` pause in a **background Edge tab** (confirmed by Vision) |
+| **Loss / bitrate** (full file vs option B) | **FAIL** | Container **0.707** Mbps; active span excl. gap **1.295** Mbps; ~**45.4 %** frame deficit vs 30 fps |
+| **Sync** | **N/A** | Video-only (no audio stream) |
+| **Resume** | **N/A** | Not exercised |
+| **Matte** | — | VP8 **1280×720**, `alpha_mode=1` preserved |
+
+**Drop-in v2** ([`spikes/s4/dropin/`](./s4/dropin/)): concurrent `startSession` / `stopAll`, gap watchdog (>500 ms via `MediaStreamTrackProcessor`), visibility logging, `exportResults()` → `<key>.results.json`.
+
+**Open decision:** **HQ master = matted canvas vs raw cam+mic + server matte** — decide after take 2 (dual record, v2).
+
+---
+
 > **Pass 1 + 1b + 2a/2b — mostly localhost / headless / synthetic; laptop MinIO smoke only; NOT full Sandbox multi-machine hardware pass.**  
 > Préliminaire · 2026-10-05 · Podcast Media · D-01 / [ARCHITECTURE](../docs/ARCHITECTURE.md) §6–7 · MinIO POC : [`spikes/s4/minio/README.md`](./s4/minio/README.md) (**pgsty/minio** verrouillé).
 
