@@ -1,14 +1,19 @@
-# Soak harness (WIP)
+# Soak harness — overnight 2026-10-06 (FINAL)
 
-Overnight 2026-10-06 scripts live on Loïc laptop lab dir:
+Lab dir on laptop: `C:\Users\azero\s1-livekit-oss\scripts\`
 
-`C:\Users\azero\s1-livekit-oss\scripts\`
+## Results
 
-- `soak-5pax-hd.mjs` + `run-soak.sh` — 5 pubs file-mode + HD sub, room `s1-soak`
-- `soak-audio-5min.mjs` + `run-soak-audio.sh` — take4 WAV speech inbound metrics
-- `soak-host-monitor.ps1` — docker stats + participants
-- `subscribe-getstats.mjs` / `run-sub-getstats.sh` — take4 subscriber capture
+| Run | Path | Verdict |
+| --- | --- | --- |
+| 30 min 5-pax HD | `soak-20261006-011411/` | connectivity PASS / **HD FAIL** (3×1280×720@8fps) |
+| 5 min audio WAV | `soak-audio-20261006-014508/` | **speech PASS**; bitrate kbps NOT VALIDATED |
 
-Harness `file` mode (`public/harness.js`): publish take4 webm video + `/media/take4-20s.wav` audio via `captureStream` (gum blocked on non-secure `host.docker.internal`).
+## Scripts
 
-Results dirs: `scripts/soak-20261006-011411/` (30 min, in progress at WIP), then `scripts/soak-audio-*`.
+- `soak-5pax-hd.mjs` + `run-soak.sh`
+- `soak-audio-5min.mjs` + `run-soak-audio.sh`
+- `soak-host-monitor.ps1`
+- Harness `file` mode: webm video + WAV audio via `captureStream`
+
+Box copies: `/workspace/s1-soak/`

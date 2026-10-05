@@ -335,16 +335,30 @@ Media remux of take 2 **matted** WebM showed **S3 synthetic smoke** (“no camer
 
 Artifacts: laptop `C:\Users\azero\s1-livekit-oss\scripts\cam-sub-getstats.json`, `take4-window-stats-refined.json`; box `/workspace/s1-soak/`.
 
-### Overnight soak (IN PROGRESS)
+### Overnight soak 30 min — FINAL (loopback)
 
 | Item | Value |
 | --- | --- |
-| Start | **2026-10-06T01:14:11** Paris · container started **01:14:22** |
-| Room | **`s1-soak`** (isolated from `vision-s3` / `s1-lab`) |
-| Load | **5** publishers + **1** HD subscriber · HOLD **1800 s** · sample **10 s** |
-| Source | take 4 raw `vision-host-raw-1791240416301.webm` → 20 s Y4M/WAV; pubs use harness **`file`** mode (`<video>/<audio>.captureStream`) — gum fake-device blocked on `host.docker.internal` (non-secure origin) |
-| Status | **IN PROGRESS** at WIP commit time (~01:40, ~t=1540 s, 6/6 connected). Final HD/audio numbers in follow-up commit. |
-| Host metrics | `scripts/soak-*/host-metrics.csv` + `participants.log` |
+| Window | **2026-10-06T01:14:11 → 01:44:34** Paris (HOLD 1800 s) |
+| Room | **`s1-soak`** (isolated from `vision-s3`) |
+| Load | **5** file pubs + **1** sub · sample **10 s** · all joins OK (1.6–3.5 s) |
+| Source | take4 raw → Y4M/WAV; harness **`file`** CaptureStream (gum blocked on non-secure `host.docker.internal`) |
+| Subscriber inbound | video samples **880** · res seen: 160×90 … **1280×720** · HD samples **3** only (fps **8/8/8**) · mid **106** · low **595** · packetsLost last **0** · freezeCount last **76** |
+| HD verdict | **FAIL** — 1280×720 not sustained (adaptiveStream/dynacast + 5 tiles; forceHigh insufficient) |
+| Connectivity | **PASS** 6/6 for full 30 min, no scripted disconnect |
+| Host | LiveKit CPU ~**22–35%**, mem ~**110 MiB** (`host-metrics.csv`) |
+| Caveat | **Single-machine loopback** — not LAN/WAN |
+
+### Audio speech soak 5 min — FINAL (take4 WAV)
+
+| Item | Value |
+| --- | --- |
+| Window | **01:45:08 → 01:50:19** Paris · room **`s1-soak-audio`** · **3** pubs + 1 sub |
+| Audio source | `/media/take4-20s.wav` (from take4 raw Opus) via harness file audio `captureStream`; Chrome `--use-file-for-fake-audio-capture` also set (unused for file mode) |
+| Inbound audio | **177** samples · **3** SSRCs · loss **0%** · jitter **2–13 ms** (med **6**) · audioLevel med **0.066** max **1.0** · totalAudioEnergy **0.13 → 7.35** (grew) · concealedSamples last **1440** / events **1** |
+| Bitrate kbps | **NOT VALIDATED** (NaN delta bug in `soak-audio-5min.mjs`) — do not invent |
+| Speech verdict | **PASS** (energy + audioLevel proof of real speech on all 3 remotes) |
+| Video note (same run) | HD **23** samples, fps **14/22/30** — better than 5-pax 30 min |
 
 
 ## Annexe — desk SaaS (superseded)
