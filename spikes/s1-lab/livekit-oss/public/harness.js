@@ -2,6 +2,7 @@ import {
   Room,
   RoomEvent,
   Track,
+  LocalVideoTrack,
   createLocalTracks,
   VideoPresets,
 } from "https://esm.sh/livekit-client@2.9.1";
@@ -11,6 +12,7 @@ const POLL_MS = 2000;
 const els = {
   room: document.getElementById("room"),
   identity: document.getElementById("identity"),
+  mediaMode: document.getElementById("media-mode"),
   join: document.getElementById("join"),
   leave: document.getElementById("leave"),
   status: document.getElementById("status"),
@@ -25,6 +27,10 @@ let room = null;
 let statsTimer = null;
 /** key -> { bytes, at } for bitrate */
 const byteSnapshots = new Map();
+/** @type {number | null} */
+let canvasAnim = null;
+/** @type {MediaStreamTrack | null} */
+let canvasVideoTrack = null;
 
 els.identity.value = `p-${Math.floor(Math.random() * 900 + 100)}`;
 
@@ -74,18 +80,22 @@ async function joinRoom() {
   await room.connect(url, token);
   setStatus(`connected — ${roomName}`);
 
-  const tracks = await createLocalTracks({
-    audio: true,
-    video: {
-      resolution: VideoPresets.h720.resolution,
-    },
-  });
-
-  for (const track of tracks) {
-    await room.localParticipant.publishTrack(track);
-    if (track.kind === Track.Kind.Video) {
-      track.attach(els.localVideo);
+  const mode = els.mediaMode?.value ?? "canvas";
+  if (mode === "camera") {
+    const tracks = await createLocalTracks({
+      audio: true,
+      video: { resolution: VideoPresets.h720.resolution },
+    });
+    for (const track of tracks) {
+      await room.localParticipant.publishTrack(track);
+      if (track.kind === Track.Kind.Video) track.attach(els.localVideo);
     }
+    setStatus(`connected — ${roomName} (camera)`);
+  } else if (mode === "canvas") {
+    await publishCanvasTrack();
+    setStatus(`connected — ${roomName} (canvas, no cam)`);
+  } else {
+    setStatus(`connected — ${roomName} (subscribe-only, no publish)`);
   }
 
   for (const p of room.remoteParticipants.values()) {
@@ -100,6 +110,7 @@ async function joinRoom() {
 
 async function leaveRoom() {
   stopStatsPolling();
+  stopCanvas();
   byteSnapshots.clear();
   clearStatsTable();
   removeAllRemoteTiles();
@@ -113,6 +124,46 @@ async function leaveRoom() {
   setStatus("disconnected");
   els.join.disabled = false;
   els.leave.disabled = true;
+}
+
+
+async function publishCanvasTrack() {
+  const canvas = document.createElement("canvas");
+  canvas.width = 1280;
+  canvas.height = 720;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) throw new Error("canvas 2d unavailable");
+
+  const draw = (t) => {
+    const hue = (t / 40) % 360;
+    ctx.fillStyle = `hsl(${hue} 55% 18%)`;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#e8eaed";
+    ctx.font = "48px system-ui,sans-serif";
+    ctx.fillText("S1 canvas smoke (no cam)", 48, 120);
+    ctx.font = "28px system-ui,sans-serif";
+    ctx.fillText(new Date().toISOString(), 48, 180);
+    ctx.fillText(`identity: ${room?.localParticipant?.identity ?? "?"}`, 48, 220);
+    canvasAnim = requestAnimationFrame(draw);
+  };
+  canvasAnim = requestAnimationFrame(draw);
+
+  const stream = canvas.captureStream(15);
+  canvasVideoTrack = stream.getVideoTracks()[0];
+  const local = new LocalVideoTrack(canvasVideoTrack, undefined, false);
+  await room.localParticipant.publishTrack(local, { name: "canvas-smoke" });
+  local.attach(els.localVideo);
+}
+
+function stopCanvas() {
+  if (canvasAnim != null) {
+    cancelAnimationFrame(canvasAnim);
+    canvasAnim = null;
+  }
+  if (canvasVideoTrack) {
+    canvasVideoTrack.stop();
+    canvasVideoTrack = null;
+  }
 }
 
 async function fetchToken(roomName, identity) {
