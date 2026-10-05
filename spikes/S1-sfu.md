@@ -4,7 +4,7 @@
 | --- | --- |
 | **Date** | 2026-10-05 (pivot Loïc via lead) |
 | **Auteur** | Podcast RTC |
-| **Statut** | **LAB GO — stack = LiveKit OSS (B)** |
+| **Statut** | **LAB DEV LOCAL UP** — stack **LiveKit OSS (B)** ; instance Docker Compose sur poste dev (2026-10-05) |
 | **Décision stack POC** | **B — LiveKit OSS self-host** (vote locked 2026-10-05, lead / Loïc) ; A/C/D non retenus |
 | **D-04** | Override **POC uniquement** — voir [`S1-D04-POC-override.md`](S1-D04-POC-override.md) |
 
@@ -35,7 +35,7 @@ Coût POC : **ESTIMATION VPS €/h** uniquement (pas de facturation minutes clou
 | --- | --- | --- |
 | **PREP SaaS (archivé)** | Desk LiveKit Cloud / Daily / Agora | **Superseded** — POC SaaS abandonné ([annexe](#annexe--desk-saas-superseded)) |
 | **PREP self-host** | Grille comparatif (historique) + QCM | Vote **B** |
-| **LAB LiveKit OSS** | `docker compose` + harnais [`livekit-oss/`](s1-lab/livekit-oss/) | **GO** — déploiement **LAN first** ; IP hôte **TBD** Loïc |
+| **LAB LiveKit OSS** | `docker compose` + harnais [`livekit-oss/`](s1-lab/livekit-oss/) | **DEV local UP** (Loïc unblocked) ; **LAN Sandbox IP** reporté pour multi-pax FR |
 
 **Interdit** : **SFU SaaS** (Cloud/Daily/Agora) ; code Phase 1 produit dans ce repo spike.
 
@@ -45,20 +45,25 @@ Coût POC : **ESTIMATION VPS €/h** uniquement (pas de facturation minutes clou
 
 *(Ne pas inventer de chiffres.)*
 
-**Cible lab** : participants en **France** ; SFU sur **LAN Sandbox en priorité** (VPS EU en repli si besoin). **IP / SSH / hôte** : **TBD** — fournis par Loïc (ne pas inventer).
+**Cible lab** : participants en **France** ; SFU sur **LAN Sandbox en priorité** (VPS EU en repli). **Dev local** : pas d’attente IP Sandbox pour smoke (Loïc, 2026-10-05). **IP LAN Sandbox** : **TBD** pour sessions multi-pax sur le réseau Sandbox (ne pas inventer).
 
 | Champ | Valeur |
 | --- | --- |
-| Hôte SFU (LAN IP / VPS EU FQDN) | |
-| Région / datacenter VPS | |
-| TURN / STUN (coturn, LiveKit TURN, autre) | |
-| Devices / OS clients | |
+| Hôte SFU (LAN IP / VPS EU FQDN) | **dev** : `127.0.0.1` (localhost) — **LAN Sandbox IP : TBD** Loïc |
+| Région / datacenter VPS | n/a (dev local) |
+| TURN / STUN (coturn, LiveKit TURN, autre) | non testé (dev localhost) |
+| Devices / OS clients | Poste dev partagé (« Grok Bot computer ») — smoke local |
 | Navigateurs (versions) | |
-| Nb machines physiques (≥ 2) | |
-| Réseau clients (fibre / Wi‑Fi / VPN) | |
+| Nb machines physiques (≥ 2) | 1 (dev smoke) — **≥2 requis pour protocole 5 pax** |
+| Réseau clients (fibre / Wi‑Fi / VPN) | localhost |
 | Stack | **LiveKit OSS (B)** |
-| Versions serveur + SDK client | |
-| Date début / fin lab | |
+| Versions serveur + SDK client | `livekit/livekit-server:v1.8.4` ; `livekit-client` (harnais esm) |
+| Ports hôte | TCP **7880**, **7881** ; UDP **50000–50200** (pas de conflit MinIO **9000/9001** sur même machine) |
+| Room par défaut | `s1-lab` |
+| Clés | Placeholders `.env.example` (non prod) |
+| Smoke 2026-10-05 | Token mint + HTTP **200** LiveKit vérifiés |
+| Répertoire sur la box | `/workspace/s1-livekit-oss` (équivalent [`s1-lab/livekit-oss/`](s1-lab/livekit-oss/)) |
+| Date début / fin lab | début dev **2026-10-05** ; fin — |
 
 ---
 
@@ -187,7 +192,7 @@ Comparaison **historique** (pré-vote). **POC retenu : colonne LiveKit OSS (B).*
 | ID | Blocker | Owner | Statut |
 | --- | --- | --- | --- |
 | B1 | Vote stack POC | — | **Fermé** — **B LiveKit OSS** |
-| B2 | **IP / hôte / SSH LAN Sandbox** + ports/TURN ([`S1-QCM.md`](S1-QCM.md) Q2 = LAN first) | Loïc | **Ouvert** — Q2 mode tranché ; IP **TBD** |
+| B2 | **IP / hôte / SSH LAN Sandbox** pour lab **multi-pax France** (Q2 = LAN first) | Loïc | **Reporté** — dev local **UP** sans IP Sandbox |
 | B3 | Go formel post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)) pour enchaînement produit | Lead | Ouvert (parallèle prep OK) |
 | B4 | ~~SFU SaaS free tier~~ | — | **Annulé** — SaaS stop per Loïc |
 

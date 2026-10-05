@@ -2,7 +2,23 @@
 
 Self-hosted **`livekit-server`** on Sandbox **LAN** (default path per Q2 Loïc). **EU VPS** only later if needed. Participants **France**. **Not** LiveKit Cloud. **Not** production.
 
-**Awaiting Sandbox LAN host IP** (and SSH/access details) from Loïc — **do not invent**; set `LIVEKIT_URL` once provided.
+**Sandbox LAN host IP** still **TBD** from Loïc for multi-client lab on Sandbox network — **do not invent**.
+
+## Dev instance running (2026-10-05)
+
+Loïc unblocked **local/dev Docker Compose** — no wait on Sandbox IP for smoke on the shared dev box.
+
+| Item | Value |
+| --- | --- |
+| Host | Grok Bot computer (shared dev box) |
+| Working dir on box | `/workspace/s1-livekit-oss` (mirrors this repo path `spikes/s1-lab/livekit-oss/`) |
+| Server image | `livekit/livekit-server:v1.8.4` |
+| LiveKit WebSocket | `ws://127.0.0.1:7880` |
+| Harness UI (token + getStats) | http://127.0.0.1:5190 |
+| Default room | `s1-lab` |
+| Ports | TCP **7880**, **7881**; UDP **50000–50200** (no conflict with MinIO **9000/9001** on same host) |
+| Keys | Placeholders from [`.env.example`](./.env.example) — **not production** |
+| Verified 2026-10-05 | Token mint + HTTP **200** against LiveKit |
 
 | | |
 | --- | --- |

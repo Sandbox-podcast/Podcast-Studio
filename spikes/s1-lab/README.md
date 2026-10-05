@@ -6,7 +6,7 @@ POC SFU stack: **[`livekit-oss/`](./livekit-oss/)** — **LAB GO** ([`S1-sfu.md`
 
 | Target | Status |
 | --- | --- |
-| [**LiveKit OSS**](./livekit-oss/) | **Runnable** — `docker compose` + `npm run dev` |
+| [**LiveKit OSS**](./livekit-oss/) | **DEV LOCAL UP** (2026-10-05) — see [dev instance](./livekit-oss/README.md#dev-instance-running-2026-10-05) |
 
 ## Not selected for POC
 
