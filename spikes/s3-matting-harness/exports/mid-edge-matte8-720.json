@@ -1,0 +1,52 @@
+{
+  "harness": "s3-matting-harness",
+  "note": "Spike PREP - Edge browser matting (MediaPipe tasks-vision, RAF+canvas composite). NOT python-mediapipe inference-only. Measured 2026-10-06 Europe/Paris on LAPTOP-BI8P2KF3 MID inventaire. Take4 live overlay fpsAvg~34.5 is LIVE CAM (pre-v8 overlay); Playwright loop fpsAvg 24.6 is run4-raw FILE LOOP (s4-matte8). NOT apples-to-apples \u2014 equal-source A/B (v7 vs v8 both on run4-raw) PENDING. Do not treat 34.5\u219224.6 as v8 cost.",
+  "exportedAt": "2026-10-05T23:01:01.134043+00:00",
+  "host": "LAPTOP-BI8P2KF3",
+  "hostClass": "MID inventaire r\u00e9el (i7-11370H + Iris Xe + RTX 3070) \u2014 NOT LOW-END i5+iGPU",
+  "resolutionPreset": "720p",
+  "backend": "mediapipe-tasks-vision-edge",
+  "browser": "Edge (Playwright loop + live overlay)",
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "runs": [
+    {
+      "id": "take4-live-overlay-pre-v8",
+      "source": "live camera (LifeCam Cinema)",
+      "harnessVersion": "pre-v8 / take4 live",
+      "scope": "Edge RAF+canvas composite overlay (live)",
+      "summary": {
+        "fpsAvg": 34.5,
+        "fpsP5": null,
+        "fpsP5Note": "overlay p5 was WRONG math (p5 of frameMs inverted); fixed in v8 \u2014 do not cite pre-v8 overlay p5"
+      },
+      "pass": "N/A (MID inventaire; live observation)"
+    },
+    {
+      "id": "s4-matte8-playwright-run4-raw-loop",
+      "source": "take4 raw WebM file loop (720p)",
+      "harnessVersion": "s4-matte8 (v8)",
+      "scope": "Edge Playwright ~20s steady RAF+canvas",
+      "v8Settings": {
+        "maskUpsample": "bilinear",
+        "edgeBlurPx": 2.5,
+        "temporalBlend": "0.65/0.35",
+        "confidenceThreshold": 0.4,
+        "model": "selfie general",
+        "dualCanvas": "opaque preview + transparent record"
+      },
+      "summary": {
+        "fpsAvg": 24.6,
+        "fpsP5Worst": 18.0,
+        "frameMsAvg": 40.7,
+        "frameMsP95": 55.5
+      },
+      "pass": "N/A (MID inventaire; quality hair fringe FAIL designer criteria)"
+    }
+  ],
+  "comparisonCaveat": "pending equal-source A/B: v7 vs v8 both on run4-raw Playwright. Do not publish causal FPS delta until that lands.",
+  "softLean": "master HQ = cam raw; browser matte = live/preview only",
+  "samples": []
+}

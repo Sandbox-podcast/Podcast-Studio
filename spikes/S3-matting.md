@@ -4,7 +4,7 @@
 **Auteur** : _à compléter_  
 **Statut** : **PREP** — profils matériels **verrouillés par Loïc** (voir Setup) ; en attente de (a) SKU / modèle exact pour la **cible MID** (i7 + dGPU milieu de gamme — **TBD**), (b) feu vert lead Podcast Studio post-S0 (D-00).
 
-> **Mesures MID inventaire (2026-10-05)** : **python-mediapipe** sur **`LAPTOP-BI8P2KF3`** (LifeCam 720p) — voir table **Mesures** ; exports `spikes/s3-matting-harness/exports/mid-mediapipe-*.json`. **≠ pass officiel LOW-END** (i5 + iGPU). Harness **Edge** (`:8088`, RAF + canvas composite) et chemin **CaptureStream matting navigateur** : **toujours bloqués** (frames n’avancent pas). Aucune conclusion pass/fail S3 tant que le protocole n’est pas exécuté sur la **cible LOW-END** et le go spike acté.
+> **Mesures MID inventaire (2026-10-05 → 2026-10-06)** : **python-mediapipe** + **Edge navigateur** sur **`LAPTOP-BI8P2KF3`** (LifeCam / take4 raw 720p) — voir table **Mesures** ; exports `spikes/s3-matting-harness/exports/mid-mediapipe-*.json` et `exports/mid-edge-matte8-720.json`. **≠ pass officiel LOW-END** (i5 + iGPU). **MID inventaire ≠ LOW-END.** Edge RAF+canvas : premier chiffres navigateur (take4 live + Playwright file loop) — **A/B égal source (v7 vs v8 sur run4-raw) PENDING** ; ne pas publier de delta causal 34.5→24.6. Soft lean : **master HQ = cam brute** ; matte navigateur = live/preview (frange cheveux = FAIL critères Designer). Aucune conclusion pass/fail S3 tant que le protocole n’est pas exécuté sur la **cible LOW-END** et le go spike acté.
 
 ---
 
@@ -24,12 +24,12 @@ Alignement architecture : pipeline client décrit en [ARCHITECTURE.md §5](../do
 | --- | --- |
 | **Cible LOW-END (Loïc) — pass officiel Windows** | Laptop **Windows** · CPU **Intel Core i5** · **iGPU** · hôte nommé **`LAPTOP-BI8P2KF3`** au verrou — **écart inventaire 2026-10-05** (voir Inventaire) ; confirmation Loïc **en attente** (changer la cible ou utiliser une autre machine i5 + iGPU) |
 | **Cible MID (Loïc)** | **Windows** · CPU **Intel Core i7** · **dGPU milieu de gamme** · SKU / modèle exact **TBD** |
-| Devices (runs officiels) | **`LAPTOP-BI8P2KF3`** — **CONNECTED** ; harness S3 **`http://127.0.0.1:8088/`** (Edge, matting **bloqué**). **2026-10-05** : mesures **python-mediapipe** (ffmpeg dshow → ImageSegmenter selfie, CPU/XNNPACK) = **inventaire MID réel** — **pas** LOW-END officiel. |
+| Devices (runs officiels) | **`LAPTOP-BI8P2KF3`** — **CONNECTED** ; harness S3 **`http://127.0.0.1:8088/`** (Edge). **2026-10-05** : **python-mediapipe** (ffmpeg dshow → ImageSegmenter selfie, CPU/XNNPACK). **2026-10-06** : Edge MediaPipe tasks-vision RAF+canvas (take4 live + Playwright run4-raw loop, `s4-matte8`) = **inventaire MID réel** — **pas** LOW-END officiel. |
 | OS / navigateurs | **`LAPTOP-BI8P2KF3`** : **Windows 11 Famille** · **Edge** (harness) · **python/3.9.13** + **mediapipe/0.10.14** (runs mesurés). Autres unités : _TBD_ |
 | Caméra(s) testées | **Microsoft® LifeCam Cinema(TM)** — max natif **1280×720@30** (pas de mode 1080p dshow) |
 | Harness | `spikes/s3-matting-harness/` (statique, hors produit) |
 | Réseau | Local ; LiveKit OSS S1 **`s1-lab`** — sur **`LAPTOP-BI8P2KF3`** : `ws://192.168.1.68:7880` (LAN) et `ws://127.0.0.1:7880` · token `http://127.0.0.1:5190/api/token` · harness S3 **`http://127.0.0.1:8088/`** — smoke / pub-sub host-local uniquement (voir **DRAFT** ci-dessous) |
-| Versions backends | **mediapipe 0.10.14** (python ImageSegmenter selfie, delegate CPU) · harness navigateur tasks-vision : _Edge run matting non exécuté (bloqué)_ |
+| Versions backends | **mediapipe 0.10.14** (python ImageSegmenter selfie, delegate CPU) · harness navigateur **MediaPipe tasks-vision** (Edge, selfie general, `s4-matte8` : bilinéaire + blur 2.5px + temporal 0.65/0.35 + threshold 0.4 + dual canvas) |
 
 ### Inventaire matériel (sondage — pas de FPS)
 
@@ -64,14 +64,18 @@ Critères spike (référence, **non évalués ici**) :
 
 ## Mesures (pass officiel Windows — LOW-END / MID)
 
-_Runs **LOW-END officiels** : toujours **ouverts** (pas de ligne i5+iGPU). Ci-dessous : **MID inventaire réel** sur **`LAPTOP-BI8P2KF3`** — **python-mediapipe**, scope **`segment_for_video` uniquement** (pas RAF+canvas Edge). Chiffres issus des exports JSON ; ne pas extrapoler._
+_Runs **LOW-END officiels** : toujours **ouverts** (pas de ligne i5+iGPU). Ci-dessous : **MID inventaire réel** sur **`LAPTOP-BI8P2KF3`** (i7-11370H + Iris Xe + RTX 3070 — **≠ LOW-END**). Deux runtimes : **python-mediapipe** (inference-only) et **Edge navigateur** (RAF+canvas). Chiffres issus des exports JSON ; ne pas extrapoler.
+
+> **Caveat A/B égal source (PENDING)** : take4 live overlay **fpsAvg ~34.5** = **cam live** (pre-v8) ; Playwright **fpsAvg 24.6 / fpsP5Worst 18** = **fichier run4-raw en boucle** (`s4-matte8`). **Pas comparable** — ne pas publier de delta causal « coût v8 ». A/B **v7 vs v8**, tous deux sur **run4-raw Playwright**, à venir. Overlay FPS p5 pre-v8 était **faux** (p5 de frameMs inversé) — corrigé en v8 (issue liée)._
 
 | device | OS | browser / runtime | camera res | backend (mediapipe \| webgpu \| wasm) | FPS avg | FPS p5 | CPU % | GPU % | notes | pass? |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| **LAPTOP-BI8P2KF3** · MID inventaire réel (i7-11370H + RTX 3070) · **≠ LOW-END** | Windows | **python-mediapipe** (ffmpeg-dshow) · **≠ Edge harness** | 1280×720 | mediapipe **CPU** | **174.0** | **194.3** | | | frameMsAvg **5.75** · frameMsP5 **5.15** · sampleCount **600** · boucle capture+infer ~**29 FPS** (cam 30 fps) ; headroom infer = fpsAvg · export `exports/mid-mediapipe-720.json` | **N/A** (MID inventaire ; pas pass LOW-END) |
+| **LAPTOP-BI8P2KF3** · MID inventaire réel (i7-11370H + RTX 3070) · **≠ LOW-END** | Windows | **python-mediapipe** (ffmpeg-dshow) · **≠ Edge harness** | 1280×720 | mediapipe **CPU** | **174.0** | **194.3** | | | frameMsAvg **5.75** · frameMsP5 **5.15** · sampleCount **600** · boucle capture+infer wall ~**29 FPS** (cam 30 fps) ; headroom infer = fpsAvg · export `exports/mid-mediapipe-720.json` | **N/A** (MID inventaire ; pas pass LOW-END) |
 | **LAPTOP-BI8P2KF3** · MID inventaire réel · **≠ LOW-END** | Windows | **python-mediapipe** | 1920×1080 (tentative) | mediapipe CPU | — | — | | | **BLOCKED** · `camera_max_720p` — LifeCam max **1280×720@30** · export `exports/mid-mediapipe-1080.json` | **BLOCKED** |
+| **LAPTOP-BI8P2KF3** · MID inventaire · **≠ LOW-END** | Windows | **Edge** · overlay live take4 (pre-v8) | 1280×720 **live cam** | mediapipe **tasks-vision** (browser) | **~34.5** | — (overlay p5 **WRONG** pre-v8) | | | Observation live take4 · **source = cam live** · p5 overlay math fixed in v8 · **≠** Playwright file loop | **N/A** (observation) |
+| **LAPTOP-BI8P2KF3** · MID inventaire · **≠ LOW-END** | Windows | **Edge** · Playwright `s4-matte8` ~20 s steady | 1280×720 **run4-raw file loop** | mediapipe **tasks-vision** (browser) | **24.6** | **18.0** (p5Worst = 1000/p95 frameMs) | | | frameMsAvg **40.7** · frameMsP95 **55.5** · v8: bilinear + blur 2.5px + temporal 0.65/0.35 + thr 0.4 + selfie general + dual canvas · export `exports/mid-edge-matte8-720.json` · qualité frange cheveux **FAIL** Designer · soft lean master HQ = **cam brute** | **N/A** (MID ; qualité FAIL live guest) |
 
-_Exporter les samples : harness Edge (bouton Export) quand débloqué ; runs python : `spikes/s3-matting-harness/exports/`._
+_Exporter : `spikes/s3-matting-harness/exports/`. A/B égal source v7 vs v8 sur run4-raw : **PENDING**._
 
 ---
 
@@ -82,7 +86,7 @@ _Placeholder — à remplir après campagne de mesures._
 | device ↓ / res × backend → | 720p MediaPipe | 720p WebGPU | 720p WASM | 1080p MediaPipe | 1080p WebGPU | 1080p WASM |
 | --- | --- | --- | --- | --- | --- | --- |
 | _LOW-END · Windows · i5 · iGPU (unité TBD si ≠ inventaire LAPTOP)_ | | | | | | |
-| _MID / inventaire réel · LAPTOP-BI8P2KF3 · Win11 · i7-11370H · Iris Xe + RTX 3070 · LifeCam Cinema_ | **perf OK** (python mediapipe CPU **174** fpsAvg — voir Mesures ; qualité visuelle non jury : LifeCam / overhead → masque selfie surtout vert) | _non mesuré_ | _non mesuré_ | **BLOCKED** (cam max 720p) | _non mesuré_ | _non mesuré_ |
+| _MID / inventaire réel · LAPTOP-BI8P2KF3 · Win11 · i7-11370H · Iris Xe + RTX 3070 · LifeCam Cinema_ | **perf** python **174** fpsAvg (infer-only) · Edge Playwright file-loop **24.6** / live overlay ~**34.5** (sources **≠** ; A/B PENDING) — qualité Edge : silhouette OK, **frange cheveux FAIL** Designer → soft lean **master HQ = cam brute** | _non mesuré_ | _non mesuré_ | **BLOCKED** (cam max 720p) | _non mesuré_ | _non mesuré_ |
 | _MID · Windows · i7 · dGPU (SKU TBD — autre unité)_ | | | | | | |
 | _autre device_ | | | | | | |
 
@@ -97,13 +101,13 @@ Légende qualité subjective (à définir avant jury) : _ex. OK / limite / KO + 
 | Élément | Valeur |
 | --- | --- |
 | Hôte connecté | **`LAPTOP-BI8P2KF3`** — harness **`http://127.0.0.1:8088/`** (Edge) ; matériel sondé **i7 + dGPU** → **MID-like**, pas LOW-END (détail : Inventaire) |
-| Mesures FPS matting | **MID inventaire** : python-mediapipe **720p PASS** (fpsAvg **174.0**, export JSON) · **1080p BLOCKED** (cam) · Edge harness matting / CaptureStream navigateur : **bloqué** — **pas** LOW-END officiel |
+| Mesures FPS matting | **MID inventaire** : python-mediapipe **720p** fpsAvg **174.0** · Edge live ~**34.5** · Edge Playwright run4-raw **24.6** / p5Worst **18** (A/B égal source **PENDING**) · **1080p BLOCKED** (cam) — **pas** LOW-END officiel |
 | LiveKit smoke (synthétique) | Harness S3 : **Smoke synthétique** + publish vers `s1-lab` — voir `spikes/s3-matting-harness/README.md` · **DRAFT** pub/sub host-local Python (2026-10-05) : section ci-dessous |
 | Conclusion pass/fail | **N/A** — pass officiel S3 reste sur **LOW-END** **i5 + iGPU** (unité à confirmer avec Loïc) |
 
 ### DRAFT — LiveKit laptop host-local pub/sub (2026-10-05)
 
-> **DRAFT — smoke mesuré sur l’hôte lui-même** (soir **2026-10-05**, fuseau **Europe/Paris**). **Ce n’est pas le pass S3.** Hôte **`LAPTOP-BI8P2KF3`** (ASUS TUF Dash F15 · Win11 · i7-11370H · Iris Xe + RTX 3070) = **inventaire réel / MID-like** — **pas** la cible **LOW-END** verrouillée (i5 + iGPU). **LifeCam Cinema** branchée : **python-mediapipe 720p** mesuré (table **Mesures**) ; harness **Edge** matting + chemin **CaptureStream** matted **toujours bloqués** (frames n’avancent pas sous Playwright).
+> **DRAFT — smoke mesuré sur l’hôte lui-même** (soir **2026-10-05**, fuseau **Europe/Paris**). **Ce n’est pas le pass S3.** Hôte **`LAPTOP-BI8P2KF3`** (ASUS TUF Dash F15 · Win11 · i7-11370H · Iris Xe + RTX 3070) = **inventaire réel / MID-like** — **pas** la cible **LOW-END** verrouillée (i5 + iGPU). **LifeCam Cinema** branchée : **python-mediapipe 720p** + **Edge** matting mesurés (table **Mesures**, 2026-10-06) ; A/B égal source v7/v8 sur run4-raw **PENDING**.
 
 | Paramètre | Valeur (LAPTOP-BI8P2KF3) |
 | --- | --- |
@@ -166,12 +170,13 @@ _N/A pour matting client (pas de coût cloud direct). Coût SFU publish (étape 
 - [x] Chemin publish LiveKit OSS prêt (harness S3, optionnel) — **smoke box sans caméra** via piste synthétique (canvas + audio silencieux) ; défauts `ws://127.0.0.1:7880`, room `s1-lab`, identity `vision-s3`, token `http://127.0.0.1:5190/api/token` (forme S1 lab). Le harness RTC S1 (`:5190`) exige `getUserMedia` avant join — ne pas l’utiliser pour smoke headless ; utiliser `spikes/s3-matting-harness/` avec **Smoke synthétique** (défaut).
 - [x] **DRAFT** smoke host-local **pub/sub** LiveKit sur **`LAPTOP-BI8P2KF3`** (2026-10-05) — Python synth **`vision-s3-synth`** · smoke 1 publish **PASS** · smoke 2 pub+sub **PASS** — détail : **BOX-ONLY → DRAFT LiveKit laptop** ; **MID-like**, **≠ LOW-END**, **≠ pass S3**
 - [x] **MediaPipe 720p mesuré** (python-mediapipe, LifeCam, export `exports/mid-mediapipe-720.json`) — **MID inventaire** ; **≠** pass LOW-END officiel
-- [ ] Harness **Edge** boucle matting (RAF+canvas) + **Export JSON navigateur** — **bloqué** (frames n’avancent pas ; CaptureStream matted path inchangé)
+- [x] Harness **Edge** boucle matting (RAF+canvas) — take4 live + Playwright run4-raw (`s4-matte8`) ; export `exports/mid-edge-matte8-720.json` — **A/B égal source v7 vs v8 PENDING** ; qualité frange cheveux FAIL Designer
+- [ ] Overlay FPS p5 math fix shippé en harness v8 — issue GitHub liée (bug pre-v8 : p5 frameMs inversé)
 - [ ] **1080p** matting sur **`LAPTOP-BI8P2KF3`** — **bloqué** caméra (`camera_max_720p`) ; export `exports/mid-mediapipe-1080.json`
 - [ ] Pass officiel **LOW-END** (i5 + iGPU, unité à confirmer) — protocole + tables **ouvert**
 - [ ] Couplage publish SFU en conditions réelles (caméra + matting mesuré sur **LOW-END**)
 - [ ] ADR / roadmap : débloquer Phase 3 seulement si S3 pass (ou no-go plan B explicite, SPIKES.md)
 
-**Smoke box / inventaire réel ≠ pass S3** : FPS **720p** ci-dessus = **python-mediapipe MID inventaire uniquement** (chiffres JSON) ; le pass officiel reste le protocole sur **Windows LOW-END** · **i5 + iGPU** (unité physique à confirmer après arbitrage Loïc sur l’écart **`LAPTOP-BI8P2KF3`**).
+**Smoke box / inventaire réel ≠ pass S3** : FPS **720p** = **python-mediapipe** + **Edge navigateur** MID inventaire (chiffres JSON) ; **MID ≠ LOW-END** ; A/B égal source Edge **PENDING**. Pass officiel = protocole sur **Windows LOW-END** · **i5 + iGPU** (unité à confirmer).
 
 **Livrables associés** : ce rapport + matrice device → qualité ; harness `spikes/s3-matting-harness/`.
