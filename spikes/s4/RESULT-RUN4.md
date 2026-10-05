@@ -132,5 +132,7 @@ ROIs: gap `(760,200)–(860,300)`; hair `(480,40)–(780,180)`.
 - `/workspace/podcast-studio/s4-realcam/run4/media/server-matte/variants/roi-arm-torso-gap-t45.png`
 - stills: `/workspace/podcast-studio/s4-realcam/run4/media/server-matte/variants/stills/{A..E}_t*_checker.png`
 
-**Factual (Designer grades):** E←C lowers hair semitrans luma **169.6→125.7** and gap45 α **0.609→0.559** vs A/B. C alone edges B on gap/halo at **111.5 vs 104.3 s/min**. D resnet50: see table (extrapolated segment). Visually E is the strongest halo control among A–E on these proxies; residual soft fringe may remain.
+**Factual (metrics):** E←C lowers hair semitrans luma **169.6→125.7** and gap45 α **0.609→0.559** vs A/B. C alone edges B on gap/halo at **111.5 vs 104.3 s/min**. D resnet50: see table (extrapolated segment). Visually E is the strongest halo control among A–E on these proxies; residual soft fringe may remain.
+
+**Designer (variants):** **E** (ds0.4 + despill + 1 px erosion) confirmed best — hair halo clearly improved; arm/torso leak at **45** s still open → **near-PASS (improved)**, not a hard PASS. **D** resnet50 = **NO-GO** on cost/quality.
 
