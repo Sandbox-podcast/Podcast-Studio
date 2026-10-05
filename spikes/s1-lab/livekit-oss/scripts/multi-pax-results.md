@@ -60,3 +60,4 @@ Raw ICE RTT (nominated pairs, all PCs) per pax: mp-1 0 / 0.5 / 1 (n=20) · mp-2 
 - room was shared: non-script participant(s) also present: vision-s3
 - Harness RTT = ICE candidate-pair currentRoundTripTime (browser↔SFU), ~loopback here; says nothing about WAN.
 - Bitrate column is the harness's 2s delta; first poll per track is "—" and excluded.
+- **Harness fix (post-run):** `pickRtpReport` now picks the active simulcast layer (max bytes, then FPS) — outbound 0 bps false negative from this run is addressed in `public/harness.js`; re-run smoke to refresh outbound aggregates.

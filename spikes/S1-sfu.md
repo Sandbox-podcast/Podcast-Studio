@@ -149,7 +149,7 @@ Script : [`s1-lab/livekit-oss/scripts/multi-pax-smoke.mjs`](s1-lab/livekit-oss/s
 
 **Caveats** : vidéo **canvas synthétique ~15 fps**, **pas d’audio** ; **une** machine, Chrome headless ; **pas** LAN / **pas** 5 vraies caméras ; room partagée avec `vision-s3`.
 
-**Bug connu harnais** : ligne **outbound** peut afficher **0 bps** après ~10 s — `pickRtpReport` prend la **première** couche simulcast (souvent en pause) ; les **inbound** des autres clients prouvent la publication. Piste correctif : agréger toutes les couches ou choisir la couche active (max bytes).
+**Harnais (corrigé PR #3)** : `pickRtpReport` choisit la couche simulcast **active** (max `bytesSent`/`bytesReceived`, puis FPS) — le run ci-dessus a été mesuré avec l’ancien harnais (outbound agrégat 0/med/0 kbps dans `multi-pax-results.md`).
 
 ### Stabilité
 

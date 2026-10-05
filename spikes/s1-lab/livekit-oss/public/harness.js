@@ -331,12 +331,27 @@ async function getStatsReport(track) {
 
 function pickRtpReport(report, direction) {
   const kind = direction === "out" ? "outbound-rtp" : "inbound-rtp";
+  const bytesField = direction === "out" ? "bytesSent" : "bytesReceived";
+  const candidates = [];
   for (const stat of report.values()) {
     if (stat.type === kind && (stat.kind === "video" || stat.kind === "audio")) {
-      return stat;
+      candidates.push(stat);
     }
   }
-  return null;
+  if (!candidates.length) return null;
+  // Prefer active / non-paused simulcast layers (dynacast pauses unused ones → 0 bps).
+  candidates.sort((a, b) => {
+    const aActive = a.active !== false && !a.ended;
+    const bActive = b.active !== false && !b.ended;
+    if (aActive !== bActive) return aActive ? -1 : 1;
+    const ab = a[bytesField] ?? 0;
+    const bb = b[bytesField] ?? 0;
+    if (ab !== bb) return bb - ab;
+    const af = a.framesPerSecond ?? 0;
+    const bf = b.framesPerSecond ?? 0;
+    return bf - af;
+  });
+  return candidates[0];
 }
 
 function pickRttMs(report) {
