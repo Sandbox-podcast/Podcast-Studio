@@ -4,6 +4,18 @@
 
 Runs on the **same LAN host** as self-hosted **LiveKit OSS** (S1). `MINIO_LAN_HOST` is a placeholder until that machine’s IP/hostname is known.
 
+### Laptop deployment (2026-10-05 smoke)
+
+| Item | Value |
+| --- | --- |
+| Host | **LAPTOP-BI8P2KF3** · **192.168.1.68** |
+| API / console | `:9000` / `:9001` |
+| Compose | Same digest-pinned images as this folder; **no** `docker-compose.override.yml` host-network hack |
+| Credentials | Laptop `.env` only — never commit |
+| Smoke | ~19:30 CEST — 40 MB `mc` multipart + read-back, sha256 match, object deleted |
+
+**Firewall caveat:** Docker allowed on Windows **Public** profile while Wi-Fi is **Private** — other LAN clients may be blocked until Loïc approves inbound TCP **9000/9001** (and LiveKit **7880/7881/5190**, UDP **50000–50200**). See [`../../S4-recording.md`](../../S4-recording.md) §Laptop LAN MinIO.
+
 ## Image decision (locked 2026-10-05, Loïc)
 
 S4 POC uses the frozen community fork **`pgsty/minio`** (with matching **`pgsty/mc`** for init). Official `minio/minio` / `minio/mc` are no longer pullable from Docker Hub (2026-10-05); `quay.io/minio/*` denied; `dl.min.io` → HTTP 410.

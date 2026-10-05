@@ -6,7 +6,10 @@ Loïc decision (2026-10-05): **POC storage locked** to self-hosted **`pgsty/mini
 | --- | --- |
 | [`minio/`](./minio/) | Docker Compose **`pgsty/minio`** (digest-pinned) + `mc` init; server-wide CORS / stale MPU via env |
 | [`multipart-proto/`](./multipart-proto/) | Next.js 15 lab helper + browser multipart/resume sketch |
-| [`lab-pass1/`](./lab-pass1/) | Pass 1 lab harness (headless localhost run 2026-10-05) |
-| [`../S4-recording.md`](../S4-recording.md) | **Preliminary** spike report (pass 1 local; not hardware verdict) |
+| [`lab-pass1/`](./lab-pass1/) | Pass 1 + 1b lab harness (localhost 2026-10-05) |
+| [`lab-pass2/`](./lab-pass2/) | Pass 2a remux scripts + 2b OPFS crash harness |
+| [`webcodecs/`](./webcodecs/) | WebCodecs / fMP4 parallel sketch (sources + `RESULT.md`) |
+| [`../S4-recording.md`](../S4-recording.md) | **Preliminary** report + soft-lock verdict |
+| [`../S4-webcodecs.md`](../S4-webcodecs.md) | WebCodecs spike summary (parallel track) |
 
 Canonical protocol: [`../S4-protocol-prep.md`](../S4-protocol-prep.md).
