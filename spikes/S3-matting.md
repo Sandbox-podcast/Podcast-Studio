@@ -10,7 +10,7 @@
 
 ## Hypothèse testée
 
-Le détourage **côté client** (backends candidats : MediaPipe, WebGPU, WASM) peut atteindre **≥ 24 FPS** stables sur la **cible basse (LOW-END)** : laptop **Windows**, **Intel Core i5** + **iGPU**, unité **`LAPTOP-BI8P2KF3`**, avec une qualité **subjectivement acceptable pour podcast** (jury interne), et un **fallback explicite** (désactivation du matting → caméra brute) qui **ne casse pas la session** live.
+Le détourage **côté client** (backends candidats : MediaPipe, WebGPU, WASM) peut atteindre **≥ 24 FPS** stables sur la **cible basse (LOW-END)** : laptop **Windows**, **Intel Core i5** + **iGPU** (unité physique à aligner avec le verrou Loïc — voir **Inventaire matériel**), avec une qualité **subjectivement acceptable pour podcast** (jury interne), et un **fallback explicite** (désactivation du matting → caméra brute) qui **ne casse pas la session** live.
 
 La **cible MID** (Windows · **Intel Core i7** · **dGPU milieu de gamme**, SKU exact **TBD**) est documentée pour campagne complémentaire / matrice ; le **pass officiel S3** reste défini sur **LOW-END** ci-dessus.
 
@@ -22,14 +22,27 @@ Alignement architecture : pipeline client décrit en [ARCHITECTURE.md §5](../do
 
 | Élément | Valeur |
 | --- | --- |
-| **Cible LOW-END (Loïc) — pass officiel Windows** | Laptop **Windows** · CPU **Intel Core i5** · **iGPU** · hôte **`LAPTOP-BI8P2KF3`** |
+| **Cible LOW-END (Loïc) — pass officiel Windows** | Laptop **Windows** · CPU **Intel Core i5** · **iGPU** · hôte nommé **`LAPTOP-BI8P2KF3`** au verrou — **écart inventaire 2026-10-05** (voir Inventaire) ; confirmation Loïc **en attente** (changer la cible ou utiliser une autre machine i5 + iGPU) |
 | **Cible MID (Loïc)** | **Windows** · CPU **Intel Core i7** · **dGPU milieu de gamme** · SKU / modèle exact **TBD** |
-| Devices (runs officiels) | _vide — à renseigner après runs sur LOW-END (+ MID si campagne étendue)_ |
-| OS / navigateurs | **Windows** (build / édition _TBD_ par unité) · navigateurs de campagne _TBD_ (ex. Chrome / Edge) |
+| Devices (runs officiels) | **`LAPTOP-BI8P2KF3`** — **CONNECTED** ; harness S3 local **`http://127.0.0.1:8088/`** (Edge). Runs sur cet hôte = **inventaire réel / MID-like** jusqu’à arbitrage Loïc — **pas** LOW-END officiel. Mesures : tables ci-dessous **toujours vides** (pas d’export JSON). |
+| OS / navigateurs | **`LAPTOP-BI8P2KF3`** : **Windows 11 Famille** · **Microsoft Edge** (harness `:8088`). Autres unités : _TBD_ |
 | Caméra(s) testées | _vide_ |
 | Harness | `spikes/s3-matting-harness/` (statique, hors produit) |
 | Réseau | Local ; publish SFU **optionnel** via harness S3 → LiveKit OSS S1 (`s1-lab`) — smoke seulement |
 | Versions backends | _à renseigner au run (MediaPipe tasks-vision, etc.)_ |
+
+### Inventaire matériel (sondage — pas de FPS)
+
+_Sondage local **2026-10-05** sur l’hôte connecté. Ne remplace pas le verrou profil tant que Loïc n’a pas tranché._
+
+| Champ | `LAPTOP-BI8P2KF3` (CONNECTED) |
+| --- | --- |
+| État harness | S3 harness actif · **`http://127.0.0.1:8088/`** · navigateur **Edge** |
+| OS | **Windows 11 Famille** |
+| CPU | **11th Gen Intel Core i7-11370H** (4 cœurs) |
+| GPU | **Intel Iris Xe** + **NVIDIA GeForce RTX 3070 Laptop GPU** |
+| vs profil LOW-END (i5 + iGPU) | **Ne correspond pas** — classer les runs sur cette machine en **inventaire réel / MID-like** |
+| Suite | Attendre Loïc : ajuster la cible LOW-END **ou** fournir une autre unité **i5 + iGPU** pour le pass officiel |
 
 ---
 
@@ -68,8 +81,9 @@ _Placeholder — à remplir après campagne de mesures._
 
 | device ↓ / res × backend → | 720p MediaPipe | 720p WebGPU | 720p WASM | 1080p MediaPipe | 1080p WebGPU | 1080p WASM |
 | --- | --- | --- | --- | --- | --- | --- |
-| _LOW-END · Windows · i5 · iGPU · LAPTOP-BI8P2KF3_ | | | | | | |
-| _MID · Windows · i7 · dGPU (SKU TBD)_ | | | | | | |
+| _LOW-END · Windows · i5 · iGPU (unité TBD si ≠ inventaire LAPTOP)_ | | | | | | |
+| _MID / inventaire réel · LAPTOP-BI8P2KF3 · Win11 · i7-11370H · Iris Xe + RTX 3070_ | | | | | | |
+| _MID · Windows · i7 · dGPU (SKU TBD — autre unité)_ | | | | | | |
 | _autre device_ | | | | | | |
 
 Légende qualité subjective (à définir avant jury) : _ex. OK / limite / KO + commentaire court par cellule._
@@ -82,9 +96,10 @@ Légende qualité subjective (à définir avant jury) : _ex. OK / limite / KO + 
 
 | Élément | Valeur |
 | --- | --- |
-| Mesures FPS matting | _vide — non applicable sur smoke synthétique_ |
+| Hôte connecté | **`LAPTOP-BI8P2KF3`** — harness **`http://127.0.0.1:8088/`** (Edge) ; matériel sondé **i7 + dGPU** → **MID-like**, pas LOW-END (détail : Inventaire) |
+| Mesures FPS matting | _vide — aucun export JSON ; ne pas inventer de FPS_ |
 | LiveKit smoke (synthétique) | Harness S3 : **Smoke synthétique** + publish vers `s1-lab` / `vision-s3` — voir `spikes/s3-matting-harness/README.md` |
-| Conclusion pass/fail | **N/A** — ne remplace pas le protocole sur **LOW-END** (`LAPTOP-BI8P2KF3`) |
+| Conclusion pass/fail | **N/A** — pass officiel S3 reste sur **LOW-END** **i5 + iGPU** (unité à confirmer avec Loïc) |
 
 ---
 
@@ -108,7 +123,8 @@ _N/A pour matting client (pas de coût cloud direct). Coût SFU publish (étape 
 
 ## Suite
 
-- [x] Profil **LOW-END** verrouillé (Loïc) : Windows laptop i5 + iGPU · **`LAPTOP-BI8P2KF3`**
+- [x] Profil **LOW-END** verrouillé (Loïc) : Windows laptop **i5 + iGPU** (hostname **`LAPTOP-BI8P2KF3`** au verrou — **réconciliation inventaire en attente**)
+- [x] **`LAPTOP-BI8P2KF3`** connecté ; harness S3 sur **`http://127.0.0.1:8088/`** (Edge) — inventaire réel **MID-like** (sondage 2026-10-05)
 - [x] Profil **MID** verrouillé (Loïc) : Windows i7 + dGPU milieu de gamme · SKU **TBD**
 - [ ] SKU / unité physique MID pour les runs
 - [ ] Go lead post-S0
@@ -120,6 +136,6 @@ _N/A pour matting client (pas de coût cloud direct). Coût SFU publish (étape 
 - [ ] Couplage publish SFU en conditions réelles (caméra + matting mesuré sur **LOW-END**)
 - [ ] ADR / roadmap : débloquer Phase 3 seulement si S3 pass (ou no-go plan B explicite, SPIKES.md)
 
-**Smoke box ≠ pass S3** : aucun chiffre FPS inventé ici ; le pass officiel reste le protocole sur **Windows LOW-END** · i5 + iGPU · **`LAPTOP-BI8P2KF3`**.
+**Smoke box / inventaire réel ≠ pass S3** : aucun chiffre FPS inventé ici ; le pass officiel reste le protocole sur **Windows LOW-END** · **i5 + iGPU** (unité physique à confirmer après arbitrage Loïc sur l’écart **`LAPTOP-BI8P2KF3`**).
 
 **Livrables associés** : ce rapport + matrice device → qualité ; harness `spikes/s3-matting-harness/`.
