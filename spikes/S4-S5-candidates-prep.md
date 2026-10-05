@@ -5,7 +5,11 @@
 **Date** : 2026-10-05 · Podcast Media  
 **Contrainte [D-01](../docs/DECISIONS.md)** : masters = object storage S3-compatible ; managed = proxies / ABR / preview seulement ([ARCHITECTURE](../docs/ARCHITECTURE.md) §6–7).
 
-## Object storage (évaluation après mesures S4)
+## POC S4 (verrouillé — hors grille cloud)
+
+Décision Loïc (2026-10-05) : le **POC S4** utilise **MinIO self-hosted** sur le LAN Sandbox ([`s4/minio/`](./s4/minio/)) — $0, S3-compatible, même hôte que LiveKit OSS (IP/host **TBD**). Ce choix **ne remplace pas** la grille ci-dessous : R2/S3/GCS restent à comparer **après** le POC et les mesures lab.
+
+## Object storage cloud (évaluation après mesures S4 / post-POC)
 
 Comparatif **indicatif** pour le lab — pas de « winner » dans ce document.
 
