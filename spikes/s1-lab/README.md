@@ -21,3 +21,4 @@ POC SFU stack: **[`livekit-oss/`](./livekit-oss/)** — **LAB GO** ([`S1-sfu.md`
 - **No** LiveKit Cloud / Daily / Agora.
 - Participants **France**; **LAN Sandbox first** (Q2 locked); **host IP TBD** from Loïc (no invented hostnames).
 - **D-04 POC override** only ([`S1-D04-POC-override.md`](../S1-D04-POC-override.md)).
+- **SFU €/h ceiling N/A** for POC self-host (Loïc, 2026-10-05 via lead) — continue local multi-pax / getStats without a €/h gate; cloud ceiling deferred.

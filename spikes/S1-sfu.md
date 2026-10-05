@@ -26,7 +26,7 @@ Un **SFU LiveKit OSS self-hosté** sur infra Sandbox (**LAN** et/ou **VPS EU**) 
 3. Rester compatible **local-first masters** (AC-RTC-003) : egress serveur = bonus, jamais seul master.
 4. Garder le **trafic média sur infra Sandbox** (LAN ou VPS EU) — pas de minutes SFU SaaS en POC.
 
-Coût POC : **ESTIMATION VPS €/h** uniquement (pas de facturation minutes cloud) — **pas de pass/fail coût inventé**.
+Coût POC : **plafond SFU €/h = N/A** pour self-host (lock Loïc) — poursuivre lab local multi-pax / getStats **sans gate budget €/h**. Observations VPS optionnelles plus tard ; **pas de pass/fail coût inventé**. Plafond **cloud** €/h = **hors scope POC** (à fixer si retour SFU managé post-POC / D-04).
 
 ---
 
@@ -172,10 +172,13 @@ Comparaison **historique** (pré-vote). **POC retenu : colonne LiveKit OSS (B).*
 - [ ] Instabilité > 3 pax non résolue
 - [ ] Incompatible local-first
 
-### Coût
+### Coût / plafond SFU €/h
 
-- **Pas de pass/fail coût inventé** pour le POC.
-- EST. VPS documentées si disponibles ; comparaison budget = **après** indications Loïc (hors scope lock salon).
+| Périmètre | Décision (Loïc via lead, **2026-10-05**) |
+| --- | --- |
+| **POC self-host (S1 lab)** | Plafond SFU **€/h = N/A** — **aucun pass/fail coût** ; ne pas bloquer multi-pax / AC-RTC-002 sur un seuil €/h |
+| **Cloud managé (post-POC)** | Plafond €/h **reporté** — à traiter si / quand hypothèse D-04 cloud est réévaluée |
+| **Mesures** | Tableaux coût infra : **vides** tant qu’aucun chiffre observé (ne pas inventer) |
 
 ---
 
@@ -196,6 +199,7 @@ Comparaison **historique** (pré-vote). **POC retenu : colonne LiveKit OSS (B).*
 | B2 | **IP / hôte / SSH LAN Sandbox** pour lab **multi-pax France** (Q2 = LAN first) | Loïc | **Reporté** — dev local **UP** sans IP Sandbox |
 | B3 | Go formel post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)) pour enchaînement produit | Lead | Ouvert (parallèle prep OK) |
 | B4 | ~~SFU SaaS free tier~~ | — | **Annulé** — SaaS stop per Loïc |
+| B5 | Plafond **€/h** SFU (gate lab) | Loïc | **Fermé** — **N/A POC self-host** ; cloud €/h plus tard |
 
 ---
 

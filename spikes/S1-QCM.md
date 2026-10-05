@@ -19,7 +19,7 @@ Choisir la **stack SFU pour le POC** Podcast Studio (sessions internes Sandbox, 
 - ≥ 5 participants simultanés (AC-RTC-001)
 - Diagnostics AC-RTC-002 (bitrate, packet loss, jitter, RTT, résolution, FPS)
 - Compatibilité **local-first masters** (AC-RTC-003)
-- Coût infra = **VPS / LAN** (EST. €/h) — pas de minutes SFU cloud en POC
+- Coût infra POC : **plafond SFU €/h N/A** (self-host) — pas de minutes SFU cloud en POC
 
 Mesh exclu pour le produit ; ce QCM concerne le **POC self-host** uniquement.
 
