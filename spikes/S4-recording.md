@@ -174,7 +174,7 @@ At part cut, the manifest was written with `byteCursor` advanced **without** reg
 
 **RVM checkerboard (Designer):** grade **near-PASS** (not a hard PASS) — halo on hair and a few leaks on arm/torso at **45** s visible on checker; hands OK; still clearly better than browser v8. Final quality call still **open** (flicker clip pending; Loïc decides). Assets: [`run4/media/server-matte/`](./s4/run4/media/server-matte/).
 
-**RVM variants (box CPU, Xeon 8c, no GPU — [`RESULT-RUN4.md` §8](./s4/RESULT-RUN4.md)):** mobilenetv3 ds0.375 **104** s/min; ds0.4 **112** s/min; resnet50 ~**191** s/min (extrapolated **15–55** s). Variant **E** (ds0.4 + white despill + 1 px alpha erosion) best on proxies: hair semi-transparent luma **−26** %, arm/torso gap alpha **0.61→0.56**, ~**+7** % compute vs baseline; resnet50 not worth it on this take. Designer grading on variants **pending**; master HQ still **open** (Loïc decides). [`run4/media/server-matte/variants/`](./s4/run4/media/server-matte/variants/).
+**RVM variants (box CPU, Xeon 8c, no GPU — [`RESULT-RUN4.md` §8](./s4/RESULT-RUN4.md)):** mobilenetv3 ds0.375 **104** s/min; ds0.4 **112** s/min; resnet50 ~**191** s/min (extrapolated **15–55** s). Variant **E** (ds0.4 + white despill + 1 px alpha erosion) best on proxies: hair semi-transparent luma **−26** %, arm/torso gap alpha **0.61→0.56**, ~**+7** % compute vs baseline. **Designer (variants):** **E** confirmed best — hair halo clearly improved; arm/torso leak at **45** s still open → **near-PASS (improved)**, not a hard PASS. **D** resnet50 = **NO-GO** on cost/quality. Master HQ still **open** (Loïc decides). [`run4/media/server-matte/variants/`](./s4/run4/media/server-matte/variants/).
 
 ---
 
