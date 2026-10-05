@@ -91,7 +91,17 @@ Open these on the host firewall when using **LAN** or **VPS EU** (exact host/IP 
    npm run dev
    ```
 
-5. Open `http://127.0.0.1:5190` → room `s1-lab` → **Join** (allow camera/mic).
+5. Open `http://127.0.0.1:5190` → room `s1-lab` → **Join** (default **canvas** if no cam).
+
+### Multi-pax smoke (automated)
+
+With `docker compose` + `npm run dev` running:
+
+```bash
+node scripts/multi-pax-smoke.mjs
+```
+
+Requires **playwright-core** + Chrome (dev box used `PW_CORE=/workspace/tools/pw/node_modules/playwright-core/index.mjs`). Writes `scripts/multi-pax-results.md` and `.json`. Latest run **PASS** 2026-10-05 — see [`S1-sfu.md`](../../S1-sfu.md) mesures.
 
 CLI token:
 
