@@ -2,6 +2,10 @@
 
 Minimal browser lab mirroring [`../livekit/`](../livekit/). **Not** Phase 1 product code.
 
+## Region (France participants)
+
+Prefer **EU call servers** for S1 lab (e.g. Daily **`eu-central-1` (Frankfurt)** via room `geo` or dashboard region). Participants are in France; strict EU **residency** is still **TBD** (QCM Loïc) — do not invent Sandbox policy.
+
 ## Prerequisites
 
 - [Daily.co](https://www.daily.co/) account on the **free** plan (10 000 participant-minutes/month).

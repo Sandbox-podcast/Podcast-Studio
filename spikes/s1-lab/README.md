@@ -14,24 +14,25 @@ Spike **S1** browser lab for SFU evaluation ([`S1-sfu.md`](../S1-sfu.md)). **Not
 - **No secrets in git** — copy each provider’s `.env.example` → `.env` locally (see table above).
 - Lab may run on **free tier before** formal go post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)); cost pass/fail still requires a €/h ceiling from Loïc.
 - **SFU choice not locked** — these harnesses are for measurements only.
+- **EU region for lab** (constraint Loïc via lead): participants are in **France** — prefer **EU SFU endpoints** (e.g. LiveKit **eu** / Frankfurt, Daily `eu-central-1` geo, Agora Europe edge) when creating projects/rooms. **Strict EU residency** remains **TBD** in the QCM; this is a lab latency/geo default, not an invented compliance policy.
 
 ## Quick start
 
 ### LiveKit
 
-1. [LiveKit Cloud](https://cloud.livekit.io/) project on **Build** (free).
-2. `cd spikes/s1-lab/livekit && cp .env.example .env` — fill `LIVEKIT_URL`, `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET`.
+1. [LiveKit Cloud](https://cloud.livekit.io/) project on **Build** (free), **EU region** (e.g. eu-central / Frankfurt).
+2. `cd spikes/s1-lab/livekit && cp .env.example .env` — fill EU `LIVEKIT_URL`, `LIVEKIT_API_KEY`, `LIVEKIT_API_SECRET` (see [`livekit/README.md`](./livekit/README.md)).
 3. `npm install && npm run dev` → `http://127.0.0.1:5179`
 
 ### Daily
 
-1. [Daily.co](https://www.daily.co/) free account.
+1. [Daily.co](https://www.daily.co/) free account; create lab rooms with **EU geo** (`eu-central-1` / Frankfurt) when the API/dashboard allows.
 2. `cd spikes/s1-lab/daily && cp .env.example .env` — set `DAILY_API_KEY` **or** a fixed `DAILY_ROOM_URL` from the dashboard.
 3. `npm install && npm run dev` → `http://127.0.0.1:5180`
 
 ### Agora
 
-1. [Agora Console](https://console.agora.io/) free project + App Certificate enabled.
+1. [Agora Console](https://console.agora.io/) free project + App Certificate enabled; prefer **Europe** edge / documented EU endpoints for lab channels.
 2. `cd spikes/s1-lab/agora && cp .env.example .env` — `AGORA_APP_ID` + `AGORA_APP_CERTIFICATE` (or short-lived `AGORA_TEMP_TOKEN` from console).
 3. `npm install && npm run dev` → `http://127.0.0.1:5181`
 

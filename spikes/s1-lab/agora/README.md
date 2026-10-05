@@ -2,6 +2,10 @@
 
 Minimal browser lab mirroring [`../livekit/`](../livekit/). **Not** Phase 1 product code.
 
+## Region (France participants)
+
+Use Agora’s **Europe** edge / documented EU endpoints for lab channels (participants in France). Strict EU **data residency** vs geo latency alone remains **TBD** in the QCM — not decided in this harness.
+
 ## Prerequisites
 
 - [Agora](https://console.agora.io/) project on the **free** tier (10 000 standard minutes/month).

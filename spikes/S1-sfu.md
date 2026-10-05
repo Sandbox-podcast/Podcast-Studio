@@ -41,6 +41,8 @@ Un SFU cloud managé (candidats : LiveKit Cloud, Daily, Agora) permet de :
 
 *(Colonnes vides volontairement — ne pas inventer de chiffres de lab.)*
 
+**Région EU privilégiée** (contrainte Loïc via lead) : participants lab en **France** → créer/configurer les projets et rooms SFU sur des **endpoints EU** documentés (ex. LiveKit **eu-central** / Frankfurt, Daily `eu-central-1`, edge Agora Europe). Noter la région réelle dans le tableau ci-dessous. **Residency EU stricte** ≠ simple geo latency — **TBD** QCM (B4) ; ne pas inventer de policy Sandbox ici.
+
 | Champ | Valeur |
 | --- | --- |
 | Devices / OS | |
@@ -230,7 +232,7 @@ Convention commune : **1 participant-minute** = 1 personne connectée pendant 1 
                             ▼
 ┌─────────────────────────────────────────────────────────────┐
 │ LAB (free tier — en cours)                                  │
-│  ✓ Harnais spikes/s1-lab/ (LiveKit) ; Daily/Agora stubs     │
+│  ✓ Harnais spikes/s1-lab/ (LiveKit + Daily + Agora)         │
 │  J1–J5 protocole ci-dessus (free/trial d’abord)             │
 │  Remplir mesures + coûts observés                           │
 │  Pass/Fail techniques ; coût seulement si plafond connu     │
