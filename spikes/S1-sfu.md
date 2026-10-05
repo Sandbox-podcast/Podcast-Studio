@@ -4,9 +4,9 @@
 | --- | --- |
 | **Date** | 2026-10-05 |
 | **Auteur** | Podcast RTC |
-| **Statut** | **PREP / desk research** — lab non démarré |
+| **Statut** | **LAB STARTED (free tier)** — harnais `spikes/s1-lab/` (LiveKit) ; Daily/Agora en stub |
 | **Décision SFU** | **pending mesures lab + QCM Loïc** (aucune option verrouillée) |
-| **Prérequis** | Go lead post-S0 + plafond coût €/h fixé avec Loïc avant tout lab payant |
+| **Prérequis** | Go lead post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)) pour décision formelle ; **lab free tier** démarré sans infra payante ; plafond coût €/h Loïc requis avant pass/fail coût |
 
 > **Périmètre de ce document**  
 > - Sections **PREP** : recherche desk (pricing public, DX docs, egress, diagnostics, EU). Aucun compte cloud payant créé.  
@@ -30,10 +30,10 @@ Un SFU cloud managé (candidats : LiveKit Cloud, Daily, Agora) permet de :
 
 | Phase | Contenu | Quand | Actions autorisées |
 | --- | --- | --- | --- |
-| **PREP (maintenant)** | Comparatif desk, formules de coût, protocole lab, grille mesures vide, QCM | Immédiat | Lecture docs publiques ; rédaction ; coordination lead |
-| **LAB (après go)** | Room 5 pax, throttling, mesures, coût observé | Après go S0 **et** plafond €/h Loïc | Comptes **free/trial uniquement** tant que possible ; pas de projet payant sans OK Loïc ; pas de PR produit |
+| **PREP (livré)** | Comparatif desk, formules de coût, protocole lab, grille mesures vide, QCM | 2026-10-05 | Lecture docs publiques ; rédaction ; coordination lead |
+| **LAB (en cours, free tier)** | Harnais navigateur + room 5 pax, throttling, mesures | Démarré — comptes **Build / free** uniquement | Voir [`spikes/s1-lab/README.md`](s1-lab/README.md) ; **pas de PR produit** ; décision SFU après mesures + QCM |
 
-**Interdit en PREP** : créer un projet payant LiveKit / Daily / Agora ; démarrer le lab 5 pax ; commit/PR GitHub ; verrouiller un choix SFU.
+**Interdit** : projet SFU **payant** sans OK Loïc ; verrouiller un choix SFU avant QCM ; code Phase 1 produit dans ce repo spike.
 
 ---
 
@@ -90,15 +90,16 @@ Convention commune : **1 participant-minute** = 1 personne connectée pendant 1 
 
 ## Protocole de lab détaillé (LAB — checklist jours 1–5)
 
-> Exécuter **uniquement** après : (1) go lead post-S0, (2) plafond coût Loïc, (3) accord sur comptes free/trial vs payant.
+> **Free tier** : le harnais LiveKit sous `spikes/s1-lab/livekit/` peut être exécuté dès maintenant (compte Build). Pour **pass/fail coût** et décision SFU formelle : (1) go lead post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)), (2) plafond coût Loïc, (3) mesures lab remplies ci-dessous.
 
 ### Jour 1 — Harnais minimal (1 candidat prioritaire desk, puis les autres)
 
 - [ ] Compte **free/trial** uniquement (ne pas upgrader sans OK Loïc)
-- [ ] App hello : create room + token + join 2 navigateurs (2 machines si possible)
+- [x] Harnais minimal LiveKit : `spikes/s1-lab/livekit/` (token local + join navigateur)
+- [ ] App hello : join 2 navigateurs (2 machines si possible) — **à exécuter avec compte Cloud**
 - [ ] Publier caméra/micro 720p ; subscribe croisé
-- [ ] Brancher polling `getStats()` / API diag SDK → log JSON local
-- [ ] Checklist AC-RTC-002 : bitrate, packet loss, jitter, RTT, résolution, FPS (marquer manquant)
+- [x] Polling `getStats()` → tableau UI (AC-RTC-002)
+- [ ] Checklist AC-RTC-002 validée sur run réel (marquer écarts)
 
 ### Jour 2 — Dashboard diag minimal + 3 pax
 
@@ -208,7 +209,7 @@ Convention commune : **1 participant-minute** = 1 personne connectée pendant 1 
 
 | ID | Blocker | Bloque | Owner | Statut |
 | --- | --- | --- | --- | --- |
-| B1 | Spike **S0** non pass / pas de go lead post-S0 | Démarrage LAB S1 | Lead Podcast Studio | Ouvert |
+| B1 | Spike **S0** non pass / pas de go lead post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)) | Décision SFU formelle ; pass/fail coût | Lead Podcast Studio | Ouvert — lab free tier autorisé en parallèle |
 | B2 | **Plafond coût €/h** (3 pax et 5 pax) non fixé avec Loïc | Pass/fail coût ; décision budget | Loïc via lead + QCM | Ouvert |
 | B3 | Accords comptes free/trial vs éventuel payant | Lab multi-candidats prolongé | Loïc / lead | Ouvert |
 | B4 | Clarifier **exigence residency EU** Sandbox (si stricte) vs geo latency seule | Choix région / plan (ex. LiveKit pinning Scale) | Loïc / legal — **ne pas inventer policy** | Ouvert (question) |
@@ -220,16 +221,16 @@ Convention commune : **1 participant-minute** = 1 personne connectée pendant 1 
 
 ```text
 ┌─────────────────────────────────────────────────────────────┐
-│ PREP (maintenant)                                           │
+│ PREP (livré)                                                │
 │  ✓ Desk research pricing / DX / egress / diag / EU          │
 │  ✓ Draft spikes/S1-sfu.md + QCM                             │
 │  → Transmettre QCM à Loïc via lead (pas exécuter la décision)│
-│  ✗ Pas de compte payant, pas de lab 5 pax, pas de PR        │
 └───────────────────────────┬─────────────────────────────────┘
-                            │ go S0 + plafond €/h Loïc
+                            │ lab free tier (en cours)
                             ▼
 ┌─────────────────────────────────────────────────────────────┐
-│ LAB (après go)                                              │
+│ LAB (free tier — en cours)                                  │
+│  ✓ Harnais spikes/s1-lab/ (LiveKit) ; Daily/Agora stubs     │
 │  J1–J5 protocole ci-dessus (free/trial d’abord)             │
 │  Remplir mesures + coûts observés                           │
 │  Pass/Fail techniques ; coût seulement si plafond connu     │
@@ -251,7 +252,7 @@ Convention commune : **1 participant-minute** = 1 personne connectée pendant 1 
 
 | Après… | Action |
 | --- | --- |
-| PREP livré | Lead transmet QCM Loïc ; attendre go S0 + seuil coût |
+| PREP livré | Lead transmet QCM Loïc ; lab free tier via `s1-lab/` ; attendre go S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)) + seuil coût pour décision |
 | LAB pass technique | Amender ADR / ARCHITECTURE §4 avec SFU choisi |
 | LAB fail | Documenter no-go ; option D / re-spike ; pas d’enchaînement Phase 1 RTC |
 | SFU verrouillé | Débloque chemin S4 (recording local) couplé au même SFU ; S3 matting peut paralléliser |
