@@ -3,9 +3,8 @@ import {
   RoomEvent,
   Track,
   LocalVideoTrack,
-  createLocalTracks,
-  VideoPresets,
 } from "https://esm.sh/livekit-client@2.9.1";
+// createLocalTracks / getUserMedia only loaded for mode=camera (never on page load).
 
 const POLL_MS = 2000;
 
@@ -82,6 +81,9 @@ async function joinRoom() {
 
   const mode = els.mediaMode?.value ?? "canvas";
   if (mode === "camera") {
+    const { createLocalTracks, VideoPresets } = await import(
+      "https://esm.sh/livekit-client@2.9.1"
+    );
     const tracks = await createLocalTracks({
       audio: true,
       video: { resolution: VideoPresets.h720.resolution },
