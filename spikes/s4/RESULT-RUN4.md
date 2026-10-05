@@ -98,7 +98,7 @@ Stills: `run4/raw-clap-1933ms.png`, `run4/matted-clap-1267ms.png`.
 **Checkerboard contact (missing from Vision’s green sheets):**  
 `/workspace/podcast-studio/s4-realcam/run4/media/server-matte/contact-rvm-mobilenetv3-checker-box.png`  
 Stills: `…/stills/rvm_mobilenetv3_t{05,15,25,35,45,55}_checker.png`  
-Factual alpha notes (heuristic): corner leak **false** all 6; partial_frac 0.015–0.045. Designer grades PASS/FAIL grid separately.
+Factual alpha notes (heuristic): corner leak **false** all 6; partial_frac 0.015–0.045. **Designer grade (checkerboard sheet): near-PASS (not hard PASS)** — halo on hair, a few arm/torso leaks at 45 s on checker; hands OK; clearly better than browser v8. Final quality call open (flicker clip pending; Loïc decides).
 
 ## 7. Artifacts
 
