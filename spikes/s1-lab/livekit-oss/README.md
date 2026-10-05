@@ -20,6 +20,16 @@ Loïc unblocked **local/dev Docker Compose** — no wait on Sandbox IP for smoke
 | Keys | Placeholders from [`.env.example`](./.env.example) — **not production** |
 | Verified 2026-10-05 | Token mint + HTTP **200** against LiveKit |
 
+### Headless / no cam-mic (shared dev box)
+
+The Grok Bot host has **no camera/microphone** — default `getUserMedia` fails with `NotFoundError` before reaching the SFU. Harness **Publish mode** (hard-refresh http://127.0.0.1:5190 after pull):
+
+| Mode | Behavior |
+| --- | --- |
+| **canvas** (default) | Animated canvas → `captureStream` → `LocalVideoTrack` (no `getUserMedia`) |
+| **none** | Join + subscribe only; no local publish |
+| **camera** | Previous `createLocalTracks` path (needs real devices) |
+
 | | |
 | --- | --- |
 | **Vote** | **B — LiveKit OSS self-host** (2026-10-05, lead / Loïc) |

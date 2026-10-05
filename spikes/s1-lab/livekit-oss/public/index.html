@@ -11,6 +11,7 @@
       <h1>S1 POC — LiveKit OSS self-host (vote B)</h1>
       <p class="sub">
         Spike harness — AC-RTC-002 via <code>getStats()</code>. Not Phase 1 product. Not LiveKit Cloud.
+        Box smoke: use <strong>canvas</strong> or <strong>none</strong> (no cam/mic required).
       </p>
     </header>
 
@@ -22,6 +23,14 @@
       <label>
         Display name
         <input id="identity" type="text" placeholder="p1" autocomplete="off" />
+      </label>
+      <label>
+        Publish mode
+        <select id="media-mode">
+          <option value="canvas" selected>canvas CaptureStream (no cam)</option>
+          <option value="none">none — join/subscribe only</option>
+          <option value="camera">camera + mic (getUserMedia)</option>
+        </select>
       </label>
       <button id="join" type="button">Join</button>
       <button id="leave" type="button" disabled>Leave</button>
