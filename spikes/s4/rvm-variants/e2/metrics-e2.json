@@ -1,0 +1,126 @@
+{
+  "machine": "box CPU Intel Xeon \u00b7 8 cores \u00b7 no GPU",
+  "downsample_ratio_C": 0.4,
+  "variants": {
+    "A_baseline": {
+      "t25": {
+        "partial_alpha_frac": 0.0354,
+        "gap_mean_alpha": 0.033,
+        "hair_semitrans_mean_luma": 151.05,
+        "deltaE_opaque_hair": 1.25,
+        "deltaE_band_hair": 7.99,
+        "n_opaque_hair": 16096,
+        "n_band_hair": 5854
+      },
+      "t45": {
+        "partial_alpha_frac": 0.0358,
+        "gap_mean_alpha": 0.6092,
+        "hair_semitrans_mean_luma": 169.55,
+        "deltaE_opaque_hair": 1.47,
+        "deltaE_band_hair": 5.58,
+        "n_opaque_hair": 18838,
+        "n_band_hair": 5588
+      }
+    },
+    "E_prior": {
+      "t25": {
+        "partial_alpha_frac": 0.0347,
+        "gap_mean_alpha": 0.0248,
+        "hair_semitrans_mean_luma": 112.52,
+        "deltaE_opaque_hair": 1.22,
+        "deltaE_band_hair": 19.75,
+        "n_opaque_hair": 15254,
+        "n_band_hair": 6240
+      },
+      "t45": {
+        "partial_alpha_frac": 0.0354,
+        "gap_mean_alpha": 0.559,
+        "hair_semitrans_mean_luma": 125.67,
+        "deltaE_opaque_hair": 1.45,
+        "deltaE_band_hair": 16.1,
+        "n_opaque_hair": 18090,
+        "n_band_hair": 6242
+      }
+    },
+    "E2": {
+      "t25": {
+        "partial_alpha_frac": 0.0272,
+        "gap_mean_alpha": 0.0293,
+        "hair_semitrans_mean_luma": 173.57,
+        "deltaE_opaque_hair": 1.25,
+        "deltaE_band_hair": 3.77,
+        "n_opaque_hair": 15831,
+        "n_band_hair": 5675
+      },
+      "t45": {
+        "partial_alpha_frac": 0.0287,
+        "gap_mean_alpha": 0.5841,
+        "hair_semitrans_mean_luma": 173.52,
+        "deltaE_opaque_hair": 1.46,
+        "deltaE_band_hair": 3.91,
+        "n_opaque_hair": 18753,
+        "n_band_hair": 5597
+      }
+    },
+    "E2-fgr": {
+      "t25": {
+        "partial_alpha_frac": 0.0272,
+        "gap_mean_alpha": 0.0293,
+        "hair_semitrans_mean_luma": 150.13,
+        "deltaE_opaque_hair": 1.25,
+        "deltaE_band_hair": 7.79,
+        "n_opaque_hair": 15831,
+        "n_band_hair": 5675
+      },
+      "t45": {
+        "partial_alpha_frac": 0.0287,
+        "gap_mean_alpha": 0.5841,
+        "hair_semitrans_mean_luma": 163.11,
+        "deltaE_opaque_hair": 1.46,
+        "deltaE_band_hair": 5.24,
+        "n_opaque_hair": 18753,
+        "n_band_hair": 5597
+      }
+    },
+    "E2b": {
+      "t25": {
+        "partial_alpha_frac": 0.0349,
+        "gap_mean_alpha": 0.0322,
+        "hair_semitrans_mean_luma": 174.03,
+        "deltaE_opaque_hair": 1.25,
+        "deltaE_band_hair": 3.68,
+        "n_opaque_hair": 15831,
+        "n_band_hair": 6465
+      },
+      "t45": {
+        "partial_alpha_frac": 0.0351,
+        "gap_mean_alpha": 0.5937,
+        "hair_semitrans_mean_luma": 174.08,
+        "deltaE_opaque_hair": 1.46,
+        "deltaE_band_hair": 3.71,
+        "n_opaque_hair": 18753,
+        "n_band_hair": 6287
+      }
+    }
+  },
+  "rvm_pass": {
+    "reused": true
+  },
+  "bg_estimate": "temporal mean of raw RGB where RVM \u03b1<0.02 (fallback 245 if never) [reused]",
+  "post_cost": {
+    "E2_ms_per_frame": 86.99,
+    "E2_added_s_per_min": 156.58,
+    "E2_total_s_per_min_with_C": 268.08,
+    "E2-fgr_ms_per_frame": 24.88,
+    "E2-fgr_added_s_per_min": 44.78,
+    "E2-fgr_total_s_per_min_with_C": 156.28,
+    "E2b_ms_per_frame": 56.43,
+    "E2b_added_s_per_min": 101.57,
+    "E2b_total_s_per_min_with_C": 213.07
+  },
+  "artifacts": {
+    "contact": "media/server-matte/variants/e2/contact-A-E-E2-checker.png",
+    "zoom": "media/server-matte/variants/e2/zoom-head-25-45-native.png",
+    "roi": "media/server-matte/variants/e2/roi-arm-torso-gap-t45.png"
+  }
+}

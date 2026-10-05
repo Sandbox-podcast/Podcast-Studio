@@ -136,3 +136,31 @@ ROIs: gap `(760,200)–(860,300)`; hair `(480,40)–(780,180)`.
 
 **Designer (variants):** **E** (ds0.4 + despill + 1 px erosion) confirmed best — hair halo clearly improved; arm/torso leak at **45** s still open → **near-PASS (improved)**, not a hard PASS. **D** resnet50 = **NO-GO** on cost/quality.
 
+### E2 colour fidelity (follow-up)
+
+Lead: E’s band darkening of Loïc’s grey-white hair vs A comes from (1) luma clamp@200, (2) constant bg=245, (3) full 1 px erosion. E2 builds on **C (ds=0.4)** with no luma clamp, temporal-mean bg (raw where α&lt;0.02; fallback 245), erosion only where α&lt;0.5 (E2b = none). E2-fgr uses RVM `fgr` RGB in the band.
+
+Machine: **box CPU** Intel Xeon · 8 cores · no GPU. Parent C cost **111.5 s/min** (box CPU).
+
+| Var | t45 halo luma | t45 gap α | t45 ΔE opaque | t45 ΔE band | t25 ΔE band | post ms/fr | total s/min (+C) |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| **A** | 169.55 | 0.6092 | 1.47 | 5.58 | 7.99 | — | 104.3 |
+| **E** | **125.67** | **0.559** | 1.45 | **16.10** | 19.75 | (in C) | 111.5 |
+| **E2** | 173.52 | 0.5841 | 1.46 | 3.91 | 3.77 | 87.0 | 268.1 |
+| **E2-fgr** | 163.11 | 0.5841 | 1.46 | 5.24 | 7.79 | **24.9** | **156.3** |
+| **E2b** | 174.08 | 0.5937 | 1.46 | **3.71** | **3.68** | 56.4 | 213.1 |
+
+Opaque hair luma ~204 across all variants — E darkening is **band-only**. “Halo luma ↓” conflates white-wall spill with light hair; E’s low score is partly unwanted darkening (ΔE band **16.1** vs A’s **5.6** at t=45 s).
+
+**Trade-off (factual, box CPU):** E still best on gap + raw halo proxy, **worst colour**. E2 / E2b restore band colour (ΔE ~3.7–3.9, better than A) but raise band luma above A (hair stays light; spill not crushed like E). Soft erode (E2 / E2-fgr) trims gap α **0.594→0.584** vs C; full E still tighter (**0.559**). E2-fgr ≈ A on ΔE, ≈ C on halo, cheapest post. Arm/torso decor leak @45 s **unchanged** across A–E2 (post does not fix it).
+
+**Best pick (Media, pending Designer visual + Vision 3070 timings):** **E2-fgr** for régie/delivery matte (RVM fgr already decontaminated; soft erode; **+25 ms/fr** box CPU; no grey-hair crush). Prefer **E2** only if band ΔE must beat A and post cost is acceptable on GPU. Keep E only if Designer prioritizes max halo crush over colour.
+
+**Paths:**
+- [`run4/media/server-matte/variants/e2/contact-A-E-E2-checker.png`](./run4/media/server-matte/variants/e2/contact-A-E-E2-checker.png)
+- [`run4/media/server-matte/variants/e2/zoom-head-25-45-native.png`](./run4/media/server-matte/variants/e2/zoom-head-25-45-native.png)
+- [`run4/media/server-matte/variants/e2/roi-arm-torso-gap-t45.png`](./run4/media/server-matte/variants/e2/roi-arm-torso-gap-t45.png)
+- [`run4/media/server-matte/variants/e2/bg_temporal_mean.png`](./run4/media/server-matte/variants/e2/bg_temporal_mean.png)
+- [`rvm-variants/e2/metrics-e2.json`](./rvm-variants/e2/metrics-e2.json)
+- [`rvm-variants/e2/rvm_e2_post.py`](./rvm-variants/e2/rvm_e2_post.py) (CLI: `--raw` `--outdir` `--rvm-onnx` `--downsample 0.4` [`--reuse`]; Vision 3070: `--provider CUDAExecutionProvider` or DirectML)
+
