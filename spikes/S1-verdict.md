@@ -19,7 +19,7 @@
 | Smoke **canvas join PASS** (no camera) | Headless / dev box fixes — [`s1-lab/livekit-oss/`](s1-lab/livekit-oss/) |
 | **Multi-pax local smoke (re-run post-fix)** **2026-10-05 18:40:56–18:41:51 Europe/Paris** | [`s1-lab/livekit-oss/scripts/multi-pax-results.md`](s1-lab/livekit-oss/scripts/multi-pax-results.md) · raw [`multi-pax-results.json`](s1-lab/livekit-oss/scripts/multi-pax-results.json) |
 | → **5/5 connected**; **4 remotes each** (clean room) | Same |
-| → **Outbound** harness bitrate **73 / 115 / 2410** kbps min/med/max (n=48) — **`pickRtpReport` fix validated** (`e512cb5`) | Same |
+| → **Outbound post-fix** (harness): **73 / 115 / 2410** kbps min/med/max (n=48) — **`pickRtpReport` validated** (`e512cb5`), not stuck at 0 bps | Same |
 | → **Inbound** video: **73 / 112 / 164** kbps; loss **0 %**; FPS med **15**; res **320×180** | Same |
 | → RTT **0–3 ms** | **Loopback only** (localhost) — not WAN France |
 | Harness **`pickRtpReport` fix** | Commit **`e512cb5`** — [`public/harness.js`](s1-lab/livekit-oss/public/harness.js) |
