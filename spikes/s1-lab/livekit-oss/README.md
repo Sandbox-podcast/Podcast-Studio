@@ -32,7 +32,7 @@ The Grok Bot host has **no camera/microphone** — default `getUserMedia` fails 
 
 Static assets: `styles.css`, `favicon.png` / `favicon.ico` (fixes harness tab 404 noise).
 
-**DEV CORS** (`server.mjs`): for matching `http(s)://127.0.0.1|localhost(:port)` origins only — `GET /api/token` from another local harness (e.g. S3 on `:8080`) without pasting JWT. `OPTIONS` → 204. Not for production or public hosts.
+**DEV CORS** (`server.mjs`, Vision patch — keep on PR #3): if `Origin` matches `http(s)://127.0.0.1|localhost(:port)`, respond with `Access-Control-Allow-Origin` (that origin), `Allow-Methods: GET, OPTIONS`, `Allow-Headers: Content-Type`, `Vary: Origin`. `OPTIONS` → **204**. Lets S3 harness on `:8080` mint tokens from `:5190` without pasted JWT. **DEV localhost only** — not production.
 
 | | |
 | --- | --- |
