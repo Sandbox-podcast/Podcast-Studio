@@ -25,7 +25,7 @@ Alignement architecture : pipeline client décrit en [ARCHITECTURE.md §5](../do
 | OS / navigateurs | **Windows** (build / édition _TBD_) · navigateurs de campagne _TBD_ (ex. Chrome / Edge) |
 | Caméra(s) testées | _vide_ |
 | Harness | `spikes/s3-matting-harness/` (statique, hors produit) |
-| Réseau | Local ; **pas** de publish SFU tant que S1 / room test RTC Podcast Studio |
+| Réseau | Local ; publish SFU **optionnel** via harness S3 → LiveKit OSS S1 (`s1-lab`) — smoke seulement |
 | Versions backends | _à renseigner au run (MediaPipe tasks-vision, etc.)_ |
 
 ---
@@ -96,7 +96,10 @@ _N/A pour matting client (pas de coût cloud direct). Coût SFU publish (étape 
 - [ ] Exécuter protocole via harness ; remplir tables
 - [ ] Jury qualité podcast (3 personnes)
 - [ ] Seuils fallback documentés + test session
-- [ ] Couplage publish SFU (après S1 + room test)
+- [x] Chemin publish LiveKit OSS prêt (harness S3, optionnel) — **smoke box sans caméra** via piste synthétique (canvas + audio silencieux) ; défauts `ws://127.0.0.1:7880`, room `s1-lab`, identity `vision-s3`, token `http://127.0.0.1:5190/api/token` (forme S1 lab). Le harness RTC S1 (`:5190`) exige `getUserMedia` avant join — ne pas l’utiliser pour smoke headless ; utiliser `spikes/s3-matting-harness/` avec **Smoke synthétique** (défaut).
+- [ ] Couplage publish SFU en conditions réelles (caméra + matting mesuré sur cible basse)
 - [ ] ADR / roadmap : débloquer Phase 3 seulement si S3 pass (ou no-go plan B explicite, SPIKES.md)
+
+**Smoke box ≠ pass S3** : aucun chiffre FPS inventé ici ; le pass officiel reste le protocole sur **Windows laptop i5 + iGPU** (mid **TBD**).
 
 **Livrables associés** : ce rapport + matrice device → qualité ; harness `spikes/s3-matting-harness/`.

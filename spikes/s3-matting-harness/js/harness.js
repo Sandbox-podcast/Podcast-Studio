@@ -1,4 +1,12 @@
 import { createBackend } from "./backends.js";
+import { LiveKitPublisher } from "./livekit-publish.js";
+import {
+  disposeSyntheticMedia,
+  getSyntheticPublishTracks,
+  isSyntheticPreviewRunning,
+  startSyntheticPreview,
+  stopSyntheticPreview,
+} from "./synthetic-media.js";
 
 const resolutionEl = document.getElementById("resolution");
 const cameraSelectEl = document.getElementById("cameraSelect");
@@ -13,6 +21,16 @@ const previewCanvas = document.getElementById("previewCanvas");
 const overlayEl = document.getElementById("overlay");
 const statusEl = document.getElementById("status");
 const stageEl = document.getElementById("stage");
+const lkEnableEl = document.getElementById("lkEnable");
+const lkUrlEl = document.getElementById("lkUrl");
+const lkRoomEl = document.getElementById("lkRoom");
+const lkIdentityEl = document.getElementById("lkIdentity");
+const lkTokenUrlEl = document.getElementById("lkTokenUrl");
+const lkPastedTokenEl = document.getElementById("lkPastedToken");
+const lkConnectEl = document.getElementById("lkConnect");
+const lkDisconnectEl = document.getElementById("lkDisconnect");
+const lkStatusEl = document.getElementById("lkStatus");
+const lkSyntheticEl = document.getElementById("lkSynthetic");
 
 const outCtx = previewCanvas.getContext("2d", { alpha: false });
 if (!outCtx) {
@@ -29,6 +47,14 @@ let loopRunning = false;
 const frameTimes = [];
 const MAX_SAMPLES = 600;
 const exportSamples = [];
+
+/** @type {MediaStream | null} */
+let canvasCaptureStream = null;
+
+const liveKit = new LiveKitPublisher((phase, detail) => {
+  const extra = detail ? ` — ${detail}` : "";
+  lkStatusEl.textContent = `LiveKit: ${phase}${extra}`;
+});
 
 function setStatus(msg, isError = false) {
   statusEl.textContent = msg;
@@ -51,13 +77,26 @@ function resolutionConstraints() {
   };
 }
 
+function targetCanvasSize() {
+  if (resolutionEl.value === "1080") {
+    return { width: 1920, height: 1080 };
+  }
+  return { width: 1280, height: 720 };
+}
+
 function syncCanvasSize() {
-  const w = rawVideo.videoWidth || 1280;
-  const h = rawVideo.videoHeight || 720;
+  const preset = targetCanvasSize();
+  const w = rawVideo.videoWidth || preset.width;
+  const h = rawVideo.videoHeight || preset.height;
   if (previewCanvas.width !== w || previewCanvas.height !== h) {
     previewCanvas.width = w;
     previewCanvas.height = h;
   }
+}
+
+function ensureSyntheticPreviewForPublish() {
+  const { width, height } = targetCanvasSize();
+  startSyntheticPreview({ canvas: previewCanvas, ctx: outCtx, width, height });
 }
 
 function percentile(sorted, p) {
@@ -99,8 +138,73 @@ async function listCameras() {
   }
 }
 
+function resetCanvasCapture() {
+  if (canvasCaptureStream) {
+    for (const t of canvasCaptureStream.getTracks()) {
+      t.stop();
+    }
+    canvasCaptureStream = null;
+  }
+}
+
+function useSyntheticPublish() {
+  return lkSyntheticEl.checked;
+}
+
+function getPublishTracks() {
+  if (useSyntheticPublish()) {
+    ensureSyntheticPreviewForPublish();
+    return getSyntheticPublishTracks();
+  }
+  const videoTrack = getCameraPublishVideoTrack();
+  return { videoTrack, audioTrack: null };
+}
+
+function getCameraPublishVideoTrack() {
+  if (!stream) {
+    return null;
+  }
+  const useRaw = fallbackEl.checked || !loopRunning;
+  if (useRaw) {
+    return stream.getVideoTracks()[0] ?? null;
+  }
+  if (!canvasCaptureStream) {
+    canvasCaptureStream = previewCanvas.captureStream(30);
+  }
+  return canvasCaptureStream.getVideoTracks()[0] ?? null;
+}
+
+function setLiveKitFieldsEnabled(enabled) {
+  for (const el of [
+    lkUrlEl,
+    lkRoomEl,
+    lkIdentityEl,
+    lkTokenUrlEl,
+    lkPastedTokenEl,
+    lkConnectEl,
+    lkSyntheticEl,
+  ]) {
+    el.disabled = !enabled;
+  }
+  lkDisconnectEl.disabled = !enabled || !liveKit.connected;
+}
+
+function setLiveKitStatus(text) {
+  lkStatusEl.textContent = text;
+}
+
 async function stopAll() {
+  if (liveKit.connected) {
+    await liveKit.disconnect();
+    lkDisconnectEl.disabled = true;
+    lkConnectEl.disabled = !lkEnableEl.checked;
+  }
+  if (!liveKit.connected && isSyntheticPreviewRunning() && useSyntheticPublish()) {
+    stopSyntheticPreview();
+    disposeSyntheticMedia();
+  }
   loopRunning = false;
+  resetCanvasCapture();
   if (rafId) {
     cancelAnimationFrame(rafId);
     rafId = 0;
@@ -236,15 +340,29 @@ async function startLoop() {
   }
   await ensureBackend();
   frameTimes.length = 0;
+  resetCanvasCapture();
   loopRunning = true;
   btnStop.disabled = false;
   btnLoop.disabled = true;
   mattingLoop();
   setStatus("Boucle matting en cours (overlay FPS).");
+  if (liveKit.connected && !useSyntheticPublish()) {
+    const tracks = getPublishTracks();
+    if (tracks.videoTrack) {
+      try {
+        await liveKit.publishTracks(tracks);
+      } catch (e) {
+        setLiveKitStatus(
+          `LiveKit: republish failed — ${e instanceof Error ? e.message : String(e)}`,
+        );
+      }
+    }
+  }
 }
 
 function stopLoop() {
   loopRunning = false;
+  resetCanvasCapture();
   if (rafId) {
     cancelAnimationFrame(rafId);
     rafId = 0;
@@ -252,6 +370,14 @@ function stopLoop() {
   btnLoop.disabled = !!stream;
   btnStop.disabled = true;
   setStatus("Boucle arrêtée.");
+  if (liveKit.connected && !useSyntheticPublish()) {
+    const tracks = getPublishTracks();
+    if (tracks.videoTrack) {
+      void liveKit.publishTracks(tracks).catch(() => {
+        setLiveKitStatus("LiveKit: republish raw failed");
+      });
+    }
+  }
 }
 
 function exportJson() {
@@ -289,7 +415,85 @@ function exportJson() {
 
 fallbackEl.addEventListener("change", () => {
   stageEl.classList.toggle("fallback-on", fallbackEl.checked);
+  if (liveKit.connected && !useSyntheticPublish()) {
+    const tracks = getPublishTracks();
+    if (tracks.videoTrack) {
+      void liveKit.publishTracks(tracks).catch(() => {
+        setLiveKitStatus("LiveKit: track switch failed");
+      });
+    }
+  }
 });
+
+lkSyntheticEl.addEventListener("change", () => {
+  if (!lkEnableEl.checked) {
+    return;
+  }
+  if (useSyntheticPublish()) {
+    ensureSyntheticPreviewForPublish();
+  } else if (isSyntheticPreviewRunning() && !stream) {
+    stopSyntheticPreview();
+    disposeSyntheticMedia();
+  }
+  if (liveKit.connected) {
+    void liveKit.publishTracks(getPublishTracks()).catch((e) => {
+      setLiveKitStatus(
+        `LiveKit: switch failed — ${e instanceof Error ? e.message : String(e)}`,
+      );
+    });
+  }
+});
+
+lkEnableEl.addEventListener("change", () => {
+  const on = lkEnableEl.checked;
+  setLiveKitFieldsEnabled(on);
+  if (!on) {
+    void liveKit.disconnect().then(() => {
+      setLiveKitStatus("LiveKit: désactivé");
+      lkDisconnectEl.disabled = true;
+    });
+  }
+});
+
+lkConnectEl.addEventListener("click", () => {
+  void (async () => {
+    lkConnectEl.disabled = true;
+    try {
+      const tracks = getPublishTracks();
+      await liveKit.connect(
+        {
+          livekitUrl: lkUrlEl.value,
+          room: lkRoomEl.value.trim() || "s1-lab",
+          identity: lkIdentityEl.value.trim() || "vision-s3",
+          tokenUrl: lkTokenUrlEl.value.trim() || "http://127.0.0.1:5190/api/token",
+          pastedToken: lkPastedTokenEl.value,
+        },
+        tracks,
+      );
+      lkDisconnectEl.disabled = false;
+      lkConnectEl.disabled = true;
+    } catch (e) {
+      setLiveKitStatus(
+        `LiveKit: error — ${e instanceof Error ? e.message : String(e)}`,
+      );
+      lkConnectEl.disabled = false;
+    }
+  })();
+});
+
+lkDisconnectEl.addEventListener("click", () => {
+  void liveKit.disconnect().then(() => {
+    lkDisconnectEl.disabled = true;
+    lkConnectEl.disabled = !lkEnableEl.checked;
+    setLiveKitStatus("LiveKit: idle");
+    if (useSyntheticPublish() && !stream && !loopRunning) {
+      stopSyntheticPreview();
+      disposeSyntheticMedia();
+    }
+  });
+});
+
+setLiveKitFieldsEnabled(false);
 
 btnCamera.addEventListener("click", () => {
   void startCamera();

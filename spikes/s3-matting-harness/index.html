@@ -101,13 +101,45 @@
       .err {
         color: #f88;
       }
+      fieldset.livekit {
+        border: 1px solid #3a3a45;
+        border-radius: 8px;
+        margin: 1rem 0;
+        padding: 0.75rem 1rem;
+      }
+      fieldset.livekit legend {
+        font-size: 0.9rem;
+        padding: 0 0.35rem;
+      }
+      fieldset.livekit .controls {
+        margin-bottom: 0.5rem;
+      }
+      fieldset.livekit input[type="text"] {
+        font-size: 0.85rem;
+        padding: 0.35rem 0.5rem;
+        min-width: 12rem;
+      }
+      fieldset.livekit textarea {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.5rem;
+        width: 100%;
+        max-width: 520px;
+        min-height: 2.5rem;
+        font-family: ui-monospace, monospace;
+      }
+      .lk-status {
+        font-size: 0.85rem;
+        color: #8bc;
+        margin: 0.35rem 0 0;
+      }
     </style>
   </head>
   <body>
     <h1>S3 — Harness détourage (spike PREP)</h1>
     <p class="banner">
-      Spike uniquement — pas de publish SFU. Mesures à reporter dans
-      <code>spikes/S3-matting.md</code> après inventaire machines + go.
+      Spike uniquement — publish LiveKit OSS <strong>optionnel</strong> (smoke S1
+      <code>s1-lab</code>). Ce n’est pas le pass S3 officiel. Mesures FPS à reporter
+      dans <code>spikes/S3-matting.md</code> après inventaire machines + go.
     </p>
 
     <div class="controls">
@@ -148,7 +180,57 @@
       <video id="rawVideo" playsinline muted autoplay></video>
       <div class="overlay" id="overlay">FPS: —</div>
     </div>
-    <p class="status" id="status">Choisir résolution et caméra, puis démarrer.</p>
+    <p class="status" id="status">
+      Matting : caméra optionnelle. LiveKit smoke : activer publish + synthetic (sans getUserMedia).
+    </p>
+
+    <fieldset class="livekit" id="livekitSection">
+      <legend>LiveKit publish (optionnel, off par défaut)</legend>
+      <div class="controls">
+        <label style="flex-direction: row; align-items: center; gap: 0.5rem">
+          <input type="checkbox" id="lkEnable" />
+          Activer publish LiveKit
+        </label>
+        <label style="flex-direction: row; align-items: center; gap: 0.5rem">
+          <input type="checkbox" id="lkSynthetic" checked disabled />
+          Smoke synthétique (canvas + audio silencieux, pas de caméra)
+        </label>
+      </div>
+      <div class="controls" id="lkFields">
+        <label>
+          LIVEKIT_URL
+          <input type="text" id="lkUrl" value="ws://127.0.0.1:7880" disabled />
+        </label>
+        <label>
+          Room
+          <input type="text" id="lkRoom" value="s1-lab" disabled />
+        </label>
+        <label>
+          Identity
+          <input type="text" id="lkIdentity" value="vision-s3" disabled />
+        </label>
+        <label>
+          Token URL (S1 lab)
+          <input
+            type="text"
+            id="lkTokenUrl"
+            value="http://127.0.0.1:5190/api/token"
+            disabled
+          />
+        </label>
+        <button type="button" id="lkConnect" disabled>Connect / Publish</button>
+        <button type="button" id="lkDisconnect" disabled>Disconnect</button>
+      </div>
+      <label>
+        JWT collé (optionnel — smoke si CORS / hors harness S1)
+        <textarea
+          id="lkPastedToken"
+          placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9…"
+          disabled
+        ></textarea>
+      </label>
+      <p class="lk-status" id="lkStatus">LiveKit: désactivé</p>
+    </fieldset>
 
     <script type="module" src="./js/harness.js"></script>
   </body>
