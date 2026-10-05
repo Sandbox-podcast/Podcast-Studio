@@ -2,15 +2,17 @@
 
 **Date** : 2026-10-05  
 **Auteur** : _à compléter_  
-**Statut** : **PREP** — cible basse **verrouillée par Loïc** (voir Setup) ; en attente de (a) référence matérielle **mid** concrète (unité / génération i5 — **TBD**), (b) feu vert lead Podcast Studio post-S0 (D-00).
+**Statut** : **PREP** — profils matériels **verrouillés par Loïc** (voir Setup) ; en attente de (a) SKU / modèle exact pour la **cible MID** (i7 + dGPU milieu de gamme — **TBD**), (b) feu vert lead Podcast Studio post-S0 (D-00).
 
-> **Aucune mesure ni conclusion pass/fail** dans ce document tant que l’unité de test mid est assignée et le go spike acté. Le harness local (`spikes/s3-matting-harness/`) est prêt pour les runs futurs uniquement.
+> **Aucune mesure ni conclusion pass/fail** dans ce document tant que les runs officiels Windows ne sont pas exécutés sur la **cible LOW-END** et le go spike acté. Le harness local (`spikes/s3-matting-harness/`) est prêt pour les runs futurs uniquement.
 
 ---
 
 ## Hypothèse testée
 
-Le détourage **côté client** (backends candidats : MediaPipe, WebGPU, WASM) peut atteindre **≥ 24 FPS** stables sur la **cible basse** : laptop **Windows**, **Intel Core i5** + **iGPU** (segment **mid** — référence exacte **TBD**), avec une qualité **subjectivement acceptable pour podcast** (jury interne), et un **fallback explicite** (désactivation du matting → caméra brute) qui **ne casse pas la session** live.
+Le détourage **côté client** (backends candidats : MediaPipe, WebGPU, WASM) peut atteindre **≥ 24 FPS** stables sur la **cible basse (LOW-END)** : laptop **Windows**, **Intel Core i5** + **iGPU**, unité **`LAPTOP-BI8P2KF3`**, avec une qualité **subjectivement acceptable pour podcast** (jury interne), et un **fallback explicite** (désactivation du matting → caméra brute) qui **ne casse pas la session** live.
+
+La **cible MID** (Windows · **Intel Core i7** · **dGPU milieu de gamme**, SKU exact **TBD**) est documentée pour campagne complémentaire / matrice ; le **pass officiel S3** reste défini sur **LOW-END** ci-dessus.
 
 Alignement architecture : pipeline client décrit en [ARCHITECTURE.md §5](../docs/ARCHITECTURE.md) et décision [D-02](../docs/DECISIONS.md) (live + matting client ; post-prod serveur).
 
@@ -20,9 +22,10 @@ Alignement architecture : pipeline client décrit en [ARCHITECTURE.md §5](../do
 
 | Élément | Valeur |
 | --- | --- |
-| **Cible basse (Loïc)** | Laptop **Windows** · CPU **Intel Core i5** · **iGPU** · segment **mid** (**TBD** : modèle, génération i5, RAM, unité physique de test) |
-| Devices (runs) | _vide — à renseigner une fois la référence mid assignée_ |
-| OS / navigateurs | **Windows** (build / édition _TBD_) · navigateurs de campagne _TBD_ (ex. Chrome / Edge) |
+| **Cible LOW-END (Loïc) — pass officiel Windows** | Laptop **Windows** · CPU **Intel Core i5** · **iGPU** · hôte **`LAPTOP-BI8P2KF3`** |
+| **Cible MID (Loïc)** | **Windows** · CPU **Intel Core i7** · **dGPU milieu de gamme** · SKU / modèle exact **TBD** |
+| Devices (runs officiels) | _vide — à renseigner après runs sur LOW-END (+ MID si campagne étendue)_ |
+| OS / navigateurs | **Windows** (build / édition _TBD_ par unité) · navigateurs de campagne _TBD_ (ex. Chrome / Edge) |
 | Caméra(s) testées | _vide_ |
 | Harness | `spikes/s3-matting-harness/` (statique, hors produit) |
 | Réseau | Local ; publish SFU **optionnel** via harness S3 → LiveKit OSS S1 (`s1-lab`) — smoke seulement |
@@ -32,7 +35,7 @@ Alignement architecture : pipeline client décrit en [ARCHITECTURE.md §5](../do
 
 ## Protocole (SPIKES S3)
 
-Exécuter au minimum sur la **cible basse** ci-dessus (et tout autre device de l’inventaire interne), pour **720p** et **1080p** (contraintes `getUserMedia` du harness).
+Exécuter au minimum sur la **cible LOW-END** (pass officiel), et sur **MID** si la campagne le prévoit, pour **720p** et **1080p** (contraintes `getUserMedia` du harness).
 
 1. **Mesures perf** : FPS matting (moyenne + p5), CPU %, GPU % si disponible (overlay harness + export CSV/JSON).
 2. **Scénarios qualité** : lumière difficile (contre-jour / ombres), cheveux fins, gestes rapides (mains / tête).
@@ -41,12 +44,14 @@ Exécuter au minimum sur la **cible basse** ci-dessus (et tout autre device de l
 
 Critères spike (référence, **non évalués ici**) :
 
-- **Pass** : ≥ 24 FPS matting stable sur laptop cible basse ; qualité OK jury 3 personnes ; fallback sans rupture de session.
+- **Pass** : ≥ 24 FPS matting stable sur laptop **LOW-END** ; qualité OK jury 3 personnes ; fallback sans rupture de session.
 - **Fail** : &lt; 15 FPS sur machines cibles → matting reporté / optionnel / offline only.
 
 ---
 
-## Mesures
+## Mesures (pass officiel Windows — LOW-END / MID)
+
+_Table vide tant que les runs officiels ne sont pas faits. Ne pas inventer de FPS._
 
 | device | OS | browser | camera res | backend (mediapipe \| webgpu \| wasm) | FPS avg | FPS p5 | CPU % | GPU % | notes | pass? |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -63,16 +68,29 @@ _Placeholder — à remplir après campagne de mesures._
 
 | device ↓ / res × backend → | 720p MediaPipe | 720p WebGPU | 720p WASM | 1080p MediaPipe | 1080p WebGPU | 1080p WASM |
 | --- | --- | --- | --- | --- | --- | --- |
-| _Windows · i5 · iGPU (mid TBD)_ | | | | | | |
+| _LOW-END · Windows · i5 · iGPU · LAPTOP-BI8P2KF3_ | | | | | | |
+| _MID · Windows · i7 · dGPU (SKU TBD)_ | | | | | | |
 | _autre device_ | | | | | | |
 
 Légende qualité subjective (à définir avant jury) : _ex. OK / limite / KO + commentaire court par cellule._
 
 ---
 
+## BOX-ONLY provisional (hors pass officiel S3)
+
+> **Ce bloc n’est pas le pass S3.** Aucun chiffre FPS matting officiel. Notes optionnelles depuis une box / environnement sans la cible Windows LOW-END (ex. smoke LiveKit synthétique uniquement).
+
+| Élément | Valeur |
+| --- | --- |
+| Mesures FPS matting | _vide — non applicable sur smoke synthétique_ |
+| LiveKit smoke (synthétique) | Harness S3 : **Smoke synthétique** + publish vers `s1-lab` / `vision-s3` — voir `spikes/s3-matting-harness/README.md` |
+| Conclusion pass/fail | **N/A** — ne remplace pas le protocole sur **LOW-END** (`LAPTOP-BI8P2KF3`) |
+
+---
+
 ## Pass / Fail
 
-**Non déterminé (PREP).** Ne pas remplir avant fin de protocole sur unité mid + go spike.
+**Non déterminé (PREP).** Ne pas remplir avant fin de protocole sur **LOW-END** + go spike.
 
 ---
 
@@ -90,16 +108,18 @@ _N/A pour matting client (pas de coût cloud direct). Coût SFU publish (étape 
 
 ## Suite
 
-- [x] Profil cible basse verrouillé (Loïc) : Windows laptop i5 + iGPU, mid **TBD**
-- [ ] Référence mid concrète + unité physique pour les runs
+- [x] Profil **LOW-END** verrouillé (Loïc) : Windows laptop i5 + iGPU · **`LAPTOP-BI8P2KF3`**
+- [x] Profil **MID** verrouillé (Loïc) : Windows i7 + dGPU milieu de gamme · SKU **TBD**
+- [ ] SKU / unité physique MID pour les runs
 - [ ] Go lead post-S0
-- [ ] Exécuter protocole via harness ; remplir tables
+- [ ] Exécuter protocole via harness sur **LOW-END** ; remplir tables
+- [ ] (Optionnel) Campagne **MID** + matrice qualité
 - [ ] Jury qualité podcast (3 personnes)
 - [ ] Seuils fallback documentés + test session
 - [x] Chemin publish LiveKit OSS prêt (harness S3, optionnel) — **smoke box sans caméra** via piste synthétique (canvas + audio silencieux) ; défauts `ws://127.0.0.1:7880`, room `s1-lab`, identity `vision-s3`, token `http://127.0.0.1:5190/api/token` (forme S1 lab). Le harness RTC S1 (`:5190`) exige `getUserMedia` avant join — ne pas l’utiliser pour smoke headless ; utiliser `spikes/s3-matting-harness/` avec **Smoke synthétique** (défaut).
-- [ ] Couplage publish SFU en conditions réelles (caméra + matting mesuré sur cible basse)
+- [ ] Couplage publish SFU en conditions réelles (caméra + matting mesuré sur **LOW-END**)
 - [ ] ADR / roadmap : débloquer Phase 3 seulement si S3 pass (ou no-go plan B explicite, SPIKES.md)
 
-**Smoke box ≠ pass S3** : aucun chiffre FPS inventé ici ; le pass officiel reste le protocole sur **Windows laptop i5 + iGPU** (mid **TBD**).
+**Smoke box ≠ pass S3** : aucun chiffre FPS inventé ici ; le pass officiel reste le protocole sur **Windows LOW-END** · i5 + iGPU · **`LAPTOP-BI8P2KF3`**.
 
 **Livrables associés** : ce rapport + matrice device → qualité ; harness `spikes/s3-matting-harness/`.
