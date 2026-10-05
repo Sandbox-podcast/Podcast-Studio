@@ -7,6 +7,7 @@
 | **Statut** | **VOTE LOCKED — B LiveKit OSS self-host** (2026-10-05) |
 | **Contexte** | Soft consensus RTC/Vision/Media + lead ; **lock Loïc / lead Podcast Studio** |
 | **D-04** | Override POC seulement — cloud managé = **hypothèse produit post-POC** ([`S1-D04-POC-override.md`](S1-D04-POC-override.md)) |
+| **Verdict POC** | **DRAFT ready for review** — [`S1-verdict.md`](S1-verdict.md) |
 
 > **Option B retenue pour le POC.** A / C / D non sélectionnés pour ce POC. **Q2 infra : LAN Sandbox d’abord** (VPS EU plus tard si besoin) — **IP / hôte encore TBD** (Loïc).
 

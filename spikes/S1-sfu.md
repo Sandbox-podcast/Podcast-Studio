@@ -8,6 +8,7 @@
 | **Décision stack POC** | **B — LiveKit OSS self-host** (vote locked 2026-10-05, lead / Loïc) ; A/C/D non retenus |
 | **D-04** | Override **POC uniquement** — voir [`S1-D04-POC-override.md`](S1-D04-POC-override.md) |
 | **Plafond SFU €/h** | **N/A (POC self-host)** — Loïc via lead, 2026-10-05 ; plafond **cloud** reporté post-POC |
+| **Verdict POC** | **DRAFT ready for review** — [`S1-verdict.md`](S1-verdict.md) |
 
 > **Pivot Loïc (explicite)**  
 > - **Stop** tout push cloud SFU SaaS : pas de clés / comptes / runs LiveKit Cloud, Daily, Agora.  
@@ -182,11 +183,13 @@ Script : [`s1-lab/livekit-oss/scripts/multi-pax-smoke.mjs`](s1-lab/livekit-oss/s
 
 ## Pass / Fail
 
+**Verdict consolidé (draft)** : [`S1-verdict.md`](S1-verdict.md) — **connectivity POC PASS** ; prod / WAN / LAN / 20 min / real A/V **INCOMPLETE ou NOT VALIDATED** ; coût **N/A**.
+
 ### Pass (techniques uniquement)
 
 - [ ] 5 pax A/V stables ≥ 20 min (AC-RTC-001)
-- [ ] AC-RTC-002 exposé (6 métriques)
-- [ ] Compatible local-first (egress serveur = bonus)
+- [x] AC-RTC-002 exposé (6 métriques) — **harnais local** ; WAN **non**
+- [ ] Compatible local-first (egress serveur = bonus) — **non testé** en lab S1
 
 ### Fail
 
