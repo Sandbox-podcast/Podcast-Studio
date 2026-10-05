@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>S1 lab — LiveKit OSS harness</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>S1 POC — LiveKit OSS self-host (vote B)</h1>
+      <p class="sub">
+        Spike harness — AC-RTC-002 via <code>getStats()</code>. Not Phase 1 product. Not LiveKit Cloud.
+      </p>
+    </header>
+
+    <section class="panel join">
+      <label>
+        Room
+        <input id="room" type="text" value="s1-lab" autocomplete="off" />
+      </label>
+      <label>
+        Display name
+        <input id="identity" type="text" placeholder="p1" autocomplete="off" />
+      </label>
+      <button id="join" type="button">Join</button>
+      <button id="leave" type="button" disabled>Leave</button>
+      <span id="status" class="status">disconnected</span>
+    </section>
+
+    <section class="panel media">
+      <h2>Local preview</h2>
+      <div class="tiles">
+        <div class="tile">
+          <video id="local-video" autoplay playsinline muted></video>
+          <span class="label">You (muted preview)</span>
+        </div>
+      </div>
+      <h2>Remote participants</h2>
+      <div id="remote-tiles" class="tiles"></div>
+    </section>
+
+    <section class="panel stats">
+      <h2>Diagnostics (AC-RTC-002)</h2>
+      <p class="sub">Polled every 2s from WebRTC <code>getStats()</code> on published/subscribed tracks.</p>
+      <table id="stats-table">
+        <thead>
+          <tr>
+            <th>Participant</th>
+            <th>Track</th>
+            <th>Dir</th>
+            <th>Bitrate</th>
+            <th>Loss</th>
+            <th>Jitter (ms)</th>
+            <th>RTT (ms)</th>
+            <th>Resolution</th>
+            <th>FPS</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <script type="module" src="/harness.js"></script>
+  </body>
+</html>

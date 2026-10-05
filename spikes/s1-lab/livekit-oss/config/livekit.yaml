@@ -1,0 +1,15 @@
+# S1 lab — LiveKit OSS (placeholder dev keys only; must match .env / LIVEKIT_KEYS)
+port: 7880
+
+rtc:
+  tcp_port: 7881
+  port_range_start: 50000
+  port_range_end: 50200
+  # Set true + node_ip on VPS EU when deploying (see README); false for local docker
+  use_external_ip: false
+
+keys:
+  API_S1_LAB_DEV_PLACEHOLDER: secret_s1_lab_placeholder_not_for_production
+
+logging:
+  level: info

@@ -4,11 +4,11 @@
 | --- | --- |
 | **Date** | 2026-10-05 (aligné pivot S1) |
 | **Auteur** | Podcast RTC |
-| **Statut** | **Vote salon en cours** — **ne pas verrouiller** de stack côté spike |
-| **Contexte** | Pivot Loïc : POC **sans SFU SaaS** ; comparaison self-host avant décision |
+| **Statut** | **VOTE LOCKED — B LiveKit OSS self-host** (2026-10-05) |
+| **Contexte** | Soft consensus RTC/Vision/Media + lead ; **lock Loïc / lead Podcast Studio** |
 | **D-04** | Override POC seulement — cloud managé = **hypothèse produit post-POC** ([`S1-D04-POC-override.md`](S1-D04-POC-override.md)) |
 
-> **Pas de recommandation** A/B/C/D par l’équipe spike. Ce QCM prépare le **salon** ; la décision attend le vote.
+> **Option B retenue pour le POC.** A / C / D non sélectionnés pour ce POC. **Q2 infra (LAN vs VPS EU)** reste **ouverte**.
 
 ---
 
@@ -78,9 +78,9 @@ Mesh exclu pour le produit ; ce QCM concerne le **POC self-host** uniquement.
 
 ## 5. Observations prep (pas une recommandation)
 
-- Comparaison détaillée : [`S1-sfu.md`](S1-sfu.md) grille mediasoup vs LiveKit OSS.
-- **Vote salon en cours** — l’équipe spike **ne coche pas** d’option.
-- Lab cible : **France** ; hôte **LAN ou VPS EU**.
+- Stack POC : **LiveKit OSS** — lab [`s1-lab/livekit-oss/`](s1-lab/livekit-oss/).
+- Grille historique mediasoup vs OSS : [`S1-sfu.md`](S1-sfu.md).
+- Lab cible : **France** ; hôte **LAN ou VPS EU** — **Q2 non tranché**.
 
 ## 6. Questions pour le salon / Loïc
 
@@ -88,12 +88,12 @@ Mesh exclu pour le produit ; ce QCM concerne le **POC self-host** uniquement.
 
 Après lecture de [`S1-sfu.md`](S1-sfu.md) (grille + mesures lab quand remplies) :
 
-- [ ] **A** mediasoup (self-host)  
-- [ ] **B** LiveKit OSS (self-host)  
-- [ ] **C** DIY / autre : _______________  
-- [ ] **D** Revenir cloud managé (hors POC actuel — OK Loïc requis)  
+- [ ] **A** mediasoup (self-host) — *non retenu POC*  
+- [x] **B** LiveKit OSS (self-host) — **LOCKED 2026-10-05**  
+- [ ] **C** DIY / autre — *non retenu POC*  
+- [ ] **D** Revenir cloud managé — *hors POC actuel*  
 
-Commentaire : _________________________________
+Commentaire : Vote salon / lead + Loïc — **B** pour exécution lab.
 
 ### Q2 — Infra lab
 
@@ -114,7 +114,7 @@ Confirmer que l’**hypothèse produit** reste le **SFU cloud public managé** (
 
 ## 7. Suite process
 
-1. Lead partage ce QCM + PR #3 / `S1-sfu.md` au **salon**.  
-2. **Vote** → stack POC (pas de lock unilatéral spike).  
-3. Lab self-host VPS/LAN ; remplir mesures.  
-4. Post-POC : produit selon D-04 sauf amendement formel.
+1. **Vote B** → lab **GO** ([`livekit-oss/`](s1-lab/livekit-oss/)).  
+2. Clore **Q2** (LAN vs VPS EU) avec lead / Loïc.  
+3. Exécuter protocole `S1-sfu.md` ; remplir mesures.  
+4. Post-POC : hypothèse produit D-04 cloud sauf amendement Loïc.

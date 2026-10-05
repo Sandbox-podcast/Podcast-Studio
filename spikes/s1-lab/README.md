@@ -1,37 +1,23 @@
-# S1 lab — self-host POC (SFU interne)
+# S1 lab — LiveKit OSS (vote B)
 
-Spike **S1** after **Loïc pivot** ([`S1-sfu.md`](../S1-sfu.md), [`S1-D04-POC-override.md`](../S1-D04-POC-override.md)). **Not** Phase 1 product code.
+POC SFU stack: **[`livekit-oss/`](./livekit-oss/)** — **LAB GO** ([`S1-sfu.md`](../S1-sfu.md), [`S1-QCM.md`](../S1-QCM.md)).
 
-## Stop SaaS (mandatory)
+## Active
 
-**Do not** create or use LiveKit Cloud, Daily, or Agora keys, accounts, or lab runs. Folders [`livekit/`](./livekit/) (Cloud client), [`daily/`](./daily/), [`agora/`](./agora/) are **ARCHIVED / superseded** — reference only, **frozen**.
+| Target | Status |
+| --- | --- |
+| [**LiveKit OSS**](./livekit-oss/) | **Runnable** — `docker compose` + `npm run dev` |
 
-## Active lab targets (prep)
+## Not selected for POC
 
-| Target | Status | Path |
-| --- | --- | --- |
-| **mediasoup** (self-host) | Prep README + skeleton | [`mediasoup/`](./mediasoup/) |
-| **LiveKit OSS** (self-host) | Prep README + skeleton | [`livekit-oss/`](./livekit-oss/) |
-
-Deploy on Sandbox **LAN** and/or **EU VPS**. Lab participants in **France**.
+| Target | Status |
+| --- | --- |
+| [`mediasoup/`](./mediasoup/) | Prep only — option A not selected |
+| SaaS [`livekit/`](./livekit/) (Cloud), [`daily/`](./daily/), [`agora/`](./agora/) | **ARCHIVED** — do not run ([`ARCHIVED-SaaS.md`](./ARCHIVED-SaaS.md)) |
 
 ## Constraints
 
-- **POC only** : self-host on Sandbox infra — **no managed cloud SFU** until Loïc reopens (option D in [`S1-QCM.md`](../S1-QCM.md)).
-- **D-04** : managed cloud SFU remains the **product hypothesis post-POC** unless Loïc issues a new OK — see override doc (POC exception, not deletion of D-04).
-- **No stack lock** before **salon QCM** vote (mediasoup / LiveKit OSS / DIY / cloud deferred).
-- **No secrets in git** — env files local only when lab starts.
-- **No invented lab numbers** — fill [`S1-sfu.md`](../S1-sfu.md) tables after real runs.
-
-## Protocol (summary)
-
-Same acceptance goals as before: **5 clients**, **≥ 20 min**, Chrome throttling, AC-RTC-002 stats panel (browser `getStats()` + server metrics as needed). Details in `S1-sfu.md`.
-
-## Archived SaaS harnesses
-
-See [`ARCHIVED-SaaS.md`](./ARCHIVED-SaaS.md).
-
-## Related
-
-- [`../S1-QCM.md`](../S1-QCM.md) — salon vote  
-- [`../S1-D04-POC-override.md`](../S1-D04-POC-override.md)
+- **Vote B locked** — LiveKit OSS self-host only for S1 lab.
+- **No** LiveKit Cloud / Daily / Agora.
+- Participants **France**; host **LAN or EU VPS** — **Q2 infra still open** in QCM (no invented hostnames).
+- **D-04 POC override** only ([`S1-D04-POC-override.md`](../S1-D04-POC-override.md)).

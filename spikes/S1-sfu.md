@@ -4,21 +4,21 @@
 | --- | --- |
 | **Date** | 2026-10-05 (pivot Loïc via lead) |
 | **Auteur** | Podcast RTC |
-| **Statut** | **PIVOTED — self-host prep** ; lab SaaS free-tier **annulé** |
-| **Décision stack** | **Aucun verrouillage** — vote salon QCM ([`S1-QCM.md`](S1-QCM.md)) en attente |
+| **Statut** | **LAB GO — stack = LiveKit OSS (B)** |
+| **Décision stack POC** | **B — LiveKit OSS self-host** (vote locked 2026-10-05, lead / Loïc) ; A/C/D non retenus |
 | **D-04** | Override **POC uniquement** — voir [`S1-D04-POC-override.md`](S1-D04-POC-override.md) |
 
 > **Pivot Loïc (explicite)**  
 > - **Stop** tout push cloud SFU SaaS : pas de clés / comptes / runs LiveKit Cloud, Daily, Agora.  
 > - POC = **RTC serveur interne self-host** sur infra Sandbox (**LAN** et/ou **VPS EU**). Participants en **France**.  
 > - **D-04** : le SFU cloud managé reste l’**hypothèse produit post-POC** ; override POC documenté, pas d’effacement de D-04.  
-> - **Ne pas verrouiller** mediasoup / LiveKit OSS / DIY avant le vote salon A/B/C/D — **comparaison et prep seulement**.
+> - **Vote B** : exécuter le lab via [`s1-lab/livekit-oss/`](s1-lab/livekit-oss/). **Q2 infra LAN vs VPS EU** encore ouvert ([`S1-QCM.md`](S1-QCM.md)).
 
 ---
 
 ## Hypothèse testée
 
-Un **SFU self-hosté** sur infra Sandbox (candidats POC : **mediasoup**, **LiveKit OSS** ; option **DIY WebRTC** si le vote le retient) permet de :
+Un **SFU LiveKit OSS self-hosté** sur infra Sandbox (**LAN** et/ou **VPS EU**) permet de :
 
 1. Tenir **≥ 5 participants** A/V simultanés stables ≥ 20 min (AC-RTC-001), clients en **France**.
 2. Exposer les métriques AC-RTC-002 (**bitrate, packet loss, jitter, RTT, résolution, FPS**) via `getStats()` navigateur + instrumentation serveur si besoin.
@@ -34,10 +34,10 @@ Coût POC : **ESTIMATION VPS €/h** uniquement (pas de facturation minutes clou
 | Phase | Contenu | Statut |
 | --- | --- | --- |
 | **PREP SaaS (archivé)** | Desk LiveKit Cloud / Daily / Agora | **Superseded** — POC SaaS abandonné ([annexe](#annexe--desk-saas-superseded)) |
-| **PREP self-host (actif)** | Grille mediasoup vs LiveKit OSS, protocole VPS/LAN, QCM salon | **En cours** |
-| **LAB self-host** | Déploiement VPS/LAN, 5 pax FR, ≥20 min, throttling | **À démarrer** après accès infra + vote (pas de stack lock avant vote) |
+| **PREP self-host** | Grille comparatif (historique) + QCM | Vote **B** |
+| **LAB LiveKit OSS** | `docker compose` + harnais [`livekit-oss/`](s1-lab/livekit-oss/) | **GO** — hôte LAN/VPS à fixer (Q2) |
 
-**Interdit** : créer des projets / clés **SFU SaaS** ; verrouiller une stack sans vote salon ; code Phase 1 produit dans ce repo spike.
+**Interdit** : **SFU SaaS** (Cloud/Daily/Agora) ; code Phase 1 produit dans ce repo spike.
 
 ---
 
@@ -56,7 +56,7 @@ Coût POC : **ESTIMATION VPS €/h** uniquement (pas de facturation minutes clou
 | Navigateurs (versions) | |
 | Nb machines physiques (≥ 2) | |
 | Réseau clients (fibre / Wi‑Fi / VPN) | |
-| Stack candidat (mediasoup / LiveKit OSS / DIY) | |
+| Stack | **LiveKit OSS (B)** |
 | Versions serveur + SDK client | |
 | Date début / fin lab | |
 
@@ -64,7 +64,7 @@ Coût POC : **ESTIMATION VPS €/h** uniquement (pas de facturation minutes clou
 
 ## Comparatif principal — self-host POC
 
-Comparaison **préparatoire** pour le salon — **pas de recommandation**, **pas de lock** avant vote.
+Comparaison **historique** (pré-vote). **POC retenu : colonne LiveKit OSS (B).**
 
 | Critère | **mediasoup** (self-host) | **LiveKit OSS** (self-host) | **DIY WebRTC** (note) |
 | --- | --- | --- | --- |
@@ -84,41 +84,41 @@ Comparaison **préparatoire** pour le salon — **pas de recommandation**, **pas
 
 ---
 
-## Protocole de lab (self-host — VPS/LAN)
+## Protocole de lab — LiveKit OSS uniquement
 
-> Prérequis : accès **VPS EU** et/ou **LAN** fourni par Loïc/lead ; candidat serveur aligné sur le **vote salon** (en attendant, prep doc + squelettes [`s1-lab/mediasoup/`](s1-lab/mediasoup/), [`s1-lab/livekit-oss/`](s1-lab/livekit-oss/)).
+> Harnais : [`s1-lab/livekit-oss/README.md`](s1-lab/livekit-oss/README.md). **Blocker ouvert** : **LAN vs VPS EU** (QCM Q2) — pas d’hostname inventé dans le repo.
 
 ### Jour 1 — Déploiement minimal
 
-- [ ] Obtenir détails VPS/LAN (IP, ports UDP, TLS, firewall)
-- [ ] Déployer **un** candidat (selon vote ou branche lab parallèle **sans lock**)
-- [ ] TURN/STUN opérationnel ; 2 navigateurs join (2 machines si possible)
+- [ ] `docker compose up` sur hôte lead (LAN ou VPS EU quand connu)
+- [ ] `.env` : `LIVEKIT_URL` pointe vers `ws://<host>:7880` (host fourni par lead)
+- [ ] `npm run dev` harnais ; 2 navigateurs join (2 machines si possible)
 - [ ] Publier cam/mic 720p ; subscribe croisé
-- [ ] Brancher tableau AC-RTC-002 (`getStats()`)
+- [ ] Tableau AC-RTC-002 (`getStats()`)
 
 ### Jour 2 — 3 pax + diag
 
-- [ ] UI ou tableau live 6 métriques AC-RTC-002
-- [ ] Session 3 pax (France) ≥ 20 min stable
-- [ ] RTT baseline Paris → hôte SFU
+- [ ] 3 pax (France) ≥ 20 min stable
+- [ ] RTT baseline vers hôte SFU
+- [ ] Noter versions `livekit-server` + `livekit-client`
 
 ### Jour 3 — 5 pax + dégradation
 
-- [ ] 5 clients réels, ≥ 2 machines, **France**
+- [ ] 5 clients, ≥ 2 machines, **France**
 - [ ] Session ≥ 20 min (AC-RTC-001)
-- [ ] Chrome throttling (Slow 3G / custom) ; option `tc`
-- [ ] Smoke : masters locaux intacts si dégradation réseau
+- [ ] Chrome throttling ; option `tc`
+- [ ] Masters locaux intacts (smoke AC-RTC-003)
 
-### Jour 4 — Egress bonus (optionnel)
+### Jour 4 — TURN / egress (optionnel)
 
-- [ ] Un flux egress **serveur** (si stack le permet) → fichier test
-- [ ] Confirmer : egress ≠ master unique
-- [ ] Noter charge CPU / bande passante observée (pas de chiffres inventés)
+- [ ] Documenter TURN si requis (clients FR NAT)
+- [ ] Egress OSS composite/track → fichier test ; egress ≠ master unique
+- [ ] CPU / bande passante observée (pas de chiffres inventés)
 
-### Jour 5 — 2ᵉ candidat (si temps) + synthèse
+### Jour 5 — Synthèse
 
-- [ ] Smoke 10–15 min sur l’autre stack self-host si infra le permet
-- [ ] Remplir mesures ; alimenter QCM salon — **sans verrouiller** sans vote
+- [ ] Remplir grilles mesures
+- [ ] Remonter blockers infra Q2 au lead
 
 ---
 
@@ -175,8 +175,9 @@ Comparaison **préparatoire** pour le salon — **pas de recommandation**, **pas
 
 ## Décision
 
-- **Stack POC** : **en attente vote salon** (mediasoup / LiveKit OSS / DIY / reprise cloud — option D hors POC actuel).
-- **Aucune option verrouillée** par ce document.
+- **Stack POC (locked)** : **B — LiveKit OSS self-host** (2026-10-05, lead / Loïc).
+- **Non retenus POC** : A mediasoup, C DIY, D cloud managé (hors POC actuel ; OK Loïc explicite pour SaaS).
+- **Infra** : LAN **ou** VPS EU — **Q2 QCM ouvert** (pas de choix documenté ici).
 - **D-04 produit** : cloud public managé = hypothèse **post-POC** ; override POC = [`S1-D04-POC-override.md`](S1-D04-POC-override.md).
 
 ---
@@ -185,8 +186,8 @@ Comparaison **préparatoire** pour le salon — **pas de recommandation**, **pas
 
 | ID | Blocker | Owner | Statut |
 | --- | --- | --- | --- |
-| B1 | **Vote salon** A/B/C/D ([`S1-QCM.md`](S1-QCM.md)) | Lead / salon | Ouvert — **pas de stack lock** avant vote |
-| B2 | Détails **VPS EU** et/ou **LAN** (ports, TLS, TURN) | Loïc / lead | Ouvert |
+| B1 | Vote stack POC | — | **Fermé** — **B LiveKit OSS** |
+| B2 | **LAN vs VPS EU** + IP/ports/TURN ([`S1-QCM.md`](S1-QCM.md) Q2) | Loïc / lead | **Ouvert** |
 | B3 | Go formel post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)) pour enchaînement produit | Lead | Ouvert (parallèle prep OK) |
 | B4 | ~~SFU SaaS free tier~~ | — | **Annulé** — SaaS stop per Loïc |
 
@@ -199,13 +200,12 @@ Comparaison **préparatoire** pour le salon — **pas de recommandation**, **pas
 │ PIVOT (actuel)                                              │
 │  ✓ Stop SaaS SFU (pas de clés / runs cloud)                 │
 │  ✓ Doc self-host + D-04 override POC only                   │
-│  → Vote salon QCM (pas de lock avant vote)                  │
-│  → Prep s1-lab/mediasoup + livekit-oss                      │
+│  ✓ Vote B — LiveKit OSS                                     │
 └───────────────────────────┬─────────────────────────────────┘
-                            │ vote + accès VPS/LAN
+                            │ LAB GO (+ Q2 infra)
                             ▼
 ┌─────────────────────────────────────────────────────────────┐
-│ LAB self-host (VPS EU / LAN, participants FR)               │
+│ LAB LiveKit OSS (livekit-oss/, participants FR)             │
 │  5 pax · ≥20 min · throttling · grilles mesures             │
 └───────────────────────────┬─────────────────────────────────┘
                             │ post-POC produit (hors ce spike)

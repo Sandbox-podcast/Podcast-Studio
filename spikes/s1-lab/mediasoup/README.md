@@ -1,6 +1,6 @@
 # mediasoup — S1 self-host lab (prep)
 
-**Status:** skeleton / prep — **not** production SFU. **No stack lock** until salon vote ([`S1-QCM.md`](../../S1-QCM.md) option A).
+**Status:** **not selected for POC** (salon vote **B** = LiveKit OSS). Kept for reference only.
 
 ## Goal
 
