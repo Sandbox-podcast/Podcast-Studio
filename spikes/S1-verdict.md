@@ -30,6 +30,12 @@
 | → Harness in Docker **`s1-harness`** (`node:20-bookworm`, **0.0.0.0:5190**) — host npm broken on laptop | Same |
 | → Smoke RTC: harness HTTP **200**, token → `ws://192.168.1.68:7880` + JWT, LiveKit HTTP **200**, log `nodeIP=192.168.1.68` | Same |
 | → Vision (host-local synth, same laptop): **publish PASS** `vision-s3-laptop` / `vision-s3-synth`; **pub+sub PASS** `vision-s3-pub` → `vision-s3-sub`, track received, **22 frames**, `connection_quality=2` | Inventory **MID** (i7+RTX3070) — **not** LOW-END i5 pass |
+| **Edge publisher + harness subscribe getStats** **~23:05 Europe/Paris 2026-10-05** | [`S1-sfu.md`](S1-sfu.md) § LAB LAN LAPTOP · [`livekit-oss/README.md`](s1-lab/livekit-oss/README.md) |
+| → Room **`s1-lab`** · publisher **`vision-s3`** (Loïc: LiveKit publish checked on Edge **:8088** Vision harness) | Same |
+| → Server tracks while publishing: **audio/opus** + **video/VP8 1280×720** simulcast LOW/MED/HIGH | Same |
+| → Subscriber: harness **`mode=none`**, identity **`rtc-sub-getstats`**, Playwright → `http://127.0.0.1:5190` (from Docker **`host.docker.internal`**) | Same |
+| → Join: connected subscribe-only **~2046 ms** · **9** harness samples **~25 s** | Same |
+| → Inbound getStats (table): audio **~1 kbps**, loss **0 %**, RTT **~2 ms**; video **0 bps**, loss **0 %**, RTT **~2 ms**, res **320×180** (dynacast LOW), fps **—** | Same |
 | Harness **`pickRtpReport` fix** | Commit **`e512cb5`** — [`public/harness.js`](s1-lab/livekit-oss/public/harness.js) |
 | **DEV CORS** LAN | [`server.mjs`](s1-lab/livekit-oss/server.mjs) — `192.168.x.x` origins + localhost |
 

@@ -86,6 +86,18 @@ Hôte verrouillé : **`LAPTOP-BI8P2KF3`**. Déploiement : `C:\Users\azero\s1-liv
 | Pare-feu | Chemin **host-local** : pas besoin d’ouvrir le pare-feu Windows (profil Private). **Multi-appareils LAN** : règles Private — TCP **7880/7881/5190** + UDP **50000–50200** (+ Media TCP **9000/9001** MinIO noté) |
 | CORS harnais | DEV : `localhost` + **`192.168.x.x`** — [`server.mjs`](s1-lab/livekit-oss/server.mjs) |
 
+#### Edge publisher → harness subscribe getStats (~23:05 Europe/Paris)
+
+| Item | Valeur |
+| --- | --- |
+| Publisher | **`vision-s3`** — Loïc a confirmé publish LiveKit sur harness Vision Edge **:8088** |
+| Côté serveur (publish) | **audio/opus** + **video/VP8 1280×720** simulcast LOW/MED/HIGH |
+| Subscriber | Harnais **`mode=none`**, identité **`rtc-sub-getstats`**, Playwright → `http://127.0.0.1:5190` (depuis Docker **`host.docker.internal`**) |
+| Join | Connecté subscribe-only **~2046 ms** |
+| Échantillons | **9** sur **~25 s** (table AC-RTC-002 harnais) |
+| Inbound getStats | Audio **~1 kbps**, loss **0 %**, RTT **~2 ms** ; vidéo **0 bps**, loss **0 %**, RTT **~2 ms**, **320×180** (dynacast LOW), fps **—** |
+| Verdict doc | **Connectivité PASS** (join + remote vu) ; bitrate/fps vidéo active **NOT VALIDATED** cette fenêtre — ne pas passer cam/getStats global en PASS |
+
 *(Les mesures multi-pax **loopback** du poste dev restent dans [§ Mesures](#mesures-lab) — couche de validation distincte.)*
 
 ---

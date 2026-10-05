@@ -32,7 +32,26 @@ The Grok Bot host has **no camera/microphone** — default `getUserMedia` fails 
 
 Static assets: `styles.css`, `favicon.png` / `favicon.ico` (fixes harness tab 404 noise).
 
-**DEV CORS** (`server.mjs`, Vision patch — keep on PR #3): if `Origin` matches `http(s)://127.0.0.1|localhost(:port)`, respond with `Access-Control-Allow-Origin` (that origin), `Allow-Methods: GET, OPTIONS`, `Allow-Headers: Content-Type`, `Vary: Origin`. `OPTIONS` → **204**. Lets S3 harness on `:8080` mint tokens from `:5190` without pasted JWT. **DEV localhost only** — not production.
+**DEV CORS** (`server.mjs`): if `Origin` matches `http(s)://127.0.0.1`, `localhost`, or **`192.168.x.x`** (with optional `:port`), respond with `Access-Control-Allow-Origin` (that origin), `Allow-Methods: GET, OPTIONS`, `Allow-Headers: Content-Type`, `Vary: Origin`. `OPTIONS` → **204**. Lets alternate harness origins mint tokens from `:5190` without pasted JWT. **DEV only** — not production.
+
+## LAB LAN LAPTOP (Loïc — 2026-10-05)
+
+| Item | Value |
+| --- | --- |
+| Host | **LAPTOP-BI8P2KF3** |
+| Deploy path | `C:\Users\azero\s1-livekit-oss` |
+| LAN IPv4 | **192.168.1.68** (Wi‑Fi). Ignore: 169.254.x, 192.168.56.1 (VBox), 172.30.144.1 (WSL/Hyper-V) |
+| LiveKit | `livekit/livekit-server:v1.8.4` — TCP **7880/7881**, UDP **50000–50200**; `rtc.node_ip: 192.168.1.68` |
+| MinIO (Media) | Same host **9000/9001** — LiveKit avoids those ports |
+| Harness | Docker **`s1-harness`** (`node:20-bookworm`) on **0.0.0.0:5190** (host `npm` broken on laptop) |
+| URLs | http://**192.168.1.68**:5190 · ws://**192.168.1.68**:7880 · room **`s1-lab`** |
+| Smoke RTC | Harness HTTP **200**, token → `ws://192.168.1.68:7880` + JWT, LiveKit HTTP **200**, log `nodeIP=192.168.1.68` |
+| Vision (host-local synth) | Publish **PASS** `vision-s3-laptop` / `vision-s3-synth`; pub+sub **PASS** `vision-s3-pub` → `vision-s3-sub`, **22 frames**, `connection_quality=2` (MID inventory i7+RTX3070 — not LOW-END i5) |
+| Firewall | Host-local path: no Windows Private rule change required. **Multi-device LAN:** open Private profile TCP **7880/7881/5190**, UDP **50000–50200** (+ Media TCP **9000/9001** for MinIO) |
+
+**Edge `vision-s3` → harness subscribe getStats** (~23:05 Europe/Paris, room `s1-lab`): Loïc confirmed LiveKit publish on Edge Vision **:8088**; server had audio/opus + video/VP8 **1280×720** simulcast. Playwright subscriber `rtc-sub-getstats` (`mode=none`) via `http://127.0.0.1:5190` (`host.docker.internal`) — join **~2046 ms**, 9 samples / ~25 s. Inbound: audio ~1 kbps; video **0 bps**, **320×180** LOW, fps —. **Connectivity PASS**; active video bitrate/fps **NOT VALIDATED** (see [`S1-verdict.md`](../../S1-verdict.md)).
+
+Dev-box loopback multi-pax results remain under [`scripts/`](./scripts/) — separate validation layer ([`S1-sfu.md`](../../S1-sfu.md)).
 
 | | |
 | --- | --- |
