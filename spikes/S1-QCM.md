@@ -104,6 +104,16 @@ Commentaire : Vote salon / lead + Loïc — **B** pour exécution lab.
 | VPS EU (fournisseur, spec, €/h EST.) | *Reporté* — seulement si LAN insuffisant |
 | TURN (coturn / intégré) | _______________ (après IP LAN connue) |
 
+### Vote 2 — Plafond coût SFU €/h (**N/A — POC self-host**)
+
+| | |
+| --- | --- |
+| **Source** | Loïc via lead Podcast Studio |
+| **Date** | **2026-10-05** |
+| **Décision** | **N/A** pour le POC **self-host** — pas de gate €/h sur le lab local (multi-pax, `getStats`) |
+| **Post-POC** | Plafond **cloud** €/h à fixer **plus tard** si retour SFU managé (hypothèse D-04) |
+| **Pass/fail coût** | **Aucun** inventé pour S1 POC |
+
 ### Q3 — Post-POC produit (rappel D-04)
 
 Confirmer que l’**hypothèse produit** reste le **SFU cloud public managé** (D-04) **après POC**, sauf nouvel OK Loïc pour amendement :

@@ -7,6 +7,7 @@
 | **Statut** | **LAB DEV LOCAL UP** — stack **LiveKit OSS (B)** ; instance Docker Compose sur poste dev (2026-10-05) |
 | **Décision stack POC** | **B — LiveKit OSS self-host** (vote locked 2026-10-05, lead / Loïc) ; A/C/D non retenus |
 | **D-04** | Override **POC uniquement** — voir [`S1-D04-POC-override.md`](S1-D04-POC-override.md) |
+| **Plafond SFU €/h** | **N/A (POC self-host)** — Loïc via lead, 2026-10-05 ; plafond **cloud** reporté post-POC |
 
 > **Pivot Loïc (explicite)**  
 > - **Stop** tout push cloud SFU SaaS : pas de clés / comptes / runs LiveKit Cloud, Daily, Agora.  
