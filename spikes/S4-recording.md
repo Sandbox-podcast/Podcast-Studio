@@ -123,7 +123,7 @@ At part cut, the manifest was written with `byteCursor` advanced **without** reg
 
 **vs run 1:** Foreground tab — **no** **27.221** s `requestAnimationFrame` freeze reproduced; watchdog gaps empty.
 
-**Master-HQ decision:** still **open** — pending **take 4** after take 3 findings below.
+**Master-HQ decision:** see **run 4** below (still **open** — Loïc decides).
 
 ---
 

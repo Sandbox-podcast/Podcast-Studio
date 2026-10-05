@@ -12,6 +12,9 @@ Loïc decision (2026-10-05): **POC storage locked** to self-hosted **`pgsty/mini
 | [`REALCAM-RUN1-RESULT.md`](./REALCAM-RUN1-RESULT.md) | Real-cam pass 3 run 1 analysis (laptop) |
 | [`REALCAM-RUN2-RESULT.md`](./REALCAM-RUN2-RESULT.md) | Real-cam pass 3 run 2 — dual raw/matted |
 | [`REALCAM-RUN3-RESULT.md`](./REALCAM-RUN3-RESULT.md) | Real-cam pass 3 run 3 — matfix2 + audio guard |
+| [`RESULT-RUN4.md`](./RESULT-RUN4.md) | Real-cam take 4 — MediaPipe dual canvas |
+| [`S5-RVM-COST.md`](./S5-RVM-COST.md) | Async RVM server matting cost notes |
+| [`run4/`](./run4/) | Contact stills + server-matte RVM checker assets |
 | [`webcodecs/`](./webcodecs/) | WebCodecs / fMP4 parallel sketch (sources + `RESULT.md`) |
 | [`../S4-recording.md`](../S4-recording.md) | **Preliminary** report + **locked** POC verdict (Loïc 2026-10-05) |
 | [`../S4-webcodecs.md`](../S4-webcodecs.md) | WebCodecs spike summary (parallel track) |
