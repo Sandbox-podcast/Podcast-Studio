@@ -461,7 +461,18 @@ Reference: source `take4-raw.webm` itself = distinct near **29.84**, windows ≥
 
 **ab-cam-3L-on — NOT RUN (blocker):** `getUserMedia` → `NotReadableError: Could not start video source`. Windows reports the webcam (Microsoft LifeCam Cinema) **in use by `msedge.exe`** (the user's own Edge, not the A/B instance). Nothing was killed. The runner wrongly marked it DONE (status "connected" is set before publish). Fixed afterwards: a condition now FAILs when the publisher has no published video. gUM+rec coexistence: **NOT VALIDATED**.
 
-**Caveats:** n=1 × 120 s per condition. Everything on one laptop (loopback, not LAN). The sub-hi received-track MediaRecorder runs in the sub Edge in every condition. Received-track webm container is fixed at 1280×720 (upscaled when a lower layer is received). Source loops at 60 s inside each window. Two earlier attempts (02:23, 02:33) died after cond 1 (wrapper `ErrorActionPreference=Stop` killed node on a benign stderr line; Playwright `TargetClosedError` on close) and are excluded.
+**Distinct fps, corrected (native per-frame-size decode, `scripts/ab/distinct_fps_varsize.py`, threshold 0.5)**
+
+| cond | tool near | **native near** | ≥24 share: exact = frames delivered/s (tool) | **≥24 share, near-distinct** | longest near-dup (native) |
+| --- | --- | --- | --- | --- | --- |
+| file-3L-off | 25.95 | **26.09** | 1.00 | **0.85** | 8 f |
+| file-3L-on | 23.00 | **23.31** | 0.82 | **0.60** | 23 f |
+| file-2L-off | 26.26 | **26.26** | 0.975 | **0.88** | 12 f |
+| file-2L-on | 25.28 | **25.48** | 0.984 | **0.84** | 20 f |
+
+The ON vs OFF direction is unchanged. The near-distinct ≥24 share is the stricter reading. Near-dup MAD depends on the received resolution: downscaling everything to 320×180 lowers every value (see `varsize-all.json`), so cross-resolution comparisons stay approximate.
+
+**Caveats:** n=1 × 120 s per condition. Everything on one laptop (loopback, not LAN). The sub-hi received-track MediaRecorder runs in the sub Edge in every condition. The received-track webm **changes resolution mid-stream** whenever the SFU switches layers (ffprobe: 3L-off 1280×720→960×540 at ~12 s · 3L-on 1280×720→960×540 at ~13 s→**320×180 from ~39 s to the end** · 2L-off constant 1280×720 · 2L-on 1280×720→960×540 at ~10 s). An earlier version of this caveat wrongly said it was a constant 1280×720 upscale. `distinct_fps.py` lets ffmpeg autoscale every frame to the first frame's size before the MAD diff, so near-dup values are slightly biased. Its 1 s windows use exact hashes, so they count frames delivered per second. See [#10](https://github.com/Sandbox-podcast/Podcast-Studio/issues/10) and the corrected table below. Source loops at 60 s inside each window. Two earlier attempts (02:23, 02:33) died after cond 1 (wrapper `ErrorActionPreference=Stop` killed node on a benign stderr line; Playwright `TargetClosedError` on close) and are excluded.
 
 ## Annexe — desk SaaS (superseded)
 
