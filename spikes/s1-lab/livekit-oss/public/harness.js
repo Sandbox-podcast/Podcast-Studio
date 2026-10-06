@@ -244,7 +244,9 @@ async function joinRoom() {
     setStatus(`connected — ${roomName} (camera, layers=${layerCount()})`);
     if (els.hqRec?.checked) await window.__startHqRec();
   } else if (mode === "file") {
-    await publishFileTrack("/media/take4-raw.webm");
+    // ?src=<file in /media/> (default take4-raw.webm; e.g. take4-pingpong.webm)
+    const srcFile = (urlFlag("src", "take4-raw.webm") || "take4-raw.webm").replace(/[^A-Za-z0-9._-]/g, "");
+    await publishFileTrack(`/media/${srcFile}`);
     setStatus(`connected — ${roomName} (file, layers=${layerCount()})`);
     if (els.hqRec?.checked) await window.__startHqRec();
   } else if (mode === "canvas") {

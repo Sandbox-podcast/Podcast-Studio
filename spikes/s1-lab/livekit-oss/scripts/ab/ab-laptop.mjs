@@ -51,7 +51,15 @@ mkdirSync(OUT_DIR, { recursive: true });
 // CODEC=vp8 (default, livekit-client default) | h264 — non-default codec suffixes cond names (S4 keys stay distinct).
 const CODEC = (process.env.CODEC ?? "vp8").toLowerCase();
 const SFX = CODEC === "vp8" ? "" : `-${CODEC}`;
-const parseCond = (name) => { const m = /^ab-(cam|file)-([23])L-(on|off)(?:-(h264|vp8|vp9|av1))?$/.exec(name); return m ? { name: m[4] ? name : name + SFX, src: m[1], L: Number(m[2]), rec: m[3] === "on" } : null; };
+// Suffixes: -h264 (codec) and -pp (ping-pong take4 source, /media/take4-pingpong.webm).
+const parseCond = (name) => {
+  const m = /^ab-(cam|file)-([23])L-(on|off)((?:-(?:h264|vp8|pp))*)$/.exec(name);
+  if (!m) return null;
+  const sfx = m[4] || "";
+  const codecInName = /-(h264|vp8)/.exec(sfx)?.[1];
+  return { name: codecInName || !SFX ? name : name + SFX, src: m[1], L: Number(m[2]), rec: m[3] === "on",
+           codec: codecInName ?? CODEC, file: /-pp/.test(sfx) ? "take4-pingpong.webm" : "take4-raw.webm" };
+};
 const DEFAULT = CODEC === "vp8"
   ? ["ab-file-3L-off", "ab-file-3L-on", "ab-file-2L-off", "ab-file-2L-on", "ab-cam-3L-on"]
   : ["ab-file-3L-off", "ab-file-3L-on", "ab-file-2L-off", "ab-file-2L-on"];
@@ -168,7 +176,7 @@ for (const c of CONDS) {
     appendFileSync(TIMES_CSV, row([c.name, t.status, "", "", "", "", "", "", t.note, "", "", "", ""]));
     log(`${c.name} SKIPPED (S4 health failed)`); continue;
   }
-  log(`=== ${c.name} room=${room} src=${c.src} layers=${c.L} codec=${CODEC} rec=${c.rec ? "ON" : "OFF"}`);
+  log(`=== ${c.name} room=${room} src=${c.src} layers=${c.L} codec=${c.codec} file=${c.file} rec=${c.rec ? "ON" : "OFF"}`);
   const pubMarker = `s1ab-pub-${c.name}-${stamp}`, subMarker = `s1ab-sub-${c.name}-${stamp}`;
   const cpu = startCpuSampler(c.name, [pubMarker, subMarker], WARMUP_S + REC_S + 60);
   let pubCtx, subCtx;
@@ -180,7 +188,8 @@ for (const c of CONDS) {
     const errs = [];
     pub.on("console", (m) => { if (m.type() === "error" || /hq-rec|file-publish/.test(m.text())) errs.push(`${paris()} ${m.text()}`); });
     const q = new URLSearchParams({ layers: String(c.L), mode: c.src === "cam" ? "camera" : "file", cond: c.name, s4: S4_BASE });
-    if (CODEC !== "vp8") q.set("codec", CODEC);
+    if (c.codec !== "vp8") q.set("codec", c.codec);
+    if (c.src === "file") q.set("src", c.file);
     if (c.src === "file" && UNLOCK_FILE) q.set("unlockStats", "1");
     await pub.goto(`${HARNESS}${AB_PATH}?${q}`, { waitUntil: "load", timeout: 45000 });
     await pub.fill("#room", room); await pub.fill("#identity", "ab-pub");
