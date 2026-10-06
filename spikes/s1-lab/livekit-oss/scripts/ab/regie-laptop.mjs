@@ -75,8 +75,13 @@ try {
     pubs.push({ id: `rg-pub-${i}`, pg });
     log(`pub ${i} joined`);
   }
-  await sleep(2000);
-  for (const p of pubs) { const ok = await p.pg.evaluate(() => !!window.__publishedStream?.getVideoTracks().length); if (!ok) throw new Error(`${p.id} has no published video`); }
+  // "connected" is set before the file track is published; wait (up to 45 s) for every publisher's video.
+  for (const p of pubs) {
+    await p.pg.waitForFunction(() => window.__publishedStream?.getVideoTracks().length > 0 || /error/.test(document.querySelector("#status")?.textContent ?? ""), null, { timeout: 45000 }).catch(() => {});
+    const ok = await p.pg.evaluate(() => !!window.__publishedStream?.getVideoTracks().length);
+    if (!ok) throw new Error(`${p.id} has no published video after 45 s (${await p.pg.evaluate(() => document.querySelector("#status")?.textContent).catch(() => "?")})`);
+  }
+  log("all publishers have published video");
   subCtx = await launch(subM);
   const sub = subCtx.pages()[0] ?? await subCtx.newPage();
   await join_(sub, `${HARNESS}${AB_PATH}?adaptive=0&mode=none&unlockStats=1`, room, "rg-regie");
