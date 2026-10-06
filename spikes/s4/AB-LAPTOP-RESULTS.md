@@ -103,6 +103,19 @@ Full mime matrix and per-file rows: see embedded `remux-report.md` content in re
 
 ---
 
+## 2026-10-06 night: MediaRecorder H.264 (QuickSync) check + H.264-rec A/B (indicative, 1 run)
+
+Tooling: [`h264-probe/v3/`](./h264-probe/v3/) (`hw-check-v3.mjs`, `sample-gpu-v3.ps1`, `README-v3.md`; run [`runs/hwv3-headed/results.json`](./h264-probe/v3/runs/hwv3-headed/results.json)). Back-and-forth A/B reports: [`ab-reports/ab-pp-vp8-rec.md`](./ab-reports/ab-pp-vp8-rec.md), [`ab-reports/ab-pp-h264-rec.md`](./ab-reports/ab-pp-h264-rec.md).
+
+- **Positive control (VideoEncoder avc1, 20 s each):** prefer-hardware **26.5 %** of one core vs prefer-software **46.9 %**. The Intel Iris Xe exposes **no** `VideoEncode` engine type in Windows GPU counters (only VideoDecode ×2, VideoProcessing, 3D, Copy); VideoEncode exists only on the RTX 3070, so earlier “0 % VideoEncode” readings only proved **no NVENC**.
+- **HW-check v3 (headed, per-phase, our tab’s Intel VideoDecode utilisation / CPU of one core):** ve-avc1-hw **6.2 % / 50.6 %**; mr-h264 **5.7 % / 62.8 %**; mr-vp8 **1.0 % / 98.6 %**; ve-avc1-sw **0.9 % / 71.8 %**. NVENC **0**. **Conclusion:** Edge MediaRecorder `video/webm;codecs=h264` uses **Intel QuickSync** (encode work shows under the VideoDecode engine on this iGPU). Machine was busier during this run (**56 %** system CPU at idle). This corrects the earlier “likely software” hint.
+- **Edge output** for `video/webm;codecs=h264` is **Matroska/avc1 Constrained Baseline** (file still named `.webm`); remux to webm **fails**, mkv/mp4 **OK**; drop-in **v2.2** ([#11](https://github.com/Sandbox-podcast/Podcast-Studio/issues/11)) and [`analyze_ab.py`](./analyze_ab.py) handle it.
+- **S4 gates on the VP8 rec** of the back-and-forth 2L-on run (**04:02**): **PASS** (1280×720 VP8, **120.0 s**, loss **0.15 %**, **2.64 Mbps**, near-distinct **28.4 fps**, all 1 s windows ≥24).
+- **S4 gates on the H.264 rec** of the back-and-forth 2L-on run (**04:37**, `recorderMimeType` `video/webm;codecs=h264`): **PASS** on all measurable gates (1280×720 H.264 CB, **120.0 s**, loss **0.03 %**, max gap **52 ms**, **2.68 Mbps**, upload complete local=remote, all **120** one-second windows ≥28 exact-distinct frames incl. 90–120 s). Near-distinct at 0.5 = **26.5 fps** vs **28.4** for VP8 rec (cause unverified; exact-distinct **30.0**, no frame loss). A/V sync not measurable (no clean clap).
+- **Live side** of that run (measured by Podcast RTC, PR #3 `769e6b7`; judged by Designer): share≥24 at **0.3** = **0.70** vs **0.93** with VP8 rec; HD layer still **640×360** median; drop concentrated in last ~**30 s** with machine at **70–85 %** CPU, cause **NOT VALIDATED**. **Lead synthesis:** H.264 rec showed **no live benefit** on 1 run; the only argument for an S4 amendment is the **rec-only CPU gain**. **S4 lock (WebM VP8) unchanged**; any amendment is Loïc’s decision.
+
+---
+
 ## Related
 
 - A/B analyzer: [`analyze_ab.py`](./analyze_ab.py) (`--source inbox`, filter `ab-`)
