@@ -1,0 +1,20 @@
+[
+  {
+    "path": "ab-cam-3L-on-sub-hi-rx.webm",
+    "mode": "native",
+    "threshold": 0.3,
+    "total_frames": 3582,
+    "duration_s": 120.004,
+    "size_segments": [
+      "1280x720:3582f"
+    ],
+    "size_changes": 0,
+    "distinct_fps_exact": 29.849,
+    "distinct_fps_near": 29.832,
+    "longest_neardup_run_frames": 2,
+    "windows_1s_share_ge24_exact": 0.9917,
+    "windows_1s_min_exact": 23,
+    "windows_1s_share_ge24_near": 0.9917,
+    "windows_1s_median_near": 30
+  }
+]

@@ -1,0 +1,23 @@
+[
+  {
+    "path": "ab-cam-2L-on-sub-hi-rx.webm",
+    "mode": "native",
+    "threshold": 0.5,
+    "total_frames": 3088,
+    "duration_s": 119.998,
+    "size_segments": [
+      "320x180:560f",
+      "1280x720:9f",
+      "320x180:78f",
+      "1280x720:2441f"
+    ],
+    "size_changes": 3,
+    "distinct_fps_exact": 25.734,
+    "distinct_fps_near": 25.725,
+    "longest_neardup_run_frames": 2,
+    "windows_1s_share_ge24_exact": 0.6583,
+    "windows_1s_min_exact": 3,
+    "windows_1s_share_ge24_near": 0.6583,
+    "windows_1s_median_near": 30
+  }
+]

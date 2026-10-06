@@ -1,0 +1,11 @@
+[2L-b] align=csv ts (stats timestamp) offset=0.179 intervals 119/119 coverage 118.981 s (99.2%) basis=['src_frames delta']
+  expected 3568 · written 3570 · deficit 35
+  capture-relative loss: clipped 0.981 % · net -0.056 % · noise floor (steady >= 28.0 fps, 119 iv) 0.981 %
+  deficit   1 at RTC 2.0 s (rec (0.834, 1.84)) exp 30 wr 29
+  deficit   1 at RTC 4.0 s (rec (2.835, 3.827)) exp 30 wr 29
+  deficit   1 at RTC 15.0 s (rec (13.834, 14.825)) exp 30 wr 29
+  deficit   1 at RTC 18.0 s (rec (16.834, 17.841)) exp 31 wr 30
+  deficit   1 at RTC 24.0 s (rec (22.837, 23.888)) exp 32 wr 31
+  deficit   1 at RTC 28.0 s (rec (26.837, 27.843)) exp 31 wr 30
+  deficit   1 at RTC 34.0 s (rec (32.827, 33.846)) exp 32 wr 31
+  deficit   1 at RTC 37.0 s (rec (35.838, 36.829)) exp 30 wr 29

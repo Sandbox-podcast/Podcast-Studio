@@ -1,0 +1,6 @@
+ab-cam-3L-on-sub-hi-rx.webm: frames=3576 dur=120.017s size_mode=native segs=1 container_fps=29.795 distinct_fps_exact=29.796 distinct_fps_near=29.737 thresh=0.5 max_neardup=2f/31.0ms win(near)≥24=1.0 median=30.0 p5=28.0 min=26 lt24=0/120
+ab-cam-3L-on-sub-hi-rx.webm [native] frames=3576 segs=['1280x720:3576f'] exact=29.796 near=29.737 ge24_exact=1.0 ge24_near=1.0 maxneardup=2f
+  freeze>200ms (gap between near-distinct frames): n=0 total=0ms max=0ms
+ab-cam-3L-on-sub-hi-rx.webm: frames=3576 dur=120.017s size_mode=native segs=1 container_fps=29.795 distinct_fps_exact=29.796 distinct_fps_near=29.796 thresh=0.3 max_neardup=1f/0.0ms win(near)≥24=1.0 median=30.0 p5=28.0 min=26 lt24=0/120
+ab-cam-3L-on-sub-hi-rx.webm [native] frames=3576 segs=['1280x720:3576f'] exact=29.796 near=29.796 ge24_exact=1.0 ge24_near=1.0 maxneardup=1f
+  freeze>200ms (gap between near-distinct frames): n=0 total=0ms max=0ms

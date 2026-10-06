@@ -1,0 +1,62 @@
+{
+  "at": "2026-10-06T17:07:59.905",
+  "harness": {
+    "ok": true,
+    "status": 200,
+    "body": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <title>S1 lab â€” LiveKit OSS harness</title>\n    <link rel=\"stylesheet\" href=\"/styles.css\" />\n    <link rel=\"icon\" href=\"/favicon.png\" type=\"image/"
+  },
+  "media": {
+    "ok": true,
+    "status": 200,
+    "body": "\u001aEߣ�B��\u0001B��\u0001B�\u0004B�\bB��webmB��\u0004B��\u0002\u0018S�g\u0001�������\u0015I�f�*ױ�\u000fB@M��ChromeWA�Chrome\u0016T�k@���ׁ\u0001sŇU�dW,�ۃ�\u0001U�\u0001��V_VP8ਰ�\u0005\u0000��\u0002�S��\u0001vp�vq�\u0000vs�\u0000\u0000\u0000\u0000vt�\u0000\u0000\u0000\u0000vu�\u0000\u0000\u0000\u0000��ׁ\u0002sŇ0�K�Kw탁\u0002��A_OPUSc��OpusHead\u0001\u0001\u0000\u0000��\u0000\u0000\u0000\u0000\u0000፵�G;�\u0000��\u0001bd� \u001fC�u\u0001��������\u0000� up�\u0000\u0000��8\u0003�\u0001*\u0000\u0005�\u0002\u0007\u0007\b������\u001d���۹\u001f�;\u0016��N-\u0001�#\"e>m�����X\u0006����IXlzmx�\u0014��ֺ��\u0019A��~��o�;�z"
+  },
+  "s4Health": {
+    "ok": true,
+    "status": 200,
+    "body": "{\"ok\":true,\"endpoint\":\"http://127.0.0.1:9000\",\"bucket\":\"podcast-recordings-poc\",\"keyPrefix\":\"spike/s4-dropin/\"}"
+  },
+  "idleCpu": {
+    "start": "2026-10-06T17:08:01.301",
+    "end": "2026-10-06T17:08:20.233",
+    "seconds": 15,
+    "cores": 8,
+    "node_busy_pct_med": 11.9,
+    "node_busy_pct_max": 36.4,
+    "node_busy_pct_samples": [
+      18.3,
+      22.2,
+      13.3,
+      10.9,
+      8.7,
+      26.9,
+      11.3,
+      19.5,
+      11.3,
+      10.4,
+      36.4,
+      35.7,
+      10.8,
+      11.9,
+      10.9
+    ],
+    "wmi_total_pct_med": 12,
+    "wmi_total_pct_samples": [
+      7,
+      33,
+      12,
+      10,
+      34,
+      21,
+      12,
+      11,
+      21,
+      42,
+      11,
+      8,
+      28,
+      30,
+      5
+    ],
+    "note": "global CPU before any test Edge launch (includes LiveKit/Media/other host processes and the 1 Hz WMI query itself)"
+  }
+}

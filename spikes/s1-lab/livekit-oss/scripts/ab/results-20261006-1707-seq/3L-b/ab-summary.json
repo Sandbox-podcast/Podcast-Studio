@@ -1,0 +1,239 @@
+{
+  "preflight": {
+    "at": "2026-10-06T17:21:00.411",
+    "harness": {
+      "ok": true,
+      "status": 200,
+      "body": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <title>S1 lab â€” LiveKit OSS harness</title>\n    <link rel=\"stylesheet\" href=\"/styles.css\" />\n    <link rel=\"icon\" href=\"/favicon.png\" type=\"image/"
+    },
+    "media": {
+      "ok": true,
+      "status": 200,
+      "body": "\u001aEߣ�B��\u0001B��\u0001B�\u0004B�\bB��webmB��\u0004B��\u0002\u0018S�g\u0001�������\u0015I�f�*ױ�\u000fB@M��ChromeWA�Chrome\u0016T�k@���ׁ\u0001sŇU�dW,�ۃ�\u0001U�\u0001��V_VP8ਰ�\u0005\u0000��\u0002�S��\u0001vp�vq�\u0000vs�\u0000\u0000\u0000\u0000vt�\u0000\u0000\u0000\u0000vu�\u0000\u0000\u0000\u0000��ׁ\u0002sŇ0�K�Kw탁\u0002��A_OPUSc��OpusHead\u0001\u0001\u0000\u0000��\u0000\u0000\u0000\u0000\u0000፵�G;�\u0000��\u0001bd� \u001fC�u\u0001��������\u0000� up�\u0000\u0000��8\u0003�\u0001*\u0000\u0005�\u0002\u0007\u0007\b������\u001d���۹\u001f�;\u0016��N-\u0001�#\"e>m�����X\u0006����IXlzmx�\u0014��ֺ��\u0019A��~��o�;�z"
+    },
+    "s4Health": {
+      "ok": true,
+      "status": 200,
+      "body": "{\"ok\":true,\"endpoint\":\"http://127.0.0.1:9000\",\"bucket\":\"podcast-recordings-poc\",\"keyPrefix\":\"spike/s4-dropin/\"}"
+    },
+    "idleCpu": {
+      "start": "2026-10-06T17:21:01.482",
+      "end": "2026-10-06T17:21:20.388",
+      "seconds": 15,
+      "cores": 8,
+      "node_busy_pct_med": 18.5,
+      "node_busy_pct_max": 30.1,
+      "node_busy_pct_samples": [
+        12.7,
+        18.1,
+        17,
+        12.3,
+        30.1,
+        25.6,
+        19,
+        20.8,
+        18.2,
+        23.7,
+        25,
+        20.4,
+        18.5,
+        17.1,
+        16.7
+      ],
+      "wmi_total_pct_med": 21,
+      "wmi_total_pct_samples": [
+        23,
+        14,
+        15,
+        31,
+        27,
+        25,
+        16,
+        24,
+        43,
+        11,
+        22,
+        21,
+        9,
+        13,
+        13
+      ],
+      "note": "global CPU before any test Edge launch (includes LiveKit/Media/other host processes and the 1 Hz WMI query itself)"
+    }
+  },
+  "summaries": [
+    {
+      "cond": "ab-cam-3L-on",
+      "status": "DONE",
+      "sample_ms": 1000,
+      "cpu_sample_ms": 2000,
+      "window": [
+        "2026-10-06T17:21:50.292",
+        "2026-10-06T17:23:51.151"
+      ],
+      "rec": [
+        "2026-10-06T17:21:50.625",
+        "2026-10-06T17:23:51.148",
+        "stopped+exported"
+      ],
+      "perRid": {
+        "f": {
+          "n": 120,
+          "w_med": 1280,
+          "h_med": 720,
+          "fps_med": 30,
+          "kbps_med": 1687.5,
+          "qlr_counts": {
+            "none": 120
+          },
+          "qlrDurations_delta_s": {
+            "bandwidth": 0,
+            "cpu": 0,
+            "none": 119,
+            "other": 0
+          },
+          "qlrResChanges_delta": 0,
+          "encoderImplementation": [
+            "SimulcastEncoderAdapter (libvpx, libvpx, libvpx)"
+          ],
+          "enc": {
+            "layer_cap_fps": 30,
+            "top": true,
+            "enc_fps_med": 30,
+            "enc_fps_min": 24.7,
+            "src_ref_fps_med": 30,
+            "encode_ms_per_frame_med": 12.4,
+            "keyFrames_delta": 1,
+            "n_intervals": 119,
+            "n_enc_lt_src_minus3_qlr_none": 2,
+            "samples_enc_lt_src_minus3_qlr_none": [
+              {
+                "t_rel_s": 5,
+                "enc_fps": 25.2,
+                "src_fps": 29.2,
+                "ref_fps": 29.2
+              },
+              {
+                "t_rel_s": 31,
+                "enc_fps": 24.7,
+                "src_fps": 28.5,
+                "ref_fps": 28.5
+              }
+            ]
+          }
+        },
+        "q": {
+          "n": 120,
+          "w_med": 320,
+          "h_med": 180,
+          "fps_med": 20,
+          "kbps_med": 150,
+          "qlr_counts": {
+            "none": 120
+          },
+          "qlrDurations_delta_s": {
+            "bandwidth": 0,
+            "cpu": 0,
+            "none": 119,
+            "other": 0
+          },
+          "qlrResChanges_delta": 0,
+          "encoderImplementation": [
+            "SimulcastEncoderAdapter (libvpx, libvpx, libvpx)"
+          ],
+          "enc": {
+            "layer_cap_fps": 20,
+            "top": false,
+            "enc_fps_med": 20,
+            "enc_fps_min": 18,
+            "src_ref_fps_med": 20,
+            "encode_ms_per_frame_med": 1.9,
+            "keyFrames_delta": 0,
+            "n_intervals": 119,
+            "n_enc_lt_src_minus3_qlr_none": 0,
+            "samples_enc_lt_src_minus3_qlr_none": []
+          }
+        },
+        "h": {
+          "n": 120,
+          "w_med": 640,
+          "h_med": 360,
+          "fps_med": 20,
+          "kbps_med": 448,
+          "qlr_counts": {
+            "none": 120
+          },
+          "qlrDurations_delta_s": {
+            "bandwidth": 0,
+            "cpu": 0,
+            "none": 119,
+            "other": 0
+          },
+          "qlrResChanges_delta": 0,
+          "encoderImplementation": [
+            "SimulcastEncoderAdapter (libvpx, libvpx, libvpx)"
+          ],
+          "enc": {
+            "layer_cap_fps": 20,
+            "top": false,
+            "enc_fps_med": 20,
+            "enc_fps_min": 18,
+            "src_ref_fps_med": 20,
+            "encode_ms_per_frame_med": 5.6,
+            "keyFrames_delta": 0,
+            "n_intervals": 119,
+            "n_enc_lt_src_minus3_qlr_none": 0,
+            "samples_enc_lt_src_minus3_qlr_none": []
+          }
+        }
+      },
+      "src": {
+        "pc1:SV2": {
+          "n": 120,
+          "trackIdentifier": "fbad4a41-d9d9-4ac7-a55e-44daf889766a",
+          "src_fps_med": 30,
+          "src_fps_min": 28,
+          "src_fps_lt24": 0,
+          "src_fps_frames_med": 30,
+          "src_fps_frames_min": 27.9,
+          "src_w_med": 1280,
+          "src_h_med": 720,
+          "src_frames_delta": 3565
+        }
+      },
+      "bwe": {
+        "n": 120,
+        "pcs": [
+          1
+        ],
+        "aob_kbps_min": 3330.9,
+        "aob_kbps_med": 3950.8,
+        "aob_kbps_max": 4021.6,
+        "rtt_ms_med": 2,
+        "pair": [
+          "host/udp->prflx/udp"
+        ]
+      },
+      "subs": {
+        "ab-sub-hi": {
+          "n": 120,
+          "w_med": 1280,
+          "h_med": 720,
+          "fps_med": 30,
+          "freeze_delta": 1,
+          "decoder": []
+        },
+        "ab-sub-lo": {
+          "n": 120,
+          "w_med": 320,
+          "h_med": 180,
+          "fps_med": 20,
+          "freeze_delta": 1,
+          "decoder": []
+        }
+      },
+      "cpu_csv": "ab-cam-3L-on-cpu.csv",
+      "elapsed_s": 153
+    }
+  ]
+}

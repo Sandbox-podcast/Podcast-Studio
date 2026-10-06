@@ -1,0 +1,46 @@
+{
+ "2L-a": {
+  "aob_first": 808.3,
+  "aob_min": 808.3,
+  "t_min": 1.0,
+  "aob_final": 3171.8,
+  "aob_med": 3049.3,
+  "drops_gt20pct": [],
+  "t_recovered_90pct_med": 46.0,
+  "recovery_slope_kbps_s": 44.6,
+  "slope_first10s_after_min": 3.9
+ },
+ "3L-a": {
+  "aob_first": 3976.1,
+  "aob_min": 3976.1,
+  "t_min": 1.0,
+  "aob_final": 4135.6,
+  "aob_med": 4018.2,
+  "drops_gt20pct": [],
+  "t_recovered_90pct_med": null,
+  "recovery_slope_kbps_s": null,
+  "slope_first10s_after_min": 4.2
+ },
+ "2L-b": {
+  "aob_first": 1384.0,
+  "aob_min": 1384.0,
+  "t_min": 1.0,
+  "aob_final": 3190.8,
+  "aob_med": 3055.8,
+  "drops_gt20pct": [],
+  "t_recovered_90pct_med": 55.0,
+  "recovery_slope_kbps_s": 26.2,
+  "slope_first10s_after_min": 4.0
+ },
+ "3L-b": {
+  "aob_first": 4021.6,
+  "aob_min": 3330.9,
+  "t_min": 32.0,
+  "aob_final": 4001.5,
+  "aob_med": 3950.8,
+  "drops_gt20pct": [],
+  "t_recovered_90pct_med": 36.0,
+  "recovery_slope_kbps_s": 69.5,
+  "slope_first10s_after_min": 43.4
+ }
+}

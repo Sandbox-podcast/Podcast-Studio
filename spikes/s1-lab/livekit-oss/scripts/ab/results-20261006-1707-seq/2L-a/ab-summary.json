@@ -1,0 +1,392 @@
+{
+  "preflight": {
+    "at": "2026-10-06T17:07:59.905",
+    "harness": {
+      "ok": true,
+      "status": 200,
+      "body": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <title>S1 lab â€” LiveKit OSS harness</title>\n    <link rel=\"stylesheet\" href=\"/styles.css\" />\n    <link rel=\"icon\" href=\"/favicon.png\" type=\"image/"
+    },
+    "media": {
+      "ok": true,
+      "status": 200,
+      "body": "\u001aEߣ�B��\u0001B��\u0001B�\u0004B�\bB��webmB��\u0004B��\u0002\u0018S�g\u0001�������\u0015I�f�*ױ�\u000fB@M��ChromeWA�Chrome\u0016T�k@���ׁ\u0001sŇU�dW,�ۃ�\u0001U�\u0001��V_VP8ਰ�\u0005\u0000��\u0002�S��\u0001vp�vq�\u0000vs�\u0000\u0000\u0000\u0000vt�\u0000\u0000\u0000\u0000vu�\u0000\u0000\u0000\u0000��ׁ\u0002sŇ0�K�Kw탁\u0002��A_OPUSc��OpusHead\u0001\u0001\u0000\u0000��\u0000\u0000\u0000\u0000\u0000፵�G;�\u0000��\u0001bd� \u001fC�u\u0001��������\u0000� up�\u0000\u0000��8\u0003�\u0001*\u0000\u0005�\u0002\u0007\u0007\b������\u001d���۹\u001f�;\u0016��N-\u0001�#\"e>m�����X\u0006����IXlzmx�\u0014��ֺ��\u0019A��~��o�;�z"
+    },
+    "s4Health": {
+      "ok": true,
+      "status": 200,
+      "body": "{\"ok\":true,\"endpoint\":\"http://127.0.0.1:9000\",\"bucket\":\"podcast-recordings-poc\",\"keyPrefix\":\"spike/s4-dropin/\"}"
+    },
+    "idleCpu": {
+      "start": "2026-10-06T17:08:01.301",
+      "end": "2026-10-06T17:08:20.233",
+      "seconds": 15,
+      "cores": 8,
+      "node_busy_pct_med": 11.9,
+      "node_busy_pct_max": 36.4,
+      "node_busy_pct_samples": [
+        18.3,
+        22.2,
+        13.3,
+        10.9,
+        8.7,
+        26.9,
+        11.3,
+        19.5,
+        11.3,
+        10.4,
+        36.4,
+        35.7,
+        10.8,
+        11.9,
+        10.9
+      ],
+      "wmi_total_pct_med": 12,
+      "wmi_total_pct_samples": [
+        7,
+        33,
+        12,
+        10,
+        34,
+        21,
+        12,
+        11,
+        21,
+        42,
+        11,
+        8,
+        28,
+        30,
+        5
+      ],
+      "note": "global CPU before any test Edge launch (includes LiveKit/Media/other host processes and the 1 Hz WMI query itself)"
+    }
+  },
+  "summaries": [
+    {
+      "cond": "ab-cam-2L-on",
+      "status": "DONE",
+      "sample_ms": 1000,
+      "cpu_sample_ms": 2000,
+      "window": [
+        "2026-10-06T17:08:51.991",
+        "2026-10-06T17:10:52.763"
+      ],
+      "rec": [
+        "2026-10-06T17:08:52.209",
+        "2026-10-06T17:10:52.759",
+        "stopped+exported"
+      ],
+      "perRid": {
+        "h": {
+          "n": 120,
+          "w_med": 1280,
+          "h_med": 720,
+          "fps_med": 30,
+          "kbps_med": 1656.4,
+          "qlr_counts": {
+            "bandwidth": 27,
+            "none": 93
+          },
+          "qlrDurations_delta_s": {
+            "bandwidth": 26.9,
+            "cpu": 0,
+            "none": 92.1,
+            "other": 0
+          },
+          "qlrResChanges_delta": 1,
+          "encoderImplementation": [
+            "SimulcastEncoderAdapter (libvpx)",
+            "SimulcastEncoderAdapter (libvpx, libvpx)"
+          ],
+          "enc": {
+            "layer_cap_fps": 30,
+            "top": true,
+            "enc_fps_med": 29.7,
+            "enc_fps_min": 0,
+            "src_ref_fps_med": 30,
+            "encode_ms_per_frame_med": 10.1,
+            "keyFrames_delta": 18,
+            "n_intervals": 119,
+            "n_enc_lt_src_minus3_qlr_none": 15,
+            "samples_enc_lt_src_minus3_qlr_none": [
+              {
+                "t_rel_s": 28,
+                "enc_fps": 2,
+                "src_fps": 29.1,
+                "ref_fps": 29.1
+              },
+              {
+                "t_rel_s": 29,
+                "enc_fps": 11.7,
+                "src_fps": 30.3,
+                "ref_fps": 30
+              },
+              {
+                "t_rel_s": 30,
+                "enc_fps": 14.3,
+                "src_fps": 29.7,
+                "ref_fps": 29.7
+              },
+              {
+                "t_rel_s": 31,
+                "enc_fps": 9.9,
+                "src_fps": 30.6,
+                "ref_fps": 30
+              },
+              {
+                "t_rel_s": 32,
+                "enc_fps": 7,
+                "src_fps": 29.9,
+                "ref_fps": 29.9
+              },
+              {
+                "t_rel_s": 33,
+                "enc_fps": 11.1,
+                "src_fps": 29.4,
+                "ref_fps": 29.4
+              },
+              {
+                "t_rel_s": 34,
+                "enc_fps": 11,
+                "src_fps": 30,
+                "ref_fps": 30
+              },
+              {
+                "t_rel_s": 35,
+                "enc_fps": 15,
+                "src_fps": 30.1,
+                "ref_fps": 30
+              },
+              {
+                "t_rel_s": 36,
+                "enc_fps": 19.8,
+                "src_fps": 30.7,
+                "ref_fps": 30
+              },
+              {
+                "t_rel_s": 37,
+                "enc_fps": 22.9,
+                "src_fps": 29.8,
+                "ref_fps": 29.8
+              },
+              {
+                "t_rel_s": 38,
+                "enc_fps": 21.1,
+                "src_fps": 30.2,
+                "ref_fps": 30
+              },
+              {
+                "t_rel_s": 39,
+                "enc_fps": 23,
+                "src_fps": 30,
+                "ref_fps": 30
+              },
+              {
+                "t_rel_s": 40,
+                "enc_fps": 22.3,
+                "src_fps": 29.4,
+                "ref_fps": 29.4
+              },
+              {
+                "t_rel_s": 41,
+                "enc_fps": 22.5,
+                "src_fps": 30.3,
+                "ref_fps": 30
+              },
+              {
+                "t_rel_s": 42,
+                "enc_fps": 24.1,
+                "src_fps": 30.1,
+                "ref_fps": 30
+              }
+            ]
+          }
+        },
+        "q": {
+          "n": 120,
+          "w_med": 320,
+          "h_med": 180,
+          "fps_med": 20,
+          "kbps_med": 154.3,
+          "qlr_counts": {
+            "bandwidth": 27,
+            "none": 93
+          },
+          "qlrDurations_delta_s": {
+            "bandwidth": 26.9,
+            "cpu": 0,
+            "none": 92.1,
+            "other": 0
+          },
+          "qlrResChanges_delta": 1,
+          "encoderImplementation": [
+            "SimulcastEncoderAdapter (libvpx)",
+            "SimulcastEncoderAdapter (libvpx, libvpx)"
+          ],
+          "enc": {
+            "layer_cap_fps": 20,
+            "top": false,
+            "enc_fps_med": 19.9,
+            "enc_fps_min": 3.1,
+            "src_ref_fps_med": 20,
+            "encode_ms_per_frame_med": 1.9,
+            "keyFrames_delta": 18,
+            "n_intervals": 119,
+            "n_enc_lt_src_minus3_qlr_none": 17,
+            "samples_enc_lt_src_minus3_qlr_none": [
+              {
+                "t_rel_s": 29,
+                "enc_fps": 6.9,
+                "src_fps": 30.3,
+                "ref_fps": 20
+              },
+              {
+                "t_rel_s": 30,
+                "enc_fps": 3.1,
+                "src_fps": 29.7,
+                "ref_fps": 20
+              },
+              {
+                "t_rel_s": 31,
+                "enc_fps": 8.9,
+                "src_fps": 30.6,
+                "ref_fps": 20
+              },
+              {
+                "t_rel_s": 32,
+                "enc_fps": 8,
+                "src_fps": 29.9,
+                "ref_fps": 20
+              },
+              {
+                "t_rel_s": 33,
+                "enc_fps": 10.1,
+                "src_fps": 29.4,
+                "ref_fps": 20
+              },
+              {
+                "t_rel_s": 34,
+                "enc_fps": 10,
+                "src_fps": 30,
+                "ref_fps": 20
+              },
+              {
+                "t_rel_s": 35,
+                "enc_fps": 10,
+                "src_fps": 30.1,
+                "ref_fps": 20
+              },
+              {
+                "t_rel_s": 36,
+                "enc_fps": 9.9,
+                "src_fps": 30.7,
+                "ref_fps": 20
+              },
+              {
+                "t_rel_s": 37,
+                "enc_fps": 10.9,
+                "src_fps": 29.8,
+                "ref_fps": 20
+              },
+              {
+                "t_rel_s": 38,
+                "enc_fps": 9.1,
+                "src_fps": 30.2,
+                "ref_fps": 20
+              },
+              {
+                "t_rel_s": 39,
+                "enc_fps": 10,
+                "src_fps": 30,
+                "ref_fps": 20
+              },
+              {
+                "t_rel_s": 40,
+                "enc_fps": 10.1,
+                "src_fps": 29.4,
+                "ref_fps": 20
+              },
+              {
+                "t_rel_s": 41,
+                "enc_fps": 12.7,
+                "src_fps": 30.3,
+                "ref_fps": 20
+              },
+              {
+                "t_rel_s": 42,
+                "enc_fps": 15.1,
+                "src_fps": 30.1,
+                "ref_fps": 20
+              },
+              {
+                "t_rel_s": 43,
+                "enc_fps": 15.2,
+                "src_fps": 29.4,
+                "ref_fps": 20
+              },
+              {
+                "t_rel_s": 44,
+                "enc_fps": 14.9,
+                "src_fps": 30.8,
+                "ref_fps": 20
+              },
+              {
+                "t_rel_s": 45,
+                "enc_fps": 15.1,
+                "src_fps": 29.1,
+                "ref_fps": 20
+              }
+            ]
+          }
+        }
+      },
+      "src": {
+        "pc1:SV2": {
+          "n": 120,
+          "trackIdentifier": "f6d8bd89-30b4-4655-97f0-3c4b9e9ed144",
+          "src_fps_med": 30,
+          "src_fps_min": 29,
+          "src_fps_lt24": 0,
+          "src_fps_frames_med": 30,
+          "src_fps_frames_min": 29,
+          "src_w_med": 1280,
+          "src_h_med": 720,
+          "src_frames_delta": 3570
+        }
+      },
+      "bwe": {
+        "n": 120,
+        "pcs": [
+          1
+        ],
+        "aob_kbps_min": 808.3,
+        "aob_kbps_med": 3049.3,
+        "aob_kbps_max": 3171.8,
+        "rtt_ms_med": 2,
+        "pair": [
+          "host/udp->prflx/udp"
+        ]
+      },
+      "subs": {
+        "ab-sub-hi": {
+          "n": 120,
+          "w_med": 1280,
+          "h_med": 720,
+          "fps_med": 30,
+          "freeze_delta": 3,
+          "decoder": []
+        },
+        "ab-sub-lo": {
+          "n": 120,
+          "w_med": 320,
+          "h_med": 180,
+          "fps_med": 20,
+          "freeze_delta": 3,
+          "decoder": []
+        }
+      },
+      "cpu_csv": "ab-cam-2L-on-cpu.csv",
+      "elapsed_s": 155
+    }
+  ]
+}

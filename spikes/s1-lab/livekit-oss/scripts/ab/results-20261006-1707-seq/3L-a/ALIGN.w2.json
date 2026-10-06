@@ -1,0 +1,3852 @@
+{
+ "cond": "ab-cam-3L-on",
+ "top": "f",
+ "sample_s": 1.0,
+ "win_s": 2.0,
+ "src_dips_lt24_t": [],
+ "events": [],
+ "aob_kbps": [
+  3976.1,
+  3976.1,
+  3976.1,
+  3976.1,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4018.2,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6,
+  4135.6
+ ],
+ "rows": [
+  {
+   "t": 1.0,
+   "at": "2026-10-06T17:13:12.610",
+   "src_fps": 31.0,
+   "src_fps_frames": null,
+   "aob_kbps": 3976.1,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": null,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": null
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": null,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": null
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": null,
+    "qlr": "none",
+    "target_kbps": 147.8,
+    "kbps": null
+   }
+  },
+  {
+   "t": 2.0,
+   "at": "2026-10-06T17:13:13.607",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.4,
+   "aob_kbps": 3976.1,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1698.9,
+    "kbps": 1687.4
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 438.6
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 145.3
+   }
+  },
+  {
+   "t": 3.0,
+   "at": "2026-10-06T17:13:14.608",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.8,
+   "aob_kbps": 3976.1,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1626.2
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 19.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 400.6
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 133.2
+   }
+  },
+  {
+   "t": 4.0,
+   "at": "2026-10-06T17:13:15.604",
+   "src_fps": 30.0,
+   "src_fps_frames": 29.3,
+   "aob_kbps": 3976.1,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1819.8
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 442.8,
+    "kbps": 522.5
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 21.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 149.1,
+    "kbps": 169.1
+   }
+  },
+  {
+   "t": 5.0,
+   "at": "2026-10-06T17:13:16.605",
+   "src_fps": 31.0,
+   "src_fps_frames": 31.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1655.9
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 19.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 449.0,
+    "kbps": 408.0
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 149.9,
+    "kbps": 141.5
+   }
+  },
+  {
+   "t": 6.0,
+   "at": "2026-10-06T17:13:17.607",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1635.7
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 423.9
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 129.1
+   }
+  },
+  {
+   "t": 7.0,
+   "at": "2026-10-06T17:13:18.609",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.9,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1703.5
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 461.1
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 169.6
+   }
+  },
+  {
+   "t": 8.0,
+   "at": "2026-10-06T17:13:19.610",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1794.5
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 488.2
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 155.0
+   }
+  },
+  {
+   "t": 9.0,
+   "at": "2026-10-06T17:13:20.603",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.1,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1678.2,
+    "kbps": 1652.3
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 432.8,
+    "kbps": 436.4
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 21.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 142.8,
+    "kbps": 153.8
+   }
+  },
+  {
+   "t": 10.0,
+   "at": "2026-10-06T17:13:21.624",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.3,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 26.0,
+    "enc_fps": 26.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1441.8
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 453.4
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 137.6
+   }
+  },
+  {
+   "t": 11.0,
+   "at": "2026-10-06T17:13:22.601",
+   "src_fps": 30.0,
+   "src_fps_frames": 29.8,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1677.4
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 411.7
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 21.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 134.4
+   }
+  },
+  {
+   "t": 12.0,
+   "at": "2026-10-06T17:13:23.604",
+   "src_fps": 29.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1709.3
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 452.8
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 147.9
+   }
+  },
+  {
+   "t": 13.0,
+   "at": "2026-10-06T17:13:24.602",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1750.4
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 478.2
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 165.8
+   }
+  },
+  {
+   "t": 14.0,
+   "at": "2026-10-06T17:13:25.607",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.9,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1636.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 396.9
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 148.7,
+    "kbps": 130.2
+   }
+  },
+  {
+   "t": 15.0,
+   "at": "2026-10-06T17:13:26.609",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.9,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1728.9
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 449.2,
+    "kbps": 488.3
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 148.4,
+    "kbps": 179.9
+   }
+  },
+  {
+   "t": 16.0,
+   "at": "2026-10-06T17:13:27.614",
+   "src_fps": 30.0,
+   "src_fps_frames": 29.7,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1693.6,
+    "kbps": 1684.3
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 446.9,
+    "kbps": 423.9
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 21.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 147.6,
+    "kbps": 134.7
+   }
+  },
+  {
+   "t": 17.0,
+   "at": "2026-10-06T17:13:28.615",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1673.1
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 471.0
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 21.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 140.7
+   }
+  },
+  {
+   "t": 18.0,
+   "at": "2026-10-06T17:13:29.612",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.2,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1777.9
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 444.9
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 150.7
+   }
+  },
+  {
+   "t": 19.0,
+   "at": "2026-10-06T17:13:30.614",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 31.0,
+    "qlr": "none",
+    "target_kbps": 1694.5,
+    "kbps": 1704.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 445.4,
+    "kbps": 444.9
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 148.1,
+    "kbps": 151.3
+   }
+  },
+  {
+   "t": 20.0,
+   "at": "2026-10-06T17:13:31.606",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.2,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 29.0,
+    "qlr": "none",
+    "target_kbps": 1691.8,
+    "kbps": 1650.7
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 439.6
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 148.5,
+    "kbps": 141.1
+   }
+  },
+  {
+   "t": 21.0,
+   "at": "2026-10-06T17:13:32.606",
+   "src_fps": 31.0,
+   "src_fps_frames": 31.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1681.8
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 466.8
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 149.7,
+    "kbps": 163.2
+   }
+  },
+  {
+   "t": 22.0,
+   "at": "2026-10-06T17:13:33.601",
+   "src_fps": 28.0,
+   "src_fps_frames": 27.8,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 21.0,
+    "enc_fps": 22.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1266.9
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 17.0,
+    "enc_fps": 18.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 408.9
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 17.0,
+    "enc_fps": 18.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 139.4
+   }
+  },
+  {
+   "t": 23.0,
+   "at": "2026-10-06T17:13:34.614",
+   "src_fps": 32.0,
+   "src_fps_frames": 32.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1683.9
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 455.4
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 146.7
+   }
+  },
+  {
+   "t": 24.0,
+   "at": "2026-10-06T17:13:35.614",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1675.7
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 418.6
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 136.1
+   }
+  },
+  {
+   "t": 25.0,
+   "at": "2026-10-06T17:13:36.614",
+   "src_fps": 31.0,
+   "src_fps_frames": 29.8,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1691.9,
+    "kbps": 1696.9
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 448.1,
+    "kbps": 480.6
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 160.0
+   }
+  },
+  {
+   "t": 26.0,
+   "at": "2026-10-06T17:13:37.611",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.3,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1732.4
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 421.2
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 137.1
+   }
+  },
+  {
+   "t": 27.0,
+   "at": "2026-10-06T17:13:38.610",
+   "src_fps": 31.0,
+   "src_fps_frames": 31.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1642.1
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 451.2
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 145.1
+   }
+  },
+  {
+   "t": 28.0,
+   "at": "2026-10-06T17:13:39.612",
+   "src_fps": 29.0,
+   "src_fps_frames": 28.9,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1750.6
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 438.9
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 143.8
+   }
+  },
+  {
+   "t": 29.0,
+   "at": "2026-10-06T17:13:40.621",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.5,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 29.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1655.9
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 469.9
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 161.1
+   }
+  },
+  {
+   "t": 30.0,
+   "at": "2026-10-06T17:13:41.613",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1782.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 431.9,
+    "kbps": 496.7
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 21.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 140.6,
+    "kbps": 177.7
+   }
+  },
+  {
+   "t": 31.0,
+   "at": "2026-10-06T17:13:42.615",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.4,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 29.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1688.7
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 433.6,
+    "kbps": 464.9
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 141.1,
+    "kbps": 148.8
+   }
+  },
+  {
+   "t": 32.0,
+   "at": "2026-10-06T17:13:43.600",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.4,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1595.9
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 442.9,
+    "kbps": 362.7
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 148.3,
+    "kbps": 114.2
+   }
+  },
+  {
+   "t": 33.0,
+   "at": "2026-10-06T17:13:44.604",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.9,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1709.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 421.6
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 137.9
+   }
+  },
+  {
+   "t": 34.0,
+   "at": "2026-10-06T17:13:45.606",
+   "src_fps": 29.0,
+   "src_fps_frames": 28.9,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1678.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 456.1
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 153.1
+   }
+  },
+  {
+   "t": 35.0,
+   "at": "2026-10-06T17:13:46.610",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.9,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1684.7
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 452.7
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 150.9
+   }
+  },
+  {
+   "t": 36.0,
+   "at": "2026-10-06T17:13:47.613",
+   "src_fps": 30.0,
+   "src_fps_frames": 29.9,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1699.8,
+    "kbps": 1702.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 448.2,
+    "kbps": 443.0
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 147.8
+   }
+  },
+  {
+   "t": 37.0,
+   "at": "2026-10-06T17:13:48.613",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1696.9,
+    "kbps": 1751.2
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 435.5,
+    "kbps": 484.6
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 143.4,
+    "kbps": 173.8
+   }
+  },
+  {
+   "t": 38.0,
+   "at": "2026-10-06T17:13:49.612",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.1,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1648.2
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 410.3
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 128.8
+   }
+  },
+  {
+   "t": 39.0,
+   "at": "2026-10-06T17:13:50.620",
+   "src_fps": 31.0,
+   "src_fps_frames": 29.7,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 29.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1669.8,
+    "kbps": 1765.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 443.0,
+    "kbps": 496.6
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 147.7,
+    "kbps": 164.9
+   }
+  },
+  {
+   "t": 40.0,
+   "at": "2026-10-06T17:13:51.603",
+   "src_fps": 30.0,
+   "src_fps_frames": 29.5,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1634.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 409.6
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 130.7
+   }
+  },
+  {
+   "t": 41.0,
+   "at": "2026-10-06T17:13:52.603",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1678.1,
+    "kbps": 1716.2
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 449.9,
+    "kbps": 458.0
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 152.7
+   }
+  },
+  {
+   "t": 42.0,
+   "at": "2026-10-06T17:13:53.603",
+   "src_fps": 29.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1714.7
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 458.5
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 155.6
+   }
+  },
+  {
+   "t": 43.0,
+   "at": "2026-10-06T17:13:54.627",
+   "src_fps": 30.0,
+   "src_fps_frames": 29.7,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 29.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1696.1,
+    "kbps": 1671.3
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 457.7
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 150.6
+   }
+  },
+  {
+   "t": 44.0,
+   "at": "2026-10-06T17:13:55.610",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.2,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 27.0,
+    "enc_fps": 27.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1567.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 18.0,
+    "enc_fps": 17.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 374.8
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 18.0,
+    "enc_fps": 17.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 124.5
+   }
+  },
+  {
+   "t": 45.0,
+   "at": "2026-10-06T17:13:56.614",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.9,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1609.9
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 435.6
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 153.8
+   }
+  },
+  {
+   "t": 46.0,
+   "at": "2026-10-06T17:13:57.610",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.1,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1790.9
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 474.8
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 157.8
+   }
+  },
+  {
+   "t": 47.0,
+   "at": "2026-10-06T17:13:58.613",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.9,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1691.8,
+    "kbps": 1659.5
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 446.9,
+    "kbps": 472.0
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 146.4,
+    "kbps": 160.2
+   }
+  },
+  {
+   "t": 48.0,
+   "at": "2026-10-06T17:13:59.602",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.3,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1680.3,
+    "kbps": 1751.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 441.5,
+    "kbps": 440.1
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 146.9,
+    "kbps": 140.4
+   }
+  },
+  {
+   "t": 49.0,
+   "at": "2026-10-06T17:14:00.611",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.6,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1620.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 422.9
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 148.3
+   }
+  },
+  {
+   "t": 50.0,
+   "at": "2026-10-06T17:14:01.606",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.1,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 28.0,
+    "enc_fps": 28.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1561.4
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 422.8
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 120.1
+   }
+  },
+  {
+   "t": 51.0,
+   "at": "2026-10-06T17:14:02.608",
+   "src_fps": 31.0,
+   "src_fps_frames": 31.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 31.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1788.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 464.0
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 169.5
+   }
+  },
+  {
+   "t": 52.0,
+   "at": "2026-10-06T17:14:03.607",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.1,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1643.7
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 448.2
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 139.1
+   }
+  },
+  {
+   "t": 53.0,
+   "at": "2026-10-06T17:14:04.613",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.6,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1679.1,
+    "kbps": 1778.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 444.1,
+    "kbps": 498.3
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 147.1,
+    "kbps": 166.7
+   }
+  },
+  {
+   "t": 54.0,
+   "at": "2026-10-06T17:14:05.602",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.4,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1692.5,
+    "kbps": 1663.2
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 413.2
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 149.3,
+    "kbps": 139.1
+   }
+  },
+  {
+   "t": 55.0,
+   "at": "2026-10-06T17:14:06.606",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.9,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1651.7,
+    "kbps": 1756.7
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 442.8,
+    "kbps": 455.0
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 146.0,
+    "kbps": 156.1
+   }
+  },
+  {
+   "t": 56.0,
+   "at": "2026-10-06T17:14:07.604",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.2,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1636.9
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 444.0
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 149.1,
+    "kbps": 148.8
+   }
+  },
+  {
+   "t": 57.0,
+   "at": "2026-10-06T17:14:08.603",
+   "src_fps": 30.0,
+   "src_fps_frames": 29.9,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1699.6,
+    "kbps": 1731.2
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 433.7
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 139.5
+   }
+  },
+  {
+   "t": 58.0,
+   "at": "2026-10-06T17:14:09.607",
+   "src_fps": 29.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1683.1
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 470.8
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 156.8
+   }
+  },
+  {
+   "t": 59.0,
+   "at": "2026-10-06T17:14:10.604",
+   "src_fps": 30.0,
+   "src_fps_frames": 31.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1763.4
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 475.0
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 161.3
+   }
+  },
+  {
+   "t": 60.0,
+   "at": "2026-10-06T17:14:11.605",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1694.3,
+    "kbps": 1580.5
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 441.6,
+    "kbps": 397.1
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 146.3,
+    "kbps": 126.1
+   }
+  },
+  {
+   "t": 61.0,
+   "at": "2026-10-06T17:14:12.612",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.7,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1689.1,
+    "kbps": 1748.1
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 446.0,
+    "kbps": 511.4
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 147.8,
+    "kbps": 173.4
+   }
+  },
+  {
+   "t": 62.0,
+   "at": "2026-10-06T17:14:13.609",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.2,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1650.5
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 399.1
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 131.0
+   }
+  },
+  {
+   "t": 63.0,
+   "at": "2026-10-06T17:14:14.611",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.9,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1649.8,
+    "kbps": 1774.5
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 443.6,
+    "kbps": 452.6
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 148.0,
+    "kbps": 150.4
+   }
+  },
+  {
+   "t": 64.0,
+   "at": "2026-10-06T17:14:15.609",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.1,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1564.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 435.9
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 144.8
+   }
+  },
+  {
+   "t": 65.0,
+   "at": "2026-10-06T17:14:16.609",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.9,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1731.3
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 441.6
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 148.5
+   }
+  },
+  {
+   "t": 66.0,
+   "at": "2026-10-06T17:14:17.610",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1731.7
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 464.3
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 149.8
+   }
+  },
+  {
+   "t": 67.0,
+   "at": "2026-10-06T17:14:18.610",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.9,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1675.6,
+    "kbps": 1777.9
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 443.2,
+    "kbps": 469.5
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 147.7,
+    "kbps": 176.1
+   }
+  },
+  {
+   "t": 68.0,
+   "at": "2026-10-06T17:14:19.609",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1682.9,
+    "kbps": 1577.4
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 438.9,
+    "kbps": 426.3
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 144.8,
+    "kbps": 124.9
+   }
+  },
+  {
+   "t": 69.0,
+   "at": "2026-10-06T17:14:20.608",
+   "src_fps": 31.0,
+   "src_fps_frames": 31.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1876.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 444.1,
+    "kbps": 443.1
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 148.7,
+    "kbps": 151.0
+   }
+  },
+  {
+   "t": 70.0,
+   "at": "2026-10-06T17:14:21.607",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.1,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1557.1
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 418.4
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 137.1
+   }
+  },
+  {
+   "t": 71.0,
+   "at": "2026-10-06T17:14:22.610",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.9,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1582.5
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 424.2
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 139.1
+   }
+  },
+  {
+   "t": 72.0,
+   "at": "2026-10-06T17:14:23.611",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.0,
+   "aob_kbps": 4018.2,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1840.2
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 542.9
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 189.8
+   }
+  },
+  {
+   "t": 73.0,
+   "at": "2026-10-06T17:14:24.601",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.2,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1616.3
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 444.1,
+    "kbps": 384.2
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 147.3,
+    "kbps": 124.9
+   }
+  },
+  {
+   "t": 74.0,
+   "at": "2026-10-06T17:14:25.604",
+   "src_fps": 29.0,
+   "src_fps_frames": 30.1,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1685.8,
+    "kbps": 1716.7
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 449.3,
+    "kbps": 448.9
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 141.3
+   }
+  },
+  {
+   "t": 75.0,
+   "at": "2026-10-06T17:14:26.605",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.8,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1634.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 419.3
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 143.4
+   }
+  },
+  {
+   "t": 76.0,
+   "at": "2026-10-06T17:14:27.604",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.1,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1737.7
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 475.8
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 151.4
+   }
+  },
+  {
+   "t": 77.0,
+   "at": "2026-10-06T17:14:28.603",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1799.3
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 449.2,
+    "kbps": 473.7
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 164.4
+   }
+  },
+  {
+   "t": 78.0,
+   "at": "2026-10-06T17:14:29.608",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.9,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1681.2,
+    "kbps": 1605.2
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 435.6,
+    "kbps": 434.3
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 144.5,
+    "kbps": 141.0
+   }
+  },
+  {
+   "t": 79.0,
+   "at": "2026-10-06T17:14:30.605",
+   "src_fps": 31.0,
+   "src_fps_frames": 31.1,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1691.6,
+    "kbps": 1700.6
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 445.5,
+    "kbps": 439.3
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 146.9,
+    "kbps": 146.0
+   }
+  },
+  {
+   "t": 80.0,
+   "at": "2026-10-06T17:14:31.602",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.0,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1754.2
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 443.0,
+    "kbps": 480.9
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 147.3,
+    "kbps": 166.6
+   }
+  },
+  {
+   "t": 81.0,
+   "at": "2026-10-06T17:14:32.600",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1641.8
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 394.4
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 128.1
+   }
+  },
+  {
+   "t": 82.0,
+   "at": "2026-10-06T17:14:33.600",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.2,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1631.1
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 424.1
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 128.1
+   }
+  },
+  {
+   "t": 83.0,
+   "at": "2026-10-06T17:14:34.601",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.9,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1768.1
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 486.7
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 171.6
+   }
+  },
+  {
+   "t": 84.0,
+   "at": "2026-10-06T17:14:35.616",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.5,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1692.7,
+    "kbps": 1684.9
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 433.7
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 155.2
+   }
+  },
+  {
+   "t": 85.0,
+   "at": "2026-10-06T17:14:36.603",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.4,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1680.8,
+    "kbps": 1701.8
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 445.9,
+    "kbps": 429.0
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 149.7,
+    "kbps": 118.6
+   }
+  },
+  {
+   "t": 86.0,
+   "at": "2026-10-06T17:14:37.601",
+   "src_fps": 29.0,
+   "src_fps_frames": 30.1,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1671.4
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 476.5
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 166.3
+   }
+  },
+  {
+   "t": 87.0,
+   "at": "2026-10-06T17:14:38.599",
+   "src_fps": 29.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1616.5,
+    "kbps": 1919.4
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 441.3,
+    "kbps": 451.6
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 145.6
+   }
+  },
+  {
+   "t": 88.0,
+   "at": "2026-10-06T17:14:39.615",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.5,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1505.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 438.3,
+    "kbps": 470.6
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 144.2,
+    "kbps": 177.5
+   }
+  },
+  {
+   "t": 89.0,
+   "at": "2026-10-06T17:14:40.616",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.1,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 31.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1648.2
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 448.5,
+    "kbps": 458.4
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 148.7,
+    "kbps": 135.6
+   }
+  },
+  {
+   "t": 90.0,
+   "at": "2026-10-06T17:14:41.610",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.4,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 29.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1617.9
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 446.0
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 143.7
+   }
+  },
+  {
+   "t": 91.0,
+   "at": "2026-10-06T17:14:42.604",
+   "src_fps": 31.0,
+   "src_fps_frames": 31.0,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 29.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1829.1
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 19.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 437.1
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 18.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 146.1
+   }
+  },
+  {
+   "t": 92.0,
+   "at": "2026-10-06T17:14:43.605",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.0,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1681.2,
+    "kbps": 1610.5
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 430.8
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 142.6
+   }
+  },
+  {
+   "t": 93.0,
+   "at": "2026-10-06T17:14:44.607",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.9,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1684.1,
+    "kbps": 1722.2
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 449.2,
+    "kbps": 445.8
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 148.4,
+    "kbps": 160.9
+   }
+  },
+  {
+   "t": 94.0,
+   "at": "2026-10-06T17:14:45.608",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 31.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1744.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 21.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 483.5
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 143.8
+   }
+  },
+  {
+   "t": 95.0,
+   "at": "2026-10-06T17:14:46.611",
+   "src_fps": 31.0,
+   "src_fps_frames": 29.8,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 29.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1648.5
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 456.3
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 149.2
+   }
+  },
+  {
+   "t": 96.0,
+   "at": "2026-10-06T17:14:47.610",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.1,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 31.0,
+    "qlr": "none",
+    "target_kbps": 1681.5,
+    "kbps": 1818.2
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 443.5,
+    "kbps": 449.1
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 149.1,
+    "kbps": 158.4
+   }
+  },
+  {
+   "t": 97.0,
+   "at": "2026-10-06T17:14:48.610",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 29.0,
+    "qlr": "none",
+    "target_kbps": 1689.4,
+    "kbps": 1570.7
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 449.3,
+    "kbps": 433.7
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 149.7,
+    "kbps": 139.6
+   }
+  },
+  {
+   "t": 98.0,
+   "at": "2026-10-06T17:14:49.610",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 31.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1805.0
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 457.6
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 150.1
+   }
+  },
+  {
+   "t": 99.0,
+   "at": "2026-10-06T17:14:50.609",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.1,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 29.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1657.9
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 466.1
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 154.0
+   }
+  },
+  {
+   "t": 100.0,
+   "at": "2026-10-06T17:14:51.608",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1675.4,
+    "kbps": 1689.8
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 438.9,
+    "kbps": 478.8
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 143.4,
+    "kbps": 173.9
+   }
+  },
+  {
+   "t": 101.0,
+   "at": "2026-10-06T17:14:52.607",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1628.9
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 21.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 393.5
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 148.9,
+    "kbps": 122.5
+   }
+  },
+  {
+   "t": 102.0,
+   "at": "2026-10-06T17:14:53.608",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 31.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1813.9
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 452.0
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 148.7,
+    "kbps": 154.2
+   }
+  },
+  {
+   "t": 103.0,
+   "at": "2026-10-06T17:14:54.610",
+   "src_fps": 30.0,
+   "src_fps_frames": 29.9,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1589.1
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 443.6,
+    "kbps": 436.2
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 147.6,
+    "kbps": 144.9
+   }
+  },
+  {
+   "t": 104.0,
+   "at": "2026-10-06T17:14:55.611",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.1,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 29.0,
+    "qlr": "none",
+    "target_kbps": 1680.4,
+    "kbps": 1762.2
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 436.7,
+    "kbps": 491.7
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 142.7,
+    "kbps": 173.7
+   }
+  },
+  {
+   "t": 105.0,
+   "at": "2026-10-06T17:14:56.612",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1681.7
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 402.6
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 123.7
+   }
+  },
+  {
+   "t": 106.0,
+   "at": "2026-10-06T17:14:57.610",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.1,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1696.8,
+    "kbps": 1703.1
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 446.1,
+    "kbps": 491.5
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 148.6,
+    "kbps": 163.2
+   }
+  },
+  {
+   "t": 107.0,
+   "at": "2026-10-06T17:14:58.616",
+   "src_fps": 31.0,
+   "src_fps_frames": 29.8,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1716.5
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 439.2
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 145.4
+   }
+  },
+  {
+   "t": 108.0,
+   "at": "2026-10-06T17:14:59.603",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.3,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 29.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1541.1
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 404.9
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 127.7
+   }
+  },
+  {
+   "t": 109.0,
+   "at": "2026-10-06T17:15:00.606",
+   "src_fps": 30.0,
+   "src_fps_frames": 29.9,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 31.0,
+    "qlr": "none",
+    "target_kbps": 1699.4,
+    "kbps": 1817.6
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 504.9
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 182.0
+   }
+  },
+  {
+   "t": 110.0,
+   "at": "2026-10-06T17:15:01.611",
+   "src_fps": 30.0,
+   "src_fps_frames": 29.9,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1657.8
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 405.6
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 124.2
+   }
+  },
+  {
+   "t": 111.0,
+   "at": "2026-10-06T17:15:02.613",
+   "src_fps": 31.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1692.6,
+    "kbps": 1761.2
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 448.9,
+    "kbps": 475.9
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 149.5,
+    "kbps": 163.7
+   }
+  },
+  {
+   "t": 112.0,
+   "at": "2026-10-06T17:15:03.612",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1645.4
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 447.5,
+    "kbps": 444.5
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 145.8,
+    "kbps": 145.7
+   }
+  },
+  {
+   "t": 113.0,
+   "at": "2026-10-06T17:15:04.616",
+   "src_fps": 30.0,
+   "src_fps_frames": 29.8,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1741.6
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 447.2
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 140.1
+   }
+  },
+  {
+   "t": 114.0,
+   "at": "2026-10-06T17:15:05.602",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.4,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1614.5
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 417.6
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 143.9
+   }
+  },
+  {
+   "t": 115.0,
+   "at": "2026-10-06T17:15:06.615",
+   "src_fps": 29.0,
+   "src_fps_frames": 28.8,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 30.0,
+    "enc_fps": 29.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1720.8
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 456.8
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 152.9
+   }
+  },
+  {
+   "t": 116.0,
+   "at": "2026-10-06T17:15:07.615",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.1,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 30.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1727.9
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 442.2,
+    "kbps": 473.2
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 145.0,
+    "kbps": 161.5
+   }
+  },
+  {
+   "t": 117.0,
+   "at": "2026-10-06T17:15:08.603",
+   "src_fps": 29.0,
+   "src_fps_frames": 29.3,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 29.0,
+    "enc_fps": 29.0,
+    "qlr": "none",
+    "target_kbps": 1644.7,
+    "kbps": 1713.6
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 436.8,
+    "kbps": 457.7
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 143.8,
+    "kbps": 153.9
+   }
+  },
+  {
+   "t": 118.0,
+   "at": "2026-10-06T17:15:09.605",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.9,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 31.0,
+    "qlr": "none",
+    "target_kbps": 1682.8,
+    "kbps": 1639.4
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 447.5,
+    "kbps": 429.7
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 148.8,
+    "kbps": 134.3
+   }
+  },
+  {
+   "t": 119.0,
+   "at": "2026-10-06T17:15:10.605",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 29.0,
+    "enc_fps": 29.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1577.4
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 411.4
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 128.0
+   }
+  },
+  {
+   "t": 120.0,
+   "at": "2026-10-06T17:15:11.608",
+   "src_fps": 30.0,
+   "src_fps_frames": 30.0,
+   "aob_kbps": 4135.6,
+   "f": {
+    "res": "1280x720",
+    "fps": 31.0,
+    "enc_fps": 31.0,
+    "qlr": "none",
+    "target_kbps": 1700.0,
+    "kbps": 1791.1
+   },
+   "h": {
+    "res": "640x360",
+    "fps": 20.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 450.0,
+    "kbps": 446.1
+   },
+   "q": {
+    "res": "320x180",
+    "fps": 19.0,
+    "enc_fps": 20.0,
+    "qlr": "none",
+    "target_kbps": 150.0,
+    "kbps": 147.6
+   }
+  }
+ ]
+}
