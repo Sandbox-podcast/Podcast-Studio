@@ -8,7 +8,8 @@ Loïc decision (2026-10-05): **POC storage locked** to self-hosted **`pgsty/mini
 | [`multipart-proto/`](./multipart-proto/) | Next.js 15 lab helper + browser multipart/resume sketch |
 | [`lab-pass1/`](./lab-pass1/) | Pass 1 + 1b lab harness (localhost 2026-10-05) |
 | [`lab-pass2/`](./lab-pass2/) | Pass 2a remux scripts + 2b OPFS crash harness |
-| [`dropin/`](./dropin/) | S4 drop-in recorder v2 (Vision / studio integration) |
+| [`dropin/`](./dropin/) | S4 drop-in recorder v2.2 (Vision / studio integration) |
+| [`analyze_ab.py`](./analyze_ab.py) | A/B inbox/S3 analyzer: remux, S4 gates, `distinct_fps` (H.264 → `.remux.mkv`) |
 | [`REALCAM-RUN1-RESULT.md`](./REALCAM-RUN1-RESULT.md) | Real-cam pass 3 run 1 analysis (laptop) |
 | [`REALCAM-RUN2-RESULT.md`](./REALCAM-RUN2-RESULT.md) | Real-cam pass 3 run 2 — dual raw/matted |
 | [`REALCAM-RUN3-RESULT.md`](./REALCAM-RUN3-RESULT.md) | Real-cam pass 3 run 3 — matfix2 + audio guard |

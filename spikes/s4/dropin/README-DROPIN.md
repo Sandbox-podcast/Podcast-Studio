@@ -1,4 +1,4 @@
-# S4 drop-in recorder v2.1 (Vision harness)
+# S4 drop-in recorder v2.2 (Vision harness)
 
 MediaRecorder → OPFS → presigned multipart upload for the MediaPipe harness at `http://127.0.0.1:8088/`.
 
@@ -37,12 +37,15 @@ const h = await S4Recorder.startSession({
   onGap: (g) => { /* { label, startMs, durationMs } */ },
   onAudioIssue: (i) => { /* { label, reason, tMs } — toast this */ },
   // expectAudio: true|false  // default: true if stream has audio tracks
+  // mimeType: 'video/webm;codecs=h264'  // optional; v2.2 honours explicit types (no silent VP8 fallback)
 });
 h.stop();
 h.results();              // snapshot — check results.audio / audioMissing / completeOk
 await h.exportResults();  // POST /api/results → <key>.results.json in bucket + out/
 await S4Recorder.stopAll(); // stop every session; resolves when all flushed/complete
 ```
+
+**`mimeType` / H.264 (Edge):** requesting `video/webm;codecs=h264` is supported, but Edge often records **`video/x-matroska;codecs=avc1,opus`** (Matroska/avc1) while the blob may still be named `.webm`. After `startSession`, check **`results.recorderMimeType`** (and `requestedMimeType` / `mimeType`) — do not assume VP8 from the filename alone.
 
 ### Audio presence guard (v2.1)
 

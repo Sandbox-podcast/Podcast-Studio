@@ -154,6 +154,15 @@ async function probeWebCodecs() {
 function pickMime(preferred) {
   const supported = probeMimeTypes();
   if (preferred && supported.includes(preferred)) return preferred;
+  // v2.2: honour an explicit mimeType outside the candidate list (e.g. 'video/webm;codecs=h264'),
+  // and never silently fall back to VP8 when the caller asked for something specific.
+  if (preferred) {
+    let ok = false;
+    try { ok = typeof MediaRecorder !== 'undefined' && MediaRecorder.isTypeSupported(preferred); } catch (_) {}
+    if (ok) { supported.push(preferred); results.mimeTypesSupported = supported; return preferred; }
+    results.errors.push('Requested mimeType not supported: ' + preferred);
+    return '';
+  }
   return supported[0] || '';
 }
 
@@ -1217,6 +1226,8 @@ async function runSession(session) {
     } catch (e2) { recorder = new MediaRecorder(stream, { mimeType }); }
   }
   session.recorder = recorder;
+  results.requestedMimeType = preferredMime; results.mimeType = mimeType; results.recorderMimeType = recorder.mimeType || mimeType;
+  ctx.log('MediaRecorder mimeType requested/picked/actual:', preferredMime, mimeType, recorder.mimeType);
 
   const vTrack = stream.getVideoTracks()[0] || null;
   if (vTrack) {

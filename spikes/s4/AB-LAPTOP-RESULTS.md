@@ -105,6 +105,7 @@ Full mime matrix and per-file rows: see embedded `remux-report.md` content in re
 
 ## Related
 
+- A/B analyzer: [`analyze_ab.py`](./analyze_ab.py) (`--source inbox`, filter `ab-`)
 - Distinct-frame tool fix: **Fixes #10** — [`tools/distinct_fps.py`](../../tools/distinct_fps.py)
 - Criterion doc: [`S4-recording.md`](../S4-recording.md) § Distinct-frame criterion
 - LAN multi-machine protocol (pending): same parent doc
