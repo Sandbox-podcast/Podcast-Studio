@@ -151,3 +151,17 @@ Box analysis, single run per condition. **Measured numbers only.** Reports: [`ab
 - Every rec dip lines up (same 2 s interval, ±1–3 fps) with a **camera capture dip** in RTC's `media-source` series (e.g. solo 2L: capture 16.5 fps vs rec 16.7 at RTC 31.8–33.9 s; pair 3L: 15.2 vs 14.5 at 28.8–31.0 s). Over the covered spans the camera itself delivered 29.07–29.96 fps, which accounts for the raw-loss gap to 30 fps. Upload complete, local = remote, on all five recs.
 - The **live** high layer was suspended by the publisher bandwidth estimator (`qualityLimitationReason=bandwidth`) in pair 2L/3L and solo 2L, also **without** a 2nd publisher (solo 2L). Each switch to bandwidth fell in an interval with a camera capture dip, but 2 deeper camera dips triggered no switch. **Cause: NON VALIDÉE.** The local HQ rec (separate MediaRecorder encoder) stayed 1280×720 ~30 distinct fps through every cut.
 - **LAN upload desktop-ai (2.5GbE) → laptop MinIO (Wi-Fi), presigned SigV4 multipart, 5 MiB parts:** 64 MiB sequential **332 Mbps**, 256 MiB sequential **441 Mbps**, 256 MiB with 4 parts in flight **642 Mbps**; resume after a simulated client cut: restart → complete **1.44 s**, only missing parts re-sent; HEAD size/ETag and GET-back **sha256 match** on all 4 objects; test objects deleted, no pending uploads. No MinIO credentials on desktop-ai; signed URLs not kept.
+
+---
+
+## 2026-10-06 evening: alternating seq 17:07 (2L-a · 3L-a · 2L-b · 3L-b), laptop only, 1 s sampling (indicative, N=2 per condition)
+
+Box analysis, one run per condition and pass. **Measured numbers only.** Report: [`ab-reports/2026-10-06-seq-170746.md`](./ab-reports/2026-10-06-seq-170746.md). Tools: [`tools/seq_windows.py`](./tools/seq_windows.py), [`tools/capture_loss.py`](./tools/capture_loss.py), [`analyze_ab.py`](./analyze_ab.py), [`../../tools/distinct_fps.py`](../../tools/distinct_fps.py) v2. Live-side series: Podcast RTC, PR #3 commit `b8c06c9` (`results-20261006-1707-seq/`). No camera footage committed. Ok Loïc 18:31 Paris.
+
+**S4 gates: 4/4 PASS.** Raw loss 0.01 / 0.08 / 0.02 / 0.03 % (max gap 60–79 ms, 0 holes > 200 ms); distinct fps exact = near (0.3 and 0.5) 30.000 / 29.995 / 30.004 / 29.996; share of 1 s windows ≥24 = **120/120** on all 4 counts; bitrate 2.616 / 2.623 / 2.628 / 2.613 Mbps; 1280×720 constant; upload complete local=remote; watchdog gaps [].
+
+**Rec unaffected by 2L live degradation.** 2L-a: rid-h cut RTC t=1→27 then ramp to t≈42 — rec mean distinct fps **30.00** inside cut, **30.00** in ramp, **30.00** outside (≤0.03 fps by pts). 2L-b: rid-h 720p30 under target until t≈50 (1.085–1.576 Mbps) — rec **30.02** vs **30.00** after. 3L control over the same windows 29.99–30.04. No rec-side 2L vs 3L difference measured (bitrate, raw loss, share≥24, net capture-loss all overlap).
+
+**Capture-relative loss — report net (lead adoption 17:45).** Clipped at 1 s sampling equals the noise floor (0.812 / 1.065 / 0.981 / 1.262 %) and **must not be used as a gate** (boundary ±1-frame bias ~2× larger than at 2 s; 3L clipped >1 % with zero frames missing). **Net:** −0.084…0.000 % (2L-a 0.000, 3L-a 0.000, 2L-b −0.056, 3L-b −0.084). Matches RTC. Camera dips <24: 0/480 samples.
+
+**Lead D-12 = 3L for live (indicatif, N=2).** Both 3L runs clean (720p30, QLR none); both 2L runs started with low/slow BWE (2L-a QLR bandwidth ≈54 s, 2L-b under target to t≈50). S4 HQ master validated indicative on this sequence (decoupled from live).
