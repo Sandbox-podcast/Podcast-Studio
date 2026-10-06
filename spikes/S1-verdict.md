@@ -84,6 +84,20 @@
 
 ---
 
+## Décision lead 2026-10-06 17:40 — simulcast 3 couches (3L) pour le POC live
+
+**Indicatif, N=2 par condition** (séquence 17:07), plus 1 run solo à 11:50. Décision lead, voir **D-12** (PR #13, brouillon, **en attente de l'OK de Loïc**).
+
+- **Décision :** garder le **simulcast 3L** (3 couches) pour le POC live.
+- **Preuves : verdicts régie du Designer** (aucun autre PASS/FAIL n'est posé ici) :
+  - **3L PASS 3/3 :** 3L-a et 3L-b (séquence 17:07), 3L solo 11:50.
+  - **2L FAIL 2/3 :** 2L-a (démarrage en 320×180 pendant ~38 s, puis 3 gels) ; 2L solo 11:50 (coupure bandwidth en milieu de run, passage en 180p). 2L-b : PASS.
+- **Données :** [`results-20261006-1707-seq/README.md`](s1-lab/livekit-oss/scripts/ab/results-20261006-1707-seq/README.md) (commit `b8c06c9`) · [`results-20261006-1150-solo-pair/SUMMARY.md`](s1-lab/livekit-oss/scripts/ab/results-20261006-1150-solo-pair/SUMMARY.md) (commit `65dba99`).
+- **Crops du Designer :** box `/workspace/uploads/designer/seq170746/` (2L-a t15/t29/t60, 2L-b t20/t90, 3L-a t20/t90, 3L-b t20/t90, face-zoom ; hors repo).
+- **Cause de la rampe bandwidth lente en 2L :** **NON VALIDÉE**. BWE de départ basse (808 et 1 384 kbps), qui monte d'environ 4 kbps/s, avec 0 creux caméra mesuré. Par décision du lead, elle **n'est pas investiguée plus avant**.
+
+---
+
 ## Sign-off (empty)
 
 | Role | Name | Date | OK / comments |

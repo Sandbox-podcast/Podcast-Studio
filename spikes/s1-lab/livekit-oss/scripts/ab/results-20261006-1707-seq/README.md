@@ -10,6 +10,8 @@ Indicatif, 1 run par condition et par passe. **Pas de PASS/FAIL** (le Designer j
 - Analyse : analyze-ab.py, align-bwe.py `--win-s 2.0` (ALIGN.w2.json, align-series.csv) et `--win-s 1.0` (ALIGN.w1.json),
   distinct_fps v2 + varsize t0.3/t0.5 sur sub-hi rx, gels > 200 ms, capture_loss.py (Media) sur le rec S4, BWE-STATS.json.
 
+> **Décision lead 2026-10-06 17:40 :** simulcast 3L retenu pour le POC live (indicatif, N=2 par condition ; D-12, PR #13, OK Loïc en attente). Voir [`S1-verdict.md`](../../../../../S1-verdict.md#décision-lead-2026-10-06-1740--simulcast-3-couches-3l-pour-le-poc-live).
+
 ## Bornes exactes (Paris)
 
 | run | fenêtre RTC | rec S4 | wallStartIso (UTC) | offset t_rec = t_RTC − x | objet S4 |
