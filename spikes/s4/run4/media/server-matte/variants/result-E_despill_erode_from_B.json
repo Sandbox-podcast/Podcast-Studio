@@ -1,0 +1,39 @@
+{
+  "tag": "E_despill_erode_from_B",
+  "parent": "B",
+  "downsample_ratio": 0.375,
+  "machine": "box CPU Intel Xeon \u00b7 8 cores \u00b7 no GPU",
+  "note": "post on stills only from B: white despill + 1px MinFilter erode; parent wall cost unchanged; post_wall_s_stills=3.453",
+  "frames_timed": 1798,
+  "wall_fps": 17.26,
+  "seconds_compute_per_min_footage": 104.3,
+  "post_seconds_stills_only": 3.453,
+  "metrics_t45": {
+    "partial_alpha_frac": 0.0362,
+    "gap45_mean_alpha": 0.5751,
+    "gap45_partial_frac": 0.1323,
+    "gap45_opaque_frac": 0.501,
+    "hair_semitrans_mean_luma": 130.68,
+    "roi_gap": [
+      760,
+      200,
+      860,
+      300
+    ],
+    "roi_hair": [
+      480,
+      40,
+      780,
+      180
+    ]
+  },
+  "partial_alpha_frac_mean_stills": 0.0264,
+  "stills": [
+    5,
+    15,
+    25,
+    35,
+    45,
+    55
+  ]
+}

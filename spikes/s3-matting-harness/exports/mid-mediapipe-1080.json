@@ -1,0 +1,31 @@
+{
+  "harness": "s3-matting-harness",
+  "note": "Spike PREP - python-mediapipe (ffmpeg dshow -> ImageSegmenter). NOT Edge harness.",
+  "exportedAt": "2026-10-05T19:46:56.436554+00:00",
+  "resolutionPreset": "1080p",
+  "backend": "mediapipe",
+  "fallbackLast": false,
+  "canvas": {
+    "width": 1920,
+    "height": 1080
+  },
+  "summary": {
+    "fpsAvg": null,
+    "frameMsAvg": null,
+    "frameMsP5": null,
+    "fpsP5": null,
+    "sampleCount": 0
+  },
+  "samples": [],
+  "runtime": "python-mediapipe",
+  "delegate": "CPU",
+  "cameraDevice": "Microsoft\u00ae LifeCam Cinema(TM)",
+  "host": "LAPTOP-BI8P2KF3",
+  "os": "Windows",
+  "inventoryLabel": "MID inventaire reel (i7-11370H + RTX 3070) - NOT LOW-END",
+  "ffmpegFramesTotal": 0,
+  "error": "BLOCKED: Microsoft LifeCam Cinema max native res is 1280x720 (dshow list_options). No 1920x1080 mode.",
+  "userAgent": "python/3.9.13 mediapipe/0.10.14 ffmpeg-dshow",
+  "blockedReason": "camera_max_720p",
+  "dshowMax": "1280x720@30"
+}

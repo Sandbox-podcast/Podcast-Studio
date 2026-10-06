@@ -1,0 +1,51 @@
+{
+  "r1": {
+    "name": "lab-sync-a",
+    "goAt": 1791218278821,
+    "wallNow": 1791218278821,
+    "timeOrigin": 1791218277892.6,
+    "t0": 928.6999999880791,
+    "sync": {
+      "participant": "lab-sync-a",
+      "timeOrigin": 1791218277892.6,
+      "tStartPerf": 998.5,
+      "firstChunkAt": 1591.4000000059605,
+      "wallStartMs": 1791218278891
+    },
+    "firstChunkAt": 1591.4000000059605,
+    "mimeType": "video/webm;codecs=vp8,opus",
+    "totalBytesLocal": 9998227,
+    "key": "spike/s4-lab/rec/lab-sync-a-1791218278891.webm",
+    "errors": [],
+    "parts": 2
+  },
+  "r2": {
+    "name": "lab-sync-b",
+    "goAt": 1791218278821,
+    "wallNow": 1791218278821,
+    "timeOrigin": 1791218277958.4,
+    "t0": 863,
+    "sync": {
+      "participant": "lab-sync-b",
+      "timeOrigin": 1791218277958.4,
+      "tStartPerf": 932.7999999821186,
+      "firstChunkAt": 1467.8999999761581,
+      "wallStartMs": 1791218278891
+    },
+    "firstChunkAt": 1467.8999999761581,
+    "mimeType": "video/webm;codecs=vp8,opus",
+    "totalBytesLocal": 10070942,
+    "key": "spike/s4-lab/rec/lab-sync-b-1791218278891.webm",
+    "errors": [],
+    "parts": 2
+  },
+  "offset": {
+    "timeOriginDeltaMs": -65.7998046875,
+    "wallStartDeltaMs": 0,
+    "firstChunkAbsA": 1791218279484,
+    "firstChunkAbsB": 1791218279426.2998,
+    "firstChunkAbsDeltaMs": 57.7001953125,
+    "goAt": 1791218278821,
+    "durationSec": 45
+  }
+}

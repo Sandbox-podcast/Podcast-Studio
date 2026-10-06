@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>S4 drop-in v2 dual harness</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #111; color: #eee; margin: 16px; }
+    canvas { background: #000; border: 1px solid #444; display: block; }
+    #status { margin-top: 8px; color: #8f8; }
+    #log { white-space: pre-wrap; font: 12px monospace; background: #1a1a1a; padding: 8px; max-height: 280px; overflow: auto; }
+  </style>
+</head>
+<body>
+  <h1>Fake Vision harness v2 (dual session)</h1>
+  <canvas id="cv" width="1280" height="720"></canvas>
+  <div id="status">idle</div>
+  <div id="log"></div>
+  <script src="http://127.0.0.1:3320/s4-recorder.js"></script>
+  <script>
+    const canvas = document.getElementById('cv');
+    const ctx = canvas.getContext('2d', { alpha: false });
+    const statusEl = document.getElementById('status');
+    const logEl = document.getElementById('log');
+    function log(...a) {
+      logEl.textContent += a.map(x => typeof x === 'string' ? x : JSON.stringify(x)).join(' ') + '\n';
+      console.log('[harness]', ...a);
+    }
+
+    let raf = 0, frame = 0, drawing = true;
+    const t0 = performance.now();
+    function draw() {
+      if (!drawing) { raf = requestAnimationFrame(draw); return; }
+      frame++;
+      const t = (performance.now() - t0) / 1000;
+      ctx.fillStyle = `hsl(${(t * 50) % 360} 45% 20%)`;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      for (let i = 0; i < 24; i++) {
+        const x = (Math.sin(t * 1.5 + i) * 0.4 + 0.5) * canvas.width;
+        const y = (Math.cos(t * 1.1 + i * 0.6) * 0.4 + 0.5) * canvas.height;
+        ctx.fillStyle = `hsl(${(i * 12 + t * 90) % 360} 80% 55%)`;
+        ctx.beginPath(); ctx.arc(x, y, 14 + (i % 5) * 3, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.fillStyle = '#fff'; ctx.font = '42px monospace';
+      ctx.fillText(`DROPIN ${t.toFixed(2)}s f=${frame}`, 32, 64);
+      raf = requestAnimationFrame(draw);
+    }
+    draw();
+
+    // Shared audio (WebAudio) — stands in for mic
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    const ac = new AudioCtx();
+    const osc = ac.createOscillator();
+    osc.type = 'sawtooth'; osc.frequency.value = 440;
+    const gain = ac.createGain(); gain.gain.value = 0.12;
+    const dest = ac.createMediaStreamDestination();
+    osc.connect(gain).connect(dest);
+    const lfo = ac.createOscillator(); lfo.frequency.value = 0.3;
+    const lfoGain = ac.createGain(); lfoGain.gain.value = 60;
+    lfo.connect(lfoGain).connect(osc.frequency);
+    osc.start(); lfo.start();
+    const audioTracks = dest.stream.getAudioTracks();
+
+    // Synthetic "raw" video canvas (always draws, independent of `drawing` pause)
+    const rawCanvas = document.createElement('canvas');
+    rawCanvas.width = 1280; rawCanvas.height = 720;
+    const rctx = rawCanvas.getContext('2d', { alpha: false });
+    let rawRaf = 0, rawFrame = 0;
+    (function rawDraw() {
+      rawFrame++;
+      const t = (performance.now() - t0) / 1000;
+      rctx.fillStyle = `hsl(${(t * 20) % 360} 30% 25%)`;
+      rctx.fillRect(0, 0, rawCanvas.width, rawCanvas.height);
+      rctx.fillStyle = '#0f0'; rctx.font = '40px monospace';
+      rctx.fillText(`RAW ${t.toFixed(2)}s f=${rawFrame}`, 32, 64);
+      rawRaf = requestAnimationFrame(rawDraw);
+    })();
+
+    window.__harness = {
+      canvas, ac,
+      pauseCanvasDrawing(ms) {
+        drawing = false;
+        log('canvas drawing PAUSED', ms);
+        return new Promise((r) => setTimeout(() => { drawing = true; log('canvas drawing RESUMED'); r(); }, ms));
+      },
+      async runDual(durationSec = 20, pauseMs = 3000, pauseAtSec = 6) {
+        statusEl.textContent = 'recording-dual';
+        if (!window.S4Recorder?.startSession) throw new Error('S4Recorder.startSession missing');
+
+        const rawStream = new MediaStream([
+          ...rawCanvas.captureStream(30).getVideoTracks(),
+          ...audioTracks,
+        ]);
+        const mattedStream = new MediaStream([
+          ...canvas.captureStream(30).getVideoTracks(),
+          ...audioTracks,
+        ]);
+
+        const gapEvents = [];
+        const onGap = (g) => { gapEvents.push(g); log('onGap', g); };
+
+        const rawH = await window.S4Recorder.startSession({
+          stream: rawStream, label: 'raw', apiBase: 'http://127.0.0.1:3320',
+          participant: 'dropin-box', durationSec, partMiB: 5, timeslice: 1000,
+          vBitrate: 2500000, onGap, opfs: true,
+        });
+        const matH = await window.S4Recorder.startSession({
+          stream: mattedStream, label: 'matted', apiBase: 'http://127.0.0.1:3320',
+          participant: 'dropin-box', durationSec, partMiB: 5, timeslice: 1000,
+          vBitrate: 2500000, onGap, opfs: true,
+        });
+        log('sessions started', { raw: rawH.id, matted: matH.id });
+
+        // Force ~pauseMs canvas freeze mid-take (simulates background-tab rAF pause on matted only)
+        await new Promise((r) => setTimeout(r, pauseAtSec * 1000));
+        await this.pauseCanvasDrawing(pauseMs);
+        // Simulate visibilitychange if page allows (Playwright can also hide)
+        try {
+          Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'hidden' });
+          document.dispatchEvent(new Event('visibilitychange'));
+          await new Promise((r) => setTimeout(r, 50));
+          Object.defineProperty(document, 'visibilityState', { configurable: true, get: () => 'visible' });
+          document.dispatchEvent(new Event('visibilitychange'));
+        } catch (e) { log('visibility sim skipped', String(e)); }
+
+        const [rawRes, matRes] = await Promise.all([rawH.done, matH.done]);
+        let rawExport = null, matExport = null;
+        try { rawExport = await rawH.exportResults(); } catch (e) { log('raw export fail', String(e)); }
+        try { matExport = await matH.exportResults(); } catch (e) { log('mat export fail', String(e)); }
+
+        statusEl.textContent = 'done';
+        return {
+          raw: rawRes, matted: matRes, gapEvents,
+          exports: { raw: rawExport, matted: matExport },
+        };
+      },
+      stop() {
+        cancelAnimationFrame(raf); cancelAnimationFrame(rawRaf);
+        try { osc.stop(); } catch (_) {}
+        try { lfo.stop(); } catch (_) {}
+        try { ac.close(); } catch (_) {}
+      },
+    };
+    log('harness v2 ready');
+  </script>
+</body>
+</html>

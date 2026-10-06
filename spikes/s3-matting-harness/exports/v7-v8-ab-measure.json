@@ -1,0 +1,181 @@
+{
+  "startedAt": "2026-10-06T01:06:43",
+  "source": "run4-raw.webm",
+  "method": "Playwright Edge headless, same file loop, profile=v7 then v8 (optional v8b)",
+  "warmupSec": 10,
+  "measureSec": 18,
+  "profiles": [
+    {
+      "profile": "v7",
+      "url": "http://127.0.0.1:8088/?v=s4-matte9-ab&profile=v7&file=run4-raw.webm",
+      "ok": true,
+      "startedAt": "2026-10-06T01:06:44",
+      "overlay": "backend: mediapipe\nprofile: v7\nsrc: file\nfallback: off\nFPS avg: 34.0\nFPS p5 (worst): 27.1\nframe ms: 37.20\nres: 1280\u00d7720\nsamples: 533",
+      "metrics": {
+        "profile": "v7",
+        "fpsAvg": 34,
+        "fpsP5Worst": 27.2,
+        "frameMsAvg": 29.38,
+        "frameMsP95Slow": 36.8,
+        "sampleCount": 532,
+        "source": "file",
+        "canvas": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      "screenshot": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v7-run4-loop-720.png",
+      "contact_frames": [
+        {
+          "t": 5,
+          "path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v7-t05.png"
+        },
+        {
+          "t": 15,
+          "path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v7-t15.png"
+        },
+        {
+          "t": 25,
+          "path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v7-t25.png"
+        },
+        {
+          "t": 35,
+          "path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v7-t35.png"
+        },
+        {
+          "t": 45,
+          "path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v7-t45.png"
+        },
+        {
+          "t": 55,
+          "path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v7-t55.png"
+        }
+      ],
+      "fpsAvg": 34,
+      "fpsP5Worst": 27.2,
+      "sampleCount": 532,
+      "frameMsAvg": 29.38,
+      "frameMsP95Slow": 36.8,
+      "finishedAt": "2026-10-06T01:07:23"
+    },
+    {
+      "profile": "v8",
+      "url": "http://127.0.0.1:8088/?v=s4-matte9-ab&profile=v8&file=run4-raw.webm",
+      "ok": true,
+      "startedAt": "2026-10-06T01:07:24",
+      "overlay": "backend: mediapipe\nprofile: v8\nsrc: file\nfallback: off\nFPS avg: 30.0\nFPS p5 (worst): 24.3\nframe ms: 36.90\nres: 1280\u00d7720\nsamples: 471",
+      "metrics": {
+        "profile": "v8",
+        "fpsAvg": 30,
+        "fpsP5Worst": 24.3,
+        "frameMsAvg": 33.34,
+        "frameMsP95Slow": 41.2,
+        "sampleCount": 470,
+        "source": "file",
+        "canvas": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      "screenshot": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v8-run4-loop-720.png",
+      "contact_frames": [
+        {
+          "t": 5,
+          "path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v8-t05.png"
+        },
+        {
+          "t": 15,
+          "path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v8-t15.png"
+        },
+        {
+          "t": 25,
+          "path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v8-t25.png"
+        },
+        {
+          "t": 35,
+          "path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v8-t35.png"
+        },
+        {
+          "t": 45,
+          "path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v8-t45.png"
+        },
+        {
+          "t": 55,
+          "path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v8-t55.png"
+        }
+      ],
+      "fpsAvg": 30,
+      "fpsP5Worst": 24.3,
+      "sampleCount": 470,
+      "frameMsAvg": 33.34,
+      "frameMsP95Slow": 41.2,
+      "finishedAt": "2026-10-06T01:08:02"
+    },
+    {
+      "profile": "v8b",
+      "url": "http://127.0.0.1:8088/?v=s4-matte9-ab&profile=v8b&file=run4-raw.webm",
+      "ok": true,
+      "startedAt": "2026-10-06T01:08:02",
+      "overlay": "backend: mediapipe\nprofile: v8b\nsrc: file\nfallback: off\nFPS avg: 30.0\nFPS p5 (worst): 24.2\nframe ms: 25.50\nres: 1280\u00d7720\nsamples: 479",
+      "metrics": {
+        "profile": "v8b",
+        "fpsAvg": 30,
+        "fpsP5Worst": 24.2,
+        "frameMsAvg": 33.38,
+        "frameMsP95Slow": 41.3,
+        "sampleCount": 478,
+        "source": "file",
+        "canvas": {
+          "width": 1280,
+          "height": 720
+        }
+      },
+      "screenshot": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v8b-run4-loop-720.png",
+      "contact_frames": [
+        {
+          "t": 5,
+          "path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v8b-t05.png"
+        },
+        {
+          "t": 15,
+          "path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v8b-t15.png"
+        },
+        {
+          "t": 25,
+          "path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v8b-t25.png"
+        },
+        {
+          "t": 35,
+          "path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v8b-t35.png"
+        },
+        {
+          "t": 45,
+          "path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v8b-t45.png"
+        },
+        {
+          "t": 55,
+          "path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\ab-v8b-t55.png"
+        }
+      ],
+      "fpsAvg": 30,
+      "fpsP5Worst": 24.2,
+      "sampleCount": 478,
+      "frameMsAvg": 33.38,
+      "frameMsP95Slow": 41.3,
+      "finishedAt": "2026-10-06T01:08:41"
+    }
+  ],
+  "contactSheet": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\v7-v8-contact.png",
+  "delta": {
+    "fpsAvg_v8_minus_v7": -4,
+    "fpsP5_v8_minus_v7": -2.9,
+    "floor_p5_ge_24": {
+      "v7": true,
+      "v8": true,
+      "v8b": true
+    },
+    "fpsAvg_v8b_minus_v7": -4,
+    "fpsP5_v8b_minus_v7": -3.0
+  },
+  "finishedAt": "2026-10-06T01:08:42"
+}

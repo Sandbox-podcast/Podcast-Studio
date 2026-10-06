@@ -1,0 +1,32 @@
+{
+  "model": "rvm_mobilenetv3",
+  "onnx": "/workspace/podcast-studio/s4-realcam/run4/media/server-matte/models/rvm_mobilenetv3_fp32.onnx",
+  "provider": "CPUExecutionProvider",
+  "downsample_ratio": 0.375,
+  "machine": "box CPU Intel Xeon Processor \u00b7 8 cores \u00b7 no GPU",
+  "cores": 8,
+  "gpu": "none (measured CPU only)",
+  "frames": 1798,
+  "video_seconds": 59.93,
+  "wall_seconds": 104.16,
+  "process_cpu_seconds": 682.25,
+  "wall_fps": 17.26,
+  "realtime_factor": 0.575,
+  "seconds_compute_per_min_footage": 104.3,
+  "inference_ms_avg": 50.65,
+  "inference_ms_p95": 68.63,
+  "loadavg_start": "2.62 4.51 3.11 2/6253 2704090",
+  "loadavg_end": "6.93 5.57 3.66 1/6253 2709650",
+  "loadavg_samples": [
+    "2.62 4.51 3.11 3/6253 2704090",
+    "3.66 4.65 3.18 8/6292 2705048",
+    "4.40 4.78 3.24 3/6292 2705529",
+    "5.65 5.04 3.35 11/6296 2706367",
+    "6.02 5.13 3.40 8/6292 2706954",
+    "6.04 5.19 3.45 8/6293 2708001",
+    "6.39 5.31 3.51 2/6293 2708332",
+    "6.71 5.42 3.57 8/6293 2708704",
+    "7.36 5.63 3.67 14/6255 2709551"
+  ],
+  "max_rss_mb": 391.0
+}

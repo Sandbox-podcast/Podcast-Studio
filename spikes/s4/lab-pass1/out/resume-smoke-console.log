@@ -1,0 +1,12 @@
+[log] [s4] autoload probe {mime: Array(7), webCodecs: Object}
+[log] [s4] MediaRecorder.isTypeSupported: [video/webm;codecs=vp8,opus, video/webm;codecs=vp9,opus, video/webm;codecs=vp9, video/webm;codecs=vp8, video/webm, video/mp4, audio/webm;codecs=opus]
+[log] [s4] using mimeType video/webm;codecs=vp8,opus
+[log] [s4] WebCodecs probe {VideoEncoder: true, AudioEncoder: true, videoOk: Array(3), audioOk: Array(1)}
+[log] [s4] MPU created {key: spike/s4-lab/rec/lab-resume-smoke-1791218586174.webm, uploadId: MGEzMGExNDUtMjNkMi00MjU5LTlmNGItM2MwODI3NWRiZGNhLj…iODI5LTE4ZTVmMzg0N2FhMngxNzkxMjE4NTg2MTk5OTE2MzA5, bucket: podcast-recordings-poc}
+[log] [s4] recording started timeslice=1000ms partSize=5242880 durationSec=15
+[log] [s4] part 1 uploaded size=5242880 etag="09a4193cafca55969693c3f362c88163" ms=96
+[log] [s4] recorder stopped; flushing uploads…
+[log] [s4] part 2 uploaded size=3027941 etag="13e2b51995ceed56008724ebe3d56a78" ms=25
+[log] [s4] resume: list-parts…
+[log] [s4] resume: remote parts=[1,2]
+[log] [s4] complete {ok: true, key: spike/s4-lab/rec/lab-resume-smoke-1791218586174.webm, contentLength: 8270821, etag: "5302b7ed929625c95936eedd9abad6ee-2"}

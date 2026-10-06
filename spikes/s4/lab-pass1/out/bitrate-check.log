@@ -1,0 +1,21 @@
+[s4] autoload probe {mime: Array(7), webCodecs: Object}
+[s4] MediaRecorder.isTypeSupported: [video/webm;codecs=vp8,opus, video/webm;codecs=vp9,opus, video/webm;codecs=vp9, video/webm;codecs=vp8, video/webm, video/mp4, audio/webm;codecs=opus]
+[s4] using mimeType video/webm;codecs=vp8,opus
+[s4] WebCodecs probe {VideoEncoder: true, AudioEncoder: true, videoOk: Array(3), audioOk: Array(1)}
+[s4] MPU created {key: spike/s4-lab/rec/brate-1791218070476.webm, uploadId: MGEzMGExNDUtMjNkMi00MjU5LTlmNGItM2MwODI3NWRiZGNhLj…5MWYwLTBjZWYxZDg0YWRjYngxNzkxMjE4MDcwNDgxODA0OTk1, bucket: podcast-recordings-poc}
+[s4] recording started timeslice=1000ms partSize=5242880 durationSec=20
+[s4] part 1 uploaded size=5242880 etag="a93002ed50a2865db6e592b936721071" ms=44
+[s4] part 2 uploaded size=5242880 etag="a9f07eeec0fd33201568136d0c1fd2f1" ms=34
+[s4] recorder stopped; flushing uploads…
+[s4] part 3 uploaded size=586967 etag="81d237c18283bbf3209369e8efc0b9ea" ms=17
+[s4] resume: list-parts…
+[s4] resume: remote parts=[1,2,3]
+[s4] complete {ok: true, key: spike/s4-lab/rec/brate-1791218070476.webm, contentLength: 11072727, etag: "e96f85fe5254ecbfa0c4aa9c2c2066d6-3"}
+{
+  "mime": "video/webm;codecs=vp8,opus",
+  "bytes": 11072727,
+  "elapsedMs": 20039.19999998808,
+  "measuredMbps": "4.420",
+  "parts": 3,
+  "errors": []
+}

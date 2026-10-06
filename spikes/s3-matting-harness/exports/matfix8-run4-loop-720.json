@@ -1,0 +1,215 @@
+{
+  "harness": "s3-matting-harness",
+  "note": "Spike PREP \u2014 paste summary into spikes/S3-matting.md; not official pass/fail",
+  "exportedAt": "2026-10-05T22:58:06.918Z",
+  "resolutionPreset": "720p",
+  "backend": "mediapipe",
+  "fallbackLast": false,
+  "canvas": {
+    "width": 1280,
+    "height": 720
+  },
+  "summary": {
+    "fpsAvg": 24.6,
+    "fpsP5Worst": 18,
+    "frameMsAvg": 40.66,
+    "frameMsP5Fast": 28.5,
+    "frameMsP95Slow": 55.5,
+    "sampleCount": 470,
+    "source": "file"
+  },
+  "samples": [
+    {
+      "t": "2026-10-05T22:57:32.816Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 775.2,
+      "frameMs": 0.2
+    },
+    {
+      "t": "2026-10-05T22:57:33.118Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 921.7,
+      "frameMs": 0.5
+    },
+    {
+      "t": "2026-10-05T22:57:38.169Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 19.2,
+      "frameMs": 4608
+    },
+    {
+      "t": "2026-10-05T22:57:39.884Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 19.6,
+      "frameMs": 52.8
+    },
+    {
+      "t": "2026-10-05T22:57:41.457Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 20.2,
+      "frameMs": 56.1
+    },
+    {
+      "t": "2026-10-05T22:57:43.069Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 20.6,
+      "frameMs": 31.4
+    },
+    {
+      "t": "2026-10-05T22:57:46.088Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 16.5,
+      "frameMs": 48.3
+    },
+    {
+      "t": "2026-10-05T22:57:47.795Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 18.6,
+      "frameMs": 44.7
+    },
+    {
+      "t": "2026-10-05T22:57:49.035Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 20.9,
+      "frameMs": 33.1
+    },
+    {
+      "t": "2026-10-05T22:57:50.277Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 22.3,
+      "frameMs": 33.9
+    },
+    {
+      "t": "2026-10-05T22:57:51.573Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 23,
+      "frameMs": 38.7
+    },
+    {
+      "t": "2026-10-05T22:57:52.954Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 23.4,
+      "frameMs": 39.6
+    },
+    {
+      "t": "2026-10-05T22:57:54.520Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 23.4,
+      "frameMs": 27.6
+    },
+    {
+      "t": "2026-10-05T22:57:55.850Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 23.7,
+      "frameMs": 43
+    },
+    {
+      "t": "2026-10-05T22:57:57.406Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 23.8,
+      "frameMs": 37.3
+    },
+    {
+      "t": "2026-10-05T22:57:59.017Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 23.7,
+      "frameMs": 47.5
+    },
+    {
+      "t": "2026-10-05T22:58:00.561Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 23.7,
+      "frameMs": 32.7
+    },
+    {
+      "t": "2026-10-05T22:58:01.827Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 24,
+      "frameMs": 32.8
+    },
+    {
+      "t": "2026-10-05T22:58:03.117Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 24.3,
+      "frameMs": 30.6
+    },
+    {
+      "t": "2026-10-05T22:58:04.416Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 24.5,
+      "frameMs": 34
+    },
+    {
+      "t": "2026-10-05T22:58:05.806Z",
+      "backend": "mediapipe",
+      "fallback": false,
+      "width": 1280,
+      "height": 720,
+      "fpsAvg": 24.6,
+      "frameMs": 44.9
+    }
+  ],
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0",
+  "measure": "matfix8-run4-file-loop",
+  "inventoryLabel": "MID laptop Edge \u2014 file loop take4 raw (not live cam)"
+}

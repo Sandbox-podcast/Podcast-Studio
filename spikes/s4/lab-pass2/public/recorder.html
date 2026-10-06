@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>S4 lab recorder</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 16px; background: #111; color: #eee; }
+    canvas { background: #222; border: 1px solid #444; max-width: 100%; }
+    #log { white-space: pre-wrap; font: 12px/1.4 ui-monospace, monospace; background: #1a1a1a; padding: 12px; max-height: 40vh; overflow: auto; }
+    .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 8px; }
+    button { padding: 8px 14px; }
+  </style>
+</head>
+<body>
+  <h1>S4 lab — MediaRecorder → multipart MinIO</h1>
+  <div class="row">
+    <label>Participant <input id="participant" value="p1" /></label>
+    <label>Duration s <input id="durationSec" type="number" value="180" min="10" max="600" /></label>
+    <label>Part size MiB <input id="partMiB" type="number" value="5" min="5" max="32" step="1" /></label>
+    <label>Video bitrate <input id="vBitrate" type="number" value="8000000" /></label>
+    <label>Timeslice ms <input id="timeslice" type="number" value="1000" /></label>
+  </div>
+  <div class="row">
+    <button id="btnProbe">Probe codecs</button>
+    <button id="btnStart">Start record+upload</button>
+    <button id="btnStop" disabled>Stop</button>
+    <span id="status">idle</span>
+  </div>
+  <canvas id="cv" width="1920" height="1080"></canvas>
+  <h2>Log</h2>
+  <div id="log"></div>
+  <script type="module" src="./recorder.js"></script>
+</body>
+</html>

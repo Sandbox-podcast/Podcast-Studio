@@ -1,5 +1,35 @@
-.env
-.env.local
+# Dependencies
 node_modules/
+
+# Build outputs
 dist/
+build/
+.next/
+out/
+!spikes/s4/lab-pass1/out/
+!spikes/s4/lab-pass1/out/**
+*.tsbuildinfo
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Logs & debug
+logs/
 *.log
+npm-debug.log*
+
+# OS & editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Test / coverage
+coverage/
+.nyc_output/
+
+# Misc
+*.local
