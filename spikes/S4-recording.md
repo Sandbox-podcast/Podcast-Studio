@@ -194,9 +194,27 @@ At part cut, the manifest was written with `byteCursor` advanced **without** reg
 - Sent **resolution / fps** per simulcast layer
 - **Browser process CPU**
 
-On the HQ file (when recording is on), run the **S4 gates**: sync **≤ 100 ms**, loss **≤ 1 %**, bitrate **≥ 1 Mbps**, plus the shared **distinct-frame** criterion (**≥ 24** distinct fps in **1 s** windows; measure with `tools/distinct_fps.py` — **to be added**).
+On the HQ file (when recording is on), run the **S4 gates**: sync **≤ 100 ms**, loss **≤ 1 %**, bitrate **≥ 1 Mbps**, plus the shared **distinct-frame** criterion (**≥ 24** distinct fps in **1 s** windows; see [Distinct-frame criterion](#distinct-frame-criterion-24-distinct-fps)).
 
 **Goal:** determine whether local HQ recording taxes live HD simulcast, and whether heavy live publish limits HQ capture quality — bidirectional interaction, not assumed.
+
+### Distinct-frame criterion (≥24 distinct fps)
+
+**Agreed team bar** (Media / RTC / Vision / Designer): in each **1 s** window, count **near-distinct** frames (not container `nb_frames`); **PASS** when **≥ 24** distinct fps in every window (report `%` of windows ≥ 24 and **min** per-window count).
+
+**Tool:** [`tools/distinct_fps.py`](../tools/distinct_fps.py) · fixtures [`tools/testdata/`](../tools/testdata/) (synthetic `dup15_from30.mp4` + JSON only — no camera footage in repo).
+
+```bash
+python3 tools/distinct_fps.py --threshold 0.5 --json-out r.json file.webm
+```
+
+Decode uses **`-fps_mode passthrough`** — WebM VFR timestamps otherwise inflate frame counts ~**30×** if ffmpeg applies CFR conversion.
+
+**Run 4 (take 4, threshold 0.5):** raw **29.8** distinct fps, **100** % of 1-s windows ≥ 24 (min **28**); matted **14.0**, **0** % (min **12**). Synthetic doubled-frame clip (`dup15_from30.mp4`): **15.0** distinct fps.
+
+**Calibration (after VP8 re-encode):** exact pixel/hash match catches **0/30** intentional duplicate pairs — **near-duplicate** count is the metric. Mean-abs-diff on full-frame gray (**p50 / p95**): true distinct talking-head **1.02 / 2.90**; intentional dups @ VP8 **1.5 Mbps** 720p **0.31 / 0.92**; dups @ **150 kbps** 320×180 **0.26 / 1.30**. Threshold **0.5** catches ~**87** % of dups @ 1.5 Mbps with ~**8** % false-dup on talking-head consecutive frames → **undercounts conservatively** (won’t fake-pass a half-rate stream).
+
+**Limitation:** static scenes are not measurable — truly distinct frames can look like duplicates when motion is minimal.
 
 ---
 
