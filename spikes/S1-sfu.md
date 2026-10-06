@@ -655,3 +655,57 @@ The condition `ab-file-2L-on-pp-rech264` matches the 04:00 `ab-file-2L-on-pp` ru
 **Where the lower ≥24 share comes from:** in the last ~30 s of the window (2 s samples 45–59, about 04:40:16 → 04:40:46), the publisher's HD layer encoded at **15 fps**: `framesPerSecond` was 15–16 on the publisher `h` rid and on the received track, with QLR = cpu. Before that it ran at 29–31 fps. The received webm follows the same pattern (exact-hash ≥24 share 0.719). Machine total CPU was 70–85 % around 04:40:00–04:40:20, then 46–58 %. In the 04:00 VP8-rec run the HD layer stayed at 29–31 fps for the whole window. With n=1, the cause is NOT VALIDATED: it could be the software H.264 rec encode in the publisher tab, other host load, or thermal state.
 
 **Caveats:** n=1 × 120 s; loopback; runs are 35–39 min apart, and thermal and background state were not controlled. Near-dup MAD depends on resolution, and the 2L-on rows are mostly 640×360. The received-track recorder is VP8 in the subscriber Edge in all three runs. The mic is opened via `unlockStats` in the test Edge only. Loïc's Edge, the webcam and the firewall were not touched.
+
+### RESULTS — ab-cam-3L-on (real webcam, laptop, 2026-10-06 11:00–11:04 Paris)
+
+Measurements only. No PASS/FAIL (the Designer judges). n=1 × 120 s, loopback on one laptop. Webcam: Microsoft LifeCam Cinema. Loïc freed it at 10:59; Windows showed its last use by `msedge.exe` ending at 10:57:56. The run used test Edge instances only. Raw data: `spikes/s1-lab/livekit-oss/scripts/ab/results-20261006-1100-cam-3L-on/`. Received HD webm on the box: `/workspace/s1-soak/ab/run-090049-cam-3L-on/ab-cam-3L-on-sub-hi-rx.webm`.
+
+| item | value |
+| --- | --- |
+| run | wrapper 11:00:43 → 11:04:00 (node exit 0 at 11:03:55) · single run |
+| pre-run idle CPU (15 s, no test Edge) | WMI `_Total` median **28 %** (samples 10–64) · node os.cpus median **29.7 %** (11:00:50 → 11:01:09) |
+| window / rec | 11:01:41.267 → 11:03:43.318 · rec 11:01:41.554 → 11:03:43.316 stopped+exported |
+| gUM capture | 1280×720 @30.4 (track settings) |
+| S4 recorder | `recorderMimeType` = **`video/webm;codecs=vp8,opus`** (default path, no forced mime) · errors [] |
+| S4 object (MinIO `podcast-recordings-poc`) | **`spike/s4-dropin/ab-cam-3L-on-raw-1791277301460.webm`**. Multipart complete ok: 8 parts, 39 263 728 B local = remote, 118 chunks, ≈ 2.62 Mb/s. Results key `…-1791277301460.results.json` |
+
+**Publisher (3 layers, VP8, `SimulcastEncoderAdapter (libvpx, libvpx, libvpx)`, scalabilityMode L1T3, powerEfficientEncoder false):**
+
+| rid | res (59/59 samples) | fps med | kbps med | QLR durations Δ (s) |
+| --- | --- | --- | --- | --- |
+| f (HD) | **1280×720** | **30** | 1674 | **none 118.8** · cpu 0 · bw 0 |
+| h | 640×360 | 20 | 447 | none 118.8 |
+| q | 320×180 | 20 | 147 | none 118.8 |
+
+qualityLimitationResolutionChanges Δ 0. NVENC 0 %.
+
+**Received (HD-pinned sub):** **1280×720 in 59/59 samples**, fps med 30 (min sample 19). getStats freezes Δ **2 / 0.41 s**. The LOW-pinned sub got 320×180 ×59, freezes Δ 1. The received webm is 3484 frames, all 1280×720 (no layer switch).
+
+**Distinct fps on the received webm** (native size; there is no source ceiling for a live cam, so values are raw):
+
+| tool | threshold | near fps | ≥24 share (near) | ≥24 share (exact) | p5 | windows <24 | longest near-dup | near-distinct gaps >200 ms |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| varsize | **0.3** | 28.718 | **0.918** | 0.918 | — | — | 2 f | — |
+| Media v2 | **0.3** | 28.718 | 0.918 | 0.918 | 21.05 | 10/122 | 2 f / 32 ms | 2 (207 + 225 ms at ~31 s) |
+| varsize | 0.5 | 27.463 | 0.877 | 0.918 | — | — | 4 f | — |
+| Media v2 | 0.5 | 27.463 | 0.877 | 0.918 | 20 | 15/122 | 4 f / 94 ms | 2 (432 ms total) |
+
+**CPU:** publisher Edge **18.9 %** machine median (max 45.2; 151 % of one core). Sub Edge 7.2 % (max 27.0). Machine total median **66 %**.
+
+**Compared with file-3L-on (02:42, take4 file loop):**
+
+| | file-3L-on (02:42) | **cam-3L-on (11:01)** |
+| --- | --- | --- |
+| HD rid `f` sent | 960×540 @22, only 18/59 samples with dims | **1280×720 @30, 59/59** |
+| QLR Δ (s) | cpu 107.2 · none 10.8 | **none 118.8** |
+| sub-hi received | **320×180** (from ~39 s) | **1280×720** ×59 |
+| ≥24 share exact / near | 0.82 / 0.60 (thr 0.5) | **0.918 / 0.877 (thr 0.5) · 0.918 / 0.918 (thr 0.3)** |
+| pub Edge CPU % machine med (max) | 20.0 (32.8) | **18.9 (45.2)** |
+| getStats freezes Δ (sub-hi) | 1 | **2 (0.41 s)** |
+
+**Caveats:**
+- n=1; loopback; the runs are 8 h apart, and thermal and background state were not controlled. The idle CPU before this run was already 28 %.
+- The sources differ: live camera content vs take4 file loop. The near-dup share depends on scene motion, and a live cam has no ceiling, so the near rows are not comparable with the file rows.
+- The file-3L-on reference values are at threshold 0.5 (the tool default at 02:42).
+- The file publisher opens a disabled mic via `unlockStats`. The cam publisher uses the real camera and mic in the test Edge, so the S4 rec includes opus audio.
+- The received-track recorder is VP8 in the subscriber Edge.

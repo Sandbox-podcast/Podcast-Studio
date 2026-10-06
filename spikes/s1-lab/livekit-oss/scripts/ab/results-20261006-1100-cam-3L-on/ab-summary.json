@@ -1,0 +1,161 @@
+{
+  "preflight": {
+    "at": "2026-10-06T11:00:49.528",
+    "harness": {
+      "ok": true,
+      "status": 200,
+      "body": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n    <title>S1 lab â€” LiveKit OSS harness</title>\n    <link rel=\"stylesheet\" href=\"/styles.css\" />\n    <link rel=\"icon\" href=\"/favicon.png\" type=\"image/"
+    },
+    "media": {
+      "ok": true,
+      "status": 200,
+      "body": "\u001aEߣ�B��\u0001B��\u0001B�\u0004B�\bB��webmB��\u0004B��\u0002\u0018S�g\u0001�������\u0015I�f�*ױ�\u000fB@M��ChromeWA�Chrome\u0016T�k@���ׁ\u0001sŇU�dW,�ۃ�\u0001U�\u0001��V_VP8ਰ�\u0005\u0000��\u0002�S��\u0001vp�vq�\u0000vs�\u0000\u0000\u0000\u0000vt�\u0000\u0000\u0000\u0000vu�\u0000\u0000\u0000\u0000��ׁ\u0002sŇ0�K�Kw탁\u0002��A_OPUSc��OpusHead\u0001\u0001\u0000\u0000��\u0000\u0000\u0000\u0000\u0000፵�G;�\u0000��\u0001bd� \u001fC�u\u0001��������\u0000� up�\u0000\u0000��8\u0003�\u0001*\u0000\u0005�\u0002\u0007\u0007\b������\u001d���۹\u001f�;\u0016��N-\u0001�#\"e>m�����X\u0006����IXlzmx�\u0014��ֺ��\u0019A��~��o�;�z"
+    },
+    "s4Health": {
+      "ok": true,
+      "status": 200,
+      "body": "{\"ok\":true,\"endpoint\":\"http://127.0.0.1:9000\",\"bucket\":\"podcast-recordings-poc\",\"keyPrefix\":\"spike/s4-dropin/\"}"
+    },
+    "idleCpu": {
+      "start": "2026-10-06T11:00:50.844",
+      "end": "2026-10-06T11:01:09.861",
+      "seconds": 15,
+      "cores": 8,
+      "node_busy_pct_med": 29.7,
+      "node_busy_pct_max": 52,
+      "node_busy_pct_samples": [
+        21.4,
+        29.6,
+        26.5,
+        42.6,
+        41.5,
+        48.3,
+        41.3,
+        52,
+        26.8,
+        15.4,
+        15.7,
+        29.7,
+        32,
+        28.6,
+        38
+      ],
+      "wmi_total_pct_med": 28,
+      "wmi_total_pct_samples": [
+        17,
+        28,
+        26,
+        43,
+        47,
+        33,
+        63,
+        15,
+        17,
+        10,
+        28,
+        33,
+        64,
+        39,
+        19
+      ],
+      "note": "global CPU before any test Edge launch (includes LiveKit/Media/other host processes and the 1 Hz WMI query itself)"
+    }
+  },
+  "summaries": [
+    {
+      "cond": "ab-cam-3L-on",
+      "status": "DONE",
+      "window": [
+        "2026-10-06T11:01:41.267",
+        "2026-10-06T11:03:43.318"
+      ],
+      "rec": [
+        "2026-10-06T11:01:41.554",
+        "2026-10-06T11:03:43.316",
+        "stopped+exported"
+      ],
+      "perRid": {
+        "h": {
+          "n": 59,
+          "w_med": 640,
+          "h_med": 360,
+          "fps_med": 20,
+          "kbps_med": 446.9,
+          "qlr_counts": {
+            "none": 59
+          },
+          "qlrDurations_delta_s": {
+            "bandwidth": 0,
+            "cpu": 0,
+            "none": 118.8,
+            "other": 0
+          },
+          "qlrResChanges_delta": 0,
+          "encoderImplementation": [
+            "SimulcastEncoderAdapter (libvpx, libvpx, libvpx)"
+          ]
+        },
+        "q": {
+          "n": 59,
+          "w_med": 320,
+          "h_med": 180,
+          "fps_med": 20,
+          "kbps_med": 147.3,
+          "qlr_counts": {
+            "none": 59
+          },
+          "qlrDurations_delta_s": {
+            "bandwidth": 0,
+            "cpu": 0,
+            "none": 118.8,
+            "other": 0
+          },
+          "qlrResChanges_delta": 0,
+          "encoderImplementation": [
+            "SimulcastEncoderAdapter (libvpx, libvpx, libvpx)"
+          ]
+        },
+        "f": {
+          "n": 59,
+          "w_med": 1280,
+          "h_med": 720,
+          "fps_med": 30,
+          "kbps_med": 1674.2,
+          "qlr_counts": {
+            "none": 59
+          },
+          "qlrDurations_delta_s": {
+            "bandwidth": 0,
+            "cpu": 0,
+            "none": 118.8,
+            "other": 0
+          },
+          "qlrResChanges_delta": 0,
+          "encoderImplementation": [
+            "SimulcastEncoderAdapter (libvpx, libvpx, libvpx)"
+          ]
+        }
+      },
+      "subs": {
+        "ab-sub-hi": {
+          "n": 59,
+          "w_med": 1280,
+          "h_med": 720,
+          "fps_med": 30,
+          "freeze_delta": 2,
+          "decoder": []
+        },
+        "ab-sub-lo": {
+          "n": 59,
+          "w_med": 320,
+          "h_med": 180,
+          "fps_med": 20,
+          "freeze_delta": 1,
+          "decoder": []
+        }
+      },
+      "cpu_csv": "ab-cam-3L-on-cpu.csv",
+      "elapsed_s": 155
+    }
+  ]
+}
