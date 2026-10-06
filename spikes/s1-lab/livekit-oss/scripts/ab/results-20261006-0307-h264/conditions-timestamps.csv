@@ -1,0 +1,5 @@
+cond,status,join_at,window_start_paris,window_end_paris,rec_start_paris,rec_stop_paris,rec_result,note,subrec_start_paris,subrec_stop_paris,subrec_file,subrec_bytes
+ab-file-3L-off-h264,DONE,2026-10-06T03:07:09.492,2026-10-06T03:07:37.434,2026-10-06T03:09:39.812,,,,,2026-10-06T03:07:37.441,2026-10-06T03:09:39.457,ab-file-3L-off-h264-sub-hi-rx.webm,27345056
+ab-file-3L-on-h264,DONE,2026-10-06T03:09:53.360,2026-10-06T03:10:20.209,2026-10-06T03:12:21.129,2026-10-06T03:10:20.501,2026-10-06T03:12:21.124,stopped+exported,,2026-10-06T03:10:20.212,2026-10-06T03:12:20.647,ab-file-3L-on-h264-sub-hi-rx.webm,18929581
+ab-file-2L-off-h264,DONE,2026-10-06T03:12:35.246,2026-10-06T03:13:02.602,2026-10-06T03:15:05.126,,,,,2026-10-06T03:13:02.604,2026-10-06T03:15:04.627,ab-file-2L-off-h264-sub-hi-rx.webm,36905878
+ab-file-2L-on-h264,DONE,2026-10-06T03:15:19.101,2026-10-06T03:15:46.058,2026-10-06T03:17:47.609,2026-10-06T03:15:46.311,2026-10-06T03:17:47.594,stopped+exported,,2026-10-06T03:15:46.061,2026-10-06T03:17:47.130,ab-file-2L-on-h264-sub-hi-rx.webm,36239172

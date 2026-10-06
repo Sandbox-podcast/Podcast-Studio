@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "participant": "ab-file-3L-on-h264",
+  "startedAtMs": 1791249020216,
+  "health": {
+    "ok": true,
+    "status": 200,
+    "body": "{\"ok\":true,\"endpoint\":\"http://127.0.0.1:9000\",\"bucket\":\"podcast-recordings-poc\",\"keyPrefix\":\"spike/s4-dropin/\"}"
+  }
+}

@@ -15,6 +15,7 @@ inn = list(csv.DictReader(open(d / "inbound-series.csv", encoding="utf-8-sig")))
 res = {}
 for cond, t in times.items():
     L = 2 if "-2L-" in cond else 3
+    cond_base = cond
     top = "h" if L == 2 else "f"
     o = [r for r in out if r["cond"] == cond]
     rows = [r for r in o if r["rid"] == top]
@@ -44,6 +45,9 @@ for cond, t in times.items():
             cpu[role] = {"machine_pct_med": med([f(r["cpu_pct_machine"]) for r in rr]), "machine_pct_max": max([f(r["cpu_pct_machine"]) or 0 for r in rr], default=None), "one_core_pct_med": med([f(r["cpu_pct_one_core"]) for r in rr]), "n": len(rr)}
         cpu["total_cpu_pct_med"] = med([f(r["total_cpu_pct"]) for r in rows_c])
         cpu["gpu_videoencode_pct_med"] = med([f(r["gpu_videoencode_pct"]) for r in rows_c])
+        if rows_c and "nvenc_util_pct" in rows_c[0]:
+            nv = [f(r["nvenc_util_pct"]) for r in rows_c]
+            cpu["nvenc_util_pct_med"] = med(nv); cpu["nvenc_util_pct_max"] = max([x for x in nv if x is not None], default=None)
     dj = d / f"{cond}.json"
     dfps = json.load(open(dj)) if dj.exists() else None
     res[cond] = {

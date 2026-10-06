@@ -1,0 +1,83 @@
+[
+  {
+    "path": "ab-file-3L-off-h264-sub-hi-rx.webm",
+    "mode": "native",
+    "threshold": 0.5,
+    "total_frames": 3081,
+    "duration_s": 122.017,
+    "size_segments": [
+      "640x360:631f",
+      "1280x720:269f",
+      "960x540:722f",
+      "320x180:432f",
+      "480x270:215f",
+      "960x540:555f",
+      "320x180:257f"
+    ],
+    "size_changes": 6,
+    "distinct_fps_exact": 25.251,
+    "distinct_fps_near": 20.923,
+    "longest_neardup_run_frames": 19,
+    "windows_1s_share_ge24_exact": 0.6148,
+    "windows_1s_min_exact": 9,
+    "windows_1s_share_ge24_near": 0.4672,
+    "windows_1s_median_near": 23
+  },
+  {
+    "path": "ab-file-3L-on-h264-sub-hi-rx.webm",
+    "mode": "native",
+    "threshold": 0.5,
+    "total_frames": 3367,
+    "duration_s": 120.398,
+    "size_segments": [
+      "1280x720:200f",
+      "960x540:642f",
+      "320x180:2525f"
+    ],
+    "size_changes": 2,
+    "distinct_fps_exact": 27.966,
+    "distinct_fps_near": 20.166,
+    "longest_neardup_run_frames": 30,
+    "windows_1s_share_ge24_exact": 0.843,
+    "windows_1s_min_exact": 7,
+    "windows_1s_share_ge24_near": 0.3554,
+    "windows_1s_median_near": 21
+  },
+  {
+    "path": "ab-file-2L-off-h264-sub-hi-rx.webm",
+    "mode": "native",
+    "threshold": 0.5,
+    "total_frames": 3649,
+    "duration_s": 121.969,
+    "size_segments": [
+      "1280x720:3649f"
+    ],
+    "size_changes": 0,
+    "distinct_fps_exact": 29.917,
+    "distinct_fps_near": 26.933,
+    "longest_neardup_run_frames": 6,
+    "windows_1s_share_ge24_exact": 1.0,
+    "windows_1s_min_exact": 27,
+    "windows_1s_share_ge24_near": 0.959,
+    "windows_1s_median_near": 27
+  },
+  {
+    "path": "ab-file-2L-on-h264-sub-hi-rx.webm",
+    "mode": "native",
+    "threshold": 0.5,
+    "total_frames": 3573,
+    "duration_s": 121.062,
+    "size_segments": [
+      "1280x720:378f",
+      "960x540:3195f"
+    ],
+    "size_changes": 1,
+    "distinct_fps_exact": 29.514,
+    "distinct_fps_near": 24.913,
+    "longest_neardup_run_frames": 10,
+    "windows_1s_share_ge24_exact": 0.9918,
+    "windows_1s_min_exact": 2,
+    "windows_1s_share_ge24_near": 0.7787,
+    "windows_1s_median_near": 26
+  }
+]

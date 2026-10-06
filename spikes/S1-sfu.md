@@ -474,6 +474,45 @@ The ON vs OFF direction is unchanged. The near-distinct ≥24 share is the stric
 
 **Caveats:** n=1 × 120 s per condition. Everything on one laptop (loopback, not LAN). The sub-hi received-track MediaRecorder runs in the sub Edge in every condition. The received-track webm **changes resolution mid-stream** whenever the SFU switches layers (ffprobe: 3L-off 1280×720→960×540 at ~12 s · 3L-on 1280×720→960×540 at ~13 s→**320×180 from ~39 s to the end** · 2L-off constant 1280×720 · 2L-on 1280×720→960×540 at ~10 s). An earlier version of this caveat wrongly said it was a constant 1280×720 upscale. `distinct_fps.py` lets ffmpeg autoscale every frame to the first frame's size before the MAD diff, so near-dup values are slightly biased. Its 1 s windows use exact hashes, so they count frames delivered per second. See [#10](https://github.com/Sandbox-podcast/Podcast-Studio/issues/10) and the corrected table below. Source loops at 60 s inside each window. Two earlier attempts (02:23, 02:33) died after cond 1 (wrapper `ErrorActionPreference=Stop` killed node on a benign stderr line; Playwright `TargetClosedError` on close) and are excluded.
 
+### Laptop A/B ± HQ rec — H.264 publisher (03:07–03:18 Paris, loopback, n=1 per condition)
+
+> **Measurement only — no product decision.** Same matrix and timings as the VP8 run (file conditions only, 20 s warm-up, 120 s window, 2 s sampling). Publisher `videoCodec: 'h264'` (`CODEC=h264`, VP8 stays the default). Media's S4Recorder unchanged (VP8 WebM 2.5 Mbps, 1 s timeslice). Data: [`scripts/ab/results-20261006-0307-h264/`](s1-lab/livekit-oss/scripts/ab/results-20261006-0307-h264/). Webm on box `/workspace/s1-soak/ab/run-010706-h264/`. Pre-run `nvidia-smi`: GPU 0 %, encoder 0 %.
+
+**Encoder:** Edge uses **OpenH264 (software)** on every layer: `SimulcastEncoderAdapter (OpenH264, OpenH264[, OpenH264])`. **No hardware encoder:** no MediaFoundation/NVENC implementation was reported, `nvidia-smi utilization.encoder` = **0 %** (max 0) in every 2 s sample of all 4 conditions, and the Windows GPU VideoEncode engine = 0 %.
+
+**Timestamps (Paris)**
+
+| cond | window start | window end | S4 rec start | S4 rec stop | S4 result key |
+| --- | --- | --- | --- | --- | --- |
+| ab-file-3L-off-h264 | 03:07:37.434 | 03:09:39.812 | — | — | OFF |
+| ab-file-3L-on-h264 | 03:10:20.209 | 03:12:21.129 | 03:10:20.501 | 03:12:21.124 | `spike/s4-dropin/ab-file-3L-on-h264-raw-1791249020406.results.json` |
+| ab-file-2L-off-h264 | 03:13:02.602 | 03:15:05.126 | — | — | OFF |
+| ab-file-2L-on-h264 | 03:15:46.058 | 03:17:47.609 | 03:15:46.311 | 03:17:47.594 | `spike/s4-dropin/ab-file-2L-on-h264-raw-1791249346198.results.json` |
+
+**Per condition** (distinct fps from the native per-frame-size decode, see #10; the Media tool's value is in brackets)
+
+| cond | HD sent res @fps (samples w/ dims) | QLR share (HD rid) | `qualityLimitationDurations` Δ s | pub Edge CPU % machine med (max) | sub-hi received | distinct near [tool] · ≥24 near · ≥24 exact |
+| --- | --- | --- | --- | --- | --- | --- |
+| 3L-off | 960×540 @29 (37/60) | cpu 0.67 · bw 0.17 · none 0.17 | cpu 79.8 · bw 20.0 · none 20.1 | 13.1 (18.4) | 640×360 @28 · freeze Δ2 | 20.92 [20.57] · 0.47 · 0.61 |
+| 3L-on | 960×540 @24 (17/59) | cpu 0.93 · none 0.07 | cpu 110.1 · none 7.9 | 18.0 (29.5) | 320×180 @30 · freeze Δ1 | 20.17 [19.67] · 0.36 · 0.84 |
+| 2L-off | **1280×720 @30** (60/60) | **none 1.00** | none 120.0 | 12.4 (17.8) | **1280×720 @30** · freeze Δ0 | **26.93** [26.93] · **0.96** · 1.00 |
+| 2L-on | 960×540 @30 (59/59) | cpu 0.90 · none 0.10 | cpu 107.0 · none 11.7 | 24.8 (31.8) | 960×540 @30 · freeze Δ0 | 24.91 [24.62] · 0.78 · 0.99 |
+
+3L-off-h264 was unstable. The encoder was reconfigured during the window (plain `OpenH264`, SEA ×2 and SEA ×3 all appear), `bandwidth` limitation showed up early, and the received webm has **7** resolution segments (640×360 → 1280×720 → 960×540 → 320×180 → 480×270 → 960×540 → 320×180).
+
+**VP8 vs H.264 (same conditions; VP8 values from the 02:39 run, native distinct)**
+
+| cond | pub CPU med VP8 → H.264 | HD sent VP8 → H.264 | QLR (HD rid) VP8 → H.264 | sub-hi rx VP8 → H.264 | distinct near · ≥24 near, VP8 → H.264 |
+| --- | --- | --- | --- | --- | --- |
+| 3L-off | 18.6 → 13.1 | 960×540@30 → 960×540@29 (top layer 37/60 samples) | cpu .90 → cpu .67 / bw .17 | 960×540 → 640×360 | 26.09 · 0.85 → 20.92 · 0.47 |
+| 3L-on | 20.0 → 18.0 | 960×540@22 (18/59) → @24 (17/59) | cpu .90 → cpu .93 | 320×180 → 320×180 | 23.31 · 0.60 → 20.17 · 0.36 |
+| 2L-off | 15.9 → 12.4 | 1280×720@30 → 1280×720@30 | none 1.0 → none 1.0 | 1280×720 → 1280×720 | 26.26 · 0.88 → 26.93 · 0.96 |
+| 2L-on | 24.6 → 24.8 | 960×540@30 → 960×540@30 | cpu .93 → cpu .90 | 960×540 → 960×540 | 25.48 · 0.84 → 24.91 · 0.78 |
+
+**Reading (no decision):** H.264 here means OpenH264 software, so there is no GPU offload. The publisher Edge used about 3–5 pt less CPU without rec. With rec ON, CPU is about the same and `cpu` limitation dominates for both codecs, so the HQ rec effect is unchanged. 2 layers without rec is again the only clean 1280×720@30 condition (both codecs). With 3 layers, H.264 delivered fewer distinct frames than VP8 in this n=1 run.
+
+**Caveats:** n=1 × 120 s per condition, loopback on one laptop, take4 file loop. The VP8 and H.264 runs are about 25 min apart (thermal/background state not controlled). The received-track recorder is VP8 in the sub Edge (it re-encodes the decoded H.264). Near-dup MAD depends on the received resolution, so 3L rows (mostly ≤960×540 or 320×180) are not directly comparable with 2L rows.
+
 ## Annexe — desk SaaS (superseded)
 
 > **Statut : superseded** — recherche desk 2026-10-05 sur LiveKit Cloud, Daily, Agora. Le POC SaaS (free tier) est **abandonné** ; conservé comme contexte historique uniquement. **Ne pas** créer de comptes ni exécuter [`s1-lab/livekit/`](s1-lab/livekit/) (Cloud), [`daily/`](s1-lab/daily/), [`agora/`](s1-lab/agora/) contre les vendeurs.

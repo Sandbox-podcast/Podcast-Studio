@@ -1,0 +1,26 @@
+{
+  "threshold": 0.5,
+  "videos": [
+    {
+      "path": "ab-file-2L-on-h264-sub-hi-rx.webm",
+      "width": 1280,
+      "height": 720,
+      "total_frames": 3573,
+      "duration_s": 121.062,
+      "container_fps_pts": 29.513,
+      "near_dup_threshold": 0.5,
+      "distinct_frames_exact": 3573,
+      "distinct_fps_exact": 29.514,
+      "distinct_frames_near": 2981,
+      "distinct_fps_near": 24.624,
+      "longest_repeat_run_frames": 1,
+      "longest_repeat_run_ms": 0.0,
+      "longest_neardup_run_frames": 10,
+      "longest_neardup_run_ms": 311.0,
+      "windows_1s_count": 122,
+      "windows_1s_share_ge24": 0.9918,
+      "windows_1s_min_distinct": 2,
+      "windows_1s_median_distinct": 30
+    }
+  ]
+}
