@@ -35,12 +35,12 @@ if (-not (Test-Path 'node_modules\playwright-core')) {
 }
 # 4) run
 # PS 5.1 + $ErrorActionPreference=Stop turns ANY native stderr line into a terminating error that kills
-# node mid-run (happened twice at end of cond 1). Run node via cmd with its own redirect and Continue.
+# node mid-run (happened twice at end of cond 1). Run node with its own stdout/stderr files and Continue.
 $ErrorActionPreference = 'Continue'
 foreach ($v in 'OUT_DIR','COOLDOWN_S','SAMPLE_MS','HEADLESS','FAKE_MEDIA','CHROME_PATH','SUB_REC','UNLOCK_SUBS') { Remove-Item "env:$v" -ErrorAction SilentlyContinue }
 $env:AB_GO = '1'; $env:CONDS = $Conds; $env:REC_S = "$RecSec"; $env:WARMUP_S = "$WarmupSec"; $env:S4_BASE = $S4Base
 $env:HARNESS = 'http://localhost:5190'; $env:AB_PATH = '/ab/index.html'
 $nodeOut = Join-Path $here ("node-" + (Get-Date -Format yyyyMMdd-HHmmss) + ".log")
-cmd /c "`"$node`" ab-laptop.mjs > `"$nodeOut`" 2>&1"
-Write-Host "node exit $LASTEXITCODE (log $nodeOut)"
+$np = Start-Process -FilePath $node -ArgumentList 'ab-laptop.mjs' -WorkingDirectory $here -NoNewWindow -Wait -PassThru -RedirectStandardOutput $nodeOut -RedirectStandardError ($nodeOut + '.err')
+Write-Host "node exit $($np.ExitCode) (log $nodeOut)"
 Pop-Location
