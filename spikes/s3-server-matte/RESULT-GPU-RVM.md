@@ -71,3 +71,53 @@ Mesures uniquement, 1 run chacune, loopback local.
 Verdict Designer : FAIL dès N = 2 (barre ≥24 fps, p95 < 41 ms). Défauts qualité : crâne vert, mains fantômes, fuite bureau/écran, bord de joue coupé.
 Non testés (ni ouverts ni fermés) : worker/OffscreenCanvas, dGPU forcé. Le temps réel serveur (1 puis 5 flux) se mesure au run CUDA.
 Données box : `/workspace/uploads/vision-multi/`, harness `/workspace/s3-ab-v7/multi/`.
+
+## 2026-10-06 matin : DirectML RTX 3070 (laptop) puis CUDA RTX 4080 SUPER (desktop-ai)
+
+Mesures seulement. Les verdicts qualité sont ceux de Designer et du lead. Clip : `vision-host-raw-1791240416301.webm`, segment 25–40 s, 1280×720 à 30 fps. Modèle `rvm_mobilenetv3_fp32.onnx`. Scripts dans `scripts/`.
+
+### DirectML, RTX 3070 Laptop (device 1), « ordre de grandeur RTX 3070 Laptop »
+Temps réel, C ds 0,4, N = 1 : 23,8 fps tenus, latence p50 58,6 / p95 77,4 ms, inférence p50 32,5 / p95 44,8 ms, GPU 35 % (max 42 %).
+À N = 2 (sessions DML dans des threads), le pilote NVIDIA D3D12 a planté (`nvwgf2umx.dll`, c0000005). Pas de chiffre : c'est un crash, pas un plafond.
+
+| Variante | ds | s/min total | s/min inférence seule | inf p50/p95 ms | post p50 ms |
+|---|---|---|---|---|---|
+| C | 0,4 | 97,81 | 66,7 | 35,94 / 41,92 | 8,88 |
+| E2-fgr | 0,4 | 171,76 | 81,93 | 34,78 / 75,55 | 37,87 |
+| C | 0,6 | 112,03 | 78,29 | 41,31 / 47,81 | 9,54 |
+| E2-fgr | 0,6 | 187,47 | 102,35 | 56,98 / 63,76 | 37,21 |
+| C | 1,0 | 166,06 | 127,97 | 68,78 / 83,25 | 10,83 |
+| E2-fgr | 1,0 | 238,77 | 138,65 | 72,64 / 104,21 | 41,1 |
+
+Designer : ds 0,4 est le meilleur, PASS réservé. ds 0,6 et 1,0 sont FAIL. Sur ces stills, C et E2-fgr ne se distinguent pas.
+
+### CUDA, desktop-ai, « ordre de grandeur GPU desktop (RTX 4080 SUPER), GPU partagé avec le bureau »
+onnxruntime-gpu 1.30.0 avec les wheels pip CUDA 13 / cuDNN 9, dans un venv isolé de 1,87 Go (`C:\Users\azero\podcast-studio\cuda-venv`). Aucune install système, pilote 610.88 inchangé.
+
+| Variante | ds | s/min total | s/min inférence seule | inf p50/p95 ms | post p50 ms |
+|---|---|---|---|---|---|
+| C | 0,25 | 28,67 | 16,98 | 8,26 / 10,0 | 3,01 |
+| C | 0,4 | 30,72 | 18,61 | 10,18 / 11,4 | 3,09 |
+| E2-fgr | 0,4 | 66,9 | 23,9 | 10,95 / 21,93 | 19,31 |
+
+Temps réel, C ds 0,4, cadence 30 fps par flux, **un process par flux** :
+
+| N | fps par flux | latence p95 max | inf p50 | GPU moy / max |
+|---|---|---|---|---|
+| 1 | 29,92 | 23,7 ms | 11,6 ms | 27 / 55 % |
+| 2 | 29,85 | 22,7 ms | 13,4–13,8 ms | 38 / 46 % |
+| 3 | 29,45–29,67 | 57,2 ms | 21–22,7 ms | 52 / 62 % |
+| 5 | 24,6–25,8 | 77,9 ms | 27,9–29,4 ms | 73 / 86 % |
+
+**N = 5 dans un seul process batché (batch 5) : non concluant, résultat contaminé.** Deux tests Rbitnet (`bitnet_core`) ont démarré sur le GPU à 12:05:26 puis 12:06:17, alors que le run allait de 12:04:44 à 12:05:44. Résultat mesuré : 11,9 fps par flux. La boucle de ce harness est sérielle : préparation CPU ~32 ms, puis inférence du batch ~46 ms (soit 9,3 ms par image). Le pic VRAM est attribué à Rbitnet. Le lead n'a pas retenu de version optimisée pour le POC.
+
+Designer : C ds 0,25 est le meilleur, PASS réservé en live. **Pas de PASS master** (halo le long des doigts et de la paume, halo en haut des cheveux, mèche de fond restée dans le masque). E2-fgr n'apporte rien et il est abandonné.
+
+### Traitement des bords sur stills (C ds 0,25)
+Coût p50 par image, CPU sur un seul thread, numpy/PIL non optimisé, Ryzen 7 9800X3D :
+- a, décontamination de la couleur (blur-fusion) : 391 ms. Designer : aucun gain visible, écartée.
+- b, alpha resserré de 1 px puis flou σ 0,8 : 24 ms. Designer : seul gain visible (liseré plus fin), mais le liseré reste visible sur fond sombre. **Retenu par le lead comme candidat de bord pour le live**, à porter en shader/GPU.
+- c = a + b : 416 ms. Designer : identique à b, écarté.
+- b à 2 px : stills calculés sur la box (matte en CPU EP), coût box 60–69 ms (b à 1 px : 32–34 ms sur la box). Verdict « main rapide 33,4 s rongée ou pas » : en attente de Designer.
+
+Pour le master re-détouré, le lead note une nouvelle piste S3 : un détourage serveur plus lourd, en async. Choix du modèle et OK de Loïc avant tout téléchargement.
