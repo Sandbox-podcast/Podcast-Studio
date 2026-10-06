@@ -19,6 +19,10 @@
 // Capture fps: every SAMPLE_MS the publisher's getStats() `media-source` (kind=video) reports are sampled ->
 //      media-source-series.csv (one row per video source) + src_* columns appended to outbound-rid-series.csv
 //      (joined via outbound-rtp.mediaSourceId) + per-condition `src` block in ab-summary.json (median/min).
+// Publisher BWE: every SAMPLE_MS the publisher page's selected ICE candidate-pair per RTCPeerConnection
+//      (transport.selectedCandidatePairId, else nominated+succeeded) -> bwe-series.csv (availableOutgoingBitrate,
+//      currentRoundTripTime, candidate types) + per-condition `bwe` block in ab-summary.json (min/median, kbps) for the
+//      PC that carries outbound video (= LiveKit publisher transport).
 import { mkdirSync, appendFileSync, writeFileSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { tmpdir, cpus } from "node:os";
@@ -99,7 +103,7 @@ const recStartOpts = (c) => c.recMime
   : { cond: c.name, durationSec: REC_S };
 if (AB_DRY) {
   for (const c of CONDS) console.log("[ab-dry]", JSON.stringify({ ...c, recStart: c.rec ? recStartOpts(c) : null }));
-  console.log("[ab-dry] timing", JSON.stringify({ WARMUP_S, REC_S, SAMPLE_MS, COOLDOWN_S, S4_BASE, CODEC, HARNESS, AB_PATH, SUB_REC, ROOM: ROOM || "(per-cond)", PUB2_ID: PUB2_ID || "(none)", PUB2_WAIT_S, srcSampling: "media-source video -> media-source-series.csv + outbound src_* + summary.src" }));
+  console.log("[ab-dry] timing", JSON.stringify({ WARMUP_S, REC_S, SAMPLE_MS, COOLDOWN_S, S4_BASE, CODEC, HARNESS, AB_PATH, SUB_REC, ROOM: ROOM || "(per-cond)", PUB2_ID: PUB2_ID || "(none)", PUB2_WAIT_S, srcSampling: "media-source video -> media-source-series.csv + outbound src_* + summary.src", bweSampling: "publisher selected candidate-pair -> bwe-series.csv + summary.bwe" }));
   console.log("[ab-dry] exit before preflight: nothing launched");
   process.exit(0);
 }
@@ -179,6 +183,8 @@ appendFileSync(IN_CSV, row(["cond", "t_rel_s", "at_paris", "sub", "pin", "kind",
 // browser's 1 s framesPerSecond window).
 const SRC_CSV = join(OUT_DIR, "media-source-series.csv");
 appendFileSync(SRC_CSV, row(["cond", "t_rel_s", "at_paris", "source_id", "trackIdentifier", "src_fps", "src_frames", "src_w", "src_h", "src_fps_frames", "ts"]));
+const BWE_CSV = join(OUT_DIR, "bwe-series.csv");
+appendFileSync(BWE_CSV, row(["cond", "t_rel_s", "at_paris", "pc", "has_out_video", "availableOutgoingBitrate", "availableIncomingBitrate", "currentRoundTripTime", "cp_bytesSent", "local", "remote", "ts"]));
 appendFileSync(TIMES_CSV, row(["cond", "status", "join_at", "window_start_paris", "window_end_paris", "rec_start_paris", "rec_stop_paris", "rec_result", "note", "subrec_start_paris", "subrec_stop_paris", "subrec_file", "subrec_bytes", "pub2", "subx_file", "subx_bytes"]));
 
 const INIT_PC = () => {
@@ -191,12 +197,28 @@ const INIT_PC = () => {
 
 async function stats(page) {
   return page.evaluate(async () => {
-    const out = [], inn = [], src = [];
+    const out = [], inn = [], src = [], bwe = [];
     let pci = 0;
     for (const pc of window.__pcs ?? []) {
       pci++;
       if (pc.connectionState === "closed") continue;
       const rep = await pc.getStats();
+      // selected candidate-pair of this PC (availableOutgoingBitrate = sender-side BWE estimate)
+      try { // never let BWE sampling break the outbound/inbound/src sampling below
+      let selId = null, hasOutVideo = false;
+      for (const s of rep.values()) {
+        if (s.type === "transport" && s.selectedCandidatePairId) selId = s.selectedCandidatePairId;
+        if (s.type === "outbound-rtp" && s.kind === "video") hasOutVideo = true;
+      }
+      let cp = selId ? rep.get(selId) : null;
+      if (!cp) for (const s of rep.values()) if (s.type === "candidate-pair" && s.nominated && s.state === "succeeded") { cp = s; break; }
+      if (cp) {
+        const lc = rep.get(cp.localCandidateId), rc = rep.get(cp.remoteCandidateId);
+        bwe.push({ pc: pci, hasOutVideo, aob: cp.availableOutgoingBitrate ?? null, aib: cp.availableIncomingBitrate ?? null,
+          rtt: cp.currentRoundTripTime ?? null, bytesSent: cp.bytesSent ?? null, local: lc ? `${lc.candidateType}/${lc.protocol}` : null,
+          remote: rc ? `${rc.candidateType}/${rc.protocol}` : null, ts: cp.timestamp });
+      }
+      } catch (e) { bwe.push({ pc: pci, hasOutVideo: false, err: String(e) }); }
       for (const s of rep.values()) {
         if (s.type === "media-source" && s.kind === "video") src.push({
           id: `pc${pci}:${s.id}`, trackIdentifier: s.trackIdentifier ?? null, fps: s.framesPerSecond ?? null,
@@ -215,7 +237,7 @@ async function stats(page) {
           decoderImplementation: s.decoderImplementation ?? null, ts: s.timestamp });
       }
     }
-    return { out, inn, src };
+    return { out, inn, src, bwe };
   });
 }
 
@@ -257,7 +279,7 @@ for (const c of CONDS) {
   const pubMarker = `s1ab-pub-${c.name}-${stamp}`, subMarker = `s1ab-sub-${c.name}-${stamp}`;
   const cpu = startCpuSampler(c.name, [pubMarker, subMarker], WARMUP_S + REC_S + 60);
   let pubCtx, subCtx;
-  const series = { out: [], inn: [], src: [] };
+  const series = { out: [], inn: [], src: [], bwe: [] };
   const srcPrev = new Map();
   const t0 = Date.now();
   try {
@@ -345,7 +367,11 @@ for (const c of CONDS) {
       await sleep(SAMPLE_MS);
       const tr = Math.round((Date.now() - wsMs) / 100) / 10, at = paris();
       await pinAll();
-      const ps = await stats(pub).catch(() => ({ out: [], src: [] }));
+      const ps = await stats(pub).catch(() => ({ out: [], src: [], bwe: [] }));
+      for (const b of ps.bwe ?? []) {
+        series.bwe.push({ tr, ...b });
+        appendFileSync(BWE_CSV, row([c.name, tr, at, b.pc, b.hasOutVideo, b.aob, b.aib, b.rtt, b.bytesSent, b.local, b.remote, b.ts]));
+      }
       const srcById = new Map();
       for (const m of ps.src ?? []) {
         const p = srcPrev.get(m.id);
@@ -456,12 +482,18 @@ for (const c of CONDS) {
                    src_w_med: med(ms.map((m) => m.w)), src_h_med: med(ms.map((m) => m.h)),
                    src_frames_delta: ms.length > 1 && ms.at(-1).frames != null && ms[0].frames != null ? ms.at(-1).frames - ms[0].frames : null };
   }
+  // publisher BWE (availableOutgoingBitrate of the selected candidate-pair on the PC carrying outbound video)
+  const bw = series.bwe.filter((b) => b.hasOutVideo && Number.isFinite(b.aob));
+  const bweSum = bw.length ? { n: bw.length, pcs: [...new Set(bw.map((b) => b.pc))], aob_kbps_min: r1(min(bw.map((b) => b.aob / 1000))),
+    aob_kbps_med: r1(med(bw.map((b) => b.aob / 1000))), aob_kbps_max: r1(max(bw.map((b) => b.aob / 1000))),
+    rtt_ms_med: r1(med(bw.map((b) => (b.rtt ?? NaN) * 1000))), pair: [...new Set(bw.map((b) => `${b.local}->${b.remote}`))] }
+    : "NOT CAPTURED (no availableOutgoingBitrate on publisher candidate-pair)";
   const subSum = {};
   for (const sid of PUB2_ID ? ["ab-sub-hi", "ab-sub-lo", "ab-sub-x"] : ["ab-sub-hi", "ab-sub-lo"]) {
     const v = series.inn.filter((i) => i.sub === sid && i.kind === "video");
     subSum[sid] = { n: v.length, w_med: med(v.map((i) => i.w)), h_med: med(v.map((i) => i.h)), fps_med: r1(med(v.map((i) => i.fps))), freeze_delta: v.length ? (v.at(-1).freezeCount ?? 0) - (v[0].freezeCount ?? 0) : null, decoder: [...new Set(v.map((i) => i.decoderImplementation).filter(Boolean))] };
   }
-  summaries.push({ cond: c.name, status: t.status, note: t.note || undefined, window: [t.ws, t.we], rec: c.rec ? [t.rs, t.re, t.rec_result] : "OFF", ...(c.recMime ? { recMime: t.recMime ?? { requested: c.recMime, recorder: null }, recParticipant: c.recParticipant } : {}), perRid, src: Object.keys(srcSum).length ? srcSum : "NOT CAPTURED (no media-source video stats)", subs: subSum, ...(PUB2_ID ? { pub2: { id: PUB2_ID, status: t.pub2, rx: t.xfile || null } } : {}), cpu_csv: cpu ? `${c.name}-cpu.csv` : "NOT CAPTURED", elapsed_s: Math.round((Date.now() - t0) / 1000) });
+  summaries.push({ cond: c.name, status: t.status, note: t.note || undefined, window: [t.ws, t.we], rec: c.rec ? [t.rs, t.re, t.rec_result] : "OFF", ...(c.recMime ? { recMime: t.recMime ?? { requested: c.recMime, recorder: null }, recParticipant: c.recParticipant } : {}), perRid, src: Object.keys(srcSum).length ? srcSum : "NOT CAPTURED (no media-source video stats)", bwe: bweSum, subs: subSum, ...(PUB2_ID ? { pub2: { id: PUB2_ID, status: t.pub2, rx: t.xfile || null } } : {}), cpu_csv: cpu ? `${c.name}-cpu.csv` : "NOT CAPTURED", elapsed_s: Math.round((Date.now() - t0) / 1000) });
   writeFileSync(join(OUT_DIR, "ab-summary.json"), JSON.stringify({ preflight: pre, summaries }, null, 2));
   log(`${c.name} ${t.status} window ${t.ws} → ${t.we}`);
   await sleep(COOLDOWN_S * 1000);
@@ -475,6 +507,6 @@ for (const line of readFileSync(TIMES_CSV, "utf8").trim().split("\n").slice(1)) 
   md += `| ${f[0]} | ${f[1]} | ${f[3] || "—"} | ${f[4] || "—"} | ${f[5] || "—"} | ${f[6] || "—"} | ${f[7] || (f[8] ? f[8] : "OFF")} | ${f[11] ? `${f[11]} (${f[12]} B)` : "—"} |\n`;
 }
 md += `\nDistinct fps (box): \`python3 /workspace/podcast-studio/tools/distinct_fps.py --threshold 0.5 --json-out r.json <cond>-sub-hi-rx.webm\`\n`;
-md += `\nRaw: outbound-rid-series.csv (src_* = media-source) · media-source-series.csv · inbound-series.csv · <cond>-cpu.csv · <cond>-s4-results.json · ab-summary.json\n`;
+md += `\nRaw: outbound-rid-series.csv (src_* = media-source) · media-source-series.csv · bwe-series.csv (publisher candidate-pair availableOutgoingBitrate) · inbound-series.csv · <cond>-cpu.csv · <cond>-s4-results.json · ab-summary.json\n`;
 writeFileSync(join(OUT_DIR, "AB-TIMESTAMPS.md"), md);
 log("done", OUT_DIR);

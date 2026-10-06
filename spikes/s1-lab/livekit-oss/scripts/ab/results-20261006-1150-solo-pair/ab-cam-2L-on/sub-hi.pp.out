@@ -1,0 +1,6 @@
+ab-cam-2L-on-sub-hi-rx.webm: frames=2789 dur=121.426s size_mode=native segs=2 container_fps=22.967 distinct_fps_exact=22.969 distinct_fps_near=18.126 thresh=0.5 max_neardup=7f/529.0ms win(near)≥24=0.4262 median=23.0 p5=3.0 min=0 lt24=70/122
+ab-cam-2L-on-sub-hi-rx.webm [native] frames=2789 segs=['1280x720:2386f', '320x180:403f'] exact=22.969 near=18.126 ge24_exact=0.6148 ge24_near=0.4262 maxneardup=7f
+  freeze>200ms (gap between near-distinct frames): n=60 total=25370ms max=631ms
+ab-cam-2L-on-sub-hi-rx.webm: frames=2789 dur=121.426s size_mode=native segs=2 container_fps=22.967 distinct_fps_exact=22.969 distinct_fps_near=21.956 thresh=0.3 max_neardup=5f/337.0ms win(near)≥24=0.6148 median=29.0 p5=6.0 min=2 lt24=47/122
+ab-cam-2L-on-sub-hi-rx.webm [native] frames=2789 segs=['1280x720:2386f', '320x180:403f'] exact=22.969 near=21.956 ge24_exact=0.6148 ge24_near=0.6148 maxneardup=5f
+  freeze>200ms (gap between near-distinct frames): n=52 total=14805ms max=465ms

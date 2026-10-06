@@ -1,0 +1,1676 @@
+{
+  "participant": "ab-cam-3L-on",
+  "label": "raw",
+  "mimeType": "video/webm;codecs=vp8,opus",
+  "mimeTypesSupported": [
+    "video/webm;codecs=vp8,opus",
+    "video/webm;codecs=vp9,opus",
+    "video/webm;codecs=vp9",
+    "video/webm;codecs=vp8",
+    "video/webm",
+    "video/mp4;codecs=avc1.42E01E,mp4a.40.2",
+    "video/mp4;codecs=avc1.4D401E,mp4a.40.2",
+    "video/mp4",
+    "audio/webm;codecs=opus"
+  ],
+  "webCodecs": {
+    "VideoEncoder": true,
+    "AudioEncoder": true,
+    "videoConfigs": [
+      {
+        "config": {
+          "codec": "vp8",
+          "width": 1280,
+          "height": 720,
+          "bitrate": 2500000,
+          "framerate": 30
+        },
+        "supported": true,
+        "configReturned": {
+          "alpha": "discard",
+          "bitrate": 2500000,
+          "bitrateMode": "variable",
+          "codec": "vp8",
+          "contentHint": "",
+          "framerate": 30,
+          "hardwareAcceleration": "no-preference",
+          "height": 720,
+          "latencyMode": "quality",
+          "width": 1280
+        }
+      },
+      {
+        "config": {
+          "codec": "vp09.00.10.08",
+          "width": 1280,
+          "height": 720,
+          "bitrate": 2500000,
+          "framerate": 30
+        },
+        "supported": true,
+        "configReturned": {
+          "alpha": "discard",
+          "bitrate": 2500000,
+          "bitrateMode": "variable",
+          "codec": "vp09.00.10.08",
+          "contentHint": "",
+          "framerate": 30,
+          "hardwareAcceleration": "no-preference",
+          "height": 720,
+          "latencyMode": "quality",
+          "width": 1280
+        }
+      },
+      {
+        "config": {
+          "codec": "avc1.42E01E",
+          "width": 1280,
+          "height": 720,
+          "bitrate": 2500000,
+          "framerate": 30
+        },
+        "supported": false,
+        "configReturned": {
+          "alpha": "discard",
+          "bitrate": 2500000,
+          "bitrateMode": "variable",
+          "codec": "avc1.42E01E",
+          "contentHint": "",
+          "framerate": 30,
+          "hardwareAcceleration": "no-preference",
+          "height": 720,
+          "latencyMode": "quality",
+          "width": 1280
+        }
+      },
+      {
+        "config": {
+          "codec": "av01.0.04M.08",
+          "width": 1280,
+          "height": 720,
+          "bitrate": 2500000,
+          "framerate": 30
+        },
+        "supported": true,
+        "configReturned": {
+          "alpha": "discard",
+          "bitrate": 2500000,
+          "bitrateMode": "variable",
+          "codec": "av01.0.04M.08",
+          "contentHint": "",
+          "framerate": 30,
+          "hardwareAcceleration": "no-preference",
+          "height": 720,
+          "latencyMode": "quality",
+          "width": 1280
+        }
+      }
+    ],
+    "audioConfigs": [
+      {
+        "config": {
+          "codec": "opus",
+          "numberOfChannels": 1,
+          "sampleRate": 48000,
+          "bitrate": 128000
+        },
+        "supported": true,
+        "configReturned": {
+          "bitrate": 128000,
+          "bitrateMode": "variable",
+          "codec": "opus",
+          "numberOfChannels": 1,
+          "sampleRate": 48000
+        }
+      },
+      {
+        "config": {
+          "codec": "mp4a.40.2",
+          "numberOfChannels": 1,
+          "sampleRate": 48000,
+          "bitrate": 128000
+        },
+        "supported": true,
+        "configReturned": {
+          "bitrate": 128000,
+          "bitrateMode": "variable",
+          "codec": "mp4a.40.2",
+          "numberOfChannels": 1,
+          "sampleRate": 48000
+        }
+      }
+    ]
+  },
+  "recording": {
+    "key": "spike/s4-dropin/ab-cam-3L-on-raw-1791280481437.webm",
+    "label": "raw",
+    "source": "external MediaStream (caller-owned; tracks not stopped)",
+    "mimeType": "video/webm;codecs=vp8,opus",
+    "videoBitsPerSecond": 2500000,
+    "audioBitsPerSecond": 128000,
+    "timesliceMs": 1000,
+    "partSizeBytes": 5242880,
+    "durationSecTarget": 120,
+    "timeOrigin": 1791280452083,
+    "tStartPerf": 29354.099999904633,
+    "wallStartIso": "2026-10-06T09:54:41.437Z",
+    "firstChunkAt": 30440.400000095367,
+    "videoTracks": 1,
+    "audioTracks": 1,
+    "tStopPerf": 149434,
+    "chunkCount": 118,
+    "totalBytesLocal": 39244475,
+    "elapsedMs": 120079.90000009537,
+    "measuredBitrateBps": 2614557.473813275
+  },
+  "parts": [
+    {
+      "partNumber": 1,
+      "byteStart": 0,
+      "byteEnd": 5242880,
+      "size": 5242880,
+      "etag": "\"e2e3b502ca06bd8532e790b70eb55290\"",
+      "status": "uploaded",
+      "uploadMs": 108.69999980926514,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "partNumber": 2,
+      "byteStart": 5242880,
+      "byteEnd": 10485760,
+      "size": 5242880,
+      "etag": "\"3ceb4beb01d2e29a3d3d141b2adeccbf\"",
+      "status": "uploaded",
+      "uploadMs": 55.59999990463257,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "partNumber": 3,
+      "byteStart": 10485760,
+      "byteEnd": 15728640,
+      "size": 5242880,
+      "etag": "\"a4952752825098ac855e1e17adc19fef\"",
+      "status": "uploaded",
+      "uploadMs": 66.90000009536743,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "partNumber": 4,
+      "byteStart": 15728640,
+      "byteEnd": 20971520,
+      "size": 5242880,
+      "etag": "\"3464b709f44df5d840e633bbc6b1394a\"",
+      "status": "uploaded",
+      "uploadMs": 68.7000002861023,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "partNumber": 5,
+      "byteStart": 20971520,
+      "byteEnd": 26214400,
+      "size": 5242880,
+      "etag": "\"97c10e94d7bb201dae3c50dd9d79d704\"",
+      "status": "uploaded",
+      "uploadMs": 135.09999990463257,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "partNumber": 6,
+      "byteStart": 26214400,
+      "byteEnd": 31457280,
+      "size": 5242880,
+      "etag": "\"ad9b0ca7f4d1de8682d4f65e8846b8cf\"",
+      "status": "uploaded",
+      "uploadMs": 151.69999980926514,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "partNumber": 7,
+      "byteStart": 31457280,
+      "byteEnd": 36700160,
+      "size": 5242880,
+      "etag": "\"e49091ff4819be9cfe7f3f156d3ac6b3\"",
+      "status": "uploaded",
+      "uploadMs": 74.60000038146973,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "partNumber": 8,
+      "byteStart": 36700160,
+      "byteEnd": 39244475,
+      "size": 2544315,
+      "etag": "\"8f10fb8b23d1e62a4852c75bc7ba9f6c\"",
+      "status": "uploaded",
+      "uploadMs": 114.60000038146973,
+      "attempts": 1,
+      "error": null
+    }
+  ],
+  "cuts": [],
+  "integrity": {
+    "localBytes": 39244475,
+    "localSha256": "9bfd3cd2ad862b8ba36e5cf1d1f7c63e9676dfb12b27e8abab45e825ea498212",
+    "key": "spike/s4-dropin/ab-cam-3L-on-raw-1791280481437.webm",
+    "uploadId": "OTNkNThmMTgtMTc0Yi00YTI5LTgzYTgtNTFiNjA5YjM4MzM3LjBlYzZkZjdiLTU4ZDktNDdiMi1hMTJmLTVlY2E4ZTg1ODJjM3gxNzkxMjgwNDgxNDU1MjY5NjQ1",
+    "complete": {
+      "ok": true,
+      "key": "spike/s4-dropin/ab-cam-3L-on-raw-1791280481437.webm",
+      "contentLength": 39244475,
+      "etag": "\"38ab6f5c04c4a3e09a6e36ff646aa17e-8\""
+    },
+    "remoteContentLength": 39244475
+  },
+  "sync": {
+    "participant": "ab-cam-3L-on",
+    "label": "raw",
+    "timeOrigin": 1791280452083,
+    "tStartPerf": 29354.099999904633,
+    "firstChunkAt": 30440.400000095367,
+    "wallStartMs": 1791280481437
+  },
+  "errors": [],
+  "events": [
+    {
+      "type": "opfs-session-open",
+      "perf": 29426.3,
+      "wallMs": 1791280481509,
+      "iso": "2026-10-06T09:54:41.509Z",
+      "sessionId": "ab-cam-3L-on-raw-1791280481437.webm",
+      "manifestMs": 10.2
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 30447.5,
+      "wallMs": 1791280482530,
+      "iso": "2026-10-06T09:54:42.530Z",
+      "byteStart": 0,
+      "size": 304954,
+      "ms": 6.9
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 31475.4,
+      "wallMs": 1791280483558,
+      "iso": "2026-10-06T09:54:43.558Z",
+      "byteStart": 304954,
+      "size": 334758,
+      "ms": 12.9
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 32493,
+      "wallMs": 1791280484575,
+      "iso": "2026-10-06T09:54:44.575Z",
+      "byteStart": 639712,
+      "size": 329465,
+      "ms": 11.2
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 33541.1,
+      "wallMs": 1791280485624,
+      "iso": "2026-10-06T09:54:45.624Z",
+      "byteStart": 969177,
+      "size": 344619,
+      "ms": 8.1
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 34594.9,
+      "wallMs": 1791280486677,
+      "iso": "2026-10-06T09:54:46.677Z",
+      "byteStart": 1313796,
+      "size": 337262,
+      "ms": 13.4
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 35608.8,
+      "wallMs": 1791280487691,
+      "iso": "2026-10-06T09:54:47.691Z",
+      "byteStart": 1651058,
+      "size": 326333,
+      "ms": 7.8
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 36629.1,
+      "wallMs": 1791280488712,
+      "iso": "2026-10-06T09:54:48.712Z",
+      "byteStart": 1977391,
+      "size": 376630,
+      "ms": 8.3
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 37646.3,
+      "wallMs": 1791280489729,
+      "iso": "2026-10-06T09:54:49.729Z",
+      "byteStart": 2354021,
+      "size": 340185,
+      "ms": 5.8
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 38670.4,
+      "wallMs": 1791280490753,
+      "iso": "2026-10-06T09:54:50.753Z",
+      "byteStart": 2694206,
+      "size": 335325,
+      "ms": 9
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 39692.3,
+      "wallMs": 1791280491775,
+      "iso": "2026-10-06T09:54:51.775Z",
+      "byteStart": 3029531,
+      "size": 363212,
+      "ms": 11.2
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 40708.3,
+      "wallMs": 1791280492791,
+      "iso": "2026-10-06T09:54:52.791Z",
+      "byteStart": 3392743,
+      "size": 332389,
+      "ms": 7.6
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 41728.9,
+      "wallMs": 1791280493811,
+      "iso": "2026-10-06T09:54:53.811Z",
+      "byteStart": 3725132,
+      "size": 337420,
+      "ms": 8.3
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 42751.5,
+      "wallMs": 1791280494834,
+      "iso": "2026-10-06T09:54:54.834Z",
+      "byteStart": 4062552,
+      "size": 320100,
+      "ms": 10.4
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 43769.7,
+      "wallMs": 1791280495852,
+      "iso": "2026-10-06T09:54:55.852Z",
+      "byteStart": 4382652,
+      "size": 370174,
+      "ms": 8.9
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 44795.7,
+      "wallMs": 1791280496878,
+      "iso": "2026-10-06T09:54:56.878Z",
+      "byteStart": 4752826,
+      "size": 320011,
+      "ms": 13.7
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 45810.1,
+      "wallMs": 1791280497893,
+      "iso": "2026-10-06T09:54:57.893Z",
+      "byteStart": 5072837,
+      "size": 335539,
+      "ms": 9.4
+    },
+    {
+      "type": "opfs-part-write",
+      "perf": 45869.6,
+      "wallMs": 1791280497952,
+      "iso": "2026-10-06T09:54:57.952Z",
+      "partNumber": 1,
+      "size": 5242880,
+      "ms": 28.2,
+      "manifestMs": 8.7,
+      "chunkFilesDeleted": 15
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 46830.8,
+      "wallMs": 1791280498913,
+      "iso": "2026-10-06T09:54:58.913Z",
+      "byteStart": 5408376,
+      "size": 360288,
+      "ms": 9.6
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 47851.9,
+      "wallMs": 1791280499934,
+      "iso": "2026-10-06T09:54:59.934Z",
+      "byteStart": 5768664,
+      "size": 349642,
+      "ms": 10.8
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 48871,
+      "wallMs": 1791280500954,
+      "iso": "2026-10-06T09:55:00.954Z",
+      "byteStart": 6118306,
+      "size": 326557,
+      "ms": 9.6
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 49889.4,
+      "wallMs": 1791280501972,
+      "iso": "2026-10-06T09:55:01.972Z",
+      "byteStart": 6444863,
+      "size": 395423,
+      "ms": 8
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 50907.4,
+      "wallMs": 1791280502990,
+      "iso": "2026-10-06T09:55:02.990Z",
+      "byteStart": 6840286,
+      "size": 328414,
+      "ms": 7
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 51930.1,
+      "wallMs": 1791280504013,
+      "iso": "2026-10-06T09:55:04.013Z",
+      "byteStart": 7168700,
+      "size": 326159,
+      "ms": 9.3
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 52965.4,
+      "wallMs": 1791280505048,
+      "iso": "2026-10-06T09:55:05.048Z",
+      "byteStart": 7494859,
+      "size": 343225,
+      "ms": 13.8
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 53971.5,
+      "wallMs": 1791280506054,
+      "iso": "2026-10-06T09:55:06.054Z",
+      "byteStart": 7838084,
+      "size": 354594,
+      "ms": 10.1
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 54989.1,
+      "wallMs": 1791280507072,
+      "iso": "2026-10-06T09:55:07.072Z",
+      "byteStart": 8192678,
+      "size": 327427,
+      "ms": 8.6
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 56006.7,
+      "wallMs": 1791280508089,
+      "iso": "2026-10-06T09:55:08.089Z",
+      "byteStart": 8520105,
+      "size": 310410,
+      "ms": 6.6
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 57028.3,
+      "wallMs": 1791280509111,
+      "iso": "2026-10-06T09:55:09.111Z",
+      "byteStart": 8830515,
+      "size": 370287,
+      "ms": 7.6
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 58047.8,
+      "wallMs": 1791280510130,
+      "iso": "2026-10-06T09:55:10.130Z",
+      "byteStart": 9200802,
+      "size": 330139,
+      "ms": 7.6
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 59067.8,
+      "wallMs": 1791280511150,
+      "iso": "2026-10-06T09:55:11.150Z",
+      "byteStart": 9530941,
+      "size": 315065,
+      "ms": 6.7
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 60100,
+      "wallMs": 1791280512182,
+      "iso": "2026-10-06T09:55:12.182Z",
+      "byteStart": 9846006,
+      "size": 334802,
+      "ms": 12.5
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 61108.5,
+      "wallMs": 1791280513191,
+      "iso": "2026-10-06T09:55:13.191Z",
+      "byteStart": 10180808,
+      "size": 355879,
+      "ms": 8
+    },
+    {
+      "type": "opfs-part-write",
+      "perf": 61157.7,
+      "wallMs": 1791280513240,
+      "iso": "2026-10-06T09:55:13.240Z",
+      "partNumber": 2,
+      "size": 5242880,
+      "ms": 18.2,
+      "manifestMs": 8.1,
+      "chunkFilesDeleted": 15
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 62130.1,
+      "wallMs": 1791280514213,
+      "iso": "2026-10-06T09:55:14.213Z",
+      "byteStart": 10536687,
+      "size": 302266,
+      "ms": 9
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 63152.1,
+      "wallMs": 1791280515235,
+      "iso": "2026-10-06T09:55:15.235Z",
+      "byteStart": 10838953,
+      "size": 316101,
+      "ms": 10.3
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 64168.4,
+      "wallMs": 1791280516251,
+      "iso": "2026-10-06T09:55:16.251Z",
+      "byteStart": 11155054,
+      "size": 372296,
+      "ms": 8.3
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 65190.4,
+      "wallMs": 1791280517273,
+      "iso": "2026-10-06T09:55:17.273Z",
+      "byteStart": 11527350,
+      "size": 327284,
+      "ms": 10.4
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 66209.6,
+      "wallMs": 1791280518292,
+      "iso": "2026-10-06T09:55:18.292Z",
+      "byteStart": 11854634,
+      "size": 317312,
+      "ms": 8.4
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 67229.7,
+      "wallMs": 1791280519312,
+      "iso": "2026-10-06T09:55:19.312Z",
+      "byteStart": 12171946,
+      "size": 373531,
+      "ms": 8.7
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 68253.8,
+      "wallMs": 1791280520336,
+      "iso": "2026-10-06T09:55:20.336Z",
+      "byteStart": 12545477,
+      "size": 309510,
+      "ms": 13.3
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 69268.2,
+      "wallMs": 1791280521351,
+      "iso": "2026-10-06T09:55:21.351Z",
+      "byteStart": 12854987,
+      "size": 309980,
+      "ms": 7.6
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 70290.3,
+      "wallMs": 1791280522373,
+      "iso": "2026-10-06T09:55:22.373Z",
+      "byteStart": 13164967,
+      "size": 362520,
+      "ms": 9.5
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 71309.4,
+      "wallMs": 1791280523392,
+      "iso": "2026-10-06T09:55:23.392Z",
+      "byteStart": 13527487,
+      "size": 324600,
+      "ms": 8.5
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 72330.8,
+      "wallMs": 1791280524413,
+      "iso": "2026-10-06T09:55:24.413Z",
+      "byteStart": 13852087,
+      "size": 317613,
+      "ms": 9.6
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 73350.3,
+      "wallMs": 1791280525433,
+      "iso": "2026-10-06T09:55:25.433Z",
+      "byteStart": 14169700,
+      "size": 371398,
+      "ms": 9.9
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 74370,
+      "wallMs": 1791280526452,
+      "iso": "2026-10-06T09:55:26.452Z",
+      "byteStart": 14541098,
+      "size": 314736,
+      "ms": 8.6
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 75391.4,
+      "wallMs": 1791280527474,
+      "iso": "2026-10-06T09:55:27.474Z",
+      "byteStart": 14855834,
+      "size": 318038,
+      "ms": 10.3
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 76409.5,
+      "wallMs": 1791280528492,
+      "iso": "2026-10-06T09:55:28.492Z",
+      "byteStart": 15173872,
+      "size": 323934,
+      "ms": 8.4
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 77432.1,
+      "wallMs": 1791280529515,
+      "iso": "2026-10-06T09:55:29.515Z",
+      "byteStart": 15497806,
+      "size": 359292,
+      "ms": 10.3
+    },
+    {
+      "type": "opfs-part-write",
+      "perf": 77498,
+      "wallMs": 1791280529580,
+      "iso": "2026-10-06T09:55:29.580Z",
+      "partNumber": 3,
+      "size": 5242880,
+      "ms": 28.4,
+      "manifestMs": 7.5,
+      "chunkFilesDeleted": 16
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 78448.9,
+      "wallMs": 1791280530531,
+      "iso": "2026-10-06T09:55:30.531Z",
+      "byteStart": 15857098,
+      "size": 310883,
+      "ms": 8.5
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 79467.2,
+      "wallMs": 1791280531550,
+      "iso": "2026-10-06T09:55:31.550Z",
+      "byteStart": 16167981,
+      "size": 331661,
+      "ms": 6.9
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 80496.1,
+      "wallMs": 1791280532579,
+      "iso": "2026-10-06T09:55:32.579Z",
+      "byteStart": 16499642,
+      "size": 361001,
+      "ms": 13.8
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 81509.8,
+      "wallMs": 1791280533592,
+      "iso": "2026-10-06T09:55:33.592Z",
+      "byteStart": 16860643,
+      "size": 325316,
+      "ms": 9.7
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 82530.8,
+      "wallMs": 1791280534613,
+      "iso": "2026-10-06T09:55:34.613Z",
+      "byteStart": 17185959,
+      "size": 316964,
+      "ms": 10.2
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 83552.3,
+      "wallMs": 1791280535635,
+      "iso": "2026-10-06T09:55:35.635Z",
+      "byteStart": 17502923,
+      "size": 360454,
+      "ms": 10.6
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 84570.8,
+      "wallMs": 1791280536653,
+      "iso": "2026-10-06T09:55:36.653Z",
+      "byteStart": 17863377,
+      "size": 318970,
+      "ms": 9.9
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 85587.1,
+      "wallMs": 1791280537670,
+      "iso": "2026-10-06T09:55:37.670Z",
+      "byteStart": 18182347,
+      "size": 316192,
+      "ms": 6.7
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 86609.6,
+      "wallMs": 1791280538692,
+      "iso": "2026-10-06T09:55:38.692Z",
+      "byteStart": 18498539,
+      "size": 324581,
+      "ms": 9.2
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 87631.5,
+      "wallMs": 1791280539714,
+      "iso": "2026-10-06T09:55:39.714Z",
+      "byteStart": 18823120,
+      "size": 363818,
+      "ms": 10
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 88650.6,
+      "wallMs": 1791280540733,
+      "iso": "2026-10-06T09:55:40.733Z",
+      "byteStart": 19186938,
+      "size": 322120,
+      "ms": 9
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 89668.9,
+      "wallMs": 1791280541751,
+      "iso": "2026-10-06T09:55:41.751Z",
+      "byteStart": 19509058,
+      "size": 311534,
+      "ms": 7.8
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 90690.7,
+      "wallMs": 1791280542773,
+      "iso": "2026-10-06T09:55:42.773Z",
+      "byteStart": 19820592,
+      "size": 376954,
+      "ms": 9.9
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 91706.2,
+      "wallMs": 1791280543789,
+      "iso": "2026-10-06T09:55:43.789Z",
+      "byteStart": 20197546,
+      "size": 327135,
+      "ms": 5.9
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 92726.3,
+      "wallMs": 1791280544809,
+      "iso": "2026-10-06T09:55:44.809Z",
+      "byteStart": 20524681,
+      "size": 311180,
+      "ms": 5.8
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 93753.4,
+      "wallMs": 1791280545836,
+      "iso": "2026-10-06T09:55:45.836Z",
+      "byteStart": 20835861,
+      "size": 378025,
+      "ms": 13.1
+    },
+    {
+      "type": "opfs-part-write",
+      "perf": 93805.9,
+      "wallMs": 1791280545888,
+      "iso": "2026-10-06T09:55:45.888Z",
+      "partNumber": 4,
+      "size": 5242880,
+      "ms": 22,
+      "manifestMs": 8.5,
+      "chunkFilesDeleted": 16
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 94770,
+      "wallMs": 1791280546852,
+      "iso": "2026-10-06T09:55:46.852Z",
+      "byteStart": 21213886,
+      "size": 332953,
+      "ms": 9.2
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 95794.8,
+      "wallMs": 1791280547877,
+      "iso": "2026-10-06T09:55:47.877Z",
+      "byteStart": 21546839,
+      "size": 297236,
+      "ms": 13
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 96806.1,
+      "wallMs": 1791280548889,
+      "iso": "2026-10-06T09:55:48.889Z",
+      "byteStart": 21844075,
+      "size": 324145,
+      "ms": 5.6
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 97832.9,
+      "wallMs": 1791280549915,
+      "iso": "2026-10-06T09:55:49.915Z",
+      "byteStart": 22168220,
+      "size": 368708,
+      "ms": 11.7
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 98847.9,
+      "wallMs": 1791280550930,
+      "iso": "2026-10-06T09:55:50.930Z",
+      "byteStart": 22536928,
+      "size": 330359,
+      "ms": 7.2
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 99866.2,
+      "wallMs": 1791280551949,
+      "iso": "2026-10-06T09:55:51.949Z",
+      "byteStart": 22867287,
+      "size": 310065,
+      "ms": 5.8
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 100894.6,
+      "wallMs": 1791280552977,
+      "iso": "2026-10-06T09:55:52.977Z",
+      "byteStart": 23177352,
+      "size": 358635,
+      "ms": 11.5
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 101915,
+      "wallMs": 1791280553997,
+      "iso": "2026-10-06T09:55:53.997Z",
+      "byteStart": 23535987,
+      "size": 320579,
+      "ms": 13.9
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 102930,
+      "wallMs": 1791280555013,
+      "iso": "2026-10-06T09:55:55.013Z",
+      "byteStart": 23856566,
+      "size": 313488,
+      "ms": 9.2
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 103950.8,
+      "wallMs": 1791280556033,
+      "iso": "2026-10-06T09:55:56.033Z",
+      "byteStart": 24170054,
+      "size": 358547,
+      "ms": 9.7
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 104966.6,
+      "wallMs": 1791280557049,
+      "iso": "2026-10-06T09:55:57.049Z",
+      "byteStart": 24528601,
+      "size": 317577,
+      "ms": 6.2
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 105989.4,
+      "wallMs": 1791280558072,
+      "iso": "2026-10-06T09:55:58.072Z",
+      "byteStart": 24846178,
+      "size": 309900,
+      "ms": 8.8
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 107007.5,
+      "wallMs": 1791280559090,
+      "iso": "2026-10-06T09:55:59.090Z",
+      "byteStart": 25156078,
+      "size": 375282,
+      "ms": 7.3
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 108030.8,
+      "wallMs": 1791280560113,
+      "iso": "2026-10-06T09:56:00.113Z",
+      "byteStart": 25531360,
+      "size": 311583,
+      "ms": 10
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 109052.8,
+      "wallMs": 1791280561135,
+      "iso": "2026-10-06T09:56:01.135Z",
+      "byteStart": 25842943,
+      "size": 328933,
+      "ms": 12
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 110068.8,
+      "wallMs": 1791280562151,
+      "iso": "2026-10-06T09:56:02.151Z",
+      "byteStart": 26171876,
+      "size": 303456,
+      "ms": 8
+    },
+    {
+      "type": "opfs-part-write",
+      "perf": 110138.7,
+      "wallMs": 1791280562221,
+      "iso": "2026-10-06T09:56:02.221Z",
+      "partNumber": 5,
+      "size": 5242880,
+      "ms": 29.5,
+      "manifestMs": 4.2,
+      "chunkFilesDeleted": 16
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 111090.4,
+      "wallMs": 1791280563173,
+      "iso": "2026-10-06T09:56:03.173Z",
+      "byteStart": 26475332,
+      "size": 365766,
+      "ms": 9.6
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 112111.9,
+      "wallMs": 1791280564194,
+      "iso": "2026-10-06T09:56:04.194Z",
+      "byteStart": 26841098,
+      "size": 309312,
+      "ms": 9.7
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 113129.5,
+      "wallMs": 1791280565212,
+      "iso": "2026-10-06T09:56:05.212Z",
+      "byteStart": 27150410,
+      "size": 316434,
+      "ms": 8.4
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 114153.3,
+      "wallMs": 1791280566236,
+      "iso": "2026-10-06T09:56:06.236Z",
+      "byteStart": 27466844,
+      "size": 370410,
+      "ms": 12.7
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 115154.8,
+      "wallMs": 1791280567237,
+      "iso": "2026-10-06T09:56:07.237Z",
+      "byteStart": 27837254,
+      "size": 305744,
+      "ms": 12.3
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 116194.1,
+      "wallMs": 1791280568277,
+      "iso": "2026-10-06T09:56:08.277Z",
+      "byteStart": 28142998,
+      "size": 323807,
+      "ms": 10.9
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 117212.3,
+      "wallMs": 1791280569295,
+      "iso": "2026-10-06T09:56:09.295Z",
+      "byteStart": 28466805,
+      "size": 364200,
+      "ms": 11.2
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 118236.3,
+      "wallMs": 1791280570319,
+      "iso": "2026-10-06T09:56:10.319Z",
+      "byteStart": 28831005,
+      "size": 316361,
+      "ms": 15.1
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 119250.6,
+      "wallMs": 1791280571333,
+      "iso": "2026-10-06T09:56:11.333Z",
+      "byteStart": 29147366,
+      "size": 311408,
+      "ms": 10.3
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 120272.3,
+      "wallMs": 1791280572355,
+      "iso": "2026-10-06T09:56:12.355Z",
+      "byteStart": 29458774,
+      "size": 320652,
+      "ms": 11.3
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 121295.3,
+      "wallMs": 1791280573378,
+      "iso": "2026-10-06T09:56:13.378Z",
+      "byteStart": 29779426,
+      "size": 352065,
+      "ms": 14.2
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 122315.5,
+      "wallMs": 1791280574398,
+      "iso": "2026-10-06T09:56:14.398Z",
+      "byteStart": 30131491,
+      "size": 317709,
+      "ms": 14.3
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 123333.7,
+      "wallMs": 1791280575416,
+      "iso": "2026-10-06T09:56:15.416Z",
+      "byteStart": 30449200,
+      "size": 307308,
+      "ms": 9.7
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 124357.2,
+      "wallMs": 1791280576440,
+      "iso": "2026-10-06T09:56:16.440Z",
+      "byteStart": 30756508,
+      "size": 370941,
+      "ms": 14.8
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 125372.8,
+      "wallMs": 1791280577455,
+      "iso": "2026-10-06T09:56:17.455Z",
+      "byteStart": 31127449,
+      "size": 312320,
+      "ms": 11.3
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 126397.6,
+      "wallMs": 1791280578480,
+      "iso": "2026-10-06T09:56:18.480Z",
+      "byteStart": 31439769,
+      "size": 320906,
+      "ms": 15.7
+    },
+    {
+      "type": "opfs-part-write",
+      "perf": 126476.7,
+      "wallMs": 1791280578559,
+      "iso": "2026-10-06T09:56:18.559Z",
+      "partNumber": 6,
+      "size": 5242880,
+      "ms": 44.1,
+      "manifestMs": 7,
+      "chunkFilesDeleted": 16
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 127411,
+      "wallMs": 1791280579493,
+      "iso": "2026-10-06T09:56:19.493Z",
+      "byteStart": 31760675,
+      "size": 371246,
+      "ms": 10.2
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 128427.9,
+      "wallMs": 1791280580510,
+      "iso": "2026-10-06T09:56:20.510Z",
+      "byteStart": 32131921,
+      "size": 323513,
+      "ms": 7.1
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 129452,
+      "wallMs": 1791280581534,
+      "iso": "2026-10-06T09:56:21.534Z",
+      "byteStart": 32455434,
+      "size": 299998,
+      "ms": 11
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 130466.9,
+      "wallMs": 1791280582549,
+      "iso": "2026-10-06T09:56:22.549Z",
+      "byteStart": 32755432,
+      "size": 318116,
+      "ms": 6.5
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 131490.2,
+      "wallMs": 1791280583573,
+      "iso": "2026-10-06T09:56:23.573Z",
+      "byteStart": 33073548,
+      "size": 375203,
+      "ms": 8.4
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 132510.4,
+      "wallMs": 1791280584593,
+      "iso": "2026-10-06T09:56:24.593Z",
+      "byteStart": 33448751,
+      "size": 305599,
+      "ms": 8.7
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 133530.4,
+      "wallMs": 1791280585613,
+      "iso": "2026-10-06T09:56:25.613Z",
+      "byteStart": 33754350,
+      "size": 337704,
+      "ms": 9.1
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 134556,
+      "wallMs": 1791280586638,
+      "iso": "2026-10-06T09:56:26.638Z",
+      "byteStart": 34092054,
+      "size": 357288,
+      "ms": 14.5
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 135572.8,
+      "wallMs": 1791280587655,
+      "iso": "2026-10-06T09:56:27.655Z",
+      "byteStart": 34449342,
+      "size": 317083,
+      "ms": 12
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 136594.6,
+      "wallMs": 1791280588677,
+      "iso": "2026-10-06T09:56:28.677Z",
+      "byteStart": 34766425,
+      "size": 316617,
+      "ms": 13.1
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 137616.2,
+      "wallMs": 1791280589699,
+      "iso": "2026-10-06T09:56:29.699Z",
+      "byteStart": 35083042,
+      "size": 352646,
+      "ms": 12.7
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 138629.5,
+      "wallMs": 1791280590712,
+      "iso": "2026-10-06T09:56:30.712Z",
+      "byteStart": 35435688,
+      "size": 339125,
+      "ms": 8.3
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 139655.7,
+      "wallMs": 1791280591738,
+      "iso": "2026-10-06T09:56:31.738Z",
+      "byteStart": 35774813,
+      "size": 289805,
+      "ms": 12.5
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 140669.1,
+      "wallMs": 1791280592751,
+      "iso": "2026-10-06T09:56:32.751Z",
+      "byteStart": 36064618,
+      "size": 360996,
+      "ms": 8
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 141693.9,
+      "wallMs": 1791280593776,
+      "iso": "2026-10-06T09:56:33.776Z",
+      "byteStart": 36425614,
+      "size": 313287,
+      "ms": 12.7
+    },
+    {
+      "type": "opfs-part-write",
+      "perf": 141775.9,
+      "wallMs": 1791280593858,
+      "iso": "2026-10-06T09:56:33.858Z",
+      "partNumber": 7,
+      "size": 5242880,
+      "ms": 22.6,
+      "manifestMs": 12.4,
+      "chunkFilesDeleted": 15
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 142710.5,
+      "wallMs": 1791280594793,
+      "iso": "2026-10-06T09:56:34.793Z",
+      "byteStart": 36738901,
+      "size": 318846,
+      "ms": 9.5
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 143733.3,
+      "wallMs": 1791280595816,
+      "iso": "2026-10-06T09:56:35.816Z",
+      "byteStart": 37057747,
+      "size": 319027,
+      "ms": 11.8
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 144756.3,
+      "wallMs": 1791280596839,
+      "iso": "2026-10-06T09:56:36.839Z",
+      "byteStart": 37376774,
+      "size": 367799,
+      "ms": 15
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 145776.5,
+      "wallMs": 1791280597859,
+      "iso": "2026-10-06T09:56:37.859Z",
+      "byteStart": 37744573,
+      "size": 297584,
+      "ms": 12.9
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 146793.9,
+      "wallMs": 1791280598876,
+      "iso": "2026-10-06T09:56:38.876Z",
+      "byteStart": 38042157,
+      "size": 293924,
+      "ms": 8.1
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 147815.5,
+      "wallMs": 1791280599898,
+      "iso": "2026-10-06T09:56:39.898Z",
+      "byteStart": 38336081,
+      "size": 387807,
+      "ms": 13.5
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 148832.4,
+      "wallMs": 1791280600915,
+      "iso": "2026-10-06T09:56:40.915Z",
+      "byteStart": 38723888,
+      "size": 311939,
+      "ms": 11.1
+    },
+    {
+      "type": "opfs-chunk-write",
+      "perf": 149450,
+      "wallMs": 1791280601532,
+      "iso": "2026-10-06T09:56:41.532Z",
+      "byteStart": 39035827,
+      "size": 208648,
+      "ms": 17.2
+    },
+    {
+      "type": "opfs-part-write",
+      "perf": 149514,
+      "wallMs": 1791280601596,
+      "iso": "2026-10-06T09:56:41.596Z",
+      "partNumber": 8,
+      "size": 2544315,
+      "ms": 24.8,
+      "manifestMs": 9.6,
+      "chunkFilesDeleted": 9
+    },
+    {
+      "type": "opfs-session-destroyed",
+      "perf": 149852.6,
+      "wallMs": 1791280601935,
+      "iso": "2026-10-06T09:56:41.935Z",
+      "key": "spike/s4-dropin/ab-cam-3L-on-raw-1791280481437.webm"
+    }
+  ],
+  "resumeTiming": [],
+  "gaps": [],
+  "visibility": [
+    {
+      "state": "visible",
+      "tMs": 0,
+      "iso": "2026-10-06T09:54:41.437Z"
+    }
+  ],
+  "audio": {
+    "expected": true,
+    "samplesSeen": 12000,
+    "firstSampleMs": 77,
+    "issues": [],
+    "tracksAtStart": [
+      {
+        "id": "4dc8e9a2-de99-4cdc-b136-11445b5cb0f0",
+        "kind": "audio",
+        "readyState": "live",
+        "muted": false,
+        "enabled": true,
+        "label": "Par défaut - Microphone de bureau (Microsoft® LifeCam Cinema(TM))",
+        "settings": {
+          "autoGainControl": true,
+          "channelCount": 1,
+          "deviceId": "default",
+          "echoCancellation": true,
+          "groupId": "83c81ecef376f4bcf301012fedb3a5086efd63d051b30f3351ae4a275c1a43b6",
+          "latency": 0.01,
+          "noiseSuppression": true,
+          "sampleRate": 48000,
+          "sampleSize": 16,
+          "voiceIsolation": false
+        }
+      }
+    ],
+    "mode": "MediaStreamTrackProcessor",
+    "meanRmsFirstWindow": 0.0027400644782392485,
+    "nonZeroRmsCount": 12000
+  },
+  "audioMissing": false,
+  "completeOk": true,
+  "done": true,
+  "opfs": {
+    "chunkWrites": [
+      6.9,
+      12.9,
+      11.2,
+      8.1,
+      13.4,
+      7.8,
+      8.3,
+      5.8,
+      9,
+      11.2,
+      7.6,
+      8.3,
+      10.4,
+      8.9,
+      13.7,
+      9.4,
+      9.6,
+      10.8,
+      9.6,
+      8,
+      7,
+      9.3,
+      13.8,
+      10.1,
+      8.6,
+      6.6,
+      7.6,
+      7.6,
+      6.7,
+      12.5,
+      8,
+      9,
+      10.3,
+      8.3,
+      10.4,
+      8.4,
+      8.7,
+      13.3,
+      7.6,
+      9.5,
+      8.5,
+      9.6,
+      9.9,
+      8.6,
+      10.3,
+      8.4,
+      10.3,
+      8.5,
+      6.9,
+      13.8,
+      9.7,
+      10.2,
+      10.6,
+      9.9,
+      6.7,
+      9.2,
+      10,
+      9,
+      7.8,
+      9.9,
+      5.9,
+      5.8,
+      13.1,
+      9.2,
+      13,
+      5.6,
+      11.7,
+      7.2,
+      5.8,
+      11.5,
+      13.9,
+      9.2,
+      9.7,
+      6.2,
+      8.8,
+      7.3,
+      10,
+      12,
+      8,
+      9.6,
+      9.7,
+      8.4,
+      12.7,
+      12.3,
+      10.9,
+      11.2,
+      15.1,
+      10.3,
+      11.3,
+      14.2,
+      14.3,
+      9.7,
+      14.8,
+      11.3,
+      15.7,
+      10.2,
+      7.1,
+      11,
+      6.5,
+      8.4,
+      8.7,
+      9.1,
+      14.5,
+      12,
+      13.1,
+      12.7,
+      8.3,
+      12.5,
+      8,
+      12.7,
+      9.5,
+      11.8,
+      15,
+      12.9,
+      8.1,
+      13.5,
+      11.1,
+      17.2
+    ],
+    "partWrites": [
+      {
+        "partNumber": 1,
+        "size": 5242880,
+        "ms": 28.2
+      },
+      {
+        "partNumber": 2,
+        "size": 5242880,
+        "ms": 18.2
+      },
+      {
+        "partNumber": 3,
+        "size": 5242880,
+        "ms": 28.4
+      },
+      {
+        "partNumber": 4,
+        "size": 5242880,
+        "ms": 22
+      },
+      {
+        "partNumber": 5,
+        "size": 5242880,
+        "ms": 29.5
+      },
+      {
+        "partNumber": 6,
+        "size": 5242880,
+        "ms": 44.1
+      },
+      {
+        "partNumber": 7,
+        "size": 5242880,
+        "ms": 22.6
+      },
+      {
+        "partNumber": 8,
+        "size": 2544315,
+        "ms": 24.8
+      }
+    ],
+    "partDeletes": 8,
+    "manifestWrites": [
+      10.2,
+      8.7,
+      7.1,
+      8.1,
+      9.8,
+      7.5,
+      7.1,
+      8.5,
+      9.7,
+      4.2,
+      8.7,
+      7,
+      16.9,
+      12.4,
+      9.6,
+      9.6,
+      12
+    ]
+  },
+  "requestedMimeType": null,
+  "recorderMimeType": "video/webm;codecs=vp8,opus",
+  "watchdogMode": "MediaStreamTrackProcessor"
+}
