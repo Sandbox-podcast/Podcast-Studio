@@ -1,0 +1,6 @@
+{
+ "A": {"key": "spike/s4-lan/lan-test-20261006-111730-A-64M-seq.bin", "parts": 13, "uploadId": "OTNkNThmMTgtMTc0Yi00YTI5LTgzYTgtNTFiNjA5YjM4MzM3LmEwMjgyZjMxLTM5Y2ItNGYzMy1iOGFjLTE3MjZkMzllZDRhN3gxNzkxMjc4MjczOTc0MTY2NTc5"},
+ "B": {"key": "spike/s4-lan/lan-test-20261006-111730-B-256M-seq.bin", "parts": 52, "uploadId": "OTNkNThmMTgtMTc0Yi00YTI5LTgzYTgtNTFiNjA5YjM4MzM3LjcxZTdmNzdlLWNkYmEtNGJhMC1iZmEyLTJmNTJjNzFiMTBmYXgxNzkxMjc4Mjc0MDAxMDA5MTIw"},
+ "C": {"key": "spike/s4-lan/lan-test-20261006-111730-C-64M-resume.bin", "parts": 13, "uploadId": "OTNkNThmMTgtMTc0Yi00YTI5LTgzYTgtNTFiNjA5YjM4MzM3LjRjY2UyMDRkLTczZTctNDMyMi1hYTdiLWFjZGFmZGU5YjM0ZHgxNzkxMjc4Mjc0MDA4MzQ2NjEz"},
+ "D": {"key": "spike/s4-lan/lan-test-20261006-111730-D-256M-par4.bin", "parts": 52, "uploadId": "OTNkNThmMTgtMTc0Yi00YTI5LTgzYTgtNTFiNjA5YjM4MzM3LjQ1ZTc1MzA0LTU0ZDEtNDllMS1hMTlmLTNjYjZkNTU2ZWRmMXgxNzkxMjc4Mjc0MDE2NTgyNDYw"}
+}

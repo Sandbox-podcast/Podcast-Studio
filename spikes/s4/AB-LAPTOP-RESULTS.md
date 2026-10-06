@@ -131,3 +131,23 @@ Recorded in [DECISIONS.md](../../docs/DECISIONS.md) via [PR #13](https://github.
 - Criterion doc: [`S4-recording.md`](../S4-recording.md) § Distinct-frame criterion
 - LAN multi-machine protocol (pending): same parent doc
 - H.264 hw-check v3: [`h264-probe/v3/`](./h264-probe/v3/)
+
+---
+
+## 2026-10-06 daytime: S4 HQ rec vs live (cam A/B pairs) + LAN upload desktop-ai → MinIO (indicative, 1 run each)
+
+Box analysis, single run per condition. **Measured numbers only.** Reports: [`ab-reports/2026-10-06-cam3L-1101.md`](./ab-reports/2026-10-06-cam3L-1101.md) · [`ab-reports/2026-10-06-pair-1132-1135.md`](./ab-reports/2026-10-06-pair-1132-1135.md) · [`ab-reports/2026-10-06-solo-1150-1154.md`](./ab-reports/2026-10-06-solo-1150-1154.md) · [`lan-upload/REPORT-desktop-ai.md`](./lan-upload/REPORT-desktop-ai.md). Tools: [`tools/capture_loss.py`](./tools/capture_loss.py), [`tools/pair_windows.py`](./tools/pair_windows.py), [`analyze_ab.py`](./analyze_ab.py), [`../../tools/distinct_fps.py`](../../tools/distinct_fps.py) v2. Live-side series: Podcast RTC, PR #3 (`d763ad0` pair, `65dba99` solo). No camera footage committed.
+
+**Capture-relative loss (new metric, published alongside raw loss; lead-approved).** For each pair of consecutive RTC `media-source` samples: *expected* = delta of the cumulative `src_frames` counter (frames captured by the camera; not the plain fps field), *written* = rec frames whose pts fall in the same interval (aligned with `recording.wallStartIso` and the CSV `ts` stats timestamp); only intervals fully inside the rec are used. **capture-relative loss = Σ max(0, expected − written) / Σ expected** (net = (Σ expected − Σ written) / Σ expected; *noise floor* = same clipped value on intervals where both are ≥ 28 fps, i.e. ±1-frame boundary jitter). **The S4 gate is unchanged:** raw loss = max(0, 1 − video packets / (container duration × 30)) **≤ 1 %** and no gap > 200 ms.
+
+| run (Paris) | setup | raw loss (gate) | capture-relative (net / floor) | distinct fps exact / near · share≥24 | rec during live high-layer cut |
+|---|---|---|---|---|---|
+| cam-3L-on 11:01 | laptop, no 2nd publisher | 0.51 %, max gap 162 ms — PASS | N/A (no media-source sampling) | 29.862 / 29.837 · **0.992** | no cut |
+| cam-2L-on 11:32 | + desktop-ai 2nd publisher | **1.10 %**, 3 gaps > 200 ms — **FAIL** | **0.32 %** (−0.06 % / 0.30 %) | 29.679 / 29.654 · 0.983 | cut RTC 10.8–47.7 s: rec **30.00** distinct fps, 1280×720 |
+| cam-3L-on 11:35 | + desktop-ai 2nd publisher | **2.35 %**, 400 ms gap — **FAIL** (+ watchdog gap 533 ms) | **0.24 %** (−0.09 % / 0.09 %) | 29.304 / 29.279 · 0.958 | cut RTC 51.7–110.7 s: rec **30.00** distinct fps, 1280×720 |
+| cam-2L-on 11:51 (solo) | laptop only | **2.87 %**, 1 gap 224 ms (= camera dip) — **FAIL** | **0.413 %** (−0.177 % / 0.359 %) | 29.146 / 29.121 · 0.950 | cut RTC 87.0–121.5 s: rec **30.00** distinct fps (30.03 by pts), 1280×720 |
+| cam-3L-on 11:54 (solo) | laptop only | 0.04 %, max gap 79 ms — **all gates PASS** | **0.115 %** (−0.086 % / 0.115 %) | 29.992 / 29.959 · **1.000** | no cut |
+
+- Every rec dip lines up (same 2 s interval, ±1–3 fps) with a **camera capture dip** in RTC's `media-source` series (e.g. solo 2L: capture 16.5 fps vs rec 16.7 at RTC 31.8–33.9 s; pair 3L: 15.2 vs 14.5 at 28.8–31.0 s). Over the covered spans the camera itself delivered 29.07–29.96 fps, which accounts for the raw-loss gap to 30 fps. Upload complete, local = remote, on all five recs.
+- The **live** high layer was suspended by the publisher bandwidth estimator (`qualityLimitationReason=bandwidth`) in pair 2L/3L and solo 2L, also **without** a 2nd publisher (solo 2L). Each switch to bandwidth fell in an interval with a camera capture dip, but 2 deeper camera dips triggered no switch. **Cause: NON VALIDÉE.** The local HQ rec (separate MediaRecorder encoder) stayed 1280×720 ~30 distinct fps through every cut.
+- **LAN upload desktop-ai (2.5GbE) → laptop MinIO (Wi-Fi), presigned SigV4 multipart, 5 MiB parts:** 64 MiB sequential **332 Mbps**, 256 MiB sequential **441 Mbps**, 256 MiB with 4 parts in flight **642 Mbps**; resume after a simulated client cut: restart → complete **1.44 s**, only missing parts re-sent; HEAD size/ETag and GET-back **sha256 match** on all 4 objects; test objects deleted, no pending uploads. No MinIO credentials on desktop-ai; signed URLs not kept.

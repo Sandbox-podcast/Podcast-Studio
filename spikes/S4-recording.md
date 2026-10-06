@@ -192,6 +192,8 @@ At part cut, the manifest was written with `byteCursor` advanced **without** reg
 
 **Status:** not run — **no numbers yet**. Blocks on laptop **Private** firewall approval so other LAN clients can reach MinIO + LiveKit (see [Open decisions](#open-decisions)).
 
+**Update 2026-10-06 (daytime, indicative, 1 run each):** first real-camera A/B pairs (laptop, with/without desktop-ai as 2nd publisher) and LAN upload desktop-ai → MinIO measured. The local HQ rec stayed 1280×720 ~30 distinct fps while the live high layer was cut (bandwidth QLR, cause NON VALIDÉE). Raw loss ≤ 1 % gate unchanged (3/5 recs FAIL on camera capture dips), and capture-relative loss 0.115–0.413 % is published alongside it. LAN upload: 332/441 Mbps sequential, 642 Mbps with 4 parts in flight, resume 1.44 s, sha256 match. See [`AB-LAPTOP-RESULTS.md`](./s4/AB-LAPTOP-RESULTS.md) § 2026-10-06 daytime.
+
 **Context (RTC):** PR **#3** five-person soak ([commit `82eaa91`](https://github.com/Sandbox-podcast/Podcast-Studio/commit/82eaa91)) showed live HD often capped by **client CPU**, not SFU headroom: `outbound-rtp` `qualityLimitationReason` dominated by **`cpu`** (**55** % of **880** samples); LiveKit SFU CPU ~**25** % on that run.
 
 **Load model (each real client):** two encoders at once — (1) **local HQ** `MediaRecorder` (raw cam+mic, optionally matted preview path) and (2) **simulcast publish** to the SFU.
