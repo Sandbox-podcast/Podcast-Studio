@@ -12,7 +12,11 @@ param(
 $ErrorActionPreference = 'Stop'
 if (-not $VisionFreeConfirmed) { throw 'Refusing: pass -VisionFreeConfirmed only after the lead says Vision freed the 3070.' }
 $here = $PSScriptRoot
-$env:Path = "C:\Program Files\nodejs;$env:Path"
+# npm.ps1 on this laptop fails (nvm symlink -> EPERM in npm-prefix.js); call node + npm-cli.js directly.
+$node = 'C:\Program Files\nodejs\node.exe'
+$npmCli = 'C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js'
+$nvm = Join-Path $env:APPDATA 'nvm\v20.11.0'
+if (Test-Path (Join-Path $nvm 'node.exe')) { $node = Join-Path $nvm 'node.exe'; $npmCli = Join-Path $nvm 'node_modules\npm\bin\npm-cli.js' }
 # 1) deploy A/B harness to /ab/ (index.html script path rewritten)
 $ab = Join-Path $Lab 'public\ab'
 New-Item -ItemType Directory -Force -Path $ab | Out-Null
@@ -24,9 +28,13 @@ foreach ($u in @('http://localhost:5190/ab/index.html', "$S4Base/api/health")) {
 }
 # 3) deps (local to this folder)
 Push-Location $here
-if (-not (Test-Path 'node_modules\playwright-core')) { npm init -y | Out-Null; npm install playwright-core@1.48.2 --silent }
+if (-not (Test-Path 'node_modules\playwright-core')) {
+  if (-not (Test-Path 'package.json')) { '{"name":"s1-ab","private":true}' | Set-Content -Encoding ascii package.json }
+  $env:npm_config_cache = Join-Path $here '.npm-cache'
+  & $node $npmCli install playwright-core@1.48.2 --no-audit --no-fund
+}
 # 4) run
 $env:AB_GO = '1'; $env:CONDS = $Conds; $env:REC_S = "$RecSec"; $env:WARMUP_S = "$WarmupSec"; $env:S4_BASE = $S4Base
 $env:HARNESS = 'http://localhost:5190'; $env:AB_PATH = '/ab/index.html'
-node .\ab-laptop.mjs
+& $node .\ab-laptop.mjs
 Pop-Location
