@@ -1,0 +1,22 @@
+{
+  "ok": false,
+  "url": "http://127.0.0.1:8088/?v=s4-matfix8&file=run4-raw.webm",
+  "status_after_file": "Fichier cam OK \u2014 run4-raw.webm \u00b7 1280\u00d7720 \u00b7 loop (nuit matfix8)",
+  "overlay": "backend: mediapipe\nsrc: file\nfallback: off\nFPS avg: 24.5\nFPS p5 (worst): 17.7\nframe ms: 41.60\nres: 1280\u00d7720\nsamples: 418",
+  "status": "S4: pr\u00eat dual (cam+mic) \u2014 Start record ~60s, onglet au premier plan",
+  "screenshot": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\matfix8-run4-loop-720.png",
+  "fpsAvg": null,
+  "fpsP5Worst": null,
+  "frameMs": null,
+  "samples": null,
+  "summary": {
+    "fpsAvg": 24.6,
+    "fpsP5Worst": 18,
+    "frameMsAvg": 40.66,
+    "frameMsP5Fast": 28.5,
+    "frameMsP95Slow": 55.5,
+    "sampleCount": 470,
+    "source": "file"
+  },
+  "json_path": "C:\\Users\\azero\\podcast-studio\\s3-matting-harness\\exports\\matfix8-run4-loop-720.json"
+}

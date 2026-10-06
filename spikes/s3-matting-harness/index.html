@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>S3 Matting Harness (spike)</title>
+    <style>
+      :root {
+        font-family: system-ui, sans-serif;
+        color: #e8e8e8;
+        background: #1a1a1f;
+      }
+      body {
+        margin: 0;
+        padding: 1rem 1.25rem 2rem;
+        max-width: 1100px;
+      }
+      h1 {
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+      .banner {
+        background: #2d2a1a;
+        border: 1px solid #6b5a2a;
+        padding: 0.6rem 0.75rem;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem 1.25rem;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        font-size: 0.8rem;
+        color: #aaa;
+      }
+      select,
+      button {
+        font-size: 0.9rem;
+        padding: 0.35rem 0.6rem;
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+      .stage {
+        position: relative;
+        width: 1280px;
+        max-width: 100%;
+        aspect-ratio: 16 / 9;
+        background: #0a0a0c;
+        border: 2px solid #5a6578;
+        border-radius: 8px;
+        overflow: hidden;
+        /* Must have non-zero box: children are position:absolute */
+      }
+      video,
+      canvas {
+        display: block;
+        max-width: 100%;
+        vertical-align: top;
+      }
+      #previewCanvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+      #rawVideo {
+        /* Hidden feed for MediaPipe — not the visible preview */
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+        pointer-events: none;
+      }
+      #smokeVideo {
+        display: block;
+        width: 100%;
+        max-width: 640px;
+        aspect-ratio: 16 / 9;
+        background: #000;
+        border: 2px solid #3d7a4a;
+        border-radius: 8px;
+        object-fit: contain;
+      }
+      .smoke-box {
+        margin: 1rem 0;
+        padding: 0.75rem 1rem;
+        border: 1px dashed #3d7a4a;
+        border-radius: 8px;
+      }
+      .smoke-box h2 {
+        font-size: 0.95rem;
+        margin: 0 0 0.5rem;
+        font-weight: 600;
+      }
+      .overlay {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        z-index: 2;
+        font-family: ui-monospace, monospace;
+        font-size: 12px;
+        line-height: 1.45;
+        background: rgba(0, 0, 0, 0.72);
+        padding: 8px 10px;
+        border-radius: 4px;
+        white-space: pre;
+        pointer-events: none;
+      }
+      .fallback-on .overlay {
+        border: 2px solid #e6a700;
+      }
+      .status {
+        margin-top: 0.75rem;
+        font-size: 0.85rem;
+        color: #9ab;
+      }
+      .err {
+        color: #f88;
+      }
+      fieldset.livekit {
+        border: 1px solid #3a3a45;
+        border-radius: 8px;
+        margin: 1rem 0;
+        padding: 0.75rem 1rem;
+      }
+      fieldset.livekit legend {
+        font-size: 0.9rem;
+        padding: 0 0.35rem;
+      }
+      fieldset.livekit .controls {
+        margin-bottom: 0.5rem;
+      }
+      fieldset.livekit input[type="text"] {
+        font-size: 0.85rem;
+        padding: 0.35rem 0.5rem;
+        min-width: 12rem;
+      }
+      fieldset.livekit textarea {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.5rem;
+        width: 100%;
+        max-width: 520px;
+        min-height: 2.5rem;
+        font-family: ui-monospace, monospace;
+      }
+      .lk-status {
+        font-size: 0.85rem;
+        color: #8bc;
+        margin: 0.35rem 0 0;
+      }
+      .lk-status.err {
+        color: #f88;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>S3 — Harness détourage (spike PREP)</h1>
+    <p class="banner">
+      Spike uniquement — publish LiveKit OSS <strong>optionnel</strong> (smoke S1
+      <code>s1-lab</code>). Ce n’est pas le pass S3 officiel. Mesures FPS à reporter
+      dans <code>spikes/S3-matting.md</code> après inventaire machines + go. Nuit: <strong>Load file as cam</strong> (WebM raw) ou <code>?file=run4-raw.webm</code> (copie sous harness).
+    </p>
+
+    <div class="controls">
+      <label>
+        Résolution
+        <select id="resolution">
+          <option value="720">1280×720</option>
+          <option value="1080">1920×1080</option>
+        </select>
+      </label>
+      <label>
+        Caméra
+        <select id="cameraSelect">
+          <option value="">—</option>
+        </select>
+      </label>
+      <label>
+        Backend
+        <select id="backend">
+          <option value="mediapipe" selected>MediaPipe (selfie, CDN)</option>
+          <option value="mock">Mock (ellipse — tests UI only)</option>
+          <option value="webgpu">WebGPU (stub)</option>
+          <option value="wasm">WASM (stub)</option>
+        </select>
+      </label>
+      <button type="button" id="btnCamera">Démarrer caméra</button>
+      <button type="button" id="btnLoadFile">Load file as cam</button>
+      <input type="file" id="fileCamInput" accept="video/webm,video/mp4,video/*" hidden />
+      <button type="button" id="btnLoop" disabled>Start matting loop</button>
+      <button type="button" id="btnStop" disabled>Stop</button>
+      <label style="flex-direction: row; align-items: center; gap: 0.5rem">
+        <input type="checkbox" id="fallback" />
+        Fallback (raw camera)
+      </label>
+      <button type="button" id="btnExport" disabled>Export JSON</button>
+      <button type="button" id="btnSmokeVideo">Smoke vidéo nue (sans canvas)</button>
+    </div>
+
+    <div class="stage" id="stage">
+      <canvas id="previewCanvas" width="1280" height="720"></canvas>
+      <video id="rawVideo" playsinline muted autoplay></video>
+      <div class="overlay" id="overlay">FPS: —\nstage v8 matfix8</div>
+    </div>
+    <p class="status" id="status">
+      Cadre 16:9 ci-dessus = preview. Clique « Démarrer caméra » — le statut passe en bleu/rouge ici.
+    </p>
+
+    <div class="smoke-box" id="smokeBox">
+      <h2>Smoke isolé — &lt;video&gt; nu (pas de canvas / MediaPipe)</h2>
+      <video id="smokeVideo" playsinline muted autoplay></video>
+      <p class="status" id="smokeStatus">Inactif — bouton « Smoke vidéo nue ».</p>
+    </div>
+
+    <fieldset class="livekit" id="livekitSection">
+      <legend>LiveKit publish (optionnel, off par défaut)</legend>
+      <div class="controls">
+        <label style="flex-direction: row; align-items: center; gap: 0.5rem">
+          <input type="checkbox" id="lkEnable" />
+          Activer publish LiveKit
+        </label>
+        <label style="flex-direction: row; align-items: center; gap: 0.5rem">
+          <input type="checkbox" id="lkSynthetic" disabled />
+          Smoke synthétique (sans cam — désactivé dès qu’une cam/matting tourne)
+        </label>
+      </div>
+      <div class="controls" id="lkFields">
+        <label>
+          LIVEKIT_URL
+          <input type="text" id="lkUrl" value="ws://127.0.0.1:7880" disabled />
+        </label>
+        <label>
+          Room
+          <input type="text" id="lkRoom" value="s1-lab" disabled />
+        </label>
+        <label>
+          Identity
+          <input type="text" id="lkIdentity" value="vision-s3" disabled />
+        </label>
+        <label>
+          Token URL (S1 lab)
+          <input
+            type="text"
+            id="lkTokenUrl"
+            value="http://127.0.0.1:5190/api/token"
+            disabled
+          />
+        </label>
+        <button type="button" id="lkConnect" disabled>Connect / Publish</button>
+        <button type="button" id="lkDisconnect" disabled>Disconnect</button>
+      </div>
+      <label>
+        JWT collé (optionnel — smoke si CORS / hors harness S1)
+        <textarea
+          id="lkPastedToken"
+          placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9…"
+          disabled
+        ></textarea>
+      </label>
+      <p class="lk-status" id="lkStatus">LiveKit: désactivé</p>
+    </fieldset>
+    <fieldset class="livekit" id="s4Section">
+      <legend>S4 record WebM (avant SFU) — drop-in Media</legend>
+      <div class="controls">
+        <button type="button" id="btnS4Start" disabled>Start dual record ~60s</button>
+        <button type="button" id="btnS4Stop" disabled>Stop record</button>
+      </div>
+      <p class="lk-status" id="s4Status">S4: idle — matting puis dual raw+matted ~60s (onglet premier plan)</p>
+    </fieldset>
+
+    <script src="http://127.0.0.1:3320/s4-recorder.js?v=2.1"></script>
+
+
+    <script type="module" src="./js/harness.js?v=s4-matte9-ab"></script>
+  </body>
+</html>
