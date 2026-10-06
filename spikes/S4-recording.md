@@ -202,15 +202,19 @@ On the HQ file (when recording is on), run the **S4 gates**: sync **≤ 100 ms**
 
 ### Distinct-frame criterion (≥24 distinct fps)
 
-**Agreed team bar** (Media / RTC / Vision / Designer): in each **1 s** window, count **near-distinct** frames (not container `nb_frames`); **PASS** when **≥ 24** distinct fps in every window (report `%` of windows ≥ 24 and **min** per-window count).
+**Agreed team bar** (Media / RTC / Vision / Designer): in each **1 s** window, count **near-distinct** frames (threshold **0.5** MAD on gray, not container `nb_frames`). Report **`windows_1s_share_ge24`** (share of windows with ≥ 24 near-distinct frames), plus **min**, **median**, **p5**, and **`windows_1s_lt24_count`**. Exact-hash window stats are kept as `*_exact` for comparison only — do **not** use exact-hash share for live/regie PASS/FAIL ([issue #10](https://github.com/Sandbox-podcast/Podcast-Studio/issues/10)).
 
-**Tool:** [`tools/distinct_fps.py`](../tools/distinct_fps.py) · fixtures [`tools/testdata/`](../tools/testdata/) (synthetic `dup15_from30.mp4` + JSON only — no camera footage in repo).
+**Read share ≥ 24 RELATIVE to the source ceiling** on the same take (e.g. received stream share ÷ source share). A fixed **0.95** of source is the Designer bar for régie cadence when applied. **Threshold sensitivity:** on VP8 2L-on received, share≥24 goes **0.843 @ 0.5 → 0.950 @ 0.3 → 0.967 @ 0.2** (source unchanged) — see [`AB-LAPTOP-RESULTS.md`](./s4/AB-LAPTOP-RESULTS.md).
+
+**Tool:** [`tools/distinct_fps.py`](../tools/distinct_fps.py) (v2: native per-frame size, near-dup windows) · fixtures [`tools/testdata/`](../tools/testdata/) (synthetic `dup15_from30.mp4` + JSON only — no camera footage in repo).
 
 ```bash
 python3 tools/distinct_fps.py --threshold 0.5 --json-out r.json file.webm
+python3 tools/distinct_fps.py --size-mode first file.webm   # v1-compatible decode
+python3 tools/distinct_fps.py --dump-pairs pairs.json file.webm
 ```
 
-Decode uses **`-fps_mode passthrough`** — WebM VFR timestamps otherwise inflate frame counts ~**30×** if ffmpeg applies CFR conversion.
+Decode uses **`-fps_mode passthrough`**; default **`--size-mode native`** keeps each frame at its own size (simulcast layer switches). **`--size-mode first`** reproduces v1 (implicit rescale to frame 0).
 
 **Run 4 (take 4, threshold 0.5):** raw **29.8** distinct fps, **100** % of 1-s windows ≥ 24 (min **28**); matted **14.0**, **0** % (min **12**). Synthetic doubled-frame clip (`dup15_from30.mp4`): **15.0** distinct fps.
 
