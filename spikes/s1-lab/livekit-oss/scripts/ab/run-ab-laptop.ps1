@@ -7,6 +7,7 @@ param(
   [int]$RecSec = 120,
   [int]$WarmupSec = 20,
   [string]$S4Base = 'http://127.0.0.1:3320',
+  [string]$Codec = 'vp8',            # vp8 (default) | h264 — publisher videoCodec; S4 recorder unchanged
   [string]$Lab = 'C:\Users\azero\s1-livekit-oss'
 )
 $ErrorActionPreference = 'Stop'
@@ -38,7 +39,7 @@ if (-not (Test-Path 'node_modules\playwright-core')) {
 # node mid-run (happened twice at end of cond 1). Run node with its own stdout/stderr files and Continue.
 $ErrorActionPreference = 'Continue'
 foreach ($v in 'OUT_DIR','COOLDOWN_S','SAMPLE_MS','HEADLESS','FAKE_MEDIA','CHROME_PATH','SUB_REC','UNLOCK_SUBS') { Remove-Item "env:$v" -ErrorAction SilentlyContinue }
-$env:AB_GO = '1'; $env:CONDS = $Conds; $env:REC_S = "$RecSec"; $env:WARMUP_S = "$WarmupSec"; $env:S4_BASE = $S4Base
+$env:AB_GO = '1'; $env:CONDS = $Conds; $env:REC_S = "$RecSec"; $env:WARMUP_S = "$WarmupSec"; $env:S4_BASE = $S4Base; $env:CODEC = $Codec
 $env:HARNESS = 'http://localhost:5190'; $env:AB_PATH = '/ab/index.html'
 $nodeOut = Join-Path $here ("node-" + (Get-Date -Format yyyyMMdd-HHmmss) + ".log")
 $np = Start-Process -FilePath $node -ArgumentList 'ab-laptop.mjs' -WorkingDirectory $here -NoNewWindow -Wait -PassThru -RedirectStandardOutput $nodeOut -RedirectStandardError ($nodeOut + '.err')

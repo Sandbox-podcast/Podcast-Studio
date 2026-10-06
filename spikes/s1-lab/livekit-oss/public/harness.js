@@ -65,9 +65,12 @@ function layerCount() {
  */
 function simulcastPublishOptions(name) {
   const n = layerCount();
+  // ?codec=h264|vp8|vp9|av1 (default: livekit-client default = vp8)
+  const codec = urlFlag("codec");
   return {
     name,
     simulcast: true,
+    ...(codec ? { videoCodec: codec } : {}),
     source: Track.Source.Camera,
     videoEncoding: { maxBitrate: 1_700_000, maxFramerate: 30 },
     videoSimulcastLayers: n === 2 ? [VideoPresets.h180] : [VideoPresets.h180, VideoPresets.h360],

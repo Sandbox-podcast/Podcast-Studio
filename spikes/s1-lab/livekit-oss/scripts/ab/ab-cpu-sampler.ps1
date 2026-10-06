@@ -11,7 +11,7 @@ param(
 $ErrorActionPreference = 'SilentlyContinue'
 $markerList = $Markers -split ','
 $cores = [Environment]::ProcessorCount
-'ts_paris,marker,n_procs,cpu_pct_machine,cpu_pct_one_core,total_cpu_pct,gpu_videoencode_pct' | Set-Content -Encoding utf8 $OutCsv
+'ts_paris,marker,n_procs,cpu_pct_machine,cpu_pct_one_core,total_cpu_pct,gpu_videoencode_pct,nvenc_util_pct' | Set-Content -Encoding utf8 $OutCsv
 $prev = @{}; $pidMap = @{}; $i = 0
 $end = (Get-Date).AddSeconds($DurationSec)
 $sw = [Diagnostics.Stopwatch]::StartNew(); $lastMs = 0
@@ -27,6 +27,8 @@ while ((Get-Date) -lt $end) {
     $eng = Get-CimInstance Win32_PerfFormattedData_GPUPerformanceCounters_GPUEngine | Where-Object { $_.Name -like '*engtype_VideoEncode*' }
     if ($eng) { $gpu = ($eng | Measure-Object -Property UtilizationPercentage -Sum).Sum }
   } catch {}
+  $nvenc = ''
+  try { $nvenc = ((& nvidia-smi --query-gpu=utilization.encoder --format=csv,noheader,nounits 2>$null) | Select-Object -First 1).Trim() } catch {}
   $ts = Get-Date -Format 'yyyy-MM-ddTHH:mm:ss.fff'
   foreach ($m in $markerList) {
     $ids = $pidMap[$m]
@@ -38,7 +40,7 @@ while ((Get-Date) -lt $end) {
       $one = [math]::Round(100 * $d / $wall, 1); $mach = [math]::Round($one / $cores, 1)
     }
     $prev[$m] = $ms
-    Add-Content -Encoding utf8 $OutCsv "$ts,$m,$($ids.Count),$mach,$one,$total,$gpu"
+    Add-Content -Encoding utf8 $OutCsv "$ts,$m,$($ids.Count),$mach,$one,$total,$gpu,$nvenc"
   }
   $i++
   Start-Sleep -Milliseconds $IntervalMs

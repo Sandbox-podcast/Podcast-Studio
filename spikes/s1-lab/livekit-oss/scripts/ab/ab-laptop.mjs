@@ -48,8 +48,13 @@ const OUT_DIR = process.env.OUT_DIR ?? join(__dir, `ab-${stamp}`);
 mkdirSync(OUT_DIR, { recursive: true });
 
 // Lead's reduced default order (5). Any ab-{cam,file}-{2,3}L-{on,off} name is accepted via CONDS.
-const parseCond = (name) => { const m = /^ab-(cam|file)-([23])L-(on|off)$/.exec(name); return m ? { name, src: m[1], L: Number(m[2]), rec: m[3] === "on" } : null; };
-const DEFAULT = ["ab-file-3L-off", "ab-file-3L-on", "ab-file-2L-off", "ab-file-2L-on", "ab-cam-3L-on"];
+// CODEC=vp8 (default, livekit-client default) | h264 — non-default codec suffixes cond names (S4 keys stay distinct).
+const CODEC = (process.env.CODEC ?? "vp8").toLowerCase();
+const SFX = CODEC === "vp8" ? "" : `-${CODEC}`;
+const parseCond = (name) => { const m = /^ab-(cam|file)-([23])L-(on|off)(?:-(h264|vp8|vp9|av1))?$/.exec(name); return m ? { name: m[4] ? name : name + SFX, src: m[1], L: Number(m[2]), rec: m[3] === "on" } : null; };
+const DEFAULT = CODEC === "vp8"
+  ? ["ab-file-3L-off", "ab-file-3L-on", "ab-file-2L-off", "ab-file-2L-on", "ab-cam-3L-on"]
+  : ["ab-file-3L-off", "ab-file-3L-on", "ab-file-2L-off", "ab-file-2L-on"];
 const FULL8 = []; for (const src of ["cam", "file"]) for (const L of [3, 2]) for (const rec of ["off", "on"]) FULL8.push(`ab-${src}-${L}L-${rec}`);
 const want = (process.env.CONDS ?? "default").split(",").map((s) => s.trim()).filter(Boolean);
 const names = want.includes("default") || want.includes("all") ? DEFAULT : want.includes("full8") ? FULL8 : want;
@@ -93,7 +98,7 @@ if (!s4Ok) {
 const OUT_CSV = join(OUT_DIR, "outbound-rid-series.csv");
 const IN_CSV = join(OUT_DIR, "inbound-series.csv");
 const TIMES_CSV = join(OUT_DIR, "conditions-timestamps.csv");
-appendFileSync(OUT_CSV, row(["cond", "t_rel_s", "at_paris", "rid", "ssrc", "w", "h", "fps", "bytesSent", "framesSent", "active", "qlr", "qlrDur_none", "qlrDur_cpu", "qlrDur_bandwidth", "qlrDur_other", "qlrResChanges", "encoderImplementation", "powerEfficientEncoder", "scalabilityMode", "targetBitrate"]));
+appendFileSync(OUT_CSV, row(["cond", "t_rel_s", "at_paris", "rid", "ssrc", "w", "h", "fps", "bytesSent", "framesSent", "active", "qlr", "qlrDur_none", "qlrDur_cpu", "qlrDur_bandwidth", "qlrDur_other", "qlrResChanges", "encoderImplementation", "powerEfficientEncoder", "scalabilityMode", "targetBitrate", "codec"]));
 appendFileSync(IN_CSV, row(["cond", "t_rel_s", "at_paris", "sub", "pin", "kind", "ssrc", "w", "h", "fps", "bytesReceived", "packetsLost", "jitter", "freezeCount", "totalFreezesDuration", "decoderImplementation"]));
 appendFileSync(TIMES_CSV, row(["cond", "status", "join_at", "window_start_paris", "window_end_paris", "rec_start_paris", "rec_stop_paris", "rec_result", "note", "subrec_start_paris", "subrec_stop_paris", "subrec_file", "subrec_bytes"]));
 
@@ -117,7 +122,7 @@ async function stats(page) {
           bytesSent: s.bytesSent, framesSent: s.framesSent, active: s.active ?? null, qlr: s.qualityLimitationReason ?? null,
           qlrDurations: s.qualityLimitationDurations ?? null, qlrResChanges: s.qualityLimitationResolutionChanges ?? null,
           encoderImplementation: s.encoderImplementation ?? null, powerEfficientEncoder: s.powerEfficientEncoder ?? null,
-          scalabilityMode: s.scalabilityMode ?? null, targetBitrate: s.targetBitrate ?? null, ts: s.timestamp });
+          scalabilityMode: s.scalabilityMode ?? null, targetBitrate: s.targetBitrate ?? null, codec: rep.get(s.codecId)?.mimeType ?? null, ts: s.timestamp });
         if (s.type === "inbound-rtp" && (s.kind === "video" || s.kind === "audio")) inn.push({
           kind: s.kind, ssrc: s.ssrc, w: s.frameWidth ?? null, h: s.frameHeight ?? null, fps: s.framesPerSecond ?? null,
           bytesReceived: s.bytesReceived, packetsLost: s.packetsLost ?? null, jitter: s.jitter ?? null,
@@ -163,7 +168,7 @@ for (const c of CONDS) {
     appendFileSync(TIMES_CSV, row([c.name, t.status, "", "", "", "", "", "", t.note, "", "", "", ""]));
     log(`${c.name} SKIPPED (S4 health failed)`); continue;
   }
-  log(`=== ${c.name} room=${room} src=${c.src} layers=${c.L} rec=${c.rec ? "ON" : "OFF"}`);
+  log(`=== ${c.name} room=${room} src=${c.src} layers=${c.L} codec=${CODEC} rec=${c.rec ? "ON" : "OFF"}`);
   const pubMarker = `s1ab-pub-${c.name}-${stamp}`, subMarker = `s1ab-sub-${c.name}-${stamp}`;
   const cpu = startCpuSampler(c.name, [pubMarker, subMarker], WARMUP_S + REC_S + 60);
   let pubCtx, subCtx;
@@ -175,6 +180,7 @@ for (const c of CONDS) {
     const errs = [];
     pub.on("console", (m) => { if (m.type() === "error" || /hq-rec|file-publish/.test(m.text())) errs.push(`${paris()} ${m.text()}`); });
     const q = new URLSearchParams({ layers: String(c.L), mode: c.src === "cam" ? "camera" : "file", cond: c.name, s4: S4_BASE });
+    if (CODEC !== "vp8") q.set("codec", CODEC);
     if (c.src === "file" && UNLOCK_FILE) q.set("unlockStats", "1");
     await pub.goto(`${HARNESS}${AB_PATH}?${q}`, { waitUntil: "load", timeout: 45000 });
     await pub.fill("#room", room); await pub.fill("#identity", "ab-pub");
@@ -225,7 +231,7 @@ for (const c of CONDS) {
       for (const o of ps.out) {
         series.out.push({ tr, ...o });
         const d = o.qlrDurations ?? {};
-        appendFileSync(OUT_CSV, row([c.name, tr, at, o.rid, o.ssrc, o.w, o.h, o.fps, o.bytesSent, o.framesSent, o.active, o.qlr, d.none, d.cpu, d.bandwidth, d.other, o.qlrResChanges, o.encoderImplementation, o.powerEfficientEncoder, o.scalabilityMode, o.targetBitrate]));
+        appendFileSync(OUT_CSV, row([c.name, tr, at, o.rid, o.ssrc, o.w, o.h, o.fps, o.bytesSent, o.framesSent, o.active, o.qlr, d.none, d.cpu, d.bandwidth, d.other, o.qlrResChanges, o.encoderImplementation, o.powerEfficientEncoder, o.scalabilityMode, o.targetBitrate, o.codec]));
       }
       for (const s of subs) {
         const ss = await stats(s.pg).catch(() => ({ inn: [] }));
@@ -295,7 +301,7 @@ for (const c of CONDS) {
 }
 
 // Markdown timestamp table for Media alignment
-let md = `# S1 laptop A/B — ${paris()}\n\nHarness ${HARNESS}${AB_PATH} · S4 ${S4_BASE} · warmup ${WARMUP_S}s · window ${REC_S}s · sample ${SAMPLE_MS}ms\n\n| cond | status | window start (Paris) | window end (Paris) | rec start | rec stop | rec | sub-hi rx webm |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n`;
+let md = `# S1 laptop A/B — ${paris()}\n\nHarness ${HARNESS}${AB_PATH} · codec ${CODEC} · S4 ${S4_BASE} · warmup ${WARMUP_S}s · window ${REC_S}s · sample ${SAMPLE_MS}ms\n\n| cond | status | window start (Paris) | window end (Paris) | rec start | rec stop | rec | sub-hi rx webm |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n`;
 const { readFileSync } = await import("node:fs");
 for (const line of readFileSync(TIMES_CSV, "utf8").trim().split("\n").slice(1)) {
   const f = line.split(",");
