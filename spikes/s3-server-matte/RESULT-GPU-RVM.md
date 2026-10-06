@@ -38,6 +38,13 @@
 - Full 60 s version: on the laptop at `s3-server-matte/gpu-e2/flicker-E2-fgr-checker.mp4`.
 - Still `gpu-e2/clip-frame-32s.png`: both hands whole, open fingers, light edge on the hair. The motion verdict belongs to Designer.
 
+### Designer verdict (2026-10-06 02:24 Paris)
+- **Stills: PASS** (hair + hands, no leak).
+- **Motion: FAIL.** On a fast gesture around **33–34 s** of the source, the hand turns semi-transparent ("ghost hand") and a white leak from the original background appears beside it.
+- Scope (lead): this blocks the quality of the **delivered matte**. It does **not** block the master choice (raw cam). It argues for keeping the raw.
+- So E2-fgr is the POC post-processing choice **for stills only**. It is not validated in motion. E2b stays the fallback.
+- Next (CUDA run, not DirectML): clean C + E2-fgr with no encode in the pass and erosion on GPU; same 25–40 s sequence at downsample_ratio 0.4 / 0.6 / 1.0; side-by-side at 32 s and 33.2–34.0 s. PASS = opaque palm, no checker through it, no white leak. If ds is not enough, the next lever is a temporal mask.
+
 ## Live control-room cadence (reminder, backlog P1)
 - The matted canvas is capped at ~**14 distinct fps** by the paint rate. Media `distinct_fps.py`: matted **14.0**, raw **29.8**. LiveKit also sees ~14 fps.
 - Criterion: **≥24 distinct fps** (not 30 ticks with duplicates). Backlog P1, **no fix tonight**.
@@ -45,3 +52,22 @@
 
 ## Files
 - `gpu-e2/result-C.json`, `result-E2-fgr.json`, `result-bg-prep.json`, `result-E2b-contended.json`, `result-gpu-e2.json` (aggregate written by the run; its E2b entry = contended), `gpu_bench_e2.py`, `clip-frame-32s.png`.
+
+## Nuit 2026-10-06 : matting navigateur v7 en live (laptop MID i7-11370H, pas le LOW-END i5+iGPU)
+
+Mesures uniquement, 1 run chacune, loopback local.
+
+**v7 côté invité, même onglet que `ab-file-2L-on` (03:36–03:38)** : paint 16,5 fps, traitement p50 33,4 / p95 55,4 ms ; couche HD envoyée 1280×720@15 ; sub HD 14,4 fps distincts, part ≥24 = 0,0, 4 gels (2,24 s). Verdict Designer : FAIL régie (cadence et qualité).
+
+**v7 sur N flux dans un seul onglet Edge, côté régie (04:15–04:23, 60 s par palier)** — MediaPipe sur l'Iris Xe (ANGLE Intel D3D11), pas la RTX :
+
+| N | Paint fps / flux | p50 / p95 traitement | CPU onglet / machine |
+|---|---|---|---|
+| 1 | 24,5 | 21,6 / 30,5 ms | 17,6 % / 53 % |
+| 2 | ~15,5 | 28 / 36,7 ms | 22,4 % / 61 % |
+| 3 | 9,7 | 31 / 39,5 ms | 22,8 % / 70 % |
+| 5 | ~5,2 | 35 / 43,6 ms | 26,9 % / 95 % |
+
+Verdict Designer : FAIL dès N = 2 (barre ≥24 fps, p95 < 41 ms). Défauts qualité : crâne vert, mains fantômes, fuite bureau/écran, bord de joue coupé.
+Non testés (ni ouverts ni fermés) : worker/OffscreenCanvas, dGPU forcé. Le temps réel serveur (1 puis 5 flux) se mesure au run CUDA.
+Données box : `/workspace/uploads/vision-multi/`, harness `/workspace/s3-ab-v7/multi/`.
