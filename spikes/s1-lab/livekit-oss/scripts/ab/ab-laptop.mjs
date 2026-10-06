@@ -22,8 +22,8 @@ const __dir = dirname(fileURLToPath(import.meta.url));
 // playwright-core 1.48 + Edge 154: closing a persistent context can reject an internal navigation promise
 // (TargetClosedError) as an UNHANDLED rejection, which killed node after condition 1 (laptop, 02:25:53).
 const benign = (e) => /Target page, context or browser has been closed|TargetClosedError/.test(String(e?.stack ?? e));
-process.on("unhandledRejection", (e) => { if (benign(e)) { console.warn("[ab] ignored", String(e).split("\n")[0]); return; } console.error("[ab] unhandledRejection", e); process.exit(1); });
-process.on("uncaughtException", (e) => { if (benign(e)) { console.warn("[ab] ignored", String(e).split("\n")[0]); return; } console.error("[ab] uncaughtException", e); process.exit(1); });
+process.on("unhandledRejection", (e) => { if (benign(e)) { console.log("[ab] ignored", String(e).split("\n")[0]); return; } console.error("[ab] unhandledRejection", e); process.exit(1); });
+process.on("uncaughtException", (e) => { if (benign(e)) { console.log("[ab] ignored", String(e).split("\n")[0]); return; } console.error("[ab] uncaughtException", e); process.exit(1); });
 if (process.env.AB_GO !== "1") {
   console.error("[ab] refusing to run: set AB_GO=1 only after the lead confirms Vision freed the 3070.");
   process.exit(2);
