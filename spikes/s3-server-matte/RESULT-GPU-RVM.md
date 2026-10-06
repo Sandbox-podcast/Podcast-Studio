@@ -118,6 +118,6 @@ Coût p50 par image, CPU sur un seul thread, numpy/PIL non optimisé, Ryzen 7 98
 - a, décontamination de la couleur (blur-fusion) : 391 ms. Designer : aucun gain visible, écartée.
 - b, alpha resserré de 1 px puis flou σ 0,8 : 24 ms. Designer : seul gain visible (liseré plus fin), mais le liseré reste visible sur fond sombre. **Retenu par le lead comme candidat de bord pour le live**, à porter en shader/GPU.
 - c = a + b : 416 ms. Designer : identique à b, écarté.
-- b à 2 px : stills calculés sur la box (matte en CPU EP), coût box 60–69 ms (b à 1 px : 32–34 ms sur la box). Verdict « main rapide 33,4 s rongée ou pas » : en attente de Designer.
+- b à 2 px : stills calculés sur la box (matte en CPU EP), coût box 60–69 ms (b à 1 px : 32–34 ms sur la box). Designer : **FAIL face à b 1 px**. La main rapide à 33,4 s est rongée : 520 pixels nettement assombris en b 2 px, contre 68 en b 1 px. Sur les doigts à 37,37 s, le gain est marginal et le halo reste. Sur les cheveux, aucune différence. b 2 px est abandonné, b 1 px reste le candidat live. Le volet bords de S3 est clos pour le POC.
 
 Pour le master re-détouré, le lead note une nouvelle piste S3 : un détourage serveur plus lourd, en async. Choix du modèle et OK de Loïc avant tout téléchargement.
