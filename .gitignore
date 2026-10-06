@@ -6,6 +6,8 @@ dist/
 build/
 .next/
 out/
+!spikes/s4/lab-pass1/out/
+!spikes/s4/lab-pass1/out/**
 *.tsbuildinfo
 
 # Environment

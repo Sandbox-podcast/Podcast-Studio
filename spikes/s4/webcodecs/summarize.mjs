@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+const r = JSON.parse(fs.readFileSync(`out/${process.argv[2]}-results.json`, 'utf8')); const x = r.recording; const m = x.metrics;
+const vq = m.queueSamples.map((s) => s.vq); 
+console.log(JSON.stringify({ ver: r.browserVersion, start: x.recStartWall, recWallMs: x.recWallMs, vspan: x.mediaVideoSpanSec, aEnd: x.mediaAudioEndOnTimelineSec, aclock: x.audioClock, vb: x.videoBitrateBps, ab: x.audioBitrateBps, total: x.totalBytes, br: x.measuredBitrateBps, upDone: x.uploadCompletedAtRecMs, vdc: x.videoDecoderConfig, vcfg: x.videoConfigRequested.codec + ' ' + x.videoConfigRequested.hardwareAcceleration }));
+console.log('parts', JSON.stringify(x.parts.map((p) => [p.PartNumber, p.Size, p.cutAtRecMs, p.uploadedAtRecMs, p.putMs, p.attempt])));
+const { queueSamples, fragments, audioInputGaps, silenceFills, ...rest } = m; console.log(JSON.stringify(rest));
+console.log('vq samples avg', (vq.reduce((a, b) => a + b, 0) / vq.length).toFixed(2), 'max sampled', Math.max(...vq), 'n', vq.length);
+console.log('fragments', fragments.length, JSON.stringify(fragments.slice(0, 4)), '... last', JSON.stringify(fragments.at(-1)));
+const fps = queueSamples.map((s, i) => i ? s.framesIn - queueSamples[i - 1].framesIn : s.framesIn); console.log('fps/s min', Math.min(...fps.slice(1)), 'max', Math.max(...fps));
+console.log(JSON.stringify(r.ffprobe)); console.log(JSON.stringify(r.integrity)); console.log(JSON.stringify(r.playerCheck));
+console.log('silence', m.silenceFilledMs?.toFixed?.(1), JSON.stringify(m.silenceFills), 'vgaps', JSON.stringify(m.videoInputGapsOver70ms), 'aoutgaps', JSON.stringify(m.audioOutputGaps));
