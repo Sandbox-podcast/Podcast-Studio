@@ -1,0 +1,2 @@
+cond,status,join_at,window_start_paris,window_end_paris,rec_start_paris,rec_stop_paris,rec_result,note,subrec_start_paris,subrec_stop_paris,subrec_file,subrec_bytes,pub2,subx_file,subx_bytes
+ab-cam-2L-on,DONE,2026-10-06T11:31:45.691,2026-10-06T11:32:14.140,2026-10-06T11:34:18.869,2026-10-06T11:32:14.522,2026-10-06T11:34:18.863,stopped+exported,,2026-10-06T11:32:14.146,2026-10-06T11:34:15.564,ab-cam-2L-on-sub-hi-rx.webm,24994053,present,ab-cam-2L-on-sub-x-rx.webm,38741823
