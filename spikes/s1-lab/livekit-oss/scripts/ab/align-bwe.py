@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Align per-sample (SAMPLE_MS) publisher series: media-source fps, candidate-pair availableOutgoingBitrate,
 per-rid outbound targetBitrate / bytesSent-derived kbps / res / fps / QLR. Flags coincidences:
-QLR switch (any rid) or top-layer drop (res change or enc fps 0) within +-1 sample of a capture dip (src fps < 24).
-Usage: align-bwe.py <cond_dir> [--json out.json] [--csv out.csv]"""
+QLR switch (any rid) or top-layer drop (res change or enc fps 0) within +-WIN of a capture dip (src fps < 24);
+WIN = --win-s seconds (default 2.0, +0.15 s slack for sampling jitter; works for 1 s and 2 s sampling).
+Usage: align-bwe.py <cond_dir> [--json out.json] [--csv out.csv] [--win-s 2.0]"""
 import csv, json, sys
 from pathlib import Path
 d = Path(sys.argv[1]); args = sys.argv[2:]
@@ -52,12 +53,13 @@ for i in range(1, len(rows)):
         if ea is not None and eb is not None and ea == 0 and eb > 0: ev.append((b["t"], top, "top enc fps 0->>0 (layer back)"))
 dips = [r["t"] for r in rows if (r["src_fps"] is not None and r["src_fps"] < 24) or (r["src_fps_frames"] is not None and r["src_fps_frames"] < 24)]
 step = (rows[1]["t"] - rows[0]["t"]) if len(rows) > 1 else 2
+win = float(opt("--win-s") or 2.0)
 coin = []
 for t, rid, what in ev:
-    near = [x for x in dips if abs(x - t) <= step * 1.01]
-    coin.append({"t": t, "rid": rid, "event": what, "src_dip_within_1_sample": near,
+    near = [x for x in dips if abs(x - t) <= win + 0.15]
+    coin.append({"t": t, "rid": rid, "event": what, "src_dip_within_win": near,
                  "src_fps_at_t": next((r["src_fps"] for r in rows if r["t"] == t), None)})
-res = {"cond": cond, "top": top, "sample_s": round(step, 1), "src_dips_lt24_t": dips, "events": coin,
+res = {"cond": cond, "top": top, "sample_s": round(step, 1), "win_s": win, "src_dips_lt24_t": dips, "events": coin,
        "aob_kbps": [r["aob_kbps"] for r in rows], "rows": rows}
 if opt("--json"): json.dump(res, open(opt("--json"), "w"), indent=1)
 if opt("--csv"):
@@ -71,4 +73,4 @@ if opt("--csv"):
                 x = r.get(rid, {}); line += [x.get("res"), x.get("fps"), x.get("enc_fps"), x.get("qlr"), x.get("target_kbps"), x.get("kbps")]
             w.writerow(line)
 print(f"{cond}: sample {step:.1f}s, src dips<24 at {dips}")
-for c in coin: print(f"  t={c['t']:>6} {c['rid']:>2} {c['event']:<34} src_fps={c['src_fps_at_t']} dip±1={c['src_dip_within_1_sample']}")
+for c in coin: print(f"  t={c['t']:>6} {c['rid']:>2} {c['event']:<34} src_fps={c['src_fps_at_t']} dip±{win:g}s={c['src_dip_within_win']}")

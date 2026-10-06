@@ -10,6 +10,9 @@
 //      CONDS default = ab-file-3L-off,ab-file-3L-on,ab-file-2L-off,ab-file-2L-on,ab-cam-3L-on (or "full8")
 //      SUB_REC (1) SUB_REC_BITRATE (2500000)
 //      WARMUP_S (20) REC_S (120) COOLDOWN_S (10) SAMPLE_MS (2000) S4_BASE (http://127.0.0.1:3320)
+//      CPU_SAMPLE_MS (= SAMPLE_MS) interval of the per-condition CPU/GPU sampler (ab-cpu-sampler.ps1), decoupled so a 1 s
+//      getStats series can keep the 2 s WMI sampler of earlier runs (same host load). getStats samples are scheduled on
+//      a fixed grid (window start + k*SAMPLE_MS), not sleep(SAMPLE_MS)+overhead.
 //      CHANNEL (msedge) OUT_DIR  ON_S4_FAIL (skip|abort, default skip)
 //      IDLE_S (15; 0 = off) pre-run idle CPU sample, before any Edge launch -> preflight.idleCpu in ab-summary.json
 //      AB_DRY=1 parse CONDS + print the planned rec calls, then exit (no preflight, no Edge, no LiveKit)
@@ -48,6 +51,7 @@ const WARMUP_S = Number(process.env.WARMUP_S ?? 20);
 const REC_S = Number(process.env.REC_S ?? 120);
 const COOLDOWN_S = Number(process.env.COOLDOWN_S ?? 10);
 const SAMPLE_MS = Number(process.env.SAMPLE_MS ?? 2000);
+const CPU_SAMPLE_MS = Number(process.env.CPU_SAMPLE_MS ?? SAMPLE_MS);
 const S4_BASE = process.env.S4_BASE ?? "http://127.0.0.1:3320";
 const CHANNEL = process.env.CHANNEL ?? "msedge";
 const ROOM = process.env.ROOM ?? "";
@@ -103,7 +107,7 @@ const recStartOpts = (c) => c.recMime
   : { cond: c.name, durationSec: REC_S };
 if (AB_DRY) {
   for (const c of CONDS) console.log("[ab-dry]", JSON.stringify({ ...c, recStart: c.rec ? recStartOpts(c) : null }));
-  console.log("[ab-dry] timing", JSON.stringify({ WARMUP_S, REC_S, SAMPLE_MS, COOLDOWN_S, S4_BASE, CODEC, HARNESS, AB_PATH, SUB_REC, ROOM: ROOM || "(per-cond)", PUB2_ID: PUB2_ID || "(none)", PUB2_WAIT_S, srcSampling: "media-source video -> media-source-series.csv + outbound src_* + summary.src", bweSampling: "publisher selected candidate-pair -> bwe-series.csv + summary.bwe" }));
+  console.log("[ab-dry] timing", JSON.stringify({ WARMUP_S, REC_S, SAMPLE_MS, CPU_SAMPLE_MS, expectedSamplesPerCond: Math.floor((REC_S * 1000 - 1) / SAMPLE_MS) + 1, COOLDOWN_S, S4_BASE, CODEC, HARNESS, AB_PATH, SUB_REC, ROOM: ROOM || "(per-cond)", PUB2_ID: PUB2_ID || "(none)", PUB2_WAIT_S, srcSampling: "media-source video -> media-source-series.csv + outbound src_* + summary.src", bweSampling: "publisher selected candidate-pair -> bwe-series.csv + summary.bwe" }));
   console.log("[ab-dry] exit before preflight: nothing launched");
   process.exit(0);
 }
@@ -245,7 +249,7 @@ function startCpuSampler(cond, markers, durationSec) {
   const ps1 = join(__dir, "ab-cpu-sampler.ps1");
   if (process.platform !== "win32" || !existsSync(ps1)) { log("cpu sampler skipped (not win32 or ps1 missing)"); return null; }
   const csv = join(OUT_DIR, `${cond}-cpu.csv`);
-  const p = spawn("powershell.exe", ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", ps1, "-Markers", markers.join(","), "-OutCsv", csv, "-IntervalMs", String(SAMPLE_MS), "-DurationSec", String(durationSec)], { stdio: "ignore" });
+  const p = spawn("powershell.exe", ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", ps1, "-Markers", markers.join(","), "-OutCsv", csv, "-IntervalMs", String(CPU_SAMPLE_MS), "-DurationSec", String(durationSec)], { stdio: "ignore" });
   return { p, csv };
 }
 
@@ -363,8 +367,11 @@ for (const c of CONDS) {
         }
       }
     }
+    let tick = 0;
     while (Date.now() - wsMs < REC_S * 1000) {
-      await sleep(SAMPLE_MS);
+      // fixed grid: next sample at wsMs + k*SAMPLE_MS (skip ticks if a stats round overran)
+      tick = Math.max(tick + 1, Math.ceil((Date.now() - wsMs) / SAMPLE_MS));
+      await sleep(Math.max(0, wsMs + tick * SAMPLE_MS - Date.now()));
       const tr = Math.round((Date.now() - wsMs) / 100) / 10, at = paris();
       await pinAll();
       const ps = await stats(pub).catch(() => ({ out: [], src: [], bwe: [] }));
@@ -493,14 +500,14 @@ for (const c of CONDS) {
     const v = series.inn.filter((i) => i.sub === sid && i.kind === "video");
     subSum[sid] = { n: v.length, w_med: med(v.map((i) => i.w)), h_med: med(v.map((i) => i.h)), fps_med: r1(med(v.map((i) => i.fps))), freeze_delta: v.length ? (v.at(-1).freezeCount ?? 0) - (v[0].freezeCount ?? 0) : null, decoder: [...new Set(v.map((i) => i.decoderImplementation).filter(Boolean))] };
   }
-  summaries.push({ cond: c.name, status: t.status, note: t.note || undefined, window: [t.ws, t.we], rec: c.rec ? [t.rs, t.re, t.rec_result] : "OFF", ...(c.recMime ? { recMime: t.recMime ?? { requested: c.recMime, recorder: null }, recParticipant: c.recParticipant } : {}), perRid, src: Object.keys(srcSum).length ? srcSum : "NOT CAPTURED (no media-source video stats)", bwe: bweSum, subs: subSum, ...(PUB2_ID ? { pub2: { id: PUB2_ID, status: t.pub2, rx: t.xfile || null } } : {}), cpu_csv: cpu ? `${c.name}-cpu.csv` : "NOT CAPTURED", elapsed_s: Math.round((Date.now() - t0) / 1000) });
+  summaries.push({ cond: c.name, status: t.status, sample_ms: SAMPLE_MS, cpu_sample_ms: CPU_SAMPLE_MS, note: t.note || undefined, window: [t.ws, t.we], rec: c.rec ? [t.rs, t.re, t.rec_result] : "OFF", ...(c.recMime ? { recMime: t.recMime ?? { requested: c.recMime, recorder: null }, recParticipant: c.recParticipant } : {}), perRid, src: Object.keys(srcSum).length ? srcSum : "NOT CAPTURED (no media-source video stats)", bwe: bweSum, subs: subSum, ...(PUB2_ID ? { pub2: { id: PUB2_ID, status: t.pub2, rx: t.xfile || null } } : {}), cpu_csv: cpu ? `${c.name}-cpu.csv` : "NOT CAPTURED", elapsed_s: Math.round((Date.now() - t0) / 1000) });
   writeFileSync(join(OUT_DIR, "ab-summary.json"), JSON.stringify({ preflight: pre, summaries }, null, 2));
   log(`${c.name} ${t.status} window ${t.ws} → ${t.we}`);
   await sleep(COOLDOWN_S * 1000);
 }
 
 // Markdown timestamp table for Media alignment
-let md = `# S1 laptop A/B — ${paris()}\n\nHarness ${HARNESS}${AB_PATH} · codec ${CODEC} · S4 ${S4_BASE} · warmup ${WARMUP_S}s · window ${REC_S}s · sample ${SAMPLE_MS}ms\n\n| cond | status | window start (Paris) | window end (Paris) | rec start | rec stop | rec | sub-hi rx webm |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n`;
+let md = `# S1 laptop A/B — ${paris()}\n\nHarness ${HARNESS}${AB_PATH} · codec ${CODEC} · S4 ${S4_BASE} · warmup ${WARMUP_S}s · window ${REC_S}s · sample ${SAMPLE_MS}ms (cpu ${CPU_SAMPLE_MS}ms)\n\n| cond | status | window start (Paris) | window end (Paris) | rec start | rec stop | rec | sub-hi rx webm |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n`;
 const { readFileSync } = await import("node:fs");
 for (const line of readFileSync(TIMES_CSV, "utf8").trim().split("\n").slice(1)) {
   const f = line.split(",");
