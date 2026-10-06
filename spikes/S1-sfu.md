@@ -402,6 +402,25 @@ Artifact: laptop `scripts/soak-20261006-011411/QLR-ANALYSIS.json` · box `/works
 | Video note (same run) | HD **23** samples, fps **14/22/30** — better than 5-pax 30 min |
 
 
+### Laptop A/B ± HQ rec — protocol (instrumentation ready, **NOT RUN**)
+
+> Tracked in [#9](https://github.com/Sandbox-podcast/Podcast-Studio/issues/9). **Measurement only — no product decision.** Do **not** run while Vision holds the 3070 (wrapper refuses without `-VisionFreeConfirmed`; runner refuses without `AB_GO=1`).
+
+| Item | Setup |
+| --- | --- |
+| Topology | Laptop only: **1** publisher (Edge, `http://localhost:5190/ab/index.html` = secure context) + **2** subscribers in a **separate** Edge instance (`ab-sub-hi` pinned HIGH, `ab-sub-lo` pinned LOW, `adaptive=0`) |
+| Sources | pass 1 **real camera** (`getUserMedia` 720p) · pass 2 **take4 raw** file loop (`/media/take4-raw.webm` + take4 WAV) as reference |
+| Simulcast | `?layers=3` → `[h180, h360]` + source (rids q/h/f; = livekit-client 720p default) · `?layers=2` → `[h180]` + source (rids **q/h**, `h` = top) |
+| HQ rec | **Media's `S4Recorder`** in the **publisher tab** on the **same published MediaStream** (`window.__publishedStream`): ON = `startSession({stream, label:'raw', participant:<cond>, apiBase:'http://127.0.0.1:3320', durationSec:120, timeslice:1000, vBitrate:2500000})`, end = `stopAll()` + `exportResults()`; OFF = never call `startSession`. Preflight `GET :3320/api/health`; on failure the ON conditions are **SKIPPED** and reported — Media's process is never restarted |
+| Matrix (8) | `ab-{cam,file}-{3,2}L-{off,on}` (OFF/ON adjacent) · warmup **20 s** · window **120 s** (= rec window) · sample **2 s** · ~**3 min**/cond |
+| Logged | per-rid outbound series (w/h/fps/bytes/active/**qualityLimitationReason + qualityLimitationDurations** / resolutionChanges / **encoderImplementation** / powerEfficientEncoder / scalabilityMode / targetBitrate) · subscriber inbound series (w/h/fps/bytes/loss/jitter/freeze) · **browser CPU** (pub vs sub Edge instance, by `--user-data-dir` marker; + total CPU + GPU VideoEncode %) · **precise Paris start/end** per condition (`AB-TIMESTAMPS.md`) |
+| Gotcha | Chromium hides `encoderImplementation` unless the page captures → file pass holds a **disabled, unpublished** mic track (`?unlockStats=1`, `UNLOCK_FILE=1` default) |
+
+Run (after lead go): stage `scripts/ab/*` + `public/harness.js` + `public/index.html` into `C:\Users\azero\s1-livekit-oss\scripts\ab\`, then
+`powershell -File scripts\ab\run-ab-laptop.ps1 -VisionFreeConfirmed [-Conds ab-cam-3L-off,ab-cam-3L-on]`. The wrapper deploys to `public\ab\` (root harness used by Vision untouched).
+
+**Box dry run** (02:03–02:06 Paris, isolated box LiveKit 1.8.4 on alt ports, Chromium fake devices, **mock** S4 server — wiring only, numbers not meaningful): 3L → rids q/h/f 320×180 / 640×360 / 1280×720; 2L → q/h 320×180 / 1280×720; `qualityLimitationDurations` deltas + `encoderImplementation` captured (`SimulcastEncoderAdapter (libvpx…)`); sub-hi 1280×720 / sub-lo 320×180 pins hold; S4 hook start/stop/export OK on cam and file streams; S4-down → ON conds SKIPPED. **Laptop results: NOT VALIDATED (not run).**
+
 ## Annexe — desk SaaS (superseded)
 
 > **Statut : superseded** — recherche desk 2026-10-05 sur LiveKit Cloud, Daily, Agora. Le POC SaaS (free tier) est **abandonné** ; conservé comme contexte historique uniquement. **Ne pas** créer de comptes ni exécuter [`s1-lab/livekit/`](s1-lab/livekit/) (Cloud), [`daily/`](s1-lab/daily/), [`agora/`](s1-lab/agora/) contre les vendeurs.

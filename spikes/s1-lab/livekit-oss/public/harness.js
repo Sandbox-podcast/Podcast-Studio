@@ -3,6 +3,8 @@ import {
   RoomEvent,
   Track,
   LocalVideoTrack,
+  VideoPresets,
+  VideoQuality,
 } from "https://esm.sh/livekit-client@2.9.1";
 // createLocalTracks / getUserMedia only loaded for mode=camera (never on page load).
 
@@ -12,6 +14,8 @@ const els = {
   room: document.getElementById("room"),
   identity: document.getElementById("identity"),
   mediaMode: document.getElementById("media-mode"),
+  simulcastLayers: document.getElementById("simulcast-layers"),
+  hqRec: document.getElementById("hq-rec"),
   join: document.getElementById("join"),
   leave: document.getElementById("leave"),
   status: document.getElementById("status"),
@@ -32,6 +36,129 @@ let canvasAnim = null;
 let canvasVideoTrack = null;
 
 els.identity.value = `p-${Math.floor(Math.random() * 900 + 100)}`;
+
+function parseUrlFlags() {
+  const q = new URLSearchParams(location.search);
+  const layers = q.get("layers");
+  if (layers === "2" || layers === "3") {
+    if (els.simulcastLayers) els.simulcastLayers.value = layers;
+  }
+  if (q.get("hqRec") === "1" && els.hqRec) els.hqRec.checked = true;
+  const mode = q.get("mode");
+  if (mode && els.mediaMode) {
+    const opt = [...els.mediaMode.options].find((o) => o.value === mode);
+    if (opt) els.mediaMode.value = mode;
+  }
+}
+parseUrlFlags();
+
+function layerCount() {
+  const v = els.simulcastLayers?.value ?? "3";
+  return v === "2" ? 2 : 3;
+}
+
+/**
+ * LiveKit publish options. `videoSimulcastLayers` lists the LOWER layers only; the top layer is the
+ * source resolution (720p cam / take4 file).
+ *   layers=3 -> [h180, h360] + source  (= livekit-client default for 16:9 720p)
+ *   layers=2 -> [h180] + source
+ */
+function simulcastPublishOptions(name) {
+  const n = layerCount();
+  return {
+    name,
+    simulcast: true,
+    source: Track.Source.Camera,
+    videoEncoding: { maxBitrate: 1_700_000, maxFramerate: 30 },
+    videoSimulcastLayers: n === 2 ? [VideoPresets.h180] : [VideoPresets.h180, VideoPresets.h360],
+  };
+}
+
+function urlFlag(name, dflt = null) {
+  return new URLSearchParams(location.search).get(name) ?? dflt;
+}
+
+/** Exact tracks published to the SFU (cam or take4 captureStream) — the S4 recorder records THIS stream. */
+window.__publishedStream = null;
+function setPublishedStream(tracks) {
+  window.__publishedStream = new MediaStream(tracks.filter(Boolean));
+}
+
+// --- HQ rec hook: Media's S4Recorder (same tab, same published MediaStream) ---
+// ON  = S4Recorder.startSession({stream: publishedStream, ...}); end = stopAll() + exportResults()
+// OFF = never call startSession. Recorder script/API base: ?s4=http://127.0.0.1:3320 (default).
+const S4_BASE = urlFlag("s4", "http://127.0.0.1:3320");
+/** @type {any} */
+let s4Handle = null;
+
+async function loadS4Recorder() {
+  if (window.S4Recorder) return true;
+  await new Promise((resolve, reject) => {
+    const s = document.createElement("script");
+    s.src = `${S4_BASE}/s4-recorder.js`;
+    s.onload = () => resolve();
+    s.onerror = () => reject(new Error(`failed to load ${s.src}`));
+    document.head.appendChild(s);
+  });
+  return !!window.S4Recorder;
+}
+
+window.__s4Health = async function __s4Health() {
+  try {
+    const r = await fetch(`${S4_BASE}/api/health`, { cache: "no-store" });
+    const body = await r.text();
+    return { ok: r.ok, status: r.status, body: body.slice(0, 500) };
+  } catch (e) {
+    return { ok: false, error: String(e?.message ?? e) };
+  }
+};
+
+/** @param {{cond?: string, durationSec?: number, vBitrate?: number}} [opts] */
+window.__startHqRec = async function __startHqRec(opts = {}) {
+  const t0 = Date.now();
+  try {
+    if (s4Handle) return { ok: true, already: true };
+    const stream = window.__publishedStream;
+    if (!stream || !stream.getVideoTracks().length) return { ok: false, error: "no published stream" };
+    const health = await window.__s4Health();
+    if (!health.ok) return { ok: false, error: "s4 health failed", health };
+    await loadS4Recorder();
+    if (!window.S4Recorder?.startSession) return { ok: false, error: "S4Recorder.startSession missing" };
+    const cond = opts.cond ?? urlFlag("cond", "manual");
+    const participant = cond.startsWith("ab-") ? cond : `ab-${cond}`;
+    s4Handle = await window.S4Recorder.startSession({
+      stream,
+      label: "raw",
+      participant,
+      apiBase: S4_BASE,
+      durationSec: opts.durationSec ?? 120,
+      timeslice: 1000,
+      vBitrate: opts.vBitrate ?? 2_500_000,
+    });
+    if (els.hqRec) els.hqRec.checked = true;
+    console.log("[hq-rec] S4 session started", participant);
+    return { ok: true, participant, startedAtMs: t0, health };
+  } catch (e) {
+    s4Handle = null;
+    return { ok: false, error: String(e?.message ?? e) };
+  }
+};
+
+window.__stopHqRec = async function __stopHqRec() {
+  const t0 = Date.now();
+  try {
+    if (!s4Handle) return { ok: false, error: "not recording" };
+    await window.S4Recorder.stopAll();
+    let results = await s4Handle.exportResults();
+    try { results = JSON.parse(JSON.stringify(results ?? null)); } catch { results = String(results); }
+    s4Handle = null;
+    if (els.hqRec) els.hqRec.checked = false;
+    console.log("[hq-rec] S4 session stopped");
+    return { ok: true, stoppedAtMs: t0, results };
+  } catch (e) {
+    return { ok: false, error: String(e?.message ?? e) };
+  }
+};
 
 els.join.addEventListener("click", () => {
   joinRoom().catch((e) => {
@@ -59,7 +186,8 @@ async function joinRoom() {
   }
 
   room = new Room({
-    adaptiveStream: true,
+    // ?adaptive=0 lets an A/B subscriber pin a simulcast layer via setVideoQuality
+    adaptiveStream: urlFlag("adaptive", "1") !== "0",
     dynacast: true,
   });
 
@@ -77,7 +205,20 @@ async function joinRoom() {
   });
 
   await room.connect(url, token);
+  window.__lkRoom = room;
   setStatus(`connected — ${roomName}`);
+
+  // Chromium hides encoderImplementation/decoderImplementation/powerEfficientEncoder unless the page is
+  // capturing. ?unlockStats=1 holds a disabled (unpublished) mic track so file/none pages expose them.
+  if (urlFlag("unlockStats") === "1" && !window.__unlockTrack) {
+    try {
+      const s = await navigator.mediaDevices.getUserMedia({ audio: true });
+      window.__unlockTrack = s.getAudioTracks()[0];
+      window.__unlockTrack.enabled = false;
+    } catch (e) {
+      console.warn("[unlockStats] getUserMedia failed", e?.message ?? e);
+    }
+  }
 
   const mode = els.mediaMode?.value ?? "canvas";
   if (mode === "camera") {
@@ -89,13 +230,24 @@ async function joinRoom() {
       video: { resolution: VideoPresets.h720.resolution },
     });
     for (const track of tracks) {
-      await room.localParticipant.publishTrack(track);
-      if (track.kind === Track.Kind.Video) track.attach(els.localVideo);
+      if (track.kind === Track.Kind.Video) {
+        await room.localParticipant.publishTrack(track, simulcastPublishOptions("camera"));
+        track.attach(els.localVideo);
+      } else {
+        await room.localParticipant.publishTrack(track, { name: "mic" });
+      }
     }
-    setStatus(`connected — ${roomName} (camera)`);
+    setPublishedStream(tracks.map((tr) => tr.mediaStreamTrack));
+    setStatus(`connected — ${roomName} (camera, layers=${layerCount()})`);
+    if (els.hqRec?.checked) await window.__startHqRec();
+  } else if (mode === "file") {
+    await publishFileTrack("/media/take4-raw.webm");
+    setStatus(`connected — ${roomName} (file, layers=${layerCount()})`);
+    if (els.hqRec?.checked) await window.__startHqRec();
   } else if (mode === "canvas") {
     await publishCanvasTrack();
-    setStatus(`connected — ${roomName} (canvas, no cam)`);
+    setStatus(`connected — ${roomName} (canvas, layers=${layerCount()})`);
+    if (els.hqRec?.checked) await window.__startHqRec();
   } else {
     setStatus(`connected — ${roomName} (subscribe-only, no publish)`);
   }
@@ -113,6 +265,10 @@ async function joinRoom() {
 async function leaveRoom() {
   stopStatsPolling();
   stopCanvas();
+  stopFile();
+  if (s4Handle) { try { await window.__stopHqRec(); } catch {} }
+  window.__publishedStream = null;
+  if (window.__unlockTrack) { window.__unlockTrack.stop(); window.__unlockTrack = null; }
   byteSnapshots.clear();
   clearStatsTable();
   removeAllRemoteTiles();
@@ -122,12 +278,95 @@ async function leaveRoom() {
     await room.disconnect();
     room = null;
   }
+  window.__lkRoom = null;
 
   setStatus("disconnected");
   els.join.disabled = false;
   els.leave.disabled = true;
 }
 
+
+
+/** @type {HTMLVideoElement | null} */
+let fileVideoEl = null;
+
+async function publishFileTrack(src) {
+  stopFile();
+  const video = document.createElement("video");
+  video.src = src;
+  video.loop = true;
+  video.muted = true;
+  video.playsInline = true;
+  video.crossOrigin = "anonymous";
+  video.style.display = "none";
+  document.body.appendChild(video);
+  fileVideoEl = video;
+  await new Promise((resolve, reject) => {
+    video.onloadeddata = () => resolve();
+    video.onerror = () => reject(new Error(`file media failed: ${src}`));
+  });
+  await video.play();
+  const vTrack = video.captureStream().getVideoTracks()[0];
+  if (!vTrack) throw new Error("no video from file CaptureStream");
+
+  const audioUrl = "/media/take4-20s.wav";
+  const audioEl = document.createElement("audio");
+  audioEl.src = audioUrl;
+  audioEl.loop = true;
+  audioEl.crossOrigin = "anonymous";
+  audioEl.style.display = "none";
+  document.body.appendChild(audioEl);
+  window.__fileAudioEl = audioEl;
+  await new Promise((resolve, reject) => {
+    audioEl.onloadeddata = () => resolve();
+    audioEl.onerror = () => reject(new Error(`WAV failed: ${audioUrl}`));
+  });
+  await audioEl.play();
+  let aTrack = typeof audioEl.captureStream === "function"
+    ? audioEl.captureStream().getAudioTracks()[0]
+    : null;
+  if (!aTrack) {
+    video.muted = false;
+    aTrack = video.captureStream().getAudioTracks()[0] || null;
+  }
+
+  const localV = new LocalVideoTrack(vTrack, undefined, false);
+  await room.localParticipant.publishTrack(localV, simulcastPublishOptions("file-take4"));
+  localV.attach(els.localVideo);
+  if (aTrack) await room.localParticipant.publishTrack(aTrack, { name: "file-take4-wav-audio" });
+  setPublishedStream([vTrack, aTrack]);
+  console.log("[file-publish] layers=", layerCount());
+}
+
+/** Pin all remote video publications to LOW|MEDIUM|HIGH (needs ?adaptive=0). */
+window.__pinLayer = function __pinLayer(q = "HIGH") {
+  if (!room) return 0;
+  let n = 0;
+  for (const p of room.remoteParticipants.values()) {
+    for (const pub of p.trackPublications.values()) {
+      if (pub.kind === Track.Kind.Video && typeof pub.setVideoQuality === "function") {
+        pub.setVideoQuality(VideoQuality[q] ?? VideoQuality.HIGH);
+        n++;
+      }
+    }
+  }
+  return n;
+};
+
+function stopFile() {
+  if (fileVideoEl) {
+    try { fileVideoEl.pause(); } catch {}
+    try { fileVideoEl.removeAttribute("src"); fileVideoEl.load(); } catch {}
+    fileVideoEl.remove();
+    fileVideoEl = null;
+  }
+  if (window.__fileAudioEl) {
+    try { window.__fileAudioEl.pause(); } catch {}
+    try { window.__fileAudioEl.removeAttribute("src"); window.__fileAudioEl.load(); } catch {}
+    window.__fileAudioEl.remove();
+    window.__fileAudioEl = null;
+  }
+}
 
 async function publishCanvasTrack() {
   const canvas = document.createElement("canvas");
@@ -153,8 +392,9 @@ async function publishCanvasTrack() {
   const stream = canvas.captureStream(15);
   canvasVideoTrack = stream.getVideoTracks()[0];
   const local = new LocalVideoTrack(canvasVideoTrack, undefined, false);
-  await room.localParticipant.publishTrack(local, { name: "canvas-smoke" });
+  await room.localParticipant.publishTrack(local, simulcastPublishOptions("canvas-smoke"));
   local.attach(els.localVideo);
+  setPublishedStream([canvasVideoTrack]);
 }
 
 function stopCanvas() {

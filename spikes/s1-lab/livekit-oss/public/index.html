@@ -31,7 +31,19 @@
           <option value="canvas" selected>canvas CaptureStream (no cam)</option>
           <option value="none">none — join/subscribe only</option>
           <option value="camera">camera + mic (getUserMedia)</option>
+          <option value="file">file CaptureStream (take4 webm/wav)</option>
         </select>
+      </label>
+      <label>
+        Simulcast layers
+        <select id="simulcast-layers">
+          <option value="3" selected>3 (q/h/f — default)</option>
+          <option value="2">2 (low + high)</option>
+        </select>
+      </label>
+      <label class="check">
+        <input id="hq-rec" type="checkbox" />
+        HQ rec ON (Media S4Recorder on published stream)
       </label>
       <button id="join" type="button">Join</button>
       <button id="leave" type="button" disabled>Leave</button>

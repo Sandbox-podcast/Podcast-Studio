@@ -26,6 +26,8 @@ const MIME = {
   ".png": "image/png",
   ".ico": "image/png",
   ".svg": "image/svg+xml",
+  ".webm": "video/webm",
+  ".wav": "audio/wav",
 };
 
 createServer(async (req, res) => {
