@@ -619,3 +619,39 @@ The machine total read 100 at every sample in the window (it was 48 / 62 median 
 - The mic is opened via `unlockStats=1` in the test Edge only (needed for decoderImplementation). Loïc's own Edge and the webcam were not touched.
 - The régie's first attempt failed and was rerun.
 - The PP runs use the VP8 ping-pong source, so they are not directly comparable with the earlier take4-raw loop runs (02:39 / 03:07), which had a 60 s loop seam inside the window.
+
+### RESULTS — 2L-on ping-pong with the S4 rec forced to H.264 (laptop, 2026-10-06 04:37–04:41 Paris) — *indicatif, option d'amendement S4*
+
+Measurements only. No PASS/FAIL here (the Designer judges). n=1 × 120 s, loopback on one laptop. Raw data: `spikes/s1-lab/livekit-oss/scripts/ab/results-20261006-0437-pp-rech264/`. Received webm on the box: `/workspace/s1-soak/ab/run-023754-pp-rech264/ab-file-2L-on-pp-rech264-sub-hi-rx.webm`.
+
+The condition `ab-file-2L-on-pp-rech264` matches the 04:00 `ab-file-2L-on-pp` run: VP8 2L live publish, take4 ping-pong source, warmup 20 s, window 120 s, rec ON. Only the rec call changed: Media drop-in v2.2 `__s4.startSession({stream, apiBase, durationSec:120, label:'raw', participant:'ab-file-2L-on-pp-h264', mimeType:'video/webm;codecs=h264', vBitrate:2500000, timeslice:1000})`. A guard aborts the condition if `recorderMimeType` lacks h264/avc1. It did not trigger.
+
+| item | value |
+| --- | --- |
+| run | wrapper 04:37:54 → 04:41:03 (exit 0) · single run, no retry |
+| pre-run idle CPU (15 s, no Edge) | WMI `_Total` median **18 %** (samples 10–45) · node os.cpus median **21 %** (04:37:56 → 04:38:15) |
+| window / rec | 04:38:45.622 → 04:40:46.771 · rec 04:38:45.898 → 04:40:46.767 stopped+exported |
+| recorderMimeType | requested / picked / actual = **`video/webm;codecs=h264`** · s4Errors [] |
+| S4 object (MinIO `podcast-recordings-poc`) | **`spike/s4-dropin/ab-file-2L-on-pp-h264-raw-1791254325802.webm`**. Multipart complete ok: 8 parts, 40 194 443 B local = remote, sha256 `6ed7ecdf…051cabed`, 118 chunks, measured ≈ 2.68 Mb/s. Results key `…-1791254325802.results.json` |
+| HW encode | NVENC 0 % and adapter 0x12950 VideoEncode 0 over the window. Adapter 0x1163E has no VideoEncode engine. So the H.264 rec encode did not use a GPU encode engine (software encoder implied; implementation name not exposed) |
+
+**Side by side** (publisher HD rid `h`; received = HD-pinned sub; distinct fps on the received webm, native size, threshold **0.3**; source ceiling 0.9944):
+
+| | 2L-off-pp (03:59) | 2L-on-pp, rec VP8 (04:02) | **2L-on-pp, rec H.264 (04:38)** |
+| --- | --- | --- | --- |
+| publisher HD med | 1280×720 @30 | 640×360 @30 | **640×360 @29** |
+| publisher QLR durations (s) | none 118.1 | cpu 108.1 · none 10.5 | **cpu 108.9 · none 9.4** |
+| received HD res (2 s samples, n=59) | 1280×720 ×59 | 640×360 ×41 · 960×540 ×12 · 1280×720 ×6 | **640×360 ×42 · 960×540 ×12 · 1280×720 ×5** |
+| received webm frames | 3562 (all 720p) | 3539 (720p 340 · 540p 709 · 360p 2490) | **3089 (720p 293 · 540p 730 · 360p 2066)** |
+| varsize ≥24 share, near / exact | 0.9752 / 0.9752 | 0.9262 / 0.9508 | **0.7025 / 0.7190** |
+| ratio to source ceiling 0.9944 | 0.981 | 0.931 | **0.706** |
+| Media v2: near fps · p5 · windows <24 | 28.662 · 25 · 3/121 | 28.914 · 23 · 9/122 | **25.224 · 15 · 36/121** |
+| getStats freezes Δ (count / s), sub-hi | 1 / 0.235 | 1 / 0.218 | **0 / 0** |
+| near-distinct gaps >200 ms (v2) | 1 (232 ms) | 0 | **0** |
+| publisher Edge CPU % machine med (1-core) | 14.7 (117.7) | 22.8 (182.4) | **18.9 (151.2)** |
+| machine total CPU med | 48 | 62 | **61** |
+| idle CPU before run | n/a | n/a | **18 (WMI) / 21 (node)** |
+
+**Where the lower ≥24 share comes from:** in the last ~30 s of the window (2 s samples 45–59, about 04:40:16 → 04:40:46), the publisher's HD layer encoded at **15 fps**: `framesPerSecond` was 15–16 on the publisher `h` rid and on the received track, with QLR = cpu. Before that it ran at 29–31 fps. The received webm follows the same pattern (exact-hash ≥24 share 0.719). Machine total CPU was 70–85 % around 04:40:00–04:40:20, then 46–58 %. In the 04:00 VP8-rec run the HD layer stayed at 29–31 fps for the whole window. With n=1, the cause is NOT VALIDATED: it could be the software H.264 rec encode in the publisher tab, other host load, or thermal state.
+
+**Caveats:** n=1 × 120 s; loopback; runs are 35–39 min apart, and thermal and background state were not controlled. Near-dup MAD depends on resolution, and the 2L-on rows are mostly 640×360. The received-track recorder is VP8 in the subscriber Edge in all three runs. The mic is opened via `unlockStats` in the test Edge only. Loïc's Edge, the webcam and the firewall were not touched.
