@@ -36,7 +36,7 @@ const row = (a) => a.map(csvq).join(",") + "\n";
 
 const INIT_PC = () => { const O = window.RTCPeerConnection; window.__pcs = []; window.RTCPeerConnection = function (...a) { const pc = new O(...a); window.__pcs.push(pc); return pc; }; window.RTCPeerConnection.prototype = O.prototype; Object.setPrototypeOf(window.RTCPeerConnection, O); };
 async function launch(marker) {
-  const ctx = await chromium.launchPersistentContext(join(tmpdir(), marker), { channel: CHANNEL, headless: false, viewport: { width: 1600, height: 1000 },
+  const ctx = await chromium.launchPersistentContext(join(tmpdir(), marker), { ...(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : { channel: CHANNEL }), headless: process.env.HEADLESS === "1", viewport: { width: 1600, height: 1000 },
     args: ["--autoplay-policy=no-user-gesture-required", "--disable-background-timer-throttling", "--disable-renderer-backgrounding", "--disable-backgrounding-occluded-windows", "--use-fake-ui-for-media-stream", "--no-first-run"] });
   await ctx.grantPermissions(["microphone"], { origin: new URL(HARNESS).origin }).catch(() => {});
   await ctx.addInitScript(INIT_PC);
