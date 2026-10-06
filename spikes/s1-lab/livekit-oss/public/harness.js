@@ -353,6 +353,48 @@ window.__pinLayer = function __pinLayer(q = "HIGH") {
   return n;
 };
 
+// --- Subscriber-side rec of the RECEIVED video track (for tools/distinct_fps.py) ---
+/** @type {MediaRecorder | null} */
+let subRec = null;
+/** @type {Blob[]} */
+let subChunks = [];
+window.__startSubRec = function __startSubRec(opts = {}) {
+  if (subRec && subRec.state !== "inactive") return { ok: true, already: true };
+  let mst = null, from = null;
+  for (const p of room?.remoteParticipants.values() ?? []) {
+    for (const pub of p.trackPublications.values()) {
+      if (pub.kind === Track.Kind.Video && pub.track?.mediaStreamTrack) { mst = pub.track.mediaStreamTrack; from = p.identity; break; }
+    }
+    if (mst) break;
+  }
+  if (!mst) return { ok: false, error: "no received video track" };
+  const mime = MediaRecorder.isTypeSupported("video/webm;codecs=vp8") ? "video/webm;codecs=vp8" : "video/webm";
+  subChunks = [];
+  subRec = new MediaRecorder(new MediaStream([mst]), { mimeType: mime, videoBitsPerSecond: opts.vBitrate ?? 2_500_000 });
+  subRec.ondataavailable = (e) => { if (e.data?.size) subChunks.push(e.data); };
+  subRec.start(1000);
+  const s = mst.getSettings?.() ?? {};
+  return { ok: true, mime, from, settings: { width: s.width ?? null, height: s.height ?? null, frameRate: s.frameRate ?? null } };
+};
+/** Stops and triggers a browser download named `filename` (runner saves it via Playwright download event). */
+window.__stopSubRec = function __stopSubRec(filename = "sub-rx.webm") {
+  return new Promise((resolve) => {
+    if (!subRec || subRec.state === "inactive") { resolve({ ok: false, error: "not recording" }); return; }
+    subRec.onstop = () => {
+      const blob = new Blob(subChunks, { type: subRec.mimeType || "video/webm" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      subRec = null;
+      resolve({ ok: true, bytes: blob.size, chunks: subChunks.length });
+    };
+    subRec.stop();
+  });
+};
+
 function stopFile() {
   if (fileVideoEl) {
     try { fileVideoEl.pause(); } catch {}

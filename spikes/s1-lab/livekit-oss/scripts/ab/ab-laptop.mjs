@@ -7,6 +7,8 @@
 // SAFETY LATCH: refuses to run unless AB_GO=1 (set only after lead confirms Vision freed the 3070).
 //
 // Env: HARNESS (http://localhost:5190) AB_PATH (/ab/index.html) CONDS (all | comma list of names)
+//      CONDS default = ab-file-3L-off,ab-file-3L-on,ab-file-2L-off,ab-file-2L-on,ab-cam-3L-on (or "full8")
+//      SUB_REC (1) SUB_REC_BITRATE (2500000)
 //      WARMUP_S (20) REC_S (120) COOLDOWN_S (10) SAMPLE_MS (2000) S4_BASE (http://127.0.0.1:3320)
 //      CHANNEL (msedge) OUT_DIR  ON_S4_FAIL (skip|abort, default skip)
 import { mkdirSync, appendFileSync, writeFileSync, existsSync } from "node:fs";
@@ -40,11 +42,16 @@ const stamp = new Date().toISOString().replace(/[-:]/g, "").slice(0, 15);
 const OUT_DIR = process.env.OUT_DIR ?? join(__dir, `ab-${stamp}`);
 mkdirSync(OUT_DIR, { recursive: true });
 
-// Default matrix (8): source x layers x rec, OFF/ON adjacent so each pair shares conditions.
-const ALL = [];
-for (const src of ["cam", "file"]) for (const L of [3, 2]) for (const rec of ["off", "on"]) ALL.push({ name: `ab-${src}-${L}L-${rec}`, src, L, rec: rec === "on" });
-const want = (process.env.CONDS ?? "all").split(",").map((s) => s.trim()).filter(Boolean);
-const CONDS = want.includes("all") ? ALL : ALL.filter((c) => want.includes(c.name));
+// Lead's reduced default order (5). Any ab-{cam,file}-{2,3}L-{on,off} name is accepted via CONDS.
+const parseCond = (name) => { const m = /^ab-(cam|file)-([23])L-(on|off)$/.exec(name); return m ? { name, src: m[1], L: Number(m[2]), rec: m[3] === "on" } : null; };
+const DEFAULT = ["ab-file-3L-off", "ab-file-3L-on", "ab-file-2L-off", "ab-file-2L-on", "ab-cam-3L-on"];
+const FULL8 = []; for (const src of ["cam", "file"]) for (const L of [3, 2]) for (const rec of ["off", "on"]) FULL8.push(`ab-${src}-${L}L-${rec}`);
+const want = (process.env.CONDS ?? "default").split(",").map((s) => s.trim()).filter(Boolean);
+const names = want.includes("default") || want.includes("all") ? DEFAULT : want.includes("full8") ? FULL8 : want;
+const CONDS = names.map(parseCond).filter(Boolean);
+// HD-pinned subscriber records the RECEIVED track per condition -> <cond>-sub-hi-rx.webm (distinct_fps.py)
+const SUB_REC = process.env.SUB_REC !== "0";
+const SUB_REC_BITRATE = Number(process.env.SUB_REC_BITRATE ?? 2_500_000);
 if (!CONDS.length) { console.error("[ab] no matching CONDS", want); process.exit(2); }
 
 const paris = (ms = Date.now()) => {
@@ -83,7 +90,7 @@ const IN_CSV = join(OUT_DIR, "inbound-series.csv");
 const TIMES_CSV = join(OUT_DIR, "conditions-timestamps.csv");
 appendFileSync(OUT_CSV, row(["cond", "t_rel_s", "at_paris", "rid", "ssrc", "w", "h", "fps", "bytesSent", "framesSent", "active", "qlr", "qlrDur_none", "qlrDur_cpu", "qlrDur_bandwidth", "qlrDur_other", "qlrResChanges", "encoderImplementation", "powerEfficientEncoder", "scalabilityMode", "targetBitrate"]));
 appendFileSync(IN_CSV, row(["cond", "t_rel_s", "at_paris", "sub", "pin", "kind", "ssrc", "w", "h", "fps", "bytesReceived", "packetsLost", "jitter", "freezeCount", "totalFreezesDuration", "decoderImplementation"]));
-appendFileSync(TIMES_CSV, row(["cond", "status", "join_at", "window_start_paris", "window_end_paris", "rec_start_paris", "rec_stop_paris", "rec_result", "note"]));
+appendFileSync(TIMES_CSV, row(["cond", "status", "join_at", "window_start_paris", "window_end_paris", "rec_start_paris", "rec_stop_paris", "rec_result", "note", "subrec_start_paris", "subrec_stop_paris", "subrec_file", "subrec_bytes"]));
 
 const INIT_PC = () => {
   const Orig = window.RTCPeerConnection;
@@ -134,7 +141,7 @@ async function launch(marker) {
   if (FAKE_MEDIA) args.push("--use-fake-device-for-media-stream");
   const ctx = await chromium.launchPersistentContext(join(tmpdir(), marker), {
     ...(CHROME_PATH ? { executablePath: CHROME_PATH } : { channel: CHANNEL }),
-    headless: process.env.HEADLESS === "1", viewport: { width: 1400, height: 900 }, args,
+    headless: process.env.HEADLESS === "1", acceptDownloads: true, viewport: { width: 1400, height: 900 }, args,
   });
   await ctx.grantPermissions(["camera", "microphone"], { origin: new URL(HARNESS).origin }).catch(() => {});
   await ctx.addInitScript(INIT_PC);
@@ -145,10 +152,10 @@ const summaries = [];
 
 for (const c of CONDS) {
   const room = `s1-${c.name}-${stamp.slice(-6)}`;
-  const t = { cond: c.name, status: "pending", join_at: null, ws: null, we: null, rs: null, re: null, rec_result: "", note: "" };
+  const t = { cond: c.name, status: "pending", join_at: null, ws: null, we: null, rs: null, re: null, rec_result: "", note: "", srs: null, sre: null, sfile: "", sbytes: "" };
   if (c.rec && !s4Ok) {
     t.status = "SKIPPED"; t.note = "S4 health failed";
-    appendFileSync(TIMES_CSV, row([c.name, t.status, "", "", "", "", "", "", t.note]));
+    appendFileSync(TIMES_CSV, row([c.name, t.status, "", "", "", "", "", "", t.note, "", "", "", ""]));
     log(`${c.name} SKIPPED (S4 health failed)`); continue;
   }
   log(`=== ${c.name} room=${room} src=${c.src} layers=${c.L} rec=${c.rec ? "ON" : "OFF"}`);
@@ -186,6 +193,14 @@ for (const c of CONDS) {
 
     // ---- measurement window (= rec window) ----
     const wsMs = Date.now(); t.ws = paris(wsMs);
+    const hi = subs.find((s) => s.pin === "HIGH");
+    if (SUB_REC && hi) {
+      const r = await hi.pg.evaluate((b) => window.__startSubRec({ vBitrate: b }), SUB_REC_BITRATE).catch((e) => ({ ok: false, error: String(e) }));
+      t.srs = paris();
+      writeFileSync(join(OUT_DIR, `${c.name}-sub-hi-rec-start.json`), JSON.stringify(r, null, 2));
+      if (!r.ok) t.note = `subrec start: ${r.error}`;
+      log(`${c.name} sub-hi rec start ${JSON.stringify(r).slice(0, 160)}`);
+    }
     if (c.rec) {
       const r = await pub.evaluate((o) => window.__startHqRec(o), { cond: c.name, durationSec: REC_S });
       t.rs = paris(); t.rec_result = r.ok ? "started" : `START FAIL ${r.error}`;
@@ -210,6 +225,20 @@ for (const c of CONDS) {
         }
       }
     }
+    if (SUB_REC && hi) {
+      const fname = `${c.name}-sub-hi-rx.webm`;
+      try {
+        const dlP = hi.pg.waitForEvent("download", { timeout: 60000 });
+        const r = await hi.pg.evaluate((f) => window.__stopSubRec(f), fname);
+        t.sre = paris();
+        if (r.ok) {
+          const dl = await dlP;
+          await dl.saveAs(join(OUT_DIR, fname));
+          t.sfile = fname; t.sbytes = r.bytes;
+        } else { dlP.catch(() => {}); t.note = `subrec stop: ${r.error}`; }
+        log(`${c.name} sub-hi rec stop ${JSON.stringify(r)}`);
+      } catch (e) { t.note = `subrec save: ${String(e?.message ?? e).split("\n")[0]}`; log(`${c.name} ${t.note}`); }
+    }
     if (c.rec) {
       const r = await pub.evaluate(() => window.__stopHqRec());
       t.re = paris(); t.rec_result = r.ok ? "stopped+exported" : `STOP FAIL ${r.error}`;
@@ -228,7 +257,7 @@ for (const c of CONDS) {
     await pubCtx?.close().catch(() => {});
     try { cpu?.p.kill(); } catch {}
   }
-  appendFileSync(TIMES_CSV, row([c.name, t.status, t.join_at, t.ws, t.we, t.rs, t.re, t.rec_result, t.note]));
+  appendFileSync(TIMES_CSV, row([c.name, t.status, t.join_at, t.ws, t.we, t.rs, t.re, t.rec_result, t.note, t.srs, t.sre, t.sfile, t.sbytes]));
 
   // ---- per-condition summary (raw series stays authoritative) ----
   const rids = [...new Set(series.out.map((o) => o.rid ?? "single"))];
@@ -255,12 +284,13 @@ for (const c of CONDS) {
 }
 
 // Markdown timestamp table for Media alignment
-let md = `# S1 laptop A/B — ${paris()}\n\nHarness ${HARNESS}${AB_PATH} · S4 ${S4_BASE} · warmup ${WARMUP_S}s · window ${REC_S}s · sample ${SAMPLE_MS}ms\n\n| cond | status | window start (Paris) | window end (Paris) | rec start | rec stop | rec |\n| --- | --- | --- | --- | --- | --- | --- |\n`;
+let md = `# S1 laptop A/B — ${paris()}\n\nHarness ${HARNESS}${AB_PATH} · S4 ${S4_BASE} · warmup ${WARMUP_S}s · window ${REC_S}s · sample ${SAMPLE_MS}ms\n\n| cond | status | window start (Paris) | window end (Paris) | rec start | rec stop | rec | sub-hi rx webm |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n`;
 const { readFileSync } = await import("node:fs");
 for (const line of readFileSync(TIMES_CSV, "utf8").trim().split("\n").slice(1)) {
   const f = line.split(",");
-  md += `| ${f[0]} | ${f[1]} | ${f[3] || "—"} | ${f[4] || "—"} | ${f[5] || "—"} | ${f[6] || "—"} | ${f[7] || (f[8] ? f[8] : "OFF")} |\n`;
+  md += `| ${f[0]} | ${f[1]} | ${f[3] || "—"} | ${f[4] || "—"} | ${f[5] || "—"} | ${f[6] || "—"} | ${f[7] || (f[8] ? f[8] : "OFF")} | ${f[11] ? `${f[11]} (${f[12]} B)` : "—"} |\n`;
 }
+md += `\nDistinct fps (box): \`python3 /workspace/podcast-studio/tools/distinct_fps.py --threshold 0.5 --json-out r.json <cond>-sub-hi-rx.webm\`\n`;
 md += `\nRaw: outbound-rid-series.csv · inbound-series.csv · <cond>-cpu.csv · <cond>-s4-results.json · ab-summary.json\n`;
 writeFileSync(join(OUT_DIR, "AB-TIMESTAMPS.md"), md);
 log("done", OUT_DIR);

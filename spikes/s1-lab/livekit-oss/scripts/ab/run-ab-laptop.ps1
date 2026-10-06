@@ -3,7 +3,7 @@
 # from spikes/s1-lab/livekit-oss/public/. Deploys them to public\ab\ (root harness untouched).
 param(
   [switch]$VisionFreeConfirmed,
-  [string]$Conds = 'all',          # e.g. 'ab-cam-3L-off,ab-cam-3L-on'
+  [string]$Conds = 'default',      # default = file-3L-off,file-3L-on,file-2L-off,file-2L-on,cam-3L-on | 'full8' | comma list
   [int]$RecSec = 120,
   [int]$WarmupSec = 20,
   [string]$S4Base = 'http://127.0.0.1:3320',
