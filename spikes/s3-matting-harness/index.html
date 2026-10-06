@@ -52,11 +52,14 @@
       }
       .stage {
         position: relative;
-        display: inline-block;
-        background: #000;
+        width: 1280px;
+        max-width: 100%;
+        aspect-ratio: 16 / 9;
+        background: #0a0a0c;
+        border: 2px solid #5a6578;
         border-radius: 8px;
         overflow: hidden;
-        max-width: 100%;
+        /* Must have non-zero box: children are position:absolute */
       }
       video,
       canvas {
@@ -72,15 +75,39 @@
         pointer-events: none;
       }
       #rawVideo {
-        visibility: hidden;
+        /* Hidden feed for MediaPipe — not the visible preview */
+        position: absolute;
         width: 1px;
         height: 1px;
-        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+      #smokeVideo {
+        display: block;
+        width: 100%;
+        max-width: 640px;
+        aspect-ratio: 16 / 9;
+        background: #000;
+        border: 2px solid #3d7a4a;
+        border-radius: 8px;
+        object-fit: contain;
+      }
+      .smoke-box {
+        margin: 1rem 0;
+        padding: 0.75rem 1rem;
+        border: 1px dashed #3d7a4a;
+        border-radius: 8px;
+      }
+      .smoke-box h2 {
+        font-size: 0.95rem;
+        margin: 0 0 0.5rem;
+        font-weight: 600;
       }
       .overlay {
         position: absolute;
         top: 8px;
         left: 8px;
+        z-index: 2;
         font-family: ui-monospace, monospace;
         font-size: 12px;
         line-height: 1.45;
@@ -132,6 +159,10 @@
         color: #8bc;
         margin: 0.35rem 0 0;
       }
+      .lk-status.err {
+        color: #f88;
+        font-weight: 600;
+      }
     </style>
   </head>
   <body>
@@ -139,7 +170,7 @@
     <p class="banner">
       Spike uniquement — publish LiveKit OSS <strong>optionnel</strong> (smoke S1
       <code>s1-lab</code>). Ce n’est pas le pass S3 officiel. Mesures FPS à reporter
-      dans <code>spikes/S3-matting.md</code> après inventaire machines + go.
+      dans <code>spikes/S3-matting.md</code> après inventaire machines + go. Nuit: <strong>Load file as cam</strong> (WebM raw) ou <code>?file=run4-raw.webm</code> (copie sous harness).
     </p>
 
     <div class="controls">
@@ -159,13 +190,15 @@
       <label>
         Backend
         <select id="backend">
-          <option value="mock">Mock (alpha simulé)</option>
-          <option value="mediapipe">MediaPipe (selfie, CDN)</option>
+          <option value="mediapipe" selected>MediaPipe (selfie, CDN)</option>
+          <option value="mock">Mock (ellipse — tests UI only)</option>
           <option value="webgpu">WebGPU (stub)</option>
           <option value="wasm">WASM (stub)</option>
         </select>
       </label>
       <button type="button" id="btnCamera">Démarrer caméra</button>
+      <button type="button" id="btnLoadFile">Load file as cam</button>
+      <input type="file" id="fileCamInput" accept="video/webm,video/mp4,video/*" hidden />
       <button type="button" id="btnLoop" disabled>Start matting loop</button>
       <button type="button" id="btnStop" disabled>Stop</button>
       <label style="flex-direction: row; align-items: center; gap: 0.5rem">
@@ -173,16 +206,23 @@
         Fallback (raw camera)
       </label>
       <button type="button" id="btnExport" disabled>Export JSON</button>
+      <button type="button" id="btnSmokeVideo">Smoke vidéo nue (sans canvas)</button>
     </div>
 
     <div class="stage" id="stage">
       <canvas id="previewCanvas" width="1280" height="720"></canvas>
       <video id="rawVideo" playsinline muted autoplay></video>
-      <div class="overlay" id="overlay">FPS: —</div>
+      <div class="overlay" id="overlay">FPS: —\nstage v8 matfix8</div>
     </div>
     <p class="status" id="status">
-      Matting : caméra optionnelle. LiveKit smoke : activer publish + synthetic (sans getUserMedia).
+      Cadre 16:9 ci-dessus = preview. Clique « Démarrer caméra » — le statut passe en bleu/rouge ici.
     </p>
+
+    <div class="smoke-box" id="smokeBox">
+      <h2>Smoke isolé — &lt;video&gt; nu (pas de canvas / MediaPipe)</h2>
+      <video id="smokeVideo" playsinline muted autoplay></video>
+      <p class="status" id="smokeStatus">Inactif — bouton « Smoke vidéo nue ».</p>
+    </div>
 
     <fieldset class="livekit" id="livekitSection">
       <legend>LiveKit publish (optionnel, off par défaut)</legend>
@@ -192,8 +232,8 @@
           Activer publish LiveKit
         </label>
         <label style="flex-direction: row; align-items: center; gap: 0.5rem">
-          <input type="checkbox" id="lkSynthetic" checked disabled />
-          Smoke synthétique (canvas + audio silencieux, pas de caméra)
+          <input type="checkbox" id="lkSynthetic" disabled />
+          Smoke synthétique (sans cam — désactivé dès qu’une cam/matting tourne)
         </label>
       </div>
       <div class="controls" id="lkFields">
@@ -231,7 +271,18 @@
       </label>
       <p class="lk-status" id="lkStatus">LiveKit: désactivé</p>
     </fieldset>
+    <fieldset class="livekit" id="s4Section">
+      <legend>S4 record WebM (avant SFU) — drop-in Media</legend>
+      <div class="controls">
+        <button type="button" id="btnS4Start" disabled>Start dual record ~60s</button>
+        <button type="button" id="btnS4Stop" disabled>Stop record</button>
+      </div>
+      <p class="lk-status" id="s4Status">S4: idle — matting puis dual raw+matted ~60s (onglet premier plan)</p>
+    </fieldset>
 
-    <script type="module" src="./js/harness.js"></script>
+    <script src="http://127.0.0.1:3320/s4-recorder.js?v=2.1"></script>
+
+
+    <script type="module" src="./js/harness.js?v=s4-matte9-ab"></script>
   </body>
 </html>
