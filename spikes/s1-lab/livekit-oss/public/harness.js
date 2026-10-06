@@ -116,7 +116,11 @@ window.__s4Health = async function __s4Health() {
   }
 };
 
-/** @param {{cond?: string, durationSec?: number, vBitrate?: number}} [opts] */
+/**
+ * @param {{cond?: string, durationSec?: number, vBitrate?: number, mimeType?: string, participant?: string, timeslice?: number}} [opts]
+ * opts.mimeType (opt-in, Media drop-in v2.2+): forces the S4 MediaRecorder container/codec, e.g. 'video/webm;codecs=h264'.
+ * Without it the original call below is used unchanged (recorder picks its default, VP8 on Edge).
+ */
 window.__startHqRec = async function __startHqRec(opts = {}) {
   const t0 = Date.now();
   try {
@@ -128,7 +132,28 @@ window.__startHqRec = async function __startHqRec(opts = {}) {
     await loadS4Recorder();
     if (!window.S4Recorder?.startSession) return { ok: false, error: "S4Recorder.startSession missing" };
     const cond = opts.cond ?? urlFlag("cond", "manual");
-    const participant = cond.startsWith("ab-") ? cond : `ab-${cond}`;
+    const participant = opts.participant ?? (cond.startsWith("ab-") ? cond : `ab-${cond}`);
+    if (opts.mimeType) {
+      // Forced-mime path (v2.2 __s4.startSession). stream/apiBase/durationSec are the same plumbing as the default
+      // path (without `stream` the drop-in would record its own synthetic canvas, not the published track).
+      const startSession = window.__s4?.startSession ?? window.S4Recorder.startSession;
+      s4Handle = await startSession({
+        stream,
+        apiBase: S4_BASE,
+        durationSec: opts.durationSec ?? 120,
+        label: "raw",
+        participant,
+        mimeType: opts.mimeType,
+        vBitrate: opts.vBitrate ?? 2_500_000,
+        timeslice: opts.timeslice ?? 1000,
+      });
+      const rr = (() => { try { return s4Handle.results(); } catch { return null; } })();
+      if (els.hqRec) els.hqRec.checked = true;
+      console.log("[hq-rec] S4 session started (forced mime)", participant, rr?.recorderMimeType);
+      return { ok: true, participant, startedAtMs: t0, health, requestedMimeType: opts.mimeType,
+               recorderMimeType: rr?.recorderMimeType ?? null, pickedMimeType: rr?.mimeType ?? null,
+               s4Errors: rr?.errors ?? [] };
+    }
     s4Handle = await window.S4Recorder.startSession({
       stream,
       label: "raw",
