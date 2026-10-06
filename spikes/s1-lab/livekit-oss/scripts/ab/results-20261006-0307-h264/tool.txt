@@ -1,0 +1,4 @@
+ab-file-3L-off-h264-sub-hi-rx.webm: frames=3081 dur=122.017s container_fps=25.249 distinct_fps_exact=25.251 distinct_fps_near=20.571 thresh=0.5 max_repeat=1f/0.0ms max_neardup=19f/899.0ms win≥24=0.6148 (min=9)
+ab-file-3L-on-h264-sub-hi-rx.webm: frames=3367 dur=120.398s container_fps=27.964 distinct_fps_exact=27.966 distinct_fps_near=19.668 thresh=0.5 max_repeat=1f/0.0ms max_neardup=30f/961.0ms win≥24=0.843 (min=7)
+ab-file-2L-off-h264-sub-hi-rx.webm: frames=3649 dur=121.969s container_fps=29.917 distinct_fps_exact=29.917 distinct_fps_near=26.933 thresh=0.5 max_repeat=1f/0.0ms max_neardup=6f/155.0ms win≥24=1.0 (min=27)
+ab-file-2L-on-h264-sub-hi-rx.webm: frames=3573 dur=121.062s container_fps=29.513 distinct_fps_exact=29.514 distinct_fps_near=24.624 thresh=0.5 max_repeat=1f/0.0ms max_neardup=10f/311.0ms win≥24=0.9918 (min=2)

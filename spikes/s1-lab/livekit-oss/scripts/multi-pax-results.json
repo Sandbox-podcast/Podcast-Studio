@@ -1,0 +1,6892 @@
+{
+  "test": "S1 multi-pax smoke — LiveKit OSS self-host",
+  "startedAt": "2026-10-05T18:40:56 Europe/Paris",
+  "endedAt": "2026-10-05T18:41:51 Europe/Paris",
+  "config": {
+    "HARNESS_URL": "http://127.0.0.1:5190",
+    "ROOM": "s1-lab",
+    "N": 5,
+    "HOLD_S": 50,
+    "SAMPLE_MS": 5000,
+    "HEADLESS": true,
+    "CHROME": "/usr/bin/google-chrome",
+    "publishMode": "canvas"
+  },
+  "verdict": "PASS",
+  "criteria": {
+    "allConnected": "5/5",
+    "eachSawVideoOutOrIn": "5/5"
+  },
+  "aggregate": {
+    "out_video": {
+      "rows": 50,
+      "rtt_ms": {
+        "n": 50,
+        "min": 0,
+        "median": 1,
+        "max": 3
+      },
+      "bitrate_kbps": {
+        "n": 48,
+        "min": 73,
+        "median": 115,
+        "max": 2410
+      },
+      "fps": {
+        "n": 50,
+        "min": 15,
+        "median": 15,
+        "max": 15
+      },
+      "resolutions": [
+        "320×180",
+        "1280×720"
+      ]
+    },
+    "in_video": {
+      "rows": 200,
+      "rtt_ms": {
+        "n": 200,
+        "min": 0,
+        "median": 1,
+        "max": 3
+      },
+      "bitrate_kbps": {
+        "n": 200,
+        "min": 73,
+        "median": 112,
+        "max": 164
+      },
+      "loss_pct": {
+        "n": 200,
+        "min": 0,
+        "median": 0,
+        "max": 0
+      },
+      "jitter_ms": {
+        "n": 200,
+        "min": 0,
+        "median": 0,
+        "max": 9
+      },
+      "fps": {
+        "n": 200,
+        "min": 14,
+        "median": 15,
+        "max": 16
+      },
+      "resolutions": [
+        "320×180"
+      ]
+    }
+  },
+  "caveats": [
+    "localhost only (browser + SFU on same box)",
+    "canvas CaptureStream synthetic video @15fps, no audio",
+    "not 5 real cams",
+    "not LAN / multi-machine",
+    "headless Chrome in one process; stats scraped from harness table (polled 2s)"
+  ],
+  "participants": [
+    {
+      "identity": "mp-1",
+      "connected": true,
+      "joinMs": 1549,
+      "joinError": null,
+      "statusAtFail": null,
+      "finalStatus": "connected — s1-lab (canvas, no cam)",
+      "leftCleanly": true,
+      "leaveError": null,
+      "sawOutboundVideo": true,
+      "sawInboundVideo": true,
+      "remotesSeen": [
+        "mp-2",
+        "mp-3",
+        "mp-4",
+        "mp-5"
+      ],
+      "lastRemoteTiles": [
+        "mp-2",
+        "mp-3",
+        "mp-4",
+        "mp-5"
+      ],
+      "lastRows": [
+        {
+          "participant": "mp-1",
+          "track": "video",
+          "dir": "out",
+          "bitrate": "140 Kbps",
+          "loss": "—",
+          "jitter": "—",
+          "rtt": "1.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-2",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "147 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "1.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-3",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "149 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "1.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-4",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "129 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "1.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-5",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "114 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "1.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        }
+      ],
+      "out": {
+        "rtt_ms": {
+          "n": 10,
+          "min": 0,
+          "median": 1,
+          "max": 1
+        },
+        "bitrate_kbps": {
+          "n": 9,
+          "min": 89,
+          "median": 123,
+          "max": 149
+        },
+        "fps": {
+          "n": 10,
+          "min": 15,
+          "median": 15,
+          "max": 15
+        }
+      },
+      "in": {
+        "rtt_ms": {
+          "n": 40,
+          "min": 0,
+          "median": 1,
+          "max": 3
+        },
+        "bitrate_kbps": {
+          "n": 40,
+          "min": 74,
+          "median": 110.5,
+          "max": 164
+        },
+        "loss_pct": {
+          "n": 40,
+          "min": 0,
+          "median": 0,
+          "max": 0
+        },
+        "jitter_ms": {
+          "n": 40,
+          "min": 0,
+          "median": 0,
+          "max": 9
+        },
+        "fps": {
+          "n": 40,
+          "min": 15,
+          "median": 15,
+          "max": 15
+        },
+        "resolutions": [
+          "320×180"
+        ]
+      },
+      "rawOutboundLayers": {
+        "q": {
+          "bitrate_kbps": {
+            "n": 9,
+            "min": 102.6,
+            "median": 116.3,
+            "max": 134.2
+          },
+          "fps": {
+            "n": 10,
+            "min": 15,
+            "median": 15,
+            "max": 15
+          },
+          "lastRes": "320x180",
+          "lastActive": true,
+          "qualityLimitation": [
+            "none"
+          ]
+        },
+        "h": {
+          "bitrate_kbps": {
+            "n": 9,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "fps": null,
+          "lastRes": null,
+          "lastActive": false,
+          "qualityLimitation": [
+            "none"
+          ]
+        },
+        "f": {
+          "bitrate_kbps": {
+            "n": 9,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "fps": null,
+          "lastRes": null,
+          "lastActive": false,
+          "qualityLimitation": [
+            "none"
+          ]
+        }
+      },
+      "rawPairRtt_ms": {
+        "n": 20,
+        "min": 0,
+        "median": 1,
+        "max": 1
+      },
+      "consoleErrors": [],
+      "samples": [
+        {
+          "t_s": 9,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "—",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "91 Kbps",
+              "loss": "0.00%",
+              "jitter": "3.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "95 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "98 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "89 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-2",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 73194,
+                "framesSent": 105,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218465744.293
+              },
+              {
+                "rid": "h",
+                "bytesSent": 162249,
+                "framesSent": 77,
+                "w": 640,
+                "h": 360,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218465744.293
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1121900,
+                "framesSent": 77,
+                "w": 1280,
+                "h": 720,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218465744.293
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 14,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "107 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "107 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "94 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "86 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "74 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-2",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 137562,
+                "framesSent": 181,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218470764.589
+              },
+              {
+                "rid": "h",
+                "bytesSent": 162249,
+                "framesSent": 77,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218470764.589
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1121900,
+                "framesSent": 77,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218470764.589
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 19,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "149 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "158 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "157 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "145 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "121 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-2",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 219216,
+                "framesSent": 256,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218475787.152
+              },
+              {
+                "rid": "h",
+                "bytesSent": 162249,
+                "framesSent": 77,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218475787.152
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1121900,
+                "framesSent": 77,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218475787.152
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 24,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "89 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "96 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "104 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "117 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "116 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-2",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 291173,
+                "framesSent": 331,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218480806.568
+              },
+              {
+                "rid": "h",
+                "bytesSent": 162249,
+                "framesSent": 77,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218480806.568
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1121900,
+                "framesSent": 77,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218480806.568
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 29,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "106 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "122 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "111 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "107 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "127 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-2",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 359585,
+                "framesSent": 406,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218485823.784
+              },
+              {
+                "rid": "h",
+                "bytesSent": 162249,
+                "framesSent": 77,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218485823.784
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1121900,
+                "framesSent": 77,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218485823.784
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 34,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "148 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "149 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "141 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "122 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "108 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-2",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 441689,
+                "framesSent": 482,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218490842.345
+              },
+              {
+                "rid": "h",
+                "bytesSent": 162249,
+                "framesSent": 77,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218490842.345
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1121900,
+                "framesSent": 77,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218490842.345
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 40,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "126 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "106 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "94 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "81 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "90 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-2",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 515045,
+                "framesSent": 557,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218495875.424
+              },
+              {
+                "rid": "h",
+                "bytesSent": 162249,
+                "framesSent": 77,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218495875.424
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1121900,
+                "framesSent": 77,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218495875.424
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 45,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "95 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "92 Kbps",
+              "loss": "0.00%",
+              "jitter": "9.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "107 Kbps",
+              "loss": "0.00%",
+              "jitter": "1.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "104 Kbps",
+              "loss": "0.00%",
+              "jitter": "1.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "110 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-2",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 579466,
+                "framesSent": 632,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218500856.883
+              },
+              {
+                "rid": "h",
+                "bytesSent": 162249,
+                "framesSent": 77,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218500856.883
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1121900,
+                "framesSent": 77,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218500856.883
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 50,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "123 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "126 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "3.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "135 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "3.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "151 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "3.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "164 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "3.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-2",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 664394,
+                "framesSent": 708,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218505920.342
+              },
+              {
+                "rid": "h",
+                "bytesSent": 162249,
+                "framesSent": 77,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218505920.342
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1121900,
+                "framesSent": 77,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218505920.342
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 55,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "140 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "147 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "149 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "129 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "114 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-2",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 737395,
+                "framesSent": 783,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218510940.77
+              },
+              {
+                "rid": "h",
+                "bytesSent": 162249,
+                "framesSent": 77,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218510940.77
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1121900,
+                "framesSent": 77,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218510940.77
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "identity": "mp-2",
+      "connected": true,
+      "joinMs": 1366,
+      "joinError": null,
+      "statusAtFail": null,
+      "finalStatus": "connected — s1-lab (canvas, no cam)",
+      "leftCleanly": true,
+      "leaveError": null,
+      "sawOutboundVideo": true,
+      "sawInboundVideo": true,
+      "remotesSeen": [
+        "mp-1",
+        "mp-3",
+        "mp-4",
+        "mp-5"
+      ],
+      "lastRemoteTiles": [
+        "mp-1",
+        "mp-3",
+        "mp-4",
+        "mp-5"
+      ],
+      "lastRows": [
+        {
+          "participant": "mp-2",
+          "track": "video",
+          "dir": "out",
+          "bitrate": "114 Kbps",
+          "loss": "—",
+          "jitter": "—",
+          "rtt": "0.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-1",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "121 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "0.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-3",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "98 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "0.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-4",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "85 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "0.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-5",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "87 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "0.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        }
+      ],
+      "out": {
+        "rtt_ms": {
+          "n": 10,
+          "min": 0,
+          "median": 1,
+          "max": 1
+        },
+        "bitrate_kbps": {
+          "n": 9,
+          "min": 93,
+          "median": 114,
+          "max": 151
+        },
+        "fps": {
+          "n": 10,
+          "min": 15,
+          "median": 15,
+          "max": 15
+        }
+      },
+      "in": {
+        "rtt_ms": {
+          "n": 40,
+          "min": 0,
+          "median": 0,
+          "max": 1
+        },
+        "bitrate_kbps": {
+          "n": 40,
+          "min": 74,
+          "median": 112.5,
+          "max": 159
+        },
+        "loss_pct": {
+          "n": 40,
+          "min": 0,
+          "median": 0,
+          "max": 0
+        },
+        "jitter_ms": {
+          "n": 40,
+          "min": 0,
+          "median": 0,
+          "max": 4
+        },
+        "fps": {
+          "n": 40,
+          "min": 15,
+          "median": 15,
+          "max": 15
+        },
+        "resolutions": [
+          "320×180"
+        ]
+      },
+      "rawOutboundLayers": {
+        "h": {
+          "bitrate_kbps": {
+            "n": 9,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "fps": null,
+          "lastRes": null,
+          "lastActive": false,
+          "qualityLimitation": [
+            "none"
+          ]
+        },
+        "f": {
+          "bitrate_kbps": {
+            "n": 9,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "fps": null,
+          "lastRes": null,
+          "lastActive": false,
+          "qualityLimitation": [
+            "none"
+          ]
+        },
+        "q": {
+          "bitrate_kbps": {
+            "n": 9,
+            "min": 100.2,
+            "median": 120,
+            "max": 136.4
+          },
+          "fps": {
+            "n": 10,
+            "min": 15,
+            "median": 15,
+            "max": 15
+          },
+          "lastRes": "320x180",
+          "lastActive": true,
+          "qualityLimitation": [
+            "none"
+          ]
+        }
+      },
+      "rawPairRtt_ms": {
+        "n": 20,
+        "min": 0,
+        "median": 1,
+        "max": 1
+      },
+      "consoleErrors": [],
+      "samples": [
+        {
+          "t_s": 9,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "—",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "74 Kbps",
+              "loss": "0.00%",
+              "jitter": "4.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "94 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "99 Kbps",
+              "loss": "0.00%",
+              "jitter": "1.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "92 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 242219,
+                "framesSent": 75,
+                "w": 640,
+                "h": 360,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218465748.34
+              },
+              {
+                "rid": "f",
+                "bytesSent": 805913,
+                "framesSent": 62,
+                "w": 1280,
+                "h": 720,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218465748.34
+              },
+              {
+                "rid": "q",
+                "bytesSent": 74550,
+                "framesSent": 99,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218465748.34
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 14,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "110 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "112 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "104 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "90 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "81 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 242219,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218470770.373
+              },
+              {
+                "rid": "f",
+                "bytesSent": 805913,
+                "framesSent": 62,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218470770.373
+              },
+              {
+                "rid": "q",
+                "bytesSent": 137437,
+                "framesSent": 175,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218470770.373
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 19,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "151 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "143 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "156 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "156 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "137 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 242219,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218475789.253
+              },
+              {
+                "rid": "f",
+                "bytesSent": 805913,
+                "framesSent": 62,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218475789.253
+              },
+              {
+                "rid": "q",
+                "bytesSent": 217594,
+                "framesSent": 250,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218475789.253
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 24,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "93 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "86 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "102 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "114 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "112 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 242219,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218480806.919
+              },
+              {
+                "rid": "f",
+                "bytesSent": 805913,
+                "framesSent": 62,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218480806.919
+              },
+              {
+                "rid": "q",
+                "bytesSent": 286786,
+                "framesSent": 325,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218480806.919
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 29,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "113 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "103 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "116 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "113 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "120 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 242219,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218485827.06
+              },
+              {
+                "rid": "f",
+                "bytesSent": 805913,
+                "framesSent": 62,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218485827.06
+              },
+              {
+                "rid": "q",
+                "bytesSent": 362815,
+                "framesSent": 400,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218485827.06
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 34,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "146 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "145 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "153 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "129 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "114 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 242219,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218490842.828
+              },
+              {
+                "rid": "f",
+                "bytesSent": 805913,
+                "framesSent": 62,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218490842.828
+              },
+              {
+                "rid": "q",
+                "bytesSent": 441455,
+                "framesSent": 476,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218490842.828
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 40,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "114 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "134 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "104 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "83 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "87 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 242219,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218495876.289
+              },
+              {
+                "rid": "f",
+                "bytesSent": 805913,
+                "framesSent": 62,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218495876.289
+              },
+              {
+                "rid": "q",
+                "bytesSent": 509695,
+                "framesSent": 551,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218495876.289
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 45,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "109 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "104 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "109 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "114 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "127 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 242219,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218500901.436
+              },
+              {
+                "rid": "f",
+                "bytesSent": 805913,
+                "framesSent": 62,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218500901.436
+              },
+              {
+                "rid": "q",
+                "bytesSent": 575495,
+                "framesSent": 627,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218500901.436
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 50,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "120 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "121 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "127 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "142 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "159 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 242219,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218505920.599
+              },
+              {
+                "rid": "f",
+                "bytesSent": 805913,
+                "framesSent": 62,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218505920.599
+              },
+              {
+                "rid": "q",
+                "bytesSent": 661076,
+                "framesSent": 702,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218505920.599
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 55,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "114 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "121 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "98 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "85 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "87 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-3",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 242219,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218510943.27
+              },
+              {
+                "rid": "f",
+                "bytesSent": 805913,
+                "framesSent": 62,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218510943.27
+              },
+              {
+                "rid": "q",
+                "bytesSent": 736426,
+                "framesSent": 777,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218510943.27
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "identity": "mp-3",
+      "connected": true,
+      "joinMs": 1509,
+      "joinError": null,
+      "statusAtFail": null,
+      "finalStatus": "connected — s1-lab (canvas, no cam)",
+      "leftCleanly": true,
+      "leaveError": null,
+      "sawOutboundVideo": true,
+      "sawInboundVideo": true,
+      "remotesSeen": [
+        "mp-1",
+        "mp-2",
+        "mp-4",
+        "mp-5"
+      ],
+      "lastRemoteTiles": [
+        "mp-1",
+        "mp-2",
+        "mp-4",
+        "mp-5"
+      ],
+      "lastRows": [
+        {
+          "participant": "mp-3",
+          "track": "video",
+          "dir": "out",
+          "bitrate": "114 Kbps",
+          "loss": "—",
+          "jitter": "—",
+          "rtt": "0.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-2",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "131 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "1.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-1",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "147 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "1.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-4",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "92 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "1.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-5",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "83 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "1.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        }
+      ],
+      "out": {
+        "rtt_ms": {
+          "n": 10,
+          "min": 0,
+          "median": 1,
+          "max": 3
+        },
+        "bitrate_kbps": {
+          "n": 10,
+          "min": 92,
+          "median": 117.5,
+          "max": 1920
+        },
+        "fps": {
+          "n": 10,
+          "min": 15,
+          "median": 15,
+          "max": 15
+        }
+      },
+      "in": {
+        "rtt_ms": {
+          "n": 40,
+          "min": 0,
+          "median": 1,
+          "max": 1
+        },
+        "bitrate_kbps": {
+          "n": 40,
+          "min": 73,
+          "median": 111.5,
+          "max": 157
+        },
+        "loss_pct": {
+          "n": 40,
+          "min": 0,
+          "median": 0,
+          "max": 0
+        },
+        "jitter_ms": {
+          "n": 40,
+          "min": 0,
+          "median": 0,
+          "max": 5
+        },
+        "fps": {
+          "n": 40,
+          "min": 15,
+          "median": 15,
+          "max": 15
+        },
+        "resolutions": [
+          "320×180"
+        ]
+      },
+      "rawOutboundLayers": {
+        "q": {
+          "bitrate_kbps": {
+            "n": 9,
+            "min": 97.6,
+            "median": 119.1,
+            "max": 130.2
+          },
+          "fps": {
+            "n": 10,
+            "min": 15,
+            "median": 15,
+            "max": 16
+          },
+          "lastRes": "320x180",
+          "lastActive": true,
+          "qualityLimitation": [
+            "none"
+          ]
+        },
+        "h": {
+          "bitrate_kbps": {
+            "n": 9,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "fps": {
+            "n": 1,
+            "min": 6,
+            "median": 6,
+            "max": 6
+          },
+          "lastRes": null,
+          "lastActive": false,
+          "qualityLimitation": [
+            "none"
+          ]
+        },
+        "f": {
+          "bitrate_kbps": {
+            "n": 9,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "fps": {
+            "n": 1,
+            "min": 6,
+            "median": 6,
+            "max": 6
+          },
+          "lastRes": null,
+          "lastActive": false,
+          "qualityLimitation": [
+            "none"
+          ]
+        }
+      },
+      "rawPairRtt_ms": {
+        "n": 20,
+        "min": 0,
+        "median": 1,
+        "max": 3
+      },
+      "consoleErrors": [],
+      "samples": [
+        {
+          "t_s": 9,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "1.92 Mbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "3.0",
+              "resolution": "1280×720",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "95 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "92 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "82 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "73 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 68485,
+                "framesSent": 91,
+                "w": 320,
+                "h": 180,
+                "fps": 16,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218465749.445
+              },
+              {
+                "rid": "h",
+                "bytesSent": 249943,
+                "framesSent": 75,
+                "w": 640,
+                "h": 360,
+                "fps": 6,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218465749.445
+              },
+              {
+                "rid": "f",
+                "bytesSent": 765849,
+                "framesSent": 63,
+                "w": 1280,
+                "h": 720,
+                "fps": 6,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218465749.445
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 3,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 14,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "116 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "113 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "112 Kbps",
+              "loss": "0.00%",
+              "jitter": "5.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "104 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "95 Kbps",
+              "loss": "0.00%",
+              "jitter": "1.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 129766,
+                "framesSent": 166,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218470770.558
+              },
+              {
+                "rid": "h",
+                "bytesSent": 249943,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218470770.558
+              },
+              {
+                "rid": "f",
+                "bytesSent": 765849,
+                "framesSent": 63,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218470770.558
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 19,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "119 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "150 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "157 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "111 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "85 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 206067,
+                "framesSent": 241,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218475789.536
+              },
+              {
+                "rid": "h",
+                "bytesSent": 249943,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218475789.536
+              },
+              {
+                "rid": "f",
+                "bytesSent": 765849,
+                "framesSent": 63,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218475789.536
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 24,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "92 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "91 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "111 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "98 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "93 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 274451,
+                "framesSent": 317,
+                "w": 320,
+                "h": 180,
+                "fps": 16,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218480807.062
+              },
+              {
+                "rid": "h",
+                "bytesSent": 249943,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218480807.062
+              },
+              {
+                "rid": "f",
+                "bytesSent": 765849,
+                "framesSent": 63,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218480807.062
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 29,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "119 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "127 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "107 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "123 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "147 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 349202,
+                "framesSent": 392,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218485827.283
+              },
+              {
+                "rid": "h",
+                "bytesSent": 249943,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218485827.283
+              },
+              {
+                "rid": "f",
+                "bytesSent": 765849,
+                "framesSent": 63,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218485827.283
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 34,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "144 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "134 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "128 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "149 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "139 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 425455,
+                "framesSent": 467,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218490845.435
+              },
+              {
+                "rid": "h",
+                "bytesSent": 249943,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218490845.435
+              },
+              {
+                "rid": "f",
+                "bytesSent": 765849,
+                "framesSent": 63,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218490845.435
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 40,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "127 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "126 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "142 Kbps",
+              "loss": "0.00%",
+              "jitter": "1.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "102 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "90 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 495962,
+                "framesSent": 542,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218495830.593
+              },
+              {
+                "rid": "h",
+                "bytesSent": 249943,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218495830.593
+              },
+              {
+                "rid": "f",
+                "bytesSent": 765849,
+                "framesSent": 63,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218495830.593
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 45,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "111 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "99 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "96 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "109 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "112 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 567037,
+                "framesSent": 618,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218500908.141
+              },
+              {
+                "rid": "h",
+                "bytesSent": 249943,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218500908.141
+              },
+              {
+                "rid": "f",
+                "bytesSent": 765849,
+                "framesSent": 63,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218500908.141
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 50,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "111 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "117 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "116 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "123 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "147 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 648634,
+                "framesSent": 693,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218505923.186
+              },
+              {
+                "rid": "h",
+                "bytesSent": 249943,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218505923.186
+              },
+              {
+                "rid": "f",
+                "bytesSent": 765849,
+                "framesSent": 63,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218505923.186
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 55,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "114 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "131 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "147 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "92 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "83 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-4",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 723946,
+                "framesSent": 769,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218510943.252
+              },
+              {
+                "rid": "h",
+                "bytesSent": 249943,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218510943.252
+              },
+              {
+                "rid": "f",
+                "bytesSent": 765849,
+                "framesSent": 63,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218510943.252
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "identity": "mp-4",
+      "connected": true,
+      "joinMs": 1378,
+      "joinError": null,
+      "statusAtFail": null,
+      "finalStatus": "connected — s1-lab (canvas, no cam)",
+      "leftCleanly": true,
+      "leaveError": null,
+      "sawOutboundVideo": true,
+      "sawInboundVideo": true,
+      "remotesSeen": [
+        "mp-1",
+        "mp-2",
+        "mp-3",
+        "mp-5"
+      ],
+      "lastRemoteTiles": [
+        "mp-1",
+        "mp-2",
+        "mp-3",
+        "mp-5"
+      ],
+      "lastRows": [
+        {
+          "participant": "mp-4",
+          "track": "video",
+          "dir": "out",
+          "bitrate": "101 Kbps",
+          "loss": "—",
+          "jitter": "—",
+          "rtt": "1.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-3",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "128 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "1.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-1",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "146 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "1.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-2",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "138 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "1.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-5",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "91 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "1.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        }
+      ],
+      "out": {
+        "rtt_ms": {
+          "n": 10,
+          "min": 0,
+          "median": 1,
+          "max": 1
+        },
+        "bitrate_kbps": {
+          "n": 10,
+          "min": 93,
+          "median": 116.5,
+          "max": 2110
+        },
+        "fps": {
+          "n": 10,
+          "min": 15,
+          "median": 15,
+          "max": 15
+        }
+      },
+      "in": {
+        "rtt_ms": {
+          "n": 40,
+          "min": 0,
+          "median": 1,
+          "max": 1
+        },
+        "bitrate_kbps": {
+          "n": 40,
+          "min": 81,
+          "median": 114,
+          "max": 164
+        },
+        "loss_pct": {
+          "n": 40,
+          "min": 0,
+          "median": 0,
+          "max": 0
+        },
+        "jitter_ms": {
+          "n": 40,
+          "min": 0,
+          "median": 0,
+          "max": 4
+        },
+        "fps": {
+          "n": 40,
+          "min": 15,
+          "median": 15,
+          "max": 15
+        },
+        "resolutions": [
+          "320×180"
+        ]
+      },
+      "rawOutboundLayers": {
+        "q": {
+          "bitrate_kbps": {
+            "n": 9,
+            "min": 87.7,
+            "median": 116.5,
+            "max": 126.5
+          },
+          "fps": {
+            "n": 10,
+            "min": 15,
+            "median": 15,
+            "max": 16
+          },
+          "lastRes": "320x180",
+          "lastActive": true,
+          "qualityLimitation": [
+            "none"
+          ]
+        },
+        "f": {
+          "bitrate_kbps": {
+            "n": 9,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "fps": {
+            "n": 1,
+            "min": 12,
+            "median": 12,
+            "max": 12
+          },
+          "lastRes": null,
+          "lastActive": false,
+          "qualityLimitation": [
+            "none"
+          ]
+        },
+        "h": {
+          "bitrate_kbps": {
+            "n": 9,
+            "min": 0,
+            "median": 0,
+            "max": 0
+          },
+          "fps": {
+            "n": 1,
+            "min": 11,
+            "median": 11,
+            "max": 11
+          },
+          "lastRes": null,
+          "lastActive": false,
+          "qualityLimitation": [
+            "none"
+          ]
+        }
+      },
+      "rawPairRtt_ms": {
+        "n": 20,
+        "min": 0,
+        "median": 1,
+        "max": 1
+      },
+      "consoleErrors": [],
+      "samples": [
+        {
+          "t_s": 9,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "2.11 Mbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "1280×720",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "93 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "89 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "98 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "81 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 65349,
+                "framesSent": 85,
+                "w": 320,
+                "h": 180,
+                "fps": 16,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218465748.812
+              },
+              {
+                "rid": "f",
+                "bytesSent": 840564,
+                "framesSent": 61,
+                "w": 1280,
+                "h": 720,
+                "fps": 12,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218465748.812
+              },
+              {
+                "rid": "h",
+                "bytesSent": 308423,
+                "framesSent": 75,
+                "w": 640,
+                "h": 360,
+                "fps": 11,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218465748.812
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 14,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "107 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "119 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "116 Kbps",
+              "loss": "0.00%",
+              "jitter": "4.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "111 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "102 Kbps",
+              "loss": "0.00%",
+              "jitter": "1.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 120419,
+                "framesSent": 161,
+                "w": 320,
+                "h": 180,
+                "fps": 16,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218470773.354
+              },
+              {
+                "rid": "f",
+                "bytesSent": 840564,
+                "framesSent": 61,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218470773.354
+              },
+              {
+                "rid": "h",
+                "bytesSent": 308423,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218470773.354
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 19,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "120 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "133 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "164 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "158 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "94 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 198583,
+                "framesSent": 236,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218475789.894
+              },
+              {
+                "rid": "f",
+                "bytesSent": 840564,
+                "framesSent": 61,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218475789.894
+              },
+              {
+                "rid": "h",
+                "bytesSent": 308423,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218475789.894
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 24,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "93 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "90 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "119 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "103 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "90 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 263114,
+                "framesSent": 311,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218480809.309
+              },
+              {
+                "rid": "f",
+                "bytesSent": 840564,
+                "framesSent": 61,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218480809.309
+              },
+              {
+                "rid": "h",
+                "bytesSent": 308423,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218480809.309
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 29,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "119 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "113 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "111 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "125 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "142 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 342474,
+                "framesSent": 387,
+                "w": 320,
+                "h": 180,
+                "fps": 16,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218485826.937
+              },
+              {
+                "rid": "f",
+                "bytesSent": 840564,
+                "framesSent": 61,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218485826.937
+              },
+              {
+                "rid": "h",
+                "bytesSent": 308423,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218485826.937
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 34,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "146 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "136 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "124 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "131 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "150 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 418679,
+                "framesSent": 462,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218490845.699
+              },
+              {
+                "rid": "f",
+                "bytesSent": 840564,
+                "framesSent": 61,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218490845.699
+              },
+              {
+                "rid": "h",
+                "bytesSent": 308423,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218490845.699
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 40,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "93 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "90 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "106 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "89 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "101 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 483401,
+                "framesSent": 537,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218495875.553
+              },
+              {
+                "rid": "f",
+                "bytesSent": 840564,
+                "framesSent": 61,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218495875.553
+              },
+              {
+                "rid": "h",
+                "bytesSent": 308423,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218495875.553
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 45,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "114 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "107 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "92 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "96 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "115 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 556697,
+                "framesSent": 613,
+                "w": 320,
+                "h": 180,
+                "fps": 16,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218500907.747
+              },
+              {
+                "rid": "f",
+                "bytesSent": 840564,
+                "framesSent": 61,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218500907.747
+              },
+              {
+                "rid": "h",
+                "bytesSent": 308423,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218500907.747
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 50,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "160 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "158 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "135 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "144 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "143 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 635491,
+                "framesSent": 688,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218505925.394
+              },
+              {
+                "rid": "f",
+                "bytesSent": 840564,
+                "framesSent": 61,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218505925.394
+              },
+              {
+                "rid": "h",
+                "bytesSent": 308423,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218505925.394
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 55,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "101 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "128 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "146 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "138 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "91 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-5"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "q",
+                "bytesSent": 704955,
+                "framesSent": 763,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218510943.48
+              },
+              {
+                "rid": "f",
+                "bytesSent": 840564,
+                "framesSent": 61,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218510943.48
+              },
+              {
+                "rid": "h",
+                "bytesSent": 308423,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218510943.48
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "identity": "mp-5",
+      "connected": true,
+      "joinMs": 1453,
+      "joinError": null,
+      "statusAtFail": null,
+      "finalStatus": "connected — s1-lab (canvas, no cam)",
+      "leftCleanly": true,
+      "leaveError": null,
+      "sawOutboundVideo": true,
+      "sawInboundVideo": true,
+      "remotesSeen": [
+        "mp-1",
+        "mp-2",
+        "mp-3",
+        "mp-4"
+      ],
+      "lastRemoteTiles": [
+        "mp-1",
+        "mp-2",
+        "mp-3",
+        "mp-4"
+      ],
+      "lastRows": [
+        {
+          "participant": "mp-5",
+          "track": "video",
+          "dir": "out",
+          "bitrate": "111 Kbps",
+          "loss": "—",
+          "jitter": "—",
+          "rtt": "1.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-2",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "146 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "0.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-3",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "149 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "0.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-4",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "125 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "0.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        },
+        {
+          "participant": "mp-1",
+          "track": "video",
+          "dir": "in",
+          "bitrate": "142 Kbps",
+          "loss": "0.00%",
+          "jitter": "0.0",
+          "rtt": "0.0",
+          "resolution": "320×180",
+          "fps": "15.0"
+        }
+      ],
+      "out": {
+        "rtt_ms": {
+          "n": 10,
+          "min": 0,
+          "median": 0.5,
+          "max": 2
+        },
+        "bitrate_kbps": {
+          "n": 10,
+          "min": 73,
+          "median": 114.5,
+          "max": 2410
+        },
+        "fps": {
+          "n": 10,
+          "min": 15,
+          "median": 15,
+          "max": 15
+        }
+      },
+      "in": {
+        "rtt_ms": {
+          "n": 40,
+          "min": 0,
+          "median": 1,
+          "max": 1
+        },
+        "bitrate_kbps": {
+          "n": 40,
+          "min": 82,
+          "median": 112,
+          "max": 158
+        },
+        "loss_pct": {
+          "n": 40,
+          "min": 0,
+          "median": 0,
+          "max": 0
+        },
+        "jitter_ms": {
+          "n": 40,
+          "min": 0,
+          "median": 0,
+          "max": 5
+        },
+        "fps": {
+          "n": 40,
+          "min": 14,
+          "median": 15,
+          "max": 16
+        },
+        "resolutions": [
+          "320×180"
+        ]
+      },
+      "rawOutboundLayers": {
+        "h": {
+          "bitrate_kbps": {
+            "n": 9,
+            "min": 0,
+            "median": 0,
+            "max": 19.5
+          },
+          "fps": {
+            "n": 1,
+            "min": 15,
+            "median": 15,
+            "max": 15
+          },
+          "lastRes": null,
+          "lastActive": false,
+          "qualityLimitation": [
+            "none"
+          ]
+        },
+        "q": {
+          "bitrate_kbps": {
+            "n": 9,
+            "min": 83.4,
+            "median": 116.9,
+            "max": 131.7
+          },
+          "fps": {
+            "n": 10,
+            "min": 15,
+            "median": 15,
+            "max": 16
+          },
+          "lastRes": "320x180",
+          "lastActive": true,
+          "qualityLimitation": [
+            "none"
+          ]
+        },
+        "f": {
+          "bitrate_kbps": {
+            "n": 9,
+            "min": 0,
+            "median": 0,
+            "max": 52.9
+          },
+          "fps": {
+            "n": 1,
+            "min": 15,
+            "median": 15,
+            "max": 15
+          },
+          "lastRes": null,
+          "lastActive": false,
+          "qualityLimitation": [
+            "none"
+          ]
+        }
+      },
+      "rawPairRtt_ms": {
+        "n": 20,
+        "min": 0,
+        "median": 0.5,
+        "max": 2
+      },
+      "consoleErrors": [],
+      "samples": [
+        {
+          "t_s": 9,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "2.41 Mbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "1280×720",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "94 Kbps",
+              "loss": "0.00%",
+              "jitter": "3.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "96 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "98 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "84 Kbps",
+              "loss": "0.00%",
+              "jitter": "5.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-4"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 215391,
+                "framesSent": 70,
+                "w": 640,
+                "h": 360,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218465749.044
+              },
+              {
+                "rid": "q",
+                "bytesSent": 69004,
+                "framesSent": 76,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218465749.044
+              },
+              {
+                "rid": "f",
+                "bytesSent": 973985,
+                "framesSent": 62,
+                "w": 1280,
+                "h": 720,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218465749.044
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 14,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "73 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "108 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "91 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "87 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "106 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-4"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 227615,
+                "framesSent": 75,
+                "w": 640,
+                "h": 360,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218470766.705
+              },
+              {
+                "rid": "q",
+                "bytesSent": 121313,
+                "framesSent": 152,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218470766.705
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1007174,
+                "framesSent": 67,
+                "w": 1280,
+                "h": 720,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218470766.705
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 19,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "118 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "156 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "16.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "158 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "141 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "153 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "16.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-4"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 227615,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218475790.011
+              },
+              {
+                "rid": "q",
+                "bytesSent": 194726,
+                "framesSent": 227,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218475790.011
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1007174,
+                "framesSent": 67,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218475790.011
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 24,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "79 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "2.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "122 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "104 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "87 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "141 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-4"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 227615,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218480766.716
+              },
+              {
+                "rid": "q",
+                "bytesSent": 260781,
+                "framesSent": 302,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218480766.716
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1007174,
+                "framesSent": 67,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218480766.716
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 2,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 29,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "129 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "124 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "109 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "110 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "14.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "104 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "14.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-4"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 227615,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218485827.838
+              },
+              {
+                "rid": "q",
+                "bytesSent": 344086,
+                "framesSent": 378,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218485827.838
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1007174,
+                "framesSent": 67,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218485827.838
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 34,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "150 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "114 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "120 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "137 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "118 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-4"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 227615,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218490845.98
+              },
+              {
+                "rid": "q",
+                "bytesSent": 420091,
+                "framesSent": 453,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218490845.98
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1007174,
+                "framesSent": 67,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218490845.98
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 40,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "89 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "106 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "95 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "82 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "126 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "14.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-4"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 227615,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218495876.908
+              },
+              {
+                "rid": "q",
+                "bytesSent": 485560,
+                "framesSent": 529,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218495876.908
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1007174,
+                "framesSent": 67,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218495876.908
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 45,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "111 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "87 Kbps",
+              "loss": "0.00%",
+              "jitter": "1.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "14.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "103 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "102 Kbps",
+              "loss": "0.00%",
+              "jitter": "1.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "88 Kbps",
+              "loss": "0.00%",
+              "jitter": "1.0",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-4"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 227615,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218500901.983
+              },
+              {
+                "rid": "q",
+                "bytesSent": 563651,
+                "framesSent": 604,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218500901.983
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1007174,
+                "framesSent": 67,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218500901.983
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 50,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "166 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "130 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "135 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "153 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "125 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-4"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 227615,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218505927.116
+              },
+              {
+                "rid": "q",
+                "bytesSent": 642845,
+                "framesSent": 679,
+                "w": 320,
+                "h": 180,
+                "fps": 15,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218505927.116
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1007174,
+                "framesSent": 67,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218505927.116
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              }
+            ]
+          }
+        },
+        {
+          "t_s": 55,
+          "status": "connected — s1-lab (canvas, no cam)",
+          "rows": [
+            {
+              "participant": "mp-5",
+              "track": "video",
+              "dir": "out",
+              "bitrate": "111 Kbps",
+              "loss": "—",
+              "jitter": "—",
+              "rtt": "1.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-2",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "146 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-3",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "149 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-4",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "125 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            },
+            {
+              "participant": "mp-1",
+              "track": "video",
+              "dir": "in",
+              "bitrate": "142 Kbps",
+              "loss": "0.00%",
+              "jitter": "0.0",
+              "rtt": "0.0",
+              "resolution": "320×180",
+              "fps": "15.0"
+            }
+          ],
+          "remoteTiles": [
+            "mp-1",
+            "mp-2",
+            "mp-3",
+            "mp-4"
+          ],
+          "raw": {
+            "pcs": 2,
+            "out": [
+              {
+                "rid": "h",
+                "bytesSent": 227615,
+                "framesSent": 75,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218510943.676
+              },
+              {
+                "rid": "q",
+                "bytesSent": 710691,
+                "framesSent": 755,
+                "w": 320,
+                "h": 180,
+                "fps": 16,
+                "active": true,
+                "qlr": "none",
+                "ts": 1791218510943.676
+              },
+              {
+                "rid": "f",
+                "bytesSent": 1007174,
+                "framesSent": 67,
+                "w": null,
+                "h": null,
+                "fps": null,
+                "active": false,
+                "qlr": "none",
+                "ts": 1791218510943.676
+              }
+            ],
+            "inVideo": 4,
+            "pairs": [
+              {
+                "rtt_ms": 1,
+                "state": "succeeded"
+              },
+              {
+                "rtt_ms": 0,
+                "state": "succeeded"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "participant": "ab-cam-2L-on",
+  "startedAtMs": 1791299332002,
+  "health": {
+    "ok": true,
+    "status": 200,
+    "body": "{\"ok\":true,\"endpoint\":\"http://127.0.0.1:9000\",\"bucket\":\"podcast-recordings-poc\",\"keyPrefix\":\"spike/s4-dropin/\"}"
+  }
+}

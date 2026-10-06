@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "participant": "ab-file-2L-on-pp-h264",
+  "startedAtMs": 1791254325634,
+  "health": {
+    "ok": true,
+    "status": 200,
+    "body": "{\"ok\":true,\"endpoint\":\"http://127.0.0.1:9000\",\"bucket\":\"podcast-recordings-poc\",\"keyPrefix\":\"spike/s4-dropin/\"}"
+  },
+  "requestedMimeType": "video/webm;codecs=h264",
+  "recorderMimeType": "video/webm;codecs=h264",
+  "pickedMimeType": "video/webm;codecs=h264",
+  "s4Errors": []
+}

@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "mime": "video/webm;codecs=vp8",
+  "from": "ab-pub",
+  "settings": {
+    "width": 1280,
+    "height": 720,
+    "frameRate": 32.05972115512453
+  }
+}

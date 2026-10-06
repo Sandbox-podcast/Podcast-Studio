@@ -1,0 +1,10 @@
+[rawvideo @ 0x557f82641c80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 59571 >= 59571
+ab-cam-2L-on-sub-hi-rx.webm: frames=2733 dur=121.387s size_mode=native segs=3 container_fps=22.512 distinct_fps_exact=22.515 distinct_fps_near=17.728 thresh=0.5 max_neardup=8f/499.0ms win(near)≥24=0.3852 median=22.0 p5=3.0 min=1 lt24=75/122
+[rawvideo @ 0x55e89a2eac80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 59571 >= 59571
+ab-cam-2L-on-sub-hi-rx.webm [native] frames=2733 segs=['1280x720:267f', '320x180:669f', '1280x720:1797f'] exact=22.515 near=17.728 ge24_exact=0.5328 ge24_near=0.3852 maxneardup=8f
+  freeze>200ms (gap between near-distinct frames): n=54 total=21898ms max=705ms
+[rawvideo @ 0x5561a6e68c80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 59571 >= 59571
+ab-cam-2L-on-sub-hi-rx.webm: frames=2733 dur=121.387s size_mode=native segs=3 container_fps=22.512 distinct_fps_exact=22.515 distinct_fps_near=21.337 thresh=0.3 max_neardup=7f/573.0ms win(near)≥24=0.5328 median=27.0 p5=6.0 min=1 lt24=57/122
+[rawvideo @ 0x5616bae0dc80] Application provided invalid, non monotonically increasing dts to muxer in stream 0: 59571 >= 59571
+ab-cam-2L-on-sub-hi-rx.webm [native] frames=2733 segs=['1280x720:267f', '320x180:669f', '1280x720:1797f'] exact=22.515 near=21.337 ge24_exact=0.5328 ge24_near=0.5328 maxneardup=7f
+  freeze>200ms (gap between near-distinct frames): n=41 total=14207ms max=705ms

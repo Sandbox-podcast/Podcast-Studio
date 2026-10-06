@@ -1,0 +1,15 @@
+{
+ "freezes_gt200ms_count": 2,
+ "freezes_gt200ms_total_ms": 432,
+ "freezes_gt200ms_max_ms": 225,
+ "list": [
+  [
+   31.274,
+   207
+  ],
+  [
+   31.755,
+   225
+  ]
+ ]
+}

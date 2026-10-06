@@ -1,0 +1,5 @@
+ab-cam-2L-on: sample 1.0s, src dips<24 at []
+  t=  28.0  h QLR bandwidth->none                src_fps=30.0 dip±2s=[]
+  t=  28.0  q QLR bandwidth->none                src_fps=30.0 dip±2s=[]
+  t=  28.0  h top res -->1280x720                src_fps=30.0 dip±2s=[]
+  t=  28.0  h top enc fps 0->>0 (layer back)     src_fps=30.0 dip±2s=[]

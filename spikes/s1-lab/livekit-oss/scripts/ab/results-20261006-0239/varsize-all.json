@@ -1,0 +1,222 @@
+[
+  {
+    "path": "ab-file-3L-on-sub-hi-rx.webm",
+    "mode": "native",
+    "threshold": 0.5,
+    "total_frames": 3312,
+    "duration_s": 120.362,
+    "size_segments": [
+      "1280x720:278f",
+      "960x540:593f",
+      "320x180:2441f"
+    ],
+    "size_changes": 2,
+    "distinct_fps_exact": 27.517,
+    "distinct_fps_near": 23.305,
+    "longest_neardup_run_frames": 23,
+    "windows_1s_share_ge24_exact": 0.8182,
+    "windows_1s_min_exact": 4,
+    "windows_1s_share_ge24_near": 0.6033,
+    "windows_1s_median_near": 25
+  },
+  {
+    "path": "ab-file-3L-on-sub-hi-rx.webm",
+    "mode": "fixed:1280x720",
+    "threshold": 0.5,
+    "total_frames": 3312,
+    "duration_s": 120.362,
+    "size_segments": [
+      "1280x720:3312f"
+    ],
+    "size_changes": 0,
+    "distinct_fps_exact": 27.517,
+    "distinct_fps_near": 21.909,
+    "longest_neardup_run_frames": 27,
+    "windows_1s_share_ge24_exact": 0.8182,
+    "windows_1s_min_exact": 4,
+    "windows_1s_share_ge24_near": 0.4876,
+    "windows_1s_median_near": 23
+  },
+  {
+    "path": "ab-file-3L-on-sub-hi-rx.webm",
+    "mode": "fixed:320x180",
+    "threshold": 0.5,
+    "total_frames": 3312,
+    "duration_s": 120.362,
+    "size_segments": [
+      "320x180:3312f"
+    ],
+    "size_changes": 0,
+    "distinct_fps_exact": 27.517,
+    "distinct_fps_near": 22.291,
+    "longest_neardup_run_frames": 30,
+    "windows_1s_share_ge24_exact": 0.8182,
+    "windows_1s_min_exact": 4,
+    "windows_1s_share_ge24_near": 0.5868,
+    "windows_1s_median_near": 25
+  },
+  {
+    "path": "ab-file-3L-off-sub-hi-rx.webm",
+    "mode": "native",
+    "threshold": 0.5,
+    "total_frames": 3623,
+    "duration_s": 121.808,
+    "size_segments": [
+      "1280x720:362f",
+      "960x540:3261f"
+    ],
+    "size_changes": 1,
+    "distinct_fps_exact": 29.744,
+    "distinct_fps_near": 26.09,
+    "longest_neardup_run_frames": 8,
+    "windows_1s_share_ge24_exact": 1.0,
+    "windows_1s_min_exact": 24,
+    "windows_1s_share_ge24_near": 0.8525,
+    "windows_1s_median_near": 27
+  },
+  {
+    "path": "ab-file-3L-off-sub-hi-rx.webm",
+    "mode": "fixed:1280x720",
+    "threshold": 0.5,
+    "total_frames": 3623,
+    "duration_s": 121.808,
+    "size_segments": [
+      "1280x720:3623f"
+    ],
+    "size_changes": 0,
+    "distinct_fps_exact": 29.744,
+    "distinct_fps_near": 25.097,
+    "longest_neardup_run_frames": 8,
+    "windows_1s_share_ge24_exact": 1.0,
+    "windows_1s_min_exact": 24,
+    "windows_1s_share_ge24_near": 0.8443,
+    "windows_1s_median_near": 27
+  },
+  {
+    "path": "ab-file-3L-off-sub-hi-rx.webm",
+    "mode": "fixed:320x180",
+    "threshold": 0.5,
+    "total_frames": 3623,
+    "duration_s": 121.808,
+    "size_segments": [
+      "320x180:3623f"
+    ],
+    "size_changes": 0,
+    "distinct_fps_exact": 29.744,
+    "distinct_fps_near": 22.782,
+    "longest_neardup_run_frames": 48,
+    "windows_1s_share_ge24_exact": 1.0,
+    "windows_1s_min_exact": 24,
+    "windows_1s_share_ge24_near": 0.7377,
+    "windows_1s_median_near": 26
+  },
+  {
+    "path": "ab-file-2L-on-sub-hi-rx.webm",
+    "mode": "native",
+    "threshold": 0.5,
+    "total_frames": 3496,
+    "duration_s": 120.578,
+    "size_segments": [
+      "1280x720:268f",
+      "960x540:3228f"
+    ],
+    "size_changes": 1,
+    "distinct_fps_exact": 28.994,
+    "distinct_fps_near": 25.477,
+    "longest_neardup_run_frames": 20,
+    "windows_1s_share_ge24_exact": 0.9835,
+    "windows_1s_min_exact": 16,
+    "windows_1s_share_ge24_near": 0.843,
+    "windows_1s_median_near": 26
+  },
+  {
+    "path": "ab-file-2L-on-sub-hi-rx.webm",
+    "mode": "fixed:1280x720",
+    "threshold": 0.5,
+    "total_frames": 3496,
+    "duration_s": 120.578,
+    "size_segments": [
+      "1280x720:3496f"
+    ],
+    "size_changes": 0,
+    "distinct_fps_exact": 28.994,
+    "distinct_fps_near": 24.465,
+    "longest_neardup_run_frames": 21,
+    "windows_1s_share_ge24_exact": 0.9835,
+    "windows_1s_min_exact": 16,
+    "windows_1s_share_ge24_near": 0.7686,
+    "windows_1s_median_near": 26
+  },
+  {
+    "path": "ab-file-2L-on-sub-hi-rx.webm",
+    "mode": "fixed:320x180",
+    "threshold": 0.5,
+    "total_frames": 3496,
+    "duration_s": 120.578,
+    "size_segments": [
+      "320x180:3496f"
+    ],
+    "size_changes": 0,
+    "distinct_fps_exact": 28.994,
+    "distinct_fps_near": 22.127,
+    "longest_neardup_run_frames": 47,
+    "windows_1s_share_ge24_exact": 0.9835,
+    "windows_1s_min_exact": 16,
+    "windows_1s_share_ge24_near": 0.6446,
+    "windows_1s_median_near": 25
+  },
+  {
+    "path": "ab-file-2L-off-sub-hi-rx.webm",
+    "mode": "native",
+    "threshold": 0.5,
+    "total_frames": 3606,
+    "duration_s": 121.914,
+    "size_segments": [
+      "1280x720:3606f"
+    ],
+    "size_changes": 0,
+    "distinct_fps_exact": 29.578,
+    "distinct_fps_near": 26.264,
+    "longest_neardup_run_frames": 12,
+    "windows_1s_share_ge24_exact": 0.9754,
+    "windows_1s_min_exact": 16,
+    "windows_1s_share_ge24_near": 0.877,
+    "windows_1s_median_near": 27
+  },
+  {
+    "path": "ab-file-2L-off-sub-hi-rx.webm",
+    "mode": "fixed:1280x720",
+    "threshold": 0.5,
+    "total_frames": 3606,
+    "duration_s": 121.914,
+    "size_segments": [
+      "1280x720:3606f"
+    ],
+    "size_changes": 0,
+    "distinct_fps_exact": 29.578,
+    "distinct_fps_near": 26.264,
+    "longest_neardup_run_frames": 12,
+    "windows_1s_share_ge24_exact": 0.9754,
+    "windows_1s_min_exact": 16,
+    "windows_1s_share_ge24_near": 0.877,
+    "windows_1s_median_near": 27
+  },
+  {
+    "path": "ab-file-2L-off-sub-hi-rx.webm",
+    "mode": "fixed:320x180",
+    "threshold": 0.5,
+    "total_frames": 3606,
+    "duration_s": 121.914,
+    "size_segments": [
+      "320x180:3606f"
+    ],
+    "size_changes": 0,
+    "distinct_fps_exact": 29.578,
+    "distinct_fps_near": 21.868,
+    "longest_neardup_run_frames": 61,
+    "windows_1s_share_ge24_exact": 0.9754,
+    "windows_1s_min_exact": 16,
+    "windows_1s_share_ge24_near": 0.6475,
+    "windows_1s_median_near": 24
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "name": "@podcast-studio/s1-lab-agora",
+  "private": true,
+  "version": "0.0.0",
+  "description": "S1 spike lab harness — Agora RTC (free tier), not product code",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "mint-token": "node scripts/mint-token.mjs"
+  },
+  "dependencies": {
+    "agora-token": "^2.0.3",
+    "dotenv": "^16.4.7"
+  }
+}

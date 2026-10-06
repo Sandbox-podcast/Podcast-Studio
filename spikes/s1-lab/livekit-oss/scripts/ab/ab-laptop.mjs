@@ -1,0 +1,519 @@
+#!/usr/bin/env node
+// S1 laptop-only A/B: 1 publisher (real cam | take4 file loop) + 2 subscribers (pinned HIGH / LOW),
+// simulcast 3 vs 2 layers, HQ rec ON (Media S4Recorder, same tab, same published stream) vs OFF.
+// Runs on the Windows HOST (node + playwright-core + system Edge) so the publisher page is
+// http://localhost:5190 = secure context = real getUserMedia.
+//
+// SAFETY LATCH: refuses to run unless AB_GO=1 (set only after lead confirms Vision freed the 3070).
+//
+// Env: HARNESS (http://localhost:5190) AB_PATH (/ab/index.html) CONDS (all | comma list of names)
+//      CONDS default = ab-file-3L-off,ab-file-3L-on,ab-file-2L-off,ab-file-2L-on,ab-cam-3L-on (or "full8")
+//      SUB_REC (1) SUB_REC_BITRATE (2500000)
+//      WARMUP_S (20) REC_S (120) COOLDOWN_S (10) SAMPLE_MS (2000) S4_BASE (http://127.0.0.1:3320)
+//      CPU_SAMPLE_MS (= SAMPLE_MS) interval of the per-condition CPU/GPU sampler (ab-cpu-sampler.ps1), decoupled so a 1 s
+//      getStats series can keep the 2 s WMI sampler of earlier runs (same host load). getStats samples are scheduled on
+//      a fixed grid (window start + k*SAMPLE_MS), not sleep(SAMPLE_MS)+overhead.
+//      CHANNEL (msedge) OUT_DIR  ON_S4_FAIL (skip|abort, default skip)
+//      IDLE_S (15; 0 = off) pre-run idle CPU sample, before any Edge launch -> preflight.idleCpu in ab-summary.json
+//      AB_DRY=1 parse CONDS + print the planned rec calls, then exit (no preflight, no Edge, no LiveKit)
+// LAN 2nd publisher: ROOM (fixed room for all conds, else per-cond room) PUB2_ID (identity of a publisher on another
+//      machine, e.g. pub2-desktop-ai): adds subscriber ab-sub-x pinned HIGH that subscribes ONLY to PUB2_ID and records
+//      <cond>-sub-x-rx.webm; ab-sub-hi/lo then subscribe only to ab-pub (?subFrom). PUB2_WAIT_S (60) wait for pub2 video.
+// Capture fps: every SAMPLE_MS the publisher's getStats() `media-source` (kind=video) reports are sampled ->
+//      media-source-series.csv (one row per video source) + src_* columns appended to outbound-rid-series.csv
+//      (joined via outbound-rtp.mediaSourceId) + per-condition `src` block in ab-summary.json (median/min).
+// Publisher BWE: every SAMPLE_MS the publisher page's selected ICE candidate-pair per RTCPeerConnection
+//      (transport.selectedCandidatePairId, else nominated+succeeded) -> bwe-series.csv (availableOutgoingBitrate,
+//      currentRoundTripTime, candidate types) + per-condition `bwe` block in ab-summary.json (min/median, kbps) for the
+//      PC that carries outbound video (= LiveKit publisher transport).
+import { mkdirSync, appendFileSync, writeFileSync, existsSync } from "node:fs";
+import { join, dirname } from "node:path";
+import { tmpdir, cpus } from "node:os";
+import { spawn } from "node:child_process";
+import { fileURLToPath } from "node:url";
+import { chromium } from "playwright-core";
+
+const __dir = dirname(fileURLToPath(import.meta.url));
+// playwright-core 1.48 + Edge 154: closing a persistent context can reject an internal navigation promise
+// (TargetClosedError) as an UNHANDLED rejection, which killed node after condition 1 (laptop, 02:25:53).
+const benign = (e) => /Target page, context or browser has been closed|TargetClosedError/.test(String(e?.stack ?? e));
+process.on("unhandledRejection", (e) => { if (benign(e)) { console.log("[ab] ignored", String(e).split("\n")[0]); return; } console.error("[ab] unhandledRejection", e); process.exit(1); });
+process.on("uncaughtException", (e) => { if (benign(e)) { console.log("[ab] ignored", String(e).split("\n")[0]); return; } console.error("[ab] uncaughtException", e); process.exit(1); });
+const AB_DRY = process.env.AB_DRY === "1"; // parse-only, launches nothing
+if (process.env.AB_GO !== "1" && !AB_DRY) {
+  console.error("[ab] refusing to run: set AB_GO=1 only after the lead confirms Vision freed the 3070.");
+  process.exit(2);
+}
+
+const HARNESS = process.env.HARNESS ?? "http://localhost:5190";
+const AB_PATH = process.env.AB_PATH ?? "/ab/index.html";
+const WARMUP_S = Number(process.env.WARMUP_S ?? 20);
+const REC_S = Number(process.env.REC_S ?? 120);
+const COOLDOWN_S = Number(process.env.COOLDOWN_S ?? 10);
+const SAMPLE_MS = Number(process.env.SAMPLE_MS ?? 2000);
+const CPU_SAMPLE_MS = Number(process.env.CPU_SAMPLE_MS ?? SAMPLE_MS);
+const S4_BASE = process.env.S4_BASE ?? "http://127.0.0.1:3320";
+const CHANNEL = process.env.CHANNEL ?? "msedge";
+const ROOM = process.env.ROOM ?? "";
+const PUB2_ID = process.env.PUB2_ID ?? "";
+const PUB2_WAIT_S = Number(process.env.PUB2_WAIT_S ?? 60);
+const ON_S4_FAIL = process.env.ON_S4_FAIL ?? "skip";
+const CHROME_PATH = process.env.CHROME_PATH ?? ""; // box dry-run only (else system Edge via CHANNEL)
+const FAKE_MEDIA = process.env.FAKE_MEDIA === "1";
+// Chromium only exposes encoderImplementation while the page captures; file pass holds a disabled mic track.
+const UNLOCK_FILE = process.env.UNLOCK_FILE !== "0";
+const UNLOCK_SUBS = process.env.UNLOCK_SUBS === "1"; // decoderImplementation on subs (opens mic x2) // box dry-run only — laptop A/B uses the REAL camera
+const stamp = new Date().toISOString().replace(/[-:]/g, "").slice(0, 15);
+const OUT_DIR = process.env.OUT_DIR ?? join(__dir, `ab-${stamp}`);
+if (!AB_DRY) mkdirSync(OUT_DIR, { recursive: true });
+
+// Lead's reduced default order (5). Any ab-{cam,file}-{2,3}L-{on,off} name is accepted via CONDS.
+// CODEC=vp8 (default, livekit-client default) | h264 — non-default codec suffixes cond names (S4 keys stay distinct).
+const CODEC = (process.env.CODEC ?? "vp8").toLowerCase();
+const SFX = CODEC === "vp8" ? "" : `-${CODEC}`;
+// Suffixes: -h264 (PUBLISH codec) and -pp (ping-pong take4 source, /media/take4-pingpong.webm).
+// -rech264 (opt-in, rec ON only): publish codec unchanged (VP8), but the S4 HQ rec is forced to
+// 'video/webm;codecs=h264' via Media's drop-in v2.2 __s4.startSession; S4 participant = name with -rech264 -> -h264
+// (e.g. ab-file-2L-on-pp-rech264 -> participant ab-file-2L-on-pp-h264). If the recorder's actual mimeType
+// does not contain h264/avc1 the condition is ABORTED (FAIL, explicit error), never a silent VP8 rec.
+const REC_H264_MIME = "video/webm;codecs=h264";
+const parseCond = (name) => {
+  const m = /^ab-(cam|file)-([23])L-(on|off)((?:-(?:h264|vp8|pp|rech264))*)$/.exec(name);
+  if (!m) return null;
+  const sfx = m[4] || "";
+  const codecInName = /-(h264|vp8)(?=-|$)/.exec(sfx)?.[1];
+  const recH264 = /-rech264(?=-|$)/.test(sfx);
+  if (recH264 && m[3] !== "on") { console.error(`[ab] ${name}: -rech264 needs a rec ON condition`); return null; }
+  const fullName = codecInName || !SFX ? name : name + SFX;
+  return { name: fullName, src: m[1], L: Number(m[2]), rec: m[3] === "on",
+           codec: codecInName ?? CODEC, file: /-pp/.test(sfx) ? "take4-pingpong.webm" : "take4-raw.webm",
+           recMime: recH264 ? REC_H264_MIME : null,
+           recParticipant: recH264 ? fullName.replace("-rech264", "-h264") : null };
+};
+const DEFAULT = CODEC === "vp8"
+  ? ["ab-file-3L-off", "ab-file-3L-on", "ab-file-2L-off", "ab-file-2L-on", "ab-cam-3L-on"]
+  : ["ab-file-3L-off", "ab-file-3L-on", "ab-file-2L-off", "ab-file-2L-on"];
+const FULL8 = []; for (const src of ["cam", "file"]) for (const L of [3, 2]) for (const rec of ["off", "on"]) FULL8.push(`ab-${src}-${L}L-${rec}`);
+const want = (process.env.CONDS ?? "default").split(",").map((s) => s.trim()).filter(Boolean);
+const names = want.includes("default") || want.includes("all") ? DEFAULT : want.includes("full8") ? FULL8 : want;
+const CONDS = names.map(parseCond).filter(Boolean);
+// HD-pinned subscriber records the RECEIVED track per condition -> <cond>-sub-hi-rx.webm (distinct_fps.py)
+const SUB_REC = process.env.SUB_REC !== "0";
+const SUB_REC_BITRATE = Number(process.env.SUB_REC_BITRATE ?? 2_500_000);
+if (!CONDS.length) { console.error("[ab] no matching CONDS", want); process.exit(2); }
+// Rec start options per condition (default path = exactly the pre-existing call: {cond, durationSec}).
+const recStartOpts = (c) => c.recMime
+  ? { cond: c.name, durationSec: REC_S, participant: c.recParticipant, mimeType: c.recMime, vBitrate: 2_500_000, timeslice: 1000 }
+  : { cond: c.name, durationSec: REC_S };
+if (AB_DRY) {
+  for (const c of CONDS) console.log("[ab-dry]", JSON.stringify({ ...c, recStart: c.rec ? recStartOpts(c) : null }));
+  console.log("[ab-dry] timing", JSON.stringify({ WARMUP_S, REC_S, SAMPLE_MS, CPU_SAMPLE_MS, expectedSamplesPerCond: Math.floor((REC_S * 1000 - 1) / SAMPLE_MS) + 1, COOLDOWN_S, S4_BASE, CODEC, HARNESS, AB_PATH, SUB_REC, ROOM: ROOM || "(per-cond)", PUB2_ID: PUB2_ID || "(none)", PUB2_WAIT_S, srcSampling: "media-source video -> media-source-series.csv + outbound src_* + summary.src", bweSampling: "publisher selected candidate-pair -> bwe-series.csv + summary.bwe" }));
+  console.log("[ab-dry] exit before preflight: nothing launched");
+  process.exit(0);
+}
+
+const paris = (ms = Date.now()) => {
+  const d = new Date(ms);
+  const f = new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Paris", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit", second: "2-digit", fractionalSecondDigits: 3, hour12: false }).format(d);
+  return f.replace(" ", "T").replace(",", ".");
+};
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const med = (a) => { const s = a.filter(Number.isFinite).sort((x, y) => x - y); if (!s.length) return null; const m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+const max = (a) => { const s = a.filter(Number.isFinite); return s.length ? Math.max(...s) : null; };
+const min = (a) => { const s = a.filter(Number.isFinite); return s.length ? Math.min(...s) : null; };
+const r1 = (x) => (x == null ? null : Math.round(x * 10) / 10);
+const csvq = (v) => (v == null ? "" : /[",\n]/.test(String(v)) ? JSON.stringify(String(v)) : String(v));
+const row = (arr) => arr.map(csvq).join(",") + "\n";
+
+const log = (...a) => { const l = `[${paris()}] ${a.join(" ")}`; console.log(l); appendFileSync(join(OUT_DIR, "ab.log"), l + "\n"); };
+
+// ---------- preflight ----------
+async function get(url) {
+  try { const r = await fetch(url, { cache: "no-store" }); const b = await r.text(); return { ok: r.ok, status: r.status, body: b.slice(0, 300) }; }
+  catch (e) { return { ok: false, error: String(e?.message ?? e) }; }
+}
+const pre = { at: paris(), harness: await get(HARNESS + AB_PATH), media: await get(HARNESS + "/media/take4-raw.webm") };
+if (CONDS.some((c) => c.rec)) pre.s4Health = await get(`${S4_BASE}/api/health`);
+writeFileSync(join(OUT_DIR, "preflight.json"), JSON.stringify(pre, null, 2));
+log("preflight", JSON.stringify({ harness: pre.harness.status ?? pre.harness.error, media: pre.media.status ?? pre.media.error, s4: pre.s4Health ? (pre.s4Health.status ?? pre.s4Health.error) : "n/a" }));
+if (!pre.harness.ok) { log("ABORT harness A/B page not reachable — deploy public/ab first"); process.exit(3); }
+const s4Ok = !pre.s4Health || pre.s4Health.ok;
+if (!s4Ok) {
+  log(`S4 health FAILED at ${S4_BASE}/api/health — NOT restarting Media's process. policy=${ON_S4_FAIL}`);
+  if (ON_S4_FAIL === "abort") process.exit(4);
+}
+
+// ---------- pre-run idle CPU (no Edge launched yet) ----------
+// Global CPU over IDLE_S seconds, 1 s steps: node os.cpus() busy % (language-independent) and, on Windows, the
+// same WMI counter the per-condition sampler logs as total_cpu_pct (PerfOS_Processor _Total PercentProcessorTime).
+const IDLE_S = Number(process.env.IDLE_S ?? 15);
+async function idleCpuSample(sec) {
+  const snap = () => cpus().reduce((a, c) => { const t = c.times; a.busy += t.user + t.nice + t.sys + t.irq; a.total += t.user + t.nice + t.sys + t.irq + t.idle; return a; }, { busy: 0, total: 0 });
+  let wmi = null, wmiOut = "", firstWmi = null;
+  if (process.platform === "win32") {
+    wmi = spawn("powershell.exe", ["-NoProfile", "-Command",
+      `1..${sec} | ForEach-Object { (Get-CimInstance Win32_PerfFormattedData_PerfOS_Processor | Where-Object Name -eq '_Total').PercentProcessorTime; Start-Sleep -Milliseconds 1000 }`],
+      { stdio: ["ignore", "pipe", "ignore"] });
+    firstWmi = new Promise((r) => { wmi.stdout.once("data", r); setTimeout(r, 8000); });
+    wmi.stdout.on("data", (d) => { wmiOut += d; });
+  }
+  const wmiDone = wmi ? new Promise((r) => { wmi.on("close", r); setTimeout(() => { try { wmi.kill(); } catch {} r(); }, (sec + 30) * 1000); }) : Promise.resolve();
+  await firstWmi; // let powershell.exe finish starting so its own startup CPU is not in the node samples
+  const startAt = paris(); const node = [];
+  let prev = snap();
+  for (let i = 0; i < sec; i++) { await sleep(1000); const cur = snap(); const dt = cur.total - prev.total; if (dt > 0) node.push(r1((100 * (cur.busy - prev.busy)) / dt)); prev = cur; }
+  await wmiDone;
+  const wmiVals = wmiOut.split(/\r?\n/).map((x) => x.trim()).filter((x) => x !== "").map(Number).filter(Number.isFinite);
+  return { start: startAt, end: paris(), seconds: sec, cores: cpus().length,
+           node_busy_pct_med: med(node), node_busy_pct_max: max(node), node_busy_pct_samples: node,
+           wmi_total_pct_med: wmiVals.length ? med(wmiVals) : null, wmi_total_pct_samples: wmiVals,
+           note: "global CPU before any test Edge launch (includes LiveKit/Media/other host processes and the 1 Hz WMI query itself)" };
+}
+if (IDLE_S > 0) {
+  log(`idle CPU sample ${IDLE_S}s (no Edge launched yet)`);
+  pre.idleCpu = await idleCpuSample(IDLE_S);
+  writeFileSync(join(OUT_DIR, "preflight.json"), JSON.stringify(pre, null, 2));
+  log("idle CPU", JSON.stringify({ node_busy_pct_med: pre.idleCpu.node_busy_pct_med, wmi_total_pct_med: pre.idleCpu.wmi_total_pct_med, window: [pre.idleCpu.start, pre.idleCpu.end] }));
+}
+
+// ---------- CSV headers ----------
+const OUT_CSV = join(OUT_DIR, "outbound-rid-series.csv");
+const IN_CSV = join(OUT_DIR, "inbound-series.csv");
+const TIMES_CSV = join(OUT_DIR, "conditions-timestamps.csv");
+appendFileSync(OUT_CSV, row(["cond", "t_rel_s", "at_paris", "rid", "ssrc", "w", "h", "fps", "bytesSent", "framesSent", "active", "qlr", "qlrDur_none", "qlrDur_cpu", "qlrDur_bandwidth", "qlrDur_other", "qlrResChanges", "encoderImplementation", "powerEfficientEncoder", "scalabilityMode", "targetBitrate", "codec", "src_fps", "src_frames", "src_w", "src_h", "framesEncoded", "totalEncodeTime", "keyFramesEncoded"]));
+appendFileSync(IN_CSV, row(["cond", "t_rel_s", "at_paris", "sub", "pin", "kind", "ssrc", "w", "h", "fps", "bytesReceived", "packetsLost", "jitter", "freezeCount", "totalFreezesDuration", "decoderImplementation"]));
+// media-source (capture side, before the encoder): fps/frames = what the cam/captureStream delivered to WebRTC.
+// src_fps_frames = d(frames)/d(timestamp) between consecutive samples of the same source (independent of the
+// browser's 1 s framesPerSecond window).
+const SRC_CSV = join(OUT_DIR, "media-source-series.csv");
+appendFileSync(SRC_CSV, row(["cond", "t_rel_s", "at_paris", "source_id", "trackIdentifier", "src_fps", "src_frames", "src_w", "src_h", "src_fps_frames", "ts"]));
+const BWE_CSV = join(OUT_DIR, "bwe-series.csv");
+appendFileSync(BWE_CSV, row(["cond", "t_rel_s", "at_paris", "pc", "has_out_video", "availableOutgoingBitrate", "availableIncomingBitrate", "currentRoundTripTime", "cp_bytesSent", "local", "remote", "ts"]));
+appendFileSync(TIMES_CSV, row(["cond", "status", "join_at", "window_start_paris", "window_end_paris", "rec_start_paris", "rec_stop_paris", "rec_result", "note", "subrec_start_paris", "subrec_stop_paris", "subrec_file", "subrec_bytes", "pub2", "subx_file", "subx_bytes"]));
+
+const INIT_PC = () => {
+  const Orig = window.RTCPeerConnection;
+  window.__pcs = [];
+  window.RTCPeerConnection = function (...a) { const pc = new Orig(...a); window.__pcs.push(pc); return pc; };
+  window.RTCPeerConnection.prototype = Orig.prototype;
+  Object.setPrototypeOf(window.RTCPeerConnection, Orig);
+};
+
+async function stats(page) {
+  return page.evaluate(async () => {
+    const out = [], inn = [], src = [], bwe = [];
+    let pci = 0;
+    for (const pc of window.__pcs ?? []) {
+      pci++;
+      if (pc.connectionState === "closed") continue;
+      const rep = await pc.getStats();
+      // selected candidate-pair of this PC (availableOutgoingBitrate = sender-side BWE estimate)
+      try { // never let BWE sampling break the outbound/inbound/src sampling below
+      let selId = null, hasOutVideo = false;
+      for (const s of rep.values()) {
+        if (s.type === "transport" && s.selectedCandidatePairId) selId = s.selectedCandidatePairId;
+        if (s.type === "outbound-rtp" && s.kind === "video") hasOutVideo = true;
+      }
+      let cp = selId ? rep.get(selId) : null;
+      if (!cp) for (const s of rep.values()) if (s.type === "candidate-pair" && s.nominated && s.state === "succeeded") { cp = s; break; }
+      if (cp) {
+        const lc = rep.get(cp.localCandidateId), rc = rep.get(cp.remoteCandidateId);
+        bwe.push({ pc: pci, hasOutVideo, aob: cp.availableOutgoingBitrate ?? null, aib: cp.availableIncomingBitrate ?? null,
+          rtt: cp.currentRoundTripTime ?? null, bytesSent: cp.bytesSent ?? null, local: lc ? `${lc.candidateType}/${lc.protocol}` : null,
+          remote: rc ? `${rc.candidateType}/${rc.protocol}` : null, ts: cp.timestamp });
+      }
+      } catch (e) { bwe.push({ pc: pci, hasOutVideo: false, err: String(e) }); }
+      for (const s of rep.values()) {
+        if (s.type === "media-source" && s.kind === "video") src.push({
+          id: `pc${pci}:${s.id}`, trackIdentifier: s.trackIdentifier ?? null, fps: s.framesPerSecond ?? null,
+          frames: s.frames ?? null, w: s.width ?? null, h: s.height ?? null, ts: s.timestamp });
+        if (s.type === "outbound-rtp" && s.kind === "video") out.push({ srcId: s.mediaSourceId ? `pc${pci}:${s.mediaSourceId}` : null,
+          rid: s.rid ?? null, ssrc: s.ssrc, w: s.frameWidth ?? null, h: s.frameHeight ?? null, fps: s.framesPerSecond ?? null,
+          bytesSent: s.bytesSent, framesSent: s.framesSent, active: s.active ?? null, qlr: s.qualityLimitationReason ?? null,
+          qlrDurations: s.qualityLimitationDurations ?? null, qlrResChanges: s.qualityLimitationResolutionChanges ?? null,
+          encoderImplementation: s.encoderImplementation ?? null, powerEfficientEncoder: s.powerEfficientEncoder ?? null,
+          scalabilityMode: s.scalabilityMode ?? null, targetBitrate: s.targetBitrate ?? null, codec: rep.get(s.codecId)?.mimeType ?? null,
+          framesEncoded: s.framesEncoded ?? null, totalEncodeTime: s.totalEncodeTime ?? null, keyFramesEncoded: s.keyFramesEncoded ?? null, ts: s.timestamp });
+        if (s.type === "inbound-rtp" && (s.kind === "video" || s.kind === "audio")) inn.push({
+          kind: s.kind, ssrc: s.ssrc, w: s.frameWidth ?? null, h: s.frameHeight ?? null, fps: s.framesPerSecond ?? null,
+          bytesReceived: s.bytesReceived, packetsLost: s.packetsLost ?? null, jitter: s.jitter ?? null,
+          freezeCount: s.freezeCount ?? null, totalFreezesDuration: s.totalFreezesDuration ?? null,
+          decoderImplementation: s.decoderImplementation ?? null, ts: s.timestamp });
+      }
+    }
+    return { out, inn, src, bwe };
+  });
+}
+
+function startCpuSampler(cond, markers, durationSec) {
+  const ps1 = join(__dir, "ab-cpu-sampler.ps1");
+  if (process.platform !== "win32" || !existsSync(ps1)) { log("cpu sampler skipped (not win32 or ps1 missing)"); return null; }
+  const csv = join(OUT_DIR, `${cond}-cpu.csv`);
+  const p = spawn("powershell.exe", ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", ps1, "-Markers", markers.join(","), "-OutCsv", csv, "-IntervalMs", String(CPU_SAMPLE_MS), "-DurationSec", String(durationSec)], { stdio: "ignore" });
+  return { p, csv };
+}
+
+async function waitConnected(page, ms = 45000) {
+  await page.waitForFunction(() => { const s = document.querySelector("#status")?.textContent ?? ""; return /connected/.test(s) && !/disconnected|error/.test(s); }, null, { timeout: ms });
+}
+
+async function launch(marker) {
+  const args = ["--autoplay-policy=no-user-gesture-required", "--disable-background-timer-throttling", "--disable-renderer-backgrounding", "--disable-backgrounding-occluded-windows", "--use-fake-ui-for-media-stream", "--no-first-run"];
+  if (FAKE_MEDIA) args.push("--use-fake-device-for-media-stream");
+  const ctx = await chromium.launchPersistentContext(join(tmpdir(), marker), {
+    ...(CHROME_PATH ? { executablePath: CHROME_PATH } : { channel: CHANNEL }),
+    headless: process.env.HEADLESS === "1", acceptDownloads: true, viewport: { width: 1400, height: 900 }, args,
+  });
+  await ctx.grantPermissions(["camera", "microphone"], { origin: new URL(HARNESS).origin }).catch(() => {});
+  await ctx.addInitScript(INIT_PC);
+  return ctx;
+}
+
+const summaries = [];
+
+for (const c of CONDS) {
+  const room = ROOM || `s1-${c.name}-${stamp.slice(-6)}`;
+  const t = { cond: c.name, status: "pending", join_at: null, ws: null, we: null, rs: null, re: null, rec_result: "", note: "", srs: null, sre: null, sfile: "", sbytes: "", pub2: PUB2_ID ? "pending" : "", xfile: "", xbytes: "" };
+  if (c.rec && !s4Ok) {
+    t.status = "SKIPPED"; t.note = "S4 health failed";
+    appendFileSync(TIMES_CSV, row([c.name, t.status, "", "", "", "", "", "", t.note, "", "", "", "", "", "", ""]));
+    log(`${c.name} SKIPPED (S4 health failed)`); continue;
+  }
+  log(`=== ${c.name} room=${room} src=${c.src} layers=${c.L} codec=${c.codec} file=${c.file} rec=${c.rec ? "ON" : "OFF"}${c.recMime ? ` recMime=${c.recMime} participant=${c.recParticipant}` : ""}`);
+  const pubMarker = `s1ab-pub-${c.name}-${stamp}`, subMarker = `s1ab-sub-${c.name}-${stamp}`;
+  const cpu = startCpuSampler(c.name, [pubMarker, subMarker], WARMUP_S + REC_S + 60);
+  let pubCtx, subCtx;
+  const series = { out: [], inn: [], src: [], bwe: [] };
+  const srcPrev = new Map();
+  const t0 = Date.now();
+  try {
+    pubCtx = await launch(pubMarker);
+    const pub = pubCtx.pages()[0] ?? await pubCtx.newPage();
+    const errs = [];
+    pub.on("console", (m) => { if (m.type() === "error" || /hq-rec|file-publish/.test(m.text())) errs.push(`${paris()} ${m.text()}`); });
+    const q = new URLSearchParams({ layers: String(c.L), mode: c.src === "cam" ? "camera" : "file", cond: c.name, s4: S4_BASE });
+    if (c.codec !== "vp8") q.set("codec", c.codec);
+    if (c.src === "file") q.set("src", c.file);
+    if (c.src === "file" && UNLOCK_FILE) q.set("unlockStats", "1");
+    if (PUB2_ID) q.set("subFrom", "__none__"); // publisher tab must not decode the LAN pub2 (not in the 11:01 baseline)
+    await pub.goto(`${HARNESS}${AB_PATH}?${q}`, { waitUntil: "load", timeout: 45000 });
+    await pub.fill("#room", room); await pub.fill("#identity", "ab-pub");
+    await pub.click("#join"); await waitConnected(pub);
+    t.join_at = paris();
+    // "connected" is set before publish; a failed getUserMedia (e.g. NotReadableError, camera held by another
+    // app) must FAIL the condition instead of measuring an empty room (laptop 02:50 cam run).
+    await pub.waitForFunction(() => window.__publishedStream?.getVideoTracks().length > 0 || /error|disconnected/.test(document.querySelector("#status")?.textContent ?? ""), null, { timeout: 30000 }).catch(() => {});
+    const pubOk = await pub.evaluate(() => !!window.__publishedStream?.getVideoTracks().length);
+    if (!pubOk) throw new Error(`publisher has no published video (${(errs.at(-1) ?? "no console error").slice(0, 160)})`);
+
+    subCtx = await launch(subMarker);
+    const subs = [];
+    const subDefs = [["ab-sub-hi", "HIGH", PUB2_ID ? "ab-pub" : ""], ["ab-sub-lo", "LOW", PUB2_ID ? "ab-pub" : ""]];
+    if (PUB2_ID) subDefs.push(["ab-sub-x", "HIGH", PUB2_ID]);
+    for (const [id, pin, from] of subDefs) {
+      const pg = subs.length ? await subCtx.newPage() : (subCtx.pages()[0] ?? await subCtx.newPage());
+      await pg.goto(`${HARNESS}${AB_PATH}?adaptive=0&mode=none${UNLOCK_SUBS ? "&unlockStats=1" : ""}${from ? `&subFrom=${encodeURIComponent(from)}` : ""}`, { waitUntil: "load", timeout: 45000 });
+      await pg.fill("#room", room); await pg.fill("#identity", id);
+      await pg.selectOption("#media-mode", "none");
+      await pg.click("#join"); await waitConnected(pg);
+      subs.push({ id, pin, from, pg });
+    }
+    const pinAll = () => Promise.all(subs.map((s) => s.pg.evaluate((q) => window.__pinLayer?.(q) ?? -1, s.pin).catch(() => -1)));
+    await sleep(3000); await pinAll();
+    const x = subs.find((s) => s.id === "ab-sub-x");
+    if (x) {
+      const ok = await x.pg.waitForFunction((id) => [...(window.__lkRoom?.remoteParticipants.values() ?? [])].some((p) => p.identity === id &&
+        [...p.trackPublications.values()].some((pub) => pub.kind === "video" && pub.track?.mediaStreamTrack)), PUB2_ID, { timeout: PUB2_WAIT_S * 1000 }).then(() => true).catch(() => false);
+      t.pub2 = ok ? "present" : "ABSENT";
+      log(`${c.name} pub2 ${PUB2_ID} ${t.pub2}`);
+      if (!ok) t.note = `pub2 ${PUB2_ID} absent after ${PUB2_WAIT_S}s`;
+      await pinAll();
+    }
+    log(`${c.name} joined; warmup ${WARMUP_S}s`);
+    await sleep(WARMUP_S * 1000);
+
+    // ---- measurement window (= rec window) ----
+    const wsMs = Date.now(); t.ws = paris(wsMs);
+    const hi = subs.find((s) => s.pin === "HIGH");
+    if (SUB_REC && hi) {
+      const r = await hi.pg.evaluate((o) => window.__startSubRec(o), { vBitrate: SUB_REC_BITRATE, ...(PUB2_ID ? { from: "ab-pub" } : {}) }).catch((e) => ({ ok: false, error: String(e) }));
+      t.srs = paris();
+      writeFileSync(join(OUT_DIR, `${c.name}-sub-hi-rec-start.json`), JSON.stringify(r, null, 2));
+      if (!r.ok) t.note = `subrec start: ${r.error}`;
+      log(`${c.name} sub-hi rec start ${JSON.stringify(r).slice(0, 160)}`);
+    }
+    if (SUB_REC && x && t.pub2 === "present") {
+      const r = await x.pg.evaluate((o) => window.__startSubRec(o), { vBitrate: SUB_REC_BITRATE, from: PUB2_ID }).catch((e) => ({ ok: false, error: String(e) }));
+      writeFileSync(join(OUT_DIR, `${c.name}-sub-x-rec-start.json`), JSON.stringify(r, null, 2));
+      log(`${c.name} sub-x rec start ${JSON.stringify(r).slice(0, 160)}`);
+    }
+    if (c.rec) {
+      const r = await pub.evaluate((o) => window.__startHqRec(o), recStartOpts(c));
+      t.rs = paris(); t.rec_result = r.ok ? "started" : `START FAIL ${r.error}`;
+      writeFileSync(join(OUT_DIR, `${c.name}-s4-start.json`), JSON.stringify(r, null, 2));
+      log(`${c.name} rec start ${JSON.stringify(r).slice(0, 300)}`);
+      if (c.recMime) {
+        // Forced-mime guard: results.recorderMimeType must be H.264 — abort the condition otherwise.
+        t.recMime = { requested: c.recMime, recorder: r.recorderMimeType ?? null, picked: r.pickedMimeType ?? null };
+        if (!r.ok || !/h264|avc1/i.test(String(r.recorderMimeType ?? ""))) {
+          const why = r.ok ? `recorderMimeType=${JSON.stringify(r.recorderMimeType ?? null)} (requested ${c.recMime})` : `start failed: ${r.error}`;
+          if (r.ok) {
+            const st = await pub.evaluate(() => window.__stopHqRec()).catch((e) => ({ ok: false, error: String(e) }));
+            writeFileSync(join(OUT_DIR, `${c.name}-s4-results.json`), JSON.stringify(st, null, 2));
+            t.re = paris();
+          }
+          t.rec_result = "ABORTED rec mime not h264";
+          throw new Error(`REC MIME NOT H264 — condition aborted, no silent VP8 rec: ${why}`);
+        }
+      }
+    }
+    let tick = 0;
+    while (Date.now() - wsMs < REC_S * 1000) {
+      // fixed grid: next sample at wsMs + k*SAMPLE_MS (skip ticks if a stats round overran)
+      tick = Math.max(tick + 1, Math.ceil((Date.now() - wsMs) / SAMPLE_MS));
+      await sleep(Math.max(0, wsMs + tick * SAMPLE_MS - Date.now()));
+      const tr = Math.round((Date.now() - wsMs) / 100) / 10, at = paris();
+      await pinAll();
+      const ps = await stats(pub).catch(() => ({ out: [], src: [], bwe: [] }));
+      for (const b of ps.bwe ?? []) {
+        series.bwe.push({ tr, ...b });
+        appendFileSync(BWE_CSV, row([c.name, tr, at, b.pc, b.hasOutVideo, b.aob, b.aib, b.rtt, b.bytesSent, b.local, b.remote, b.ts]));
+      }
+      const srcById = new Map();
+      for (const m of ps.src ?? []) {
+        const p = srcPrev.get(m.id);
+        const dts = p ? (m.ts - p.ts) / 1000 : 0;
+        const fpsFrames = p && dts > 0 && m.frames != null && p.frames != null ? r1((m.frames - p.frames) / dts) : null;
+        srcPrev.set(m.id, m);
+        const e = { tr, ...m, fpsFrames };
+        srcById.set(m.id, e); series.src.push(e);
+        appendFileSync(SRC_CSV, row([c.name, tr, at, m.id, m.trackIdentifier, m.fps, m.frames, m.w, m.h, fpsFrames, m.ts]));
+      }
+      for (const o of ps.out) {
+        const d = o.qlrDurations ?? {};
+        const m = o.srcId ? srcById.get(o.srcId) : (srcById.size === 1 ? [...srcById.values()][0] : null);
+        series.out.push({ tr, ...o, srcFps: m?.fps ?? null, srcFpsFrames: m?.fpsFrames ?? null });
+        appendFileSync(OUT_CSV, row([c.name, tr, at, o.rid, o.ssrc, o.w, o.h, o.fps, o.bytesSent, o.framesSent, o.active, o.qlr, d.none, d.cpu, d.bandwidth, d.other, o.qlrResChanges, o.encoderImplementation, o.powerEfficientEncoder, o.scalabilityMode, o.targetBitrate, o.codec, m?.fps, m?.frames, m?.w, m?.h, o.framesEncoded, o.totalEncodeTime, o.keyFramesEncoded]));
+      }
+      for (const s of subs) {
+        const ss = await stats(s.pg).catch(() => ({ inn: [] }));
+        for (const i of ss.inn) {
+          series.inn.push({ tr, sub: s.id, ...i });
+          appendFileSync(IN_CSV, row([c.name, tr, at, s.id, s.pin, i.kind, i.ssrc, i.w, i.h, i.fps, i.bytesReceived, i.packetsLost, i.jitter, i.freezeCount, i.totalFreezesDuration, i.decoderImplementation]));
+        }
+      }
+    }
+    if (SUB_REC && hi) {
+      const fname = `${c.name}-sub-hi-rx.webm`;
+      try {
+        const dlP = hi.pg.waitForEvent("download", { timeout: 60000 });
+        const r = await hi.pg.evaluate((f) => window.__stopSubRec(f), fname);
+        t.sre = paris();
+        if (r.ok) {
+          const dl = await dlP;
+          await dl.saveAs(join(OUT_DIR, fname));
+          t.sfile = fname; t.sbytes = r.bytes;
+        } else { dlP.catch(() => {}); t.note = `subrec stop: ${r.error}`; }
+        log(`${c.name} sub-hi rec stop ${JSON.stringify(r)}`);
+      } catch (e) { t.note = `subrec save: ${String(e?.message ?? e).split("\n")[0]}`; log(`${c.name} ${t.note}`); }
+    }
+    if (SUB_REC && x && t.pub2 === "present") {
+      const fname = `${c.name}-sub-x-rx.webm`;
+      try {
+        const dlP = x.pg.waitForEvent("download", { timeout: 60000 });
+        const r = await x.pg.evaluate((f) => window.__stopSubRec(f), fname);
+        if (r.ok) { const dl = await dlP; await dl.saveAs(join(OUT_DIR, fname)); t.xfile = fname; t.xbytes = r.bytes; }
+        else dlP.catch(() => {});
+        log(`${c.name} sub-x rec stop ${JSON.stringify(r)}`);
+      } catch (e) { log(`${c.name} sub-x rec save: ${String(e?.message ?? e).split("\n")[0]}`); }
+    }
+    if (c.rec) {
+      const r = await pub.evaluate(() => window.__stopHqRec());
+      t.re = paris(); t.rec_result = r.ok ? "stopped+exported" : `STOP FAIL ${r.error}`;
+      writeFileSync(join(OUT_DIR, `${c.name}-s4-results.json`), JSON.stringify(r, null, 2));
+      log(`${c.name} rec stop ${r.ok ? "ok" : r.error}`);
+    }
+    t.we = paris();
+    t.status = "DONE";
+    writeFileSync(join(OUT_DIR, `${c.name}-console.json`), JSON.stringify(errs.slice(-50), null, 2));
+    for (const pg of [...subs.map((s) => s.pg), pub]) await pg.click("#leave").catch(() => {});
+  } catch (e) {
+    t.status = "FAIL"; t.note = String(e?.message ?? e).split("\n")[0];
+    log(`${c.name} FAIL ${t.note}`);
+  } finally {
+    const closeT = (ctx) => Promise.race([ctx?.close().catch(() => {}), sleep(15000)]);
+    await closeT(subCtx);
+    await closeT(pubCtx);
+    try { cpu?.p.kill(); } catch {}
+  }
+  appendFileSync(TIMES_CSV, row([c.name, t.status, t.join_at, t.ws, t.we, t.rs, t.re, t.rec_result, t.note, t.srs, t.sre, t.sfile, t.sbytes, t.pub2, t.xfile, t.xbytes]));
+
+  // ---- per-condition summary (raw series stays authoritative) ----
+  const rids = [...new Set(series.out.map((o) => o.rid ?? "single"))];
+  const perRid = {};
+  for (const rid of rids) {
+    const rs = series.out.filter((o) => (o.rid ?? "single") === rid);
+    const kbps = [];
+    for (let i = 1; i < rs.length; i++) { const dt = (rs[i].ts - rs[i - 1].ts) / 1000; if (dt > 0) kbps.push(((rs[i].bytesSent - rs[i - 1].bytesSent) * 8) / dt / 1000); }
+    const first = rs[0]?.qlrDurations, last = rs.at(-1)?.qlrDurations;
+    const dDur = {};
+    if (first && last) for (const k of Object.keys(last)) dDur[k] = r1(last[k] - (first[k] ?? 0));
+    const qc = {}; for (const o of rs) qc[o.qlr ?? "null"] = (qc[o.qlr ?? "null"] ?? 0) + 1;
+    // Encoder-skip detector: encoded fps (d framesEncoded/dt) vs capture fps (media-source) on the same interval.
+    // ref = min(src fps, layer cap): livekit-client 2.9.1 presets cap h180/h360 at 20 fps, top layer at 30 fps.
+    const topRid = c.L === 2 ? "h" : "f", cap = rid === topRid || rid === "single" ? 30 : 20;
+    const encFps = [], encMs = [], srcRef = [], skips = [];
+    for (let i = 1; i < rs.length; i++) {
+      const a = rs[i - 1], b = rs[i], dt = (b.ts - a.ts) / 1000;
+      if (!(dt > 0) || b.framesEncoded == null || a.framesEncoded == null) continue;
+      const df = b.framesEncoded - a.framesEncoded, ef = df / dt; encFps.push(ef);
+      if (df > 0 && b.totalEncodeTime != null && a.totalEncodeTime != null) encMs.push((1000 * (b.totalEncodeTime - a.totalEncodeTime)) / df);
+      const src = b.srcFpsFrames ?? b.srcFps; if (!Number.isFinite(src)) continue;
+      const ref = Math.min(src, cap); srcRef.push(ref);
+      if (ef < ref - 3 && b.qlr === "none") skips.push({ t_rel_s: b.tr, enc_fps: r1(ef), src_fps: r1(src), ref_fps: r1(ref) });
+    }
+    const enc = { layer_cap_fps: cap, top: rid === topRid, enc_fps_med: r1(med(encFps)), enc_fps_min: r1(min(encFps)),
+                  src_ref_fps_med: r1(med(srcRef)), encode_ms_per_frame_med: r1(med(encMs)),
+                  keyFrames_delta: rs.length > 1 && rs.at(-1).keyFramesEncoded != null && rs[0].keyFramesEncoded != null ? rs.at(-1).keyFramesEncoded - rs[0].keyFramesEncoded : null,
+                  n_intervals: encFps.length, n_enc_lt_src_minus3_qlr_none: skips.length, samples_enc_lt_src_minus3_qlr_none: skips };
+    perRid[rid] = { n: rs.length, w_med: med(rs.map((o) => o.w)), h_med: med(rs.map((o) => o.h)), fps_med: r1(med(rs.map((o) => o.fps))), kbps_med: r1(med(kbps)), qlr_counts: qc, qlrDurations_delta_s: dDur, qlrResChanges_delta: (rs.at(-1)?.qlrResChanges ?? 0) - (rs[0]?.qlrResChanges ?? 0), encoderImplementation: [...new Set(rs.map((o) => o.encoderImplementation).filter(Boolean))], enc };
+  }
+  // capture side (media-source, video): one block per source; NOT CAPTURED if the browser exposed none
+  const srcSum = {};
+  for (const id of [...new Set(series.src.map((m) => m.id))]) {
+    const ms = series.src.filter((m) => m.id === id);
+    const fps = ms.map((m) => m.fps), ff = ms.map((m) => m.fpsFrames);
+    srcSum[id] = { n: ms.length, trackIdentifier: ms[0]?.trackIdentifier ?? null,
+                   src_fps_med: r1(med(fps)), src_fps_min: r1(min(fps)), src_fps_lt24: fps.filter((x) => Number.isFinite(x) && x < 24).length,
+                   src_fps_frames_med: r1(med(ff)), src_fps_frames_min: r1(min(ff)),
+                   src_w_med: med(ms.map((m) => m.w)), src_h_med: med(ms.map((m) => m.h)),
+                   src_frames_delta: ms.length > 1 && ms.at(-1).frames != null && ms[0].frames != null ? ms.at(-1).frames - ms[0].frames : null };
+  }
+  // publisher BWE (availableOutgoingBitrate of the selected candidate-pair on the PC carrying outbound video)
+  const bw = series.bwe.filter((b) => b.hasOutVideo && Number.isFinite(b.aob));
+  const bweSum = bw.length ? { n: bw.length, pcs: [...new Set(bw.map((b) => b.pc))], aob_kbps_min: r1(min(bw.map((b) => b.aob / 1000))),
+    aob_kbps_med: r1(med(bw.map((b) => b.aob / 1000))), aob_kbps_max: r1(max(bw.map((b) => b.aob / 1000))),
+    rtt_ms_med: r1(med(bw.map((b) => (b.rtt ?? NaN) * 1000))), pair: [...new Set(bw.map((b) => `${b.local}->${b.remote}`))] }
+    : "NOT CAPTURED (no availableOutgoingBitrate on publisher candidate-pair)";
+  const subSum = {};
+  for (const sid of PUB2_ID ? ["ab-sub-hi", "ab-sub-lo", "ab-sub-x"] : ["ab-sub-hi", "ab-sub-lo"]) {
+    const v = series.inn.filter((i) => i.sub === sid && i.kind === "video");
+    subSum[sid] = { n: v.length, w_med: med(v.map((i) => i.w)), h_med: med(v.map((i) => i.h)), fps_med: r1(med(v.map((i) => i.fps))), freeze_delta: v.length ? (v.at(-1).freezeCount ?? 0) - (v[0].freezeCount ?? 0) : null, decoder: [...new Set(v.map((i) => i.decoderImplementation).filter(Boolean))] };
+  }
+  summaries.push({ cond: c.name, status: t.status, sample_ms: SAMPLE_MS, cpu_sample_ms: CPU_SAMPLE_MS, note: t.note || undefined, window: [t.ws, t.we], rec: c.rec ? [t.rs, t.re, t.rec_result] : "OFF", ...(c.recMime ? { recMime: t.recMime ?? { requested: c.recMime, recorder: null }, recParticipant: c.recParticipant } : {}), perRid, src: Object.keys(srcSum).length ? srcSum : "NOT CAPTURED (no media-source video stats)", bwe: bweSum, subs: subSum, ...(PUB2_ID ? { pub2: { id: PUB2_ID, status: t.pub2, rx: t.xfile || null } } : {}), cpu_csv: cpu ? `${c.name}-cpu.csv` : "NOT CAPTURED", elapsed_s: Math.round((Date.now() - t0) / 1000) });
+  writeFileSync(join(OUT_DIR, "ab-summary.json"), JSON.stringify({ preflight: pre, summaries }, null, 2));
+  log(`${c.name} ${t.status} window ${t.ws} → ${t.we}`);
+  await sleep(COOLDOWN_S * 1000);
+}
+
+// Markdown timestamp table for Media alignment
+let md = `# S1 laptop A/B — ${paris()}\n\nHarness ${HARNESS}${AB_PATH} · codec ${CODEC} · S4 ${S4_BASE} · warmup ${WARMUP_S}s · window ${REC_S}s · sample ${SAMPLE_MS}ms (cpu ${CPU_SAMPLE_MS}ms)\n\n| cond | status | window start (Paris) | window end (Paris) | rec start | rec stop | rec | sub-hi rx webm |\n| --- | --- | --- | --- | --- | --- | --- | --- |\n`;
+const { readFileSync } = await import("node:fs");
+for (const line of readFileSync(TIMES_CSV, "utf8").trim().split("\n").slice(1)) {
+  const f = line.split(",");
+  md += `| ${f[0]} | ${f[1]} | ${f[3] || "—"} | ${f[4] || "—"} | ${f[5] || "—"} | ${f[6] || "—"} | ${f[7] || (f[8] ? f[8] : "OFF")} | ${f[11] ? `${f[11]} (${f[12]} B)` : "—"} |\n`;
+}
+md += `\nDistinct fps (box): \`python3 /workspace/podcast-studio/tools/distinct_fps.py --threshold 0.5 --json-out r.json <cond>-sub-hi-rx.webm\`\n`;
+md += `\nRaw: outbound-rid-series.csv (src_* = media-source) · media-source-series.csv · bwe-series.csv (publisher candidate-pair availableOutgoingBitrate) · inbound-series.csv · <cond>-cpu.csv · <cond>-s4-results.json · ab-summary.json\n`;
+writeFileSync(join(OUT_DIR, "AB-TIMESTAMPS.md"), md);
+log("done", OUT_DIR);

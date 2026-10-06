@@ -1,0 +1,128 @@
+{
+ "ab-cam-3L-on": {
+  "status": "DONE",
+  "window": [
+   "2026-10-06T11:54:41.011",
+   "2026-10-06T11:56:42.868"
+  ],
+  "rec": "stopped+exported",
+  "hd_layer": "f",
+  "hd_sent": {
+   "w_med": 1280.0,
+   "h_med": 720.0,
+   "fps_med": 30.0,
+   "samples": 59,
+   "samples_with_dims": 59
+  },
+  "qlr_share_top": {
+   "none": 1.0
+  },
+  "qlrDurations_delta_s": {
+   "none": 118.2,
+   "cpu": 0.0,
+   "bandwidth": 0.0,
+   "other": 0.0
+  },
+  "qlrDurations_share": {
+   "none": 1.0,
+   "cpu": 0.0,
+   "bandwidth": 0.0,
+   "other": 0.0
+  },
+  "qlrResChanges_delta": 0.0,
+  "encoderImplementation": [
+   "SimulcastEncoderAdapter (libvpx, libvpx, libvpx)"
+  ],
+  "per_rid": {
+   "f": {
+    "w_med": 1280.0,
+    "h_med": 720.0,
+    "fps_med": 30.0,
+    "n": 59,
+    "n_with_dims": 59
+   },
+   "h": {
+    "w_med": 640.0,
+    "h_med": 360.0,
+    "fps_med": 20.0,
+    "n": 59,
+    "n_with_dims": 59
+   },
+   "q": {
+    "w_med": 320.0,
+    "h_med": 180.0,
+    "fps_med": 20.0,
+    "n": 59,
+    "n_with_dims": 59
+   }
+  },
+  "capture_src": {
+   "n": 59,
+   "sources": [
+    "pc1:SV2"
+   ],
+   "src_fps_med": 30.0,
+   "src_fps_min": 28.0,
+   "src_fps_frames_med": 30.0,
+   "src_fps_frames_min": 28.9,
+   "src_w_med": 1280.0,
+   "src_h_med": 720.0,
+   "samples_lt24_src_or_top_sent": [],
+   "encoder_vs_src": {
+    "f": {
+     "layer_cap_fps": 30,
+     "enc_fps_med": 30.0,
+     "enc_fps_min": 25.7,
+     "n_enc_lt_src_minus3_qlr_none": 1,
+     "samples": [
+      {
+       "t_rel_s": 118.7,
+       "enc_fps": 25.7,
+       "src_fps": 28.9
+      }
+     ]
+    },
+    "h": {
+     "layer_cap_fps": 20,
+     "enc_fps_med": 20.0,
+     "enc_fps_min": 17.6,
+     "n_enc_lt_src_minus3_qlr_none": 0,
+     "samples": []
+    },
+    "q": {
+     "layer_cap_fps": 20,
+     "enc_fps_med": 20.0,
+     "enc_fps_min": 17.6,
+     "n_enc_lt_src_minus3_qlr_none": 0,
+     "samples": []
+    }
+   }
+  },
+  "cpu": {
+   "pub": {
+    "machine_pct_med": 17.2,
+    "machine_pct_max": 24.9,
+    "one_core_pct_med": 137.8,
+    "n": 58
+   },
+   "sub": {
+    "machine_pct_med": 6.0,
+    "machine_pct_max": 17.7,
+    "one_core_pct_med": 47.7,
+    "n": 58
+   },
+   "total_cpu_pct_med": 59.0,
+   "gpu_videoencode_pct_med": 0.0,
+   "nvenc_util_pct_med": 0.0,
+   "nvenc_util_pct_max": 0.0
+  },
+  "sub_hi_rx": {
+   "w_med": 1280.0,
+   "h_med": 720.0,
+   "fps_med": 30.0,
+   "freeze_delta": 3.0
+  },
+  "sub_x_rx": null,
+  "distinct_fps": null
+ }
+}

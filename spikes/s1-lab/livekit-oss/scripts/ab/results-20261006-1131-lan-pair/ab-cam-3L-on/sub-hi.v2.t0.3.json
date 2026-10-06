@@ -1,0 +1,40 @@
+{
+  "threshold": 0.3,
+  "size_mode": "native",
+  "videos": [
+    {
+      "path": "ab-cam-3L-on-sub-hi-rx.webm",
+      "size_mode": "native",
+      "size_segments": [
+        "1280x720:1353f",
+        "640x360:1230f",
+        "1280x720:8f"
+      ],
+      "size_changes": 2,
+      "total_frames": 2591,
+      "duration_s": 120.879,
+      "container_fps_pts": 21.432,
+      "near_dup_threshold": 0.3,
+      "distinct_frames_exact": 2591,
+      "distinct_fps_exact": 21.435,
+      "distinct_frames_near": 2476,
+      "distinct_fps_near": 20.483,
+      "longest_repeat_run_frames": 1,
+      "longest_repeat_run_ms": 0.0,
+      "longest_neardup_run_frames": 4,
+      "longest_neardup_run_ms": 98.0,
+      "windows_1s_count": 121,
+      "windows_1s_basis": "near",
+      "windows_1s_share_ge24": 0.3388,
+      "windows_1s_lt24_count": 80,
+      "windows_1s_min": 2,
+      "windows_1s_p5": 13.0,
+      "windows_1s_median": 18.0,
+      "windows_1s_share_ge24_exact": 0.3388,
+      "windows_1s_lt24_count_exact": 80,
+      "windows_1s_min_exact": 2,
+      "windows_1s_p5_exact": 15.0,
+      "windows_1s_median_exact": 18.0
+    }
+  ]
+}

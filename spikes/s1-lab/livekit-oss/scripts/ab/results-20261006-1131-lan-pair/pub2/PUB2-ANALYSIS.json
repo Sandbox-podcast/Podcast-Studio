@@ -1,0 +1,184 @@
+{
+  "run_dir": "pub2",
+  "n_samples_total": 227,
+  "first": "2026-10-06T11:30:44.887",
+  "last": "2026-10-06T11:38:16.882",
+  "conds": {
+    "ab-cam-2L-on": {
+      "window": [
+        "2026-10-06T11:32:14.140",
+        "2026-10-06T11:34:18.869"
+      ],
+      "n_samples": 62,
+      "src": {
+        "src_fps_med": 30.0,
+        "src_fps_min": 30,
+        "src_fps_frames_med": 30.0,
+        "src_fps_frames_min": 29.7,
+        "w": 1280.0,
+        "h": 720.0
+      },
+      "layers": {
+        "h": {
+          "n": 62,
+          "w_med": 1280.0,
+          "h_med": 720.0,
+          "fps_med": 30.0,
+          "enc_fps_med": 30.0,
+          "enc_fps_min": 29.5,
+          "sent_fps_med": 30.0,
+          "sent_fps_min": 29.5,
+          "encode_ms_per_frame_med": 14.2,
+          "qlr_counts": {
+            "none": 62
+          },
+          "qlrDurations_delta_s": {
+            "bandwidth": 0.0,
+            "cpu": 0,
+            "none": 122.0,
+            "other": 0
+          },
+          "keyFrames_delta": 1,
+          "encoderImplementation": [
+            "SimulcastEncoderAdapter (libvpx, libvpx)"
+          ],
+          "layer_cap_fps": 30,
+          "n_enc_lt_src_minus3_qlr_none": 0,
+          "samples_enc_lt_src_minus3_qlr_none": []
+        },
+        "q": {
+          "n": 62,
+          "w_med": 320.0,
+          "h_med": 180.0,
+          "fps_med": 20.0,
+          "enc_fps_med": 20.0,
+          "enc_fps_min": 19.9,
+          "sent_fps_med": 20.0,
+          "sent_fps_min": 19.9,
+          "encode_ms_per_frame_med": 6.6,
+          "qlr_counts": {
+            "none": 62
+          },
+          "qlrDurations_delta_s": {
+            "bandwidth": 0.0,
+            "cpu": 0,
+            "none": 122.0,
+            "other": 0
+          },
+          "keyFrames_delta": 0,
+          "encoderImplementation": [
+            "SimulcastEncoderAdapter (libvpx, libvpx)"
+          ],
+          "layer_cap_fps": 20,
+          "n_enc_lt_src_minus3_qlr_none": 0,
+          "samples_enc_lt_src_minus3_qlr_none": []
+        }
+      },
+      "ice_selected_pairs": {
+        "pc1 local=prflx/udp 172.19.0.1 -> remote=host/udp 192.168.1.68:50042": 62,
+        "pc2 local=prflx/udp 172.19.0.1 -> remote=host/udp 192.168.1.68:50173": 62
+      },
+      "ice_rtt_ms_med": 4.0,
+      "cpu_gpu": {
+        "edge_cpu_pct_machine_med": 5.3,
+        "edge_cpu_pct_machine_max": 7.8,
+        "edge_cpu_pct_one_core_med": 85.3,
+        "total_cpu_pct_med": 25.0,
+        "nv_gpu_util_pct_med": 31.0,
+        "nv_gpu_util_pct_max": 82.0,
+        "nvenc_util_pct_med": 0.0,
+        "gpu_videoencode_pct_med": 0.0,
+        "n": 61,
+        "note": "edge_* = test Edge processes only (marker); GPU columns are machine-wide"
+      }
+    },
+    "ab-cam-3L-on": {
+      "window": [
+        "2026-10-06T11:35:39.181",
+        "2026-10-06T11:37:40.947"
+      ],
+      "n_samples": 61,
+      "src": {
+        "src_fps_med": 30,
+        "src_fps_min": 30,
+        "src_fps_frames_med": 30.0,
+        "src_fps_frames_min": 29.9,
+        "w": 1280,
+        "h": 720
+      },
+      "layers": {
+        "h": {
+          "n": 61,
+          "w_med": 1280,
+          "h_med": 720,
+          "fps_med": 29,
+          "enc_fps_med": 30.0,
+          "enc_fps_min": 29.5,
+          "sent_fps_med": 30.0,
+          "sent_fps_min": 29.5,
+          "encode_ms_per_frame_med": 15.4,
+          "qlr_counts": {
+            "none": 61
+          },
+          "qlrDurations_delta_s": {
+            "bandwidth": 0.0,
+            "cpu": 0,
+            "none": 120.0,
+            "other": 0
+          },
+          "keyFrames_delta": 1,
+          "encoderImplementation": [
+            "SimulcastEncoderAdapter (libvpx, libvpx)"
+          ],
+          "layer_cap_fps": 30,
+          "n_enc_lt_src_minus3_qlr_none": 0,
+          "samples_enc_lt_src_minus3_qlr_none": []
+        },
+        "q": {
+          "n": 61,
+          "w_med": 320,
+          "h_med": 180,
+          "fps_med": 21,
+          "enc_fps_med": 20.0,
+          "enc_fps_min": 19.5,
+          "sent_fps_med": 20.0,
+          "sent_fps_min": 19.5,
+          "encode_ms_per_frame_med": 9.3,
+          "qlr_counts": {
+            "none": 61
+          },
+          "qlrDurations_delta_s": {
+            "bandwidth": 0.0,
+            "cpu": 0,
+            "none": 120.0,
+            "other": 0
+          },
+          "keyFrames_delta": 0,
+          "encoderImplementation": [
+            "SimulcastEncoderAdapter (libvpx, libvpx)"
+          ],
+          "layer_cap_fps": 20,
+          "n_enc_lt_src_minus3_qlr_none": 0,
+          "samples_enc_lt_src_minus3_qlr_none": []
+        }
+      },
+      "ice_selected_pairs": {
+        "pc1 local=prflx/udp 172.19.0.1 -> remote=host/udp 192.168.1.68:50042": 61,
+        "pc2 local=prflx/udp 172.19.0.1 -> remote=host/udp 192.168.1.68:50173": 61
+      },
+      "ice_rtt_ms_med": 3.0,
+      "cpu_gpu": {
+        "edge_cpu_pct_machine_med": 5.5,
+        "edge_cpu_pct_machine_max": 14.8,
+        "edge_cpu_pct_one_core_med": 88.6,
+        "total_cpu_pct_med": 19.0,
+        "nv_gpu_util_pct_med": 33.0,
+        "nv_gpu_util_pct_max": 45.0,
+        "nvenc_util_pct_med": 0.0,
+        "gpu_videoencode_pct_med": 0.0,
+        "n": 59,
+        "note": "edge_* = test Edge processes only (marker); GPU columns are machine-wide"
+      }
+    }
+  }
+}

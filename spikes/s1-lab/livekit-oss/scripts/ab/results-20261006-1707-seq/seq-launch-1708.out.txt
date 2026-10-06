@@ -1,0 +1,17 @@
+[2026-10-06T17:07:46.481] sequence start labels=2L-a,3L-a,2L-b,3L-b pub2= sampleMs=1000 cpuSampleMs=2000 pauseSec=60 est_total_s=960
+[2026-10-06T17:07:59.507] 2L-a precheck cam_busy=[] blockers=[]
+[2026-10-06T17:07:59.524] 2L-a RUN START cond=ab-cam-2L-on room=s1-seq-2L-a-170759 out=C:\Users\azero\s1-livekit-oss\scripts\ab\seq-20261006-170746\2L-a
+[2026-10-06T17:11:10.293] 2L-a RUN STOP node exit 0 status=DONE window=2026-10-06T17:08:51.991->2026-10-06T17:10:52.763 rec=2026-10-06T17:08:52.209->2026-10-06T17:10:52.759
+[2026-10-06T17:11:10.296] pause 60s
+[2026-10-06T17:12:20.916] 3L-a precheck cam_busy=[] blockers=[]
+[2026-10-06T17:12:20.924] 3L-a RUN START cond=ab-cam-3L-on room=s1-seq-3L-a-171220 out=C:\Users\azero\s1-livekit-oss\scripts\ab\seq-20261006-170746\3L-a
+[2026-10-06T17:15:29.004] 3L-a RUN STOP node exit 0 status=DONE window=2026-10-06T17:13:11.600->2026-10-06T17:15:12.413 rec=2026-10-06T17:13:11.912->2026-10-06T17:15:12.409
+[2026-10-06T17:15:29.006] pause 60s
+[2026-10-06T17:16:39.739] 2L-b precheck cam_busy=[] blockers=[]
+[2026-10-06T17:16:39.745] 2L-b RUN START cond=ab-cam-2L-on room=s1-seq-2L-b-171639 out=C:\Users\azero\s1-livekit-oss\scripts\ab\seq-20261006-170746\2L-b
+[2026-10-06T17:19:49.652] 2L-b RUN STOP node exit 0 status=DONE window=2026-10-06T17:17:30.874->2026-10-06T17:19:31.671 rec=2026-10-06T17:17:31.122->2026-10-06T17:19:31.668
+[2026-10-06T17:19:49.655] pause 60s
+[2026-10-06T17:21:00.116] 3L-b precheck cam_busy=[] blockers=[]
+[2026-10-06T17:21:00.123] 3L-b RUN START cond=ab-cam-3L-on room=s1-seq-3L-b-172100 out=C:\Users\azero\s1-livekit-oss\scripts\ab\seq-20261006-170746\3L-b
+[2026-10-06T17:24:08.071] 3L-b RUN STOP node exit 0 status=DONE window=2026-10-06T17:21:50.292->2026-10-06T17:23:51.151 rec=2026-10-06T17:21:50.625->2026-10-06T17:23:51.148
+[2026-10-06T17:24:08.074] ALL DONE C:\Users\azero\s1-livekit-oss\scripts\ab\seq-20261006-170746

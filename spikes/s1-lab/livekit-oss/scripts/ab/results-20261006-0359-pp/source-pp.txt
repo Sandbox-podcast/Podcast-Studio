@@ -1,0 +1,6 @@
+take4-pingpong.webm: frames=5394 dur=179.799s size_mode=native segs=1 container_fps=30.0 distinct_fps_exact=20.0 distinct_fps_near=28.565 thresh=0.5 max_neardup=9f/266.0ms win(near)≥24=0.9889 median=29.0 p5=26.0 min=20 lt24=2/180
+take4-pingpong.webm [native] frames=5394 segs=['1280x720:5394f'] exact=20.0 near=28.565 ge24_exact=0.9944 ge24_near=0.9889 maxneardup=9f
+  freeze>200ms (gap between near-distinct frames): n=1 total=300ms max=300ms
+take4-pingpong.webm: frames=5394 dur=179.799s size_mode=native segs=1 container_fps=30.0 distinct_fps_exact=20.0 distinct_fps_near=28.738 thresh=0.3 max_neardup=6f/167.0ms win(near)≥24=0.9944 median=29.0 p5=27.0 min=21 lt24=1/180
+take4-pingpong.webm [native] frames=5394 segs=['1280x720:5394f'] exact=20.0 near=28.738 ge24_exact=0.9944 ge24_near=0.9944 maxneardup=6f
+  freeze>200ms (gap between near-distinct frames): n=1 total=200ms max=200ms

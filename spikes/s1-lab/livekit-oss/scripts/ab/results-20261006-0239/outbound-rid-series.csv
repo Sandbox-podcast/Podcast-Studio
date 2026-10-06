@@ -1,0 +1,596 @@
+cond,t_rel_s,at_paris,rid,ssrc,w,h,fps,bytesSent,framesSent,active,qlr,qlrDur_none,qlrDur_cpu,qlrDur_bandwidth,qlrDur_other,qlrResChanges,encoderImplementation,powerEfficientEncoder,scalabilityMode,targetBitrate
+ab-file-3L-off,2,2026-10-06T02:40:07.333,h,1042362454,640,360,20,1588188,527,true,none,19.745,0,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,450000
+ab-file-3L-off,2,2026-10-06T02:40:07.333,f,1196857196,1280,720,29,3426487,574,true,none,19.745,0,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,2,2026-10-06T02:40:07.333,q,1229015823,320,180,19,669746,529,true,none,19.745,0,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,4,2026-10-06T02:40:09.368,h,1042362454,640,360,20,1710468,568,true,none,21.779,0,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,449082
+ab-file-3L-off,4,2026-10-06T02:40:09.368,f,1196857196,1280,720,27,3856640,631,true,none,21.779,0,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,4,2026-10-06T02:40:09.368,q,1229015823,320,180,20,711723,570,true,none,21.779,0,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,148113
+ab-file-3L-off,6.1,2026-10-06T02:40:11.398,h,1042362454,640,360,20,1827797,609,true,none,23.809,0,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,444190
+ab-file-3L-off,6.1,2026-10-06T02:40:11.398,f,1196857196,1280,720,31,4260158,689,true,none,23.809,0,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,6.1,2026-10-06T02:40:11.398,q,1229015823,320,180,20,749712,611,true,none,23.809,0,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,146195
+ab-file-3L-off,8.1,2026-10-06T02:40:13.425,h,1042362454,640,360,19,1926653,648,true,none,25.835,0,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,450000
+ab-file-3L-off,8.1,2026-10-06T02:40:13.425,f,1196857196,1280,720,29,4676345,749,true,none,25.835,0,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,8.1,2026-10-06T02:40:13.425,q,1229015823,320,180,20,784958,651,true,none,25.835,0,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,10.1,2026-10-06T02:40:15.456,h,1042362454,640,360,21,2044032,690,true,none,27.871,0,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,448522
+ab-file-3L-off,10.1,2026-10-06T02:40:15.456,f,1196857196,1280,720,28,5090753,808,true,none,27.871,0,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,10.1,2026-10-06T02:40:15.456,q,1229015823,320,180,21,821773,692,true,none,27.871,0,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,149127
+ab-file-3L-off,12.2,2026-10-06T02:40:17.501,h,1042362454,640,360,21,2158106,731,true,none,29.912,0,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,449860
+ab-file-3L-off,12.2,2026-10-06T02:40:17.501,f,1196857196,1280,720,29,5517241,868,true,none,29.912,0,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,12.2,2026-10-06T02:40:17.501,q,1229015823,320,180,21,858372,733,true,none,29.912,0,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,14.2,2026-10-06T02:40:19.531,h,1042362454,480,270,20,2228155,772,true,cpu,30.172,1.77,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,14.2,2026-10-06T02:40:19.531,f,1196857196,960,540,31,5826783,930,true,cpu,30.172,1.77,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,14.2,2026-10-06T02:40:19.531,q,1229015823,240,135,20,889747,774,true,cpu,30.172,1.77,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,16.2,2026-10-06T02:40:21.560,h,1042362454,480,270,20,2313768,812,true,cpu,30.172,3.801,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,16.2,2026-10-06T02:40:21.560,f,1196857196,960,540,30,6284330,991,true,cpu,30.172,3.801,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,16.2,2026-10-06T02:40:21.560,q,1229015823,240,135,20,927587,814,true,cpu,30.172,3.801,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,18.3,2026-10-06T02:40:23.589,h,1042362454,480,270,19,2409685,852,true,cpu,30.172,5.828,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,325478
+ab-file-3L-off,18.3,2026-10-06T02:40:23.589,f,1196857196,960,540,29,6738914,1051,true,cpu,30.172,5.828,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1576315
+ab-file-3L-off,18.3,2026-10-06T02:40:23.589,q,1229015823,240,135,20,969500,855,true,cpu,30.172,5.828,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,138435
+ab-file-3L-off,20.3,2026-10-06T02:40:25.624,h,1042362454,480,270,19,2505416,893,true,cpu,30.172,7.865,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,332835
+ab-file-3L-off,20.3,2026-10-06T02:40:25.624,f,1196857196,960,540,31,7168826,1113,true,cpu,30.172,7.865,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1674800
+ab-file-3L-off,20.3,2026-10-06T02:40:25.624,q,1229015823,240,135,19,1007446,895,true,cpu,30.172,7.865,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,146362
+ab-file-3L-off,22.3,2026-10-06T02:40:27.654,h,1042362454,480,270,21,2585051,934,true,cpu,30.172,9.897,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,22.3,2026-10-06T02:40:27.654,f,1196857196,960,540,27,7572396,1171,true,cpu,30.172,9.897,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,22.3,2026-10-06T02:40:27.654,q,1229015823,240,135,20,1041309,936,true,cpu,30.172,9.897,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,24.4,2026-10-06T02:40:29.698,h,1042362454,480,270,19,2673003,974,true,cpu,30.172,11.936,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,24.4,2026-10-06T02:40:29.698,f,1196857196,960,540,29,7995963,1231,true,cpu,30.172,11.936,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,24.4,2026-10-06T02:40:29.698,q,1229015823,240,135,20,1078797,977,true,cpu,30.172,11.936,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,26.4,2026-10-06T02:40:31.725,h,1042362454,480,270,19,2761117,1015,true,cpu,30.172,13.964,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,26.4,2026-10-06T02:40:31.725,f,1196857196,960,540,31,8424893,1292,true,cpu,30.172,13.964,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,26.4,2026-10-06T02:40:31.725,q,1229015823,240,135,19,1114622,1017,true,cpu,30.172,13.964,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,28.4,2026-10-06T02:40:33.745,h,1042362454,480,270,21,2851448,1056,true,cpu,30.172,15.985,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,342645
+ab-file-3L-off,28.4,2026-10-06T02:40:33.745,f,1196857196,960,540,30,8845947,1352,true,cpu,30.172,15.985,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1681475
+ab-file-3L-off,28.4,2026-10-06T02:40:33.745,q,1229015823,240,135,20,1152906,1058,true,cpu,30.172,15.985,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,149725
+ab-file-3L-off,30.5,2026-10-06T02:40:35.778,h,1042362454,480,270,19,2938357,1096,true,cpu,30.172,18.016,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,345428
+ab-file-3L-off,30.5,2026-10-06T02:40:35.778,f,1196857196,960,540,29,9266175,1411,true,cpu,30.172,18.016,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,30.5,2026-10-06T02:40:35.778,q,1229015823,240,135,19,1191209,1098,true,cpu,30.172,18.016,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,147652
+ab-file-3L-off,32.5,2026-10-06T02:40:37.815,h,1042362454,480,270,20,3030695,1137,true,cpu,30.172,20.058,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,349612
+ab-file-3L-off,32.5,2026-10-06T02:40:37.815,f,1196857196,960,540,30,9703723,1472,true,cpu,30.172,20.058,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,32.5,2026-10-06T02:40:37.815,q,1229015823,240,135,20,1230311,1139,true,cpu,30.172,20.058,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,34.5,2026-10-06T02:40:39.861,h,1042362454,480,270,20,3118600,1178,true,cpu,30.172,22.105,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,34.5,2026-10-06T02:40:39.861,f,1196857196,960,540,28,10124122,1532,true,cpu,30.172,22.105,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1683968
+ab-file-3L-off,34.5,2026-10-06T02:40:39.861,q,1229015823,240,135,20,1267798,1180,true,cpu,30.172,22.105,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,36.6,2026-10-06T02:40:41.903,h,1042362454,480,270,20,3215860,1219,true,cpu,30.172,24.141,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,332020
+ab-file-3L-off,36.6,2026-10-06T02:40:41.903,f,1196857196,960,540,31,10583397,1593,true,cpu,30.172,24.141,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1667048
+ab-file-3L-off,36.6,2026-10-06T02:40:41.903,q,1229015823,240,135,20,1310805,1221,true,cpu,30.172,24.141,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,140697
+ab-file-3L-off,38.6,2026-10-06T02:40:43.933,h,1042362454,480,270,20,3290050,1260,true,cpu,30.172,26.17,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,38.6,2026-10-06T02:40:43.933,f,1196857196,960,540,29,10967164,1654,true,cpu,30.172,26.17,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,38.6,2026-10-06T02:40:43.933,q,1229015823,240,135,20,1342043,1262,true,cpu,30.172,26.17,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,40.6,2026-10-06T02:40:45.963,h,1042362454,480,270,20,3378741,1300,true,cpu,30.172,28.204,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,40.6,2026-10-06T02:40:45.963,f,1196857196,960,540,31,11417070,1715,true,cpu,30.172,28.204,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,40.6,2026-10-06T02:40:45.963,q,1229015823,240,135,20,1379362,1302,true,cpu,30.172,28.204,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,42.7,2026-10-06T02:40:47.990,h,1042362454,480,270,19,3467755,1340,true,cpu,30.172,30.228,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,336285
+ab-file-3L-off,42.7,2026-10-06T02:40:47.990,f,1196857196,960,540,29,11838790,1775,true,cpu,30.172,30.228,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1658475
+ab-file-3L-off,42.7,2026-10-06T02:40:47.990,q,1229015823,240,135,20,1419971,1343,true,cpu,30.172,30.228,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,144302
+ab-file-3L-off,44.7,2026-10-06T02:40:50.019,h,1042362454,480,270,20,3558382,1381,true,cpu,30.172,32.259,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,44.7,2026-10-06T02:40:50.019,f,1196857196,960,540,30,12273530,1837,true,cpu,30.172,32.259,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,44.7,2026-10-06T02:40:50.019,q,1229015823,240,135,20,1457220,1383,true,cpu,30.172,32.259,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,149640
+ab-file-3L-off,46.7,2026-10-06T02:40:52.049,h,1042362454,480,270,20,3645139,1422,true,cpu,30.172,34.285,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,46.7,2026-10-06T02:40:52.049,f,1196857196,960,540,31,12696132,1898,true,cpu,30.172,34.285,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1698798
+ab-file-3L-off,46.7,2026-10-06T02:40:52.049,q,1229015823,240,135,20,1493637,1424,true,cpu,30.172,34.285,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,48.7,2026-10-06T02:40:54.065,h,1042362454,480,270,20,3736039,1462,true,cpu,30.172,36.304,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,344822
+ab-file-3L-off,48.7,2026-10-06T02:40:54.065,f,1196857196,960,540,31,13140962,1959,true,cpu,30.172,36.304,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,48.7,2026-10-06T02:40:54.065,q,1229015823,240,135,20,1533674,1464,true,cpu,30.172,36.304,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,146523
+ab-file-3L-off,50.8,2026-10-06T02:40:56.092,h,1042362454,480,270,20,3816667,1503,true,cpu,30.172,38.331,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,50.8,2026-10-06T02:40:56.092,f,1196857196,960,540,31,13549830,2019,true,cpu,30.172,38.331,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,50.8,2026-10-06T02:40:56.092,q,1229015823,240,135,20,1567261,1505,true,cpu,30.172,38.331,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,52.8,2026-10-06T02:40:58.125,h,1042362454,480,270,18,3906492,1542,true,cpu,30.172,40.365,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,52.8,2026-10-06T02:40:58.125,f,1196857196,960,540,28,13983670,2079,true,cpu,30.172,40.365,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,52.8,2026-10-06T02:40:58.125,q,1229015823,240,135,19,1607388,1545,true,cpu,30.172,40.365,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,54.8,2026-10-06T02:41:00.152,h,1042362454,480,270,19,3999061,1583,true,cpu,30.172,42.39,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,337152
+ab-file-3L-off,54.8,2026-10-06T02:41:00.152,f,1196857196,960,540,30,14427894,2140,true,cpu,30.172,42.39,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1677633
+ab-file-3L-off,54.8,2026-10-06T02:41:00.152,q,1229015823,240,135,20,1646878,1586,true,cpu,30.172,42.39,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,143775
+ab-file-3L-off,56.9,2026-10-06T02:41:02.198,h,1042362454,480,270,20,4088034,1625,true,cpu,30.172,44.436,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,56.9,2026-10-06T02:41:02.198,f,1196857196,960,540,30,14845113,2201,true,cpu,30.172,44.436,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,56.9,2026-10-06T02:41:02.198,q,1229015823,240,135,20,1683823,1627,true,cpu,30.172,44.436,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,58.9,2026-10-06T02:41:04.231,h,1042362454,480,270,19,4172694,1665,true,cpu,30.172,46.475,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,58.9,2026-10-06T02:41:04.231,f,1196857196,960,540,30,15268932,2262,true,cpu,30.172,46.475,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,58.9,2026-10-06T02:41:04.231,q,1229015823,240,135,20,1720542,1668,true,cpu,30.172,46.475,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,60.9,2026-10-06T02:41:06.269,h,1042362454,480,270,20,4265450,1706,true,cpu,30.172,48.506,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,349057
+ab-file-3L-off,60.9,2026-10-06T02:41:06.269,f,1196857196,960,540,31,15711491,2323,true,cpu,30.172,48.506,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1682097
+ab-file-3L-off,60.9,2026-10-06T02:41:06.269,q,1229015823,240,135,21,1759641,1709,true,cpu,30.172,48.506,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,63,2026-10-06T02:41:08.294,h,1042362454,480,270,19,4351375,1746,true,cpu,30.172,50.53,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,343640
+ab-file-3L-off,63,2026-10-06T02:41:08.294,f,1196857196,960,540,30,16142385,2384,true,cpu,30.172,50.53,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1692742
+ab-file-3L-off,63,2026-10-06T02:41:08.294,q,1229015823,240,135,19,1796465,1748,true,cpu,30.172,50.53,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,147390
+ab-file-3L-off,65,2026-10-06T02:41:10.309,h,1042362454,480,270,20,4444095,1787,true,cpu,30.172,52.546,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,330000
+ab-file-3L-off,65,2026-10-06T02:41:10.309,f,1196857196,960,540,31,16567858,2443,true,cpu,30.172,52.546,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1684672
+ab-file-3L-off,65,2026-10-06T02:41:10.309,q,1229015823,240,135,20,1836095,1789,true,cpu,30.172,52.546,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,140108
+ab-file-3L-off,67,2026-10-06T02:41:12.334,h,1042362454,480,270,20,4521931,1827,true,cpu,30.172,54.57,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,67,2026-10-06T02:41:12.334,f,1196857196,960,540,29,16975414,2504,true,cpu,30.172,54.57,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,67,2026-10-06T02:41:12.334,q,1229015823,240,135,20,1869225,1829,true,cpu,30.172,54.57,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,69,2026-10-06T02:41:14.358,h,1042362454,480,270,20,4614746,1868,true,cpu,30.172,56.598,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,69,2026-10-06T02:41:14.358,f,1196857196,960,540,30,17417627,2565,true,cpu,30.172,56.598,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1686662
+ab-file-3L-off,69,2026-10-06T02:41:14.358,q,1229015823,240,135,20,1908991,1870,true,cpu,30.172,56.598,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,71.1,2026-10-06T02:41:16.401,h,1042362454,480,270,21,4703373,1909,true,cpu,30.172,58.64,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,71.1,2026-10-06T02:41:16.401,f,1196857196,960,540,30,17842169,2626,true,cpu,30.172,58.64,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,71.1,2026-10-06T02:41:16.401,q,1229015823,240,135,21,1947026,1911,true,cpu,30.172,58.64,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,73.1,2026-10-06T02:41:18.431,h,1042362454,480,270,19,4790102,1949,true,cpu,30.172,60.668,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,73.1,2026-10-06T02:41:18.431,f,1196857196,960,540,30,18279067,2687,true,cpu,30.172,60.668,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,73.1,2026-10-06T02:41:18.431,q,1229015823,240,135,20,1984326,1952,true,cpu,30.172,60.668,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,75.1,2026-10-06T02:41:20.459,h,1042362454,480,270,20,4877452,1990,true,cpu,30.172,62.698,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,75.1,2026-10-06T02:41:20.459,f,1196857196,960,540,31,18707961,2748,true,cpu,30.172,62.698,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,75.1,2026-10-06T02:41:20.459,q,1229015823,240,135,20,2021629,1992,true,cpu,30.172,62.698,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,77.2,2026-10-06T02:41:22.489,h,1042362454,480,270,19,4967005,2030,true,cpu,30.172,64.717,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,77.2,2026-10-06T02:41:22.489,f,1196857196,960,540,29,19140655,2808,true,cpu,30.172,64.717,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,77.2,2026-10-06T02:41:22.489,q,1229015823,240,135,19,2060392,2032,true,cpu,30.172,64.717,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,79.2,2026-10-06T02:41:24.520,h,1042362454,480,270,19,5060414,2070,true,cpu,30.172,66.723,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,337968
+ab-file-3L-off,79.2,2026-10-06T02:41:24.520,f,1196857196,960,540,30,19579122,2868,true,cpu,30.172,66.723,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1663770
+ab-file-3L-off,79.2,2026-10-06T02:41:24.520,q,1229015823,240,135,20,2100774,2073,true,cpu,30.172,66.723,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,145227
+ab-file-3L-off,81.2,2026-10-06T02:41:26.550,h,1042362454,480,270,20,5143238,2112,true,cpu,30.172,68.79,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,81.2,2026-10-06T02:41:26.550,f,1196857196,960,540,29,19995074,2930,true,cpu,30.172,68.79,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,81.2,2026-10-06T02:41:26.550,q,1229015823,240,135,20,2135547,2114,true,cpu,30.172,68.79,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,83.3,2026-10-06T02:41:28.580,h,1042362454,480,270,20,5230740,2152,true,cpu,30.172,70.801,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,83.3,2026-10-06T02:41:28.580,f,1196857196,960,540,31,20407454,2989,true,cpu,30.172,70.801,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,83.3,2026-10-06T02:41:28.580,q,1229015823,240,135,20,2173230,2154,true,cpu,30.172,70.801,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,85.3,2026-10-06T02:41:30.612,h,1042362454,480,270,20,5313126,2192,true,cpu,30.172,72.802,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,85.3,2026-10-06T02:41:30.612,f,1196857196,960,540,31,20825753,3048,true,cpu,30.172,72.802,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,85.3,2026-10-06T02:41:30.612,q,1229015823,240,135,20,2207234,2194,true,cpu,30.172,72.802,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,87.3,2026-10-06T02:41:32.627,h,1042362454,480,270,19,5406982,2233,true,cpu,30.172,74.865,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,87.3,2026-10-06T02:41:32.627,f,1196857196,960,540,30,21263100,3110,true,cpu,30.172,74.865,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,87.3,2026-10-06T02:41:32.627,q,1229015823,240,135,20,2247287,2236,true,cpu,30.172,74.865,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,89.3,2026-10-06T02:41:34.656,h,1042362454,480,270,20,5498473,2275,true,cpu,30.172,76.895,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,346728
+ab-file-3L-off,89.3,2026-10-06T02:41:34.656,f,1196857196,960,540,30,21695802,3170,true,cpu,30.172,76.895,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,89.3,2026-10-06T02:41:34.656,q,1229015823,240,135,20,2286034,2277,true,cpu,30.172,76.895,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,149407
+ab-file-3L-off,91.4,2026-10-06T02:41:36.690,h,1042362454,480,270,20,5584517,2316,true,cpu,30.172,78.929,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,91.4,2026-10-06T02:41:36.690,f,1196857196,960,540,29,22115592,3230,true,cpu,30.172,78.929,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1692420
+ab-file-3L-off,91.4,2026-10-06T02:41:36.690,q,1229015823,240,135,20,2323091,2318,true,cpu,30.172,78.929,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,148822
+ab-file-3L-off,93.4,2026-10-06T02:41:38.716,h,1042362454,480,270,20,5672411,2356,true,cpu,30.172,80.955,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,93.4,2026-10-06T02:41:38.716,f,1196857196,960,540,31,22554400,3292,true,cpu,30.172,80.955,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,93.4,2026-10-06T02:41:38.716,q,1229015823,240,135,20,2360292,2358,true,cpu,30.172,80.955,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,95.4,2026-10-06T02:41:40.745,h,1042362454,480,270,20,5762252,2396,true,cpu,30.172,82.985,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,347212
+ab-file-3L-off,95.4,2026-10-06T02:41:40.745,f,1196857196,960,540,30,22991368,3352,true,cpu,30.172,82.985,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1646102
+ab-file-3L-off,95.4,2026-10-06T02:41:40.745,q,1229015823,240,135,20,2399944,2399,true,cpu,30.172,82.985,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,148422
+ab-file-3L-off,97.5,2026-10-06T02:41:42.775,h,1042362454,480,270,20,5860136,2437,true,cpu,30.172,85.012,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,332078
+ab-file-3L-off,97.5,2026-10-06T02:41:42.775,f,1196857196,960,540,31,23436810,3414,true,cpu,30.172,85.012,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1659257
+ab-file-3L-off,97.5,2026-10-06T02:41:42.775,q,1229015823,240,135,19,2442829,2439,true,cpu,30.172,85.012,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,138193
+ab-file-3L-off,99.5,2026-10-06T02:41:44.806,h,1042362454,480,270,20,5929329,2478,true,cpu,30.172,87.047,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,99.5,2026-10-06T02:41:44.806,f,1196857196,960,540,31,23814115,3474,true,cpu,30.172,87.047,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,99.5,2026-10-06T02:41:44.806,q,1229015823,240,135,20,2471264,2480,true,cpu,30.172,87.047,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,101.5,2026-10-06T02:41:46.837,h,1042362454,480,270,20,6023993,2518,true,cpu,30.172,89.074,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,349668
+ab-file-3L-off,101.5,2026-10-06T02:41:46.837,f,1196857196,960,540,30,24268418,3535,true,cpu,30.172,89.074,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1672972
+ab-file-3L-off,101.5,2026-10-06T02:41:46.837,q,1229015823,240,135,19,2510868,2520,true,cpu,30.172,89.074,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,103.6,2026-10-06T02:41:48.871,h,1042362454,480,270,20,6112712,2559,true,cpu,30.172,91.109,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,344340
+ab-file-3L-off,103.6,2026-10-06T02:41:48.871,f,1196857196,960,540,31,24700799,3597,true,cpu,30.172,91.109,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,103.6,2026-10-06T02:41:48.871,q,1229015823,240,135,20,2550137,2561,true,cpu,30.172,91.109,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,146660
+ab-file-3L-off,105.6,2026-10-06T02:41:50.900,h,1042362454,480,270,20,6203984,2600,true,cpu,30.172,93.138,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,347510
+ab-file-3L-off,105.6,2026-10-06T02:41:50.900,f,1196857196,960,540,29,25119796,3655,true,cpu,30.172,93.138,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1693137
+ab-file-3L-off,105.6,2026-10-06T02:41:50.900,q,1229015823,240,135,20,2589262,2602,true,cpu,30.172,93.138,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,148472
+ab-file-3L-off,107.6,2026-10-06T02:41:52.932,h,1042362454,480,270,20,6290122,2640,true,cpu,30.172,95.17,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,107.6,2026-10-06T02:41:52.932,f,1196857196,960,540,30,25545947,3715,true,cpu,30.172,95.17,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,107.6,2026-10-06T02:41:52.932,q,1229015823,240,135,19,2626315,2642,true,cpu,30.172,95.17,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,109.6,2026-10-06T02:41:54.963,h,1042362454,480,270,20,6380658,2681,true,cpu,30.172,97.202,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,347828
+ab-file-3L-off,109.6,2026-10-06T02:41:54.963,f,1196857196,960,540,31,25972416,3776,true,cpu,30.172,97.202,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1699558
+ab-file-3L-off,109.6,2026-10-06T02:41:54.963,q,1229015823,240,135,20,2665332,2683,true,cpu,30.172,97.202,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,148003
+ab-file-3L-off,111.7,2026-10-06T02:41:56.993,h,1042362454,480,270,20,6461020,2721,true,cpu,30.172,99.231,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,111.7,2026-10-06T02:41:56.993,f,1196857196,960,540,30,26392628,3837,true,cpu,30.172,99.231,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,111.7,2026-10-06T02:41:56.993,q,1229015823,240,135,20,2699248,2724,true,cpu,30.172,99.231,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,113.7,2026-10-06T02:41:59.021,h,1042362454,480,270,20,6553997,2762,true,cpu,30.172,101.258,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,113.7,2026-10-06T02:41:59.021,f,1196857196,960,540,31,26819519,3896,true,cpu,30.172,101.258,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,113.7,2026-10-06T02:41:59.021,q,1229015823,240,135,20,2739092,2764,true,cpu,30.172,101.258,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,115.7,2026-10-06T02:42:01.051,h,1042362454,480,270,19,6639444,2802,true,cpu,30.172,103.29,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,333663
+ab-file-3L-off,115.7,2026-10-06T02:42:01.051,f,1196857196,960,540,29,27239505,3956,true,cpu,30.172,103.29,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,115.7,2026-10-06T02:42:01.051,q,1229015823,240,135,20,2776303,2805,true,cpu,30.172,103.29,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,143080
+ab-file-3L-off,117.8,2026-10-06T02:42:03.082,h,1042362454,480,270,19,6728430,2843,true,cpu,30.172,105.319,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,336618
+ab-file-3L-off,117.8,2026-10-06T02:42:03.082,f,1196857196,960,540,31,27673241,4018,true,cpu,30.172,105.319,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1670610
+ab-file-3L-off,117.8,2026-10-06T02:42:03.082,q,1229015823,240,135,19,2814231,2845,true,cpu,30.172,105.319,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,142283
+ab-file-3L-off,119.8,2026-10-06T02:42:05.110,h,1042362454,480,270,21,6811931,2884,true,cpu,30.172,107.348,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,119.8,2026-10-06T02:42:05.110,f,1196857196,960,540,30,28090781,4078,true,cpu,30.172,107.348,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-off,119.8,2026-10-06T02:42:05.110,q,1229015823,240,135,21,2849240,2886,true,cpu,30.172,107.348,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-off,121.8,2026-10-06T02:42:07.123,h,1042362454,480,270,20,6902119,2924,true,cpu,30.172,109.36,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-off,121.8,2026-10-06T02:42:07.123,f,1196857196,960,540,30,28532369,4139,true,cpu,30.172,109.36,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1696653
+ab-file-3L-off,121.8,2026-10-06T02:42:07.123,q,1229015823,240,135,20,2887775,2926,true,cpu,30.172,109.36,7.117,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-on,2.3,2026-10-06T02:42:49.332,f,3051214028,1280,720,22,1164484,244,true,none,9.491,0,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-on,2.3,2026-10-06T02:42:49.332,h,3698606141,640,360,20,1643370,490,true,none,9.491,0,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,450000
+ab-file-3L-on,2.3,2026-10-06T02:42:49.332,q,3937162612,320,180,19,484774,503,true,none,9.491,0,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-on,4.4,2026-10-06T02:42:51.455,f,3051214028,1280,720,22,1493090,289,true,none,11.59,0,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-on,4.4,2026-10-06T02:42:51.455,h,3698606141,640,360,19,1759641,529,true,none,11.59,0,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,450000
+ab-file-3L-on,4.4,2026-10-06T02:42:51.455,q,3937162612,320,180,19,524780,542,true,none,11.59,0,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,149242
+ab-file-3L-on,6.5,2026-10-06T02:42:53.486,f,3051214028,1280,720,18,1775343,331,true,none,13.636,0,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-on,6.5,2026-10-06T02:42:53.486,h,3698606141,640,360,17,1860770,567,true,none,13.636,0,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,450000
+ab-file-3L-on,6.5,2026-10-06T02:42:53.486,q,3937162612,320,180,18,558814,581,true,none,13.636,0,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-on,8.5,2026-10-06T02:42:55.548,f,3051214028,1280,720,22,2052957,372,true,none,15.685,0,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-on,8.5,2026-10-06T02:42:55.548,h,3698606141,640,360,19,1966641,605,true,none,15.685,0,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,450000
+ab-file-3L-on,8.5,2026-10-06T02:42:55.548,q,3937162612,320,180,20,593476,619,true,none,15.685,0,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-on,10.5,2026-10-06T02:42:57.570,f,3051214028,1280,720,21,2361092,416,true,none,17.707,0,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-on,10.5,2026-10-06T02:42:57.570,h,3698606141,640,360,19,2071422,643,true,none,17.707,0,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,450000
+ab-file-3L-on,10.5,2026-10-06T02:42:57.570,q,3937162612,320,180,18,626967,656,true,none,17.707,0,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-on,12.6,2026-10-06T02:42:59.604,f,3051214028,1280,720,19,2627663,454,true,none,19.753,0,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-on,12.6,2026-10-06T02:42:59.604,h,3698606141,640,360,20,2181469,682,true,none,19.753,0,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,450000
+ab-file-3L-on,12.6,2026-10-06T02:42:59.604,q,3937162612,320,180,19,663040,695,true,none,19.753,0,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-on,14.6,2026-10-06T02:43:01.663,f,3051214028,960,540,25,2866831,502,true,cpu,20.244,1.519,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-on,14.6,2026-10-06T02:43:01.663,h,3698606141,480,270,20,2255976,722,true,cpu,20.244,1.519,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-on,14.6,2026-10-06T02:43:01.663,q,3937162612,240,135,21,694778,735,true,cpu,20.244,1.519,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-on,16.7,2026-10-06T02:43:03.701,f,3051214028,960,540,21,3231077,552,true,cpu,20.244,3.616,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-on,16.7,2026-10-06T02:43:03.701,h,3698606141,480,270,19,2343377,762,true,cpu,20.244,3.616,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-on,16.7,2026-10-06T02:43:03.701,q,3937162612,240,135,19,733392,775,true,cpu,20.244,3.616,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-on,18.8,2026-10-06T02:43:05.813,f,3051214028,960,540,27,3659050,605,true,cpu,20.244,5.705,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-on,18.8,2026-10-06T02:43:05.813,h,3698606141,480,270,19,2443383,801,true,cpu,20.244,5.705,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,337383
+ab-file-3L-on,18.8,2026-10-06T02:43:05.813,q,3937162612,240,135,19,775075,814,true,cpu,20.244,5.705,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,147143
+ab-file-3L-on,20.8,2026-10-06T02:43:07.848,f,3051214028,960,540,18,3898584,640,true,cpu,20.244,7.74,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-on,20.8,2026-10-06T02:43:07.848,h,3698606141,480,270,18,2513098,836,true,cpu,20.244,7.74,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-on,20.8,2026-10-06T02:43:07.848,q,3937162612,240,135,17,804621,849,true,cpu,20.244,7.74,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-on,22.9,2026-10-06T02:43:09.898,f,3051214028,960,540,19,4246118,683,true,cpu,20.244,9.793,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-on,22.9,2026-10-06T02:43:09.898,h,3698606141,480,270,19,2609552,875,true,cpu,20.244,9.793,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-on,22.9,2026-10-06T02:43:09.898,q,3937162612,240,135,19,846329,889,true,cpu,20.244,9.793,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-on,24.9,2026-10-06T02:43:11.937,f,3051214028,960,540,26,4598031,735,true,cpu,20.244,11.832,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-on,24.9,2026-10-06T02:43:11.937,h,3698606141,480,270,20,2688272,916,true,cpu,20.244,11.832,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-on,24.9,2026-10-06T02:43:11.937,q,3937162612,240,135,20,877773,929,true,cpu,20.244,11.832,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-on,27,2026-10-06T02:43:13.985,f,3051214028,960,540,23,4963391,786,true,cpu,20.244,13.876,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-on,27,2026-10-06T02:43:13.985,h,3698606141,480,270,19,2775760,956,true,cpu,20.244,13.876,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-on,27,2026-10-06T02:43:13.985,q,3937162612,240,135,19,914735,969,true,cpu,20.244,13.876,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-on,29,2026-10-06T02:43:16.026,f,3051214028,960,540,24,5322183,836,true,cpu,20.244,15.92,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-on,29,2026-10-06T02:43:16.026,h,3698606141,480,270,19,2864100,995,true,cpu,20.244,15.92,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,347810
+ab-file-3L-on,29,2026-10-06T02:43:16.026,q,3937162612,240,135,19,953511,1009,true,cpu,20.244,15.92,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-on,31,2026-10-06T02:43:18.056,f,3051214028,960,540,27,5713825,892,true,cpu,20.244,17.95,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-on,31,2026-10-06T02:43:18.056,h,3698606141,480,270,20,2952618,1036,true,cpu,20.244,17.95,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-on,31,2026-10-06T02:43:18.056,q,3937162612,240,135,21,991560,1050,true,cpu,20.244,17.95,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-on,33.1,2026-10-06T02:43:20.088,f,3051214028,960,540,20,6049581,938,true,cpu,20.244,19.979,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-on,33.1,2026-10-06T02:43:20.088,h,3698606141,480,270,21,3042887,1077,true,cpu,20.244,19.979,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-on,33.1,2026-10-06T02:43:20.088,q,3937162612,240,135,20,1029374,1090,true,cpu,20.244,19.979,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-on,35.1,2026-10-06T02:43:22.111,f,3051214028,960,540,20,6372549,984,true,cpu,20.244,22.002,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-on,35.1,2026-10-06T02:43:22.111,h,3698606141,480,270,20,3133576,1117,true,cpu,20.244,22.002,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,350000
+ab-file-3L-on,35.1,2026-10-06T02:43:22.111,q,3937162612,240,135,20,1068188,1131,true,cpu,20.244,22.002,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,150000
+ab-file-3L-on,37.1,2026-10-06T02:43:24.136,f,3051214028,960,540,24,6766578,1036,true,cpu,20.244,24.033,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,1700000
+ab-file-3L-on,37.1,2026-10-06T02:43:24.136,h,3698606141,480,270,18,3227025,1157,true,cpu,20.244,24.033,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,330780
+ab-file-3L-on,37.1,2026-10-06T02:43:24.136,q,3937162612,240,135,20,1110597,1171,true,cpu,20.244,24.033,18.247,0,2,"SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",false,L1T3,140330
+ab-file-3L-on,39.1,2026-10-06T02:43:26.171,f,3051214028,,,,6892828,1058,true,cpu,20.244,26.061,18.247,0,2,libvpx,false,,
+ab-file-3L-on,39.1,2026-10-06T02:43:26.171,h,3698606141,320,180,30,3295565,1208,true,cpu,20.244,26.061,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,39.1,2026-10-06T02:43:26.171,q,3937162612,160,90,29,1136556,1221,true,cpu,20.244,26.061,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,41.2,2026-10-06T02:43:28.206,f,3051214028,,,,6892828,1058,true,cpu,20.244,28.103,18.247,0,2,libvpx,false,,
+ab-file-3L-on,41.2,2026-10-06T02:43:28.206,h,3698606141,320,180,30,3404143,1269,true,cpu,20.244,28.103,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,41.2,2026-10-06T02:43:28.206,q,3937162612,160,90,30,1170639,1282,true,cpu,20.244,28.103,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,43.2,2026-10-06T02:43:30.250,f,3051214028,,,,6892828,1058,true,cpu,20.244,30.141,18.247,0,2,libvpx,false,,
+ab-file-3L-on,43.2,2026-10-06T02:43:30.250,h,3698606141,320,180,30,3531532,1330,true,cpu,20.244,30.141,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,43.2,2026-10-06T02:43:30.250,q,3937162612,160,90,29,1212963,1343,true,cpu,20.244,30.141,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,45.3,2026-10-06T02:43:32.279,f,3051214028,,,,6892828,1058,true,cpu,20.244,32.169,18.247,0,2,libvpx,false,,
+ab-file-3L-on,45.3,2026-10-06T02:43:32.279,h,3698606141,320,180,31,3652874,1392,true,cpu,20.244,32.169,18.247,0,2,libvpx,false,L1T3,432830
+ab-file-3L-on,45.3,2026-10-06T02:43:32.279,q,3937162612,160,90,30,1254269,1405,true,cpu,20.244,32.169,18.247,0,2,libvpx,false,L1T3,140808
+ab-file-3L-on,47.3,2026-10-06T02:43:34.295,f,3051214028,,,,6892828,1058,true,cpu,20.244,34.186,18.247,0,2,libvpx,false,,
+ab-file-3L-on,47.3,2026-10-06T02:43:34.295,h,3698606141,320,180,30,3765275,1452,true,cpu,20.244,34.186,18.247,0,2,libvpx,false,L1T3,446307
+ab-file-3L-on,47.3,2026-10-06T02:43:34.295,q,3937162612,160,90,31,1291290,1465,true,cpu,20.244,34.186,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,49.3,2026-10-06T02:43:36.333,f,3051214028,,,,6892828,1058,true,cpu,20.244,36.222,18.247,0,2,libvpx,false,,
+ab-file-3L-on,49.3,2026-10-06T02:43:36.333,h,3698606141,320,180,30,3877451,1513,true,cpu,20.244,36.222,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,49.3,2026-10-06T02:43:36.333,q,3937162612,160,90,30,1329741,1526,true,cpu,20.244,36.222,18.247,0,2,libvpx,false,L1T3,149922
+ab-file-3L-on,51.3,2026-10-06T02:43:38.350,f,3051214028,,,,6892828,1058,true,cpu,20.244,38.243,18.247,0,2,libvpx,false,,
+ab-file-3L-on,51.3,2026-10-06T02:43:38.350,h,3698606141,320,180,30,3984007,1574,true,cpu,20.244,38.243,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,51.3,2026-10-06T02:43:38.350,q,3937162612,160,90,31,1364213,1587,true,cpu,20.244,38.243,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,53.4,2026-10-06T02:43:40.384,f,3051214028,,,,6892828,1058,true,cpu,20.244,40.277,18.247,0,2,libvpx,false,,
+ab-file-3L-on,53.4,2026-10-06T02:43:40.384,h,3698606141,320,180,29,4100302,1634,true,cpu,20.244,40.277,18.247,0,2,libvpx,false,L1T3,446305
+ab-file-3L-on,53.4,2026-10-06T02:43:40.384,q,3937162612,160,90,29,1403346,1647,true,cpu,20.244,40.277,18.247,0,2,libvpx,false,L1T3,148465
+ab-file-3L-on,55.4,2026-10-06T02:43:42.410,f,3051214028,,,,6892828,1058,true,cpu,20.244,42.3,18.247,0,2,libvpx,false,,
+ab-file-3L-on,55.4,2026-10-06T02:43:42.410,h,3698606141,320,180,31,4213427,1696,true,cpu,20.244,42.3,18.247,0,2,libvpx,false,L1T3,436215
+ab-file-3L-on,55.4,2026-10-06T02:43:42.410,q,3937162612,160,90,29,1439989,1707,true,cpu,20.244,42.3,18.247,0,2,libvpx,false,L1T3,144985
+ab-file-3L-on,57.4,2026-10-06T02:43:44.437,f,3051214028,,,,6892828,1058,true,cpu,20.244,44.33,18.247,0,2,libvpx,false,,
+ab-file-3L-on,57.4,2026-10-06T02:43:44.437,h,3698606141,320,180,30,4327935,1756,true,cpu,20.244,44.33,18.247,0,2,libvpx,false,L1T3,447288
+ab-file-3L-on,57.4,2026-10-06T02:43:44.437,q,3937162612,160,90,29,1479012,1764,true,cpu,20.244,44.33,18.247,0,2,libvpx,false,L1T3,147775
+ab-file-3L-on,59.4,2026-10-06T02:43:46.464,f,3051214028,,,,6892828,1058,true,cpu,20.244,46.365,18.247,0,2,libvpx,false,,
+ab-file-3L-on,59.4,2026-10-06T02:43:46.464,h,3698606141,320,180,31,4435639,1818,true,cpu,20.244,46.365,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,59.4,2026-10-06T02:43:46.464,q,3937162612,160,90,30,1515997,1826,true,cpu,20.244,46.365,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,61.5,2026-10-06T02:43:48.507,f,3051214028,,,,6892828,1058,true,cpu,20.244,48.4,18.247,0,2,libvpx,false,,
+ab-file-3L-on,61.5,2026-10-06T02:43:48.507,h,3698606141,320,180,30,4547143,1878,true,cpu,20.244,48.4,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,61.5,2026-10-06T02:43:48.507,q,3937162612,160,90,30,1552428,1886,true,cpu,20.244,48.4,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,63.5,2026-10-06T02:43:50.538,f,3051214028,,,,6892828,1058,true,cpu,20.244,50.428,18.247,0,2,libvpx,false,,
+ab-file-3L-on,63.5,2026-10-06T02:43:50.538,h,3698606141,320,180,30,4666025,1939,true,cpu,20.244,50.428,18.247,0,2,libvpx,false,L1T3,447927
+ab-file-3L-on,63.5,2026-10-06T02:43:50.538,q,3937162612,160,90,29,1592276,1947,true,cpu,20.244,50.428,18.247,0,2,libvpx,false,L1T3,149698
+ab-file-3L-on,65.5,2026-10-06T02:43:52.568,f,3051214028,,,,6892828,1058,true,cpu,20.244,52.461,18.247,0,2,libvpx,false,,
+ab-file-3L-on,65.5,2026-10-06T02:43:52.568,h,3698606141,320,180,30,4782748,2000,true,cpu,20.244,52.461,18.247,0,2,libvpx,false,L1T3,440442
+ab-file-3L-on,65.5,2026-10-06T02:43:52.568,q,3937162612,160,90,29,1630754,2008,true,cpu,20.244,52.461,18.247,0,2,libvpx,false,L1T3,146250
+ab-file-3L-on,67.6,2026-10-06T02:43:54.587,f,3051214028,,,,6892828,1058,true,cpu,20.244,54.478,18.247,0,2,libvpx,false,,
+ab-file-3L-on,67.6,2026-10-06T02:43:54.587,h,3698606141,320,180,30,4895361,2061,true,cpu,20.244,54.478,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,67.6,2026-10-06T02:43:54.587,q,3937162612,160,90,30,1668445,2069,true,cpu,20.244,54.478,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,69.6,2026-10-06T02:43:56.608,f,3051214028,,,,6892828,1058,true,cpu,20.244,56.498,18.247,0,2,libvpx,false,,
+ab-file-3L-on,69.6,2026-10-06T02:43:56.608,h,3698606141,320,180,31,5006968,2122,true,cpu,20.244,56.498,18.247,0,2,libvpx,false,L1T3,444195
+ab-file-3L-on,69.6,2026-10-06T02:43:56.608,q,3937162612,160,90,30,1705385,2130,true,cpu,20.244,56.498,18.247,0,2,libvpx,false,L1T3,147085
+ab-file-3L-on,71.6,2026-10-06T02:43:58.629,f,3051214028,,,,6892828,1058,true,cpu,20.244,58.518,18.247,0,2,libvpx,false,,
+ab-file-3L-on,71.6,2026-10-06T02:43:58.629,h,3698606141,320,180,30,5119794,2182,true,cpu,20.244,58.518,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,71.6,2026-10-06T02:43:58.629,q,3937162612,160,90,31,1743078,2190,true,cpu,20.244,58.518,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,73.6,2026-10-06T02:44:00.666,f,3051214028,,,,6892828,1058,true,cpu,20.244,60.557,18.247,0,2,libvpx,false,,
+ab-file-3L-on,73.6,2026-10-06T02:44:00.666,h,3698606141,320,180,30,5230622,2243,true,cpu,20.244,60.557,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,73.6,2026-10-06T02:44:00.666,q,3937162612,160,90,30,1779664,2251,true,cpu,20.244,60.557,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,75.7,2026-10-06T02:44:02.693,f,3051214028,,,,6892828,1058,true,cpu,20.244,62.582,18.247,0,2,libvpx,false,,
+ab-file-3L-on,75.7,2026-10-06T02:44:02.693,h,3698606141,320,180,30,5340219,2304,true,cpu,20.244,62.582,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,75.7,2026-10-06T02:44:02.693,q,3937162612,160,90,30,1815916,2312,true,cpu,20.244,62.582,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,77.7,2026-10-06T02:44:04.727,f,3051214028,,,,6892828,1058,true,cpu,20.244,64.618,18.247,0,2,libvpx,false,,
+ab-file-3L-on,77.7,2026-10-06T02:44:04.727,h,3698606141,320,180,30,5460519,2365,true,cpu,20.244,64.618,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,77.7,2026-10-06T02:44:04.727,q,3937162612,160,90,30,1856109,2373,true,cpu,20.244,64.618,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,79.7,2026-10-06T02:44:06.758,f,3051214028,,,,6892828,1058,true,cpu,20.244,66.648,18.247,0,2,libvpx,false,,
+ab-file-3L-on,79.7,2026-10-06T02:44:06.758,h,3698606141,320,180,30,5576596,2426,true,cpu,20.244,66.648,18.247,0,2,libvpx,false,L1T3,439775
+ab-file-3L-on,79.7,2026-10-06T02:44:06.758,q,3937162612,160,90,30,1895202,2434,true,cpu,20.244,66.648,18.247,0,2,libvpx,false,L1T3,144825
+ab-file-3L-on,81.8,2026-10-06T02:44:08.788,f,3051214028,,,,6892828,1058,true,cpu,20.244,68.682,18.247,0,2,libvpx,false,,
+ab-file-3L-on,81.8,2026-10-06T02:44:08.788,h,3698606141,320,180,30,5688315,2487,true,cpu,20.244,68.682,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,81.8,2026-10-06T02:44:08.788,q,3937162612,160,90,30,1932036,2495,true,cpu,20.244,68.682,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,83.8,2026-10-06T02:44:10.806,f,3051214028,,,,6892828,1058,true,cpu,20.244,70.696,18.247,0,2,libvpx,false,,
+ab-file-3L-on,83.8,2026-10-06T02:44:10.806,h,3698606141,320,180,31,5800781,2548,true,cpu,20.244,70.696,18.247,0,2,libvpx,false,L1T3,445175
+ab-file-3L-on,83.8,2026-10-06T02:44:10.806,q,3937162612,160,90,30,1969643,2556,true,cpu,20.244,70.696,18.247,0,2,libvpx,false,L1T3,149413
+ab-file-3L-on,85.8,2026-10-06T02:44:12.840,f,3051214028,,,,6892828,1058,true,cpu,20.244,72.732,18.247,0,2,libvpx,false,,
+ab-file-3L-on,85.8,2026-10-06T02:44:12.840,h,3698606141,320,180,30,5906593,2608,true,cpu,20.244,72.732,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,85.8,2026-10-06T02:44:12.840,q,3937162612,160,90,30,2003059,2616,true,cpu,20.244,72.732,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,87.8,2026-10-06T02:44:14.873,f,3051214028,,,,6892828,1058,true,cpu,20.244,74.763,18.247,0,2,libvpx,false,,
+ab-file-3L-on,87.8,2026-10-06T02:44:14.873,h,3698606141,320,180,30,6015938,2669,true,cpu,20.244,74.763,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,87.8,2026-10-06T02:44:14.873,q,3937162612,160,90,29,2040918,2677,true,cpu,20.244,74.763,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,89.9,2026-10-06T02:44:16.902,f,3051214028,,,,6892828,1058,true,cpu,20.244,76.795,18.247,0,2,libvpx,false,,
+ab-file-3L-on,89.9,2026-10-06T02:44:16.902,h,3698606141,320,180,30,6131525,2730,true,cpu,20.244,76.795,18.247,0,2,libvpx,false,L1T3,445575
+ab-file-3L-on,89.9,2026-10-06T02:44:16.902,q,3937162612,160,90,30,2079544,2738,true,cpu,20.244,76.795,18.247,0,2,libvpx,false,L1T3,146277
+ab-file-3L-on,91.9,2026-10-06T02:44:18.931,f,3051214028,,,,6892828,1058,true,cpu,20.244,78.822,18.247,0,2,libvpx,false,,
+ab-file-3L-on,91.9,2026-10-06T02:44:18.931,h,3698606141,320,180,30,6244489,2791,true,cpu,20.244,78.822,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,91.9,2026-10-06T02:44:18.931,q,3937162612,160,90,30,2116526,2799,true,cpu,20.244,78.822,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,93.9,2026-10-06T02:44:20.964,f,3051214028,,,,6892828,1058,true,cpu,20.244,80.856,18.247,0,2,libvpx,false,,
+ab-file-3L-on,93.9,2026-10-06T02:44:20.964,h,3698606141,320,180,30,6359717,2852,true,cpu,20.244,80.856,18.247,0,2,libvpx,false,L1T3,449545
+ab-file-3L-on,93.9,2026-10-06T02:44:20.964,q,3937162612,160,90,30,2154968,2860,true,cpu,20.244,80.856,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,96,2026-10-06T02:44:22.994,f,3051214028,,,,6892828,1058,true,cpu,20.244,82.883,18.247,0,2,libvpx,false,,
+ab-file-3L-on,96,2026-10-06T02:44:22.994,h,3698606141,320,180,30,6477599,2913,true,cpu,20.244,82.883,18.247,0,2,libvpx,false,L1T3,449992
+ab-file-3L-on,96,2026-10-06T02:44:22.994,q,3937162612,160,90,30,2193970,2921,true,cpu,20.244,82.883,18.247,0,2,libvpx,false,L1T3,148745
+ab-file-3L-on,98,2026-10-06T02:44:25.021,f,3051214028,,,,6892828,1058,true,cpu,20.244,84.913,18.247,0,2,libvpx,false,,
+ab-file-3L-on,98,2026-10-06T02:44:25.021,h,3698606141,320,180,30,6589522,2974,true,cpu,20.244,84.913,18.247,0,2,libvpx,false,L1T3,437940
+ab-file-3L-on,98,2026-10-06T02:44:25.021,q,3937162612,160,90,30,2231786,2982,true,cpu,20.244,84.913,18.247,0,2,libvpx,false,L1T3,147123
+ab-file-3L-on,100,2026-10-06T02:44:27.047,f,3051214028,,,,6892828,1058,true,cpu,20.244,86.939,18.247,0,2,libvpx,false,,
+ab-file-3L-on,100,2026-10-06T02:44:27.047,h,3698606141,320,180,31,6698289,3035,true,cpu,20.244,86.939,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,100,2026-10-06T02:44:27.047,q,3937162612,160,90,31,2266264,3043,true,cpu,20.244,86.939,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,102,2026-10-06T02:44:29.063,f,3051214028,,,,6892828,1058,true,cpu,20.244,88.954,18.247,0,2,libvpx,false,,
+ab-file-3L-on,102,2026-10-06T02:44:29.063,h,3698606141,320,180,30,6811446,3095,true,cpu,20.244,88.954,18.247,0,2,libvpx,false,L1T3,441810
+ab-file-3L-on,102,2026-10-06T02:44:29.063,q,3937162612,160,90,30,2304163,3103,true,cpu,20.244,88.954,18.247,0,2,libvpx,false,L1T3,149073
+ab-file-3L-on,104.1,2026-10-06T02:44:31.082,f,3051214028,,,,6892828,1058,true,cpu,20.244,90.974,18.247,0,2,libvpx,false,,
+ab-file-3L-on,104.1,2026-10-06T02:44:31.082,h,3698606141,320,180,31,6924531,3156,true,cpu,20.244,90.974,18.247,0,2,libvpx,false,L1T3,436565
+ab-file-3L-on,104.1,2026-10-06T02:44:31.082,q,3937162612,160,90,30,2342776,3164,true,cpu,20.244,90.974,18.247,0,2,libvpx,false,L1T3,143762
+ab-file-3L-on,106.1,2026-10-06T02:44:33.125,f,3051214028,,,,6892828,1058,true,cpu,20.244,93.017,18.247,0,2,libvpx,false,,
+ab-file-3L-on,106.1,2026-10-06T02:44:33.125,h,3698606141,320,180,30,7040970,3217,true,cpu,20.244,93.017,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,106.1,2026-10-06T02:44:33.125,q,3937162612,160,90,31,2381253,3225,true,cpu,20.244,93.017,18.247,0,2,libvpx,false,L1T3,148888
+ab-file-3L-on,108.1,2026-10-06T02:44:35.159,f,3051214028,,,,6892828,1058,true,cpu,20.244,95.053,18.247,0,2,libvpx,false,,
+ab-file-3L-on,108.1,2026-10-06T02:44:35.159,h,3698606141,320,180,30,7155035,3278,true,cpu,20.244,95.053,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,108.1,2026-10-06T02:44:35.159,q,3937162612,160,90,30,2418986,3286,true,cpu,20.244,95.053,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,110.2,2026-10-06T02:44:37.194,f,3051214028,,,,6892828,1058,true,cpu,20.244,97.084,18.247,0,2,libvpx,false,,
+ab-file-3L-on,110.2,2026-10-06T02:44:37.194,h,3698606141,320,180,30,7263725,3339,true,cpu,20.244,97.084,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,110.2,2026-10-06T02:44:37.194,q,3937162612,160,90,30,2455710,3347,true,cpu,20.244,97.084,18.247,0,2,libvpx,false,L1T3,149978
+ab-file-3L-on,112.2,2026-10-06T02:44:39.223,f,3051214028,,,,6892828,1058,true,cpu,20.244,99.114,18.247,0,2,libvpx,false,,
+ab-file-3L-on,112.2,2026-10-06T02:44:39.223,h,3698606141,320,180,30,7379899,3400,true,cpu,20.244,99.114,18.247,0,2,libvpx,false,L1T3,447320
+ab-file-3L-on,112.2,2026-10-06T02:44:39.223,q,3937162612,160,90,30,2494218,3408,true,cpu,20.244,99.114,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,114.2,2026-10-06T02:44:41.254,f,3051214028,,,,6892828,1058,true,cpu,20.244,101.143,18.247,0,2,libvpx,false,,
+ab-file-3L-on,114.2,2026-10-06T02:44:41.254,h,3698606141,320,180,30,7494324,3461,true,cpu,20.244,101.143,18.247,0,2,libvpx,false,L1T3,441767
+ab-file-3L-on,114.2,2026-10-06T02:44:41.254,q,3937162612,160,90,30,2532881,3469,true,cpu,20.244,101.143,18.247,0,2,libvpx,false,L1T3,145655
+ab-file-3L-on,116.3,2026-10-06T02:44:43.279,f,3051214028,,,,6892828,1058,true,cpu,20.244,103.177,18.247,0,2,libvpx,false,,
+ab-file-3L-on,116.3,2026-10-06T02:44:43.279,h,3698606141,320,180,29,7607729,3521,true,cpu,20.244,103.177,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,116.3,2026-10-06T02:44:43.279,q,3937162612,160,90,29,2570443,3529,true,cpu,20.244,103.177,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,118.3,2026-10-06T02:44:45.313,f,3051214028,,,,6892828,1058,true,cpu,20.244,105.202,18.247,0,2,libvpx,false,,
+ab-file-3L-on,118.3,2026-10-06T02:44:45.313,h,3698606141,320,180,31,7725031,3583,true,cpu,20.244,105.202,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,118.3,2026-10-06T02:44:45.313,q,3937162612,160,90,30,2609371,3591,true,cpu,20.244,105.202,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-3L-on,120.3,2026-10-06T02:44:47.344,f,3051214028,,,,6892828,1058,true,cpu,20.244,107.237,18.247,0,2,libvpx,false,,
+ab-file-3L-on,120.3,2026-10-06T02:44:47.344,h,3698606141,320,180,30,7827670,3643,true,cpu,20.244,107.237,18.247,0,2,libvpx,false,L1T3,450000
+ab-file-3L-on,120.3,2026-10-06T02:44:47.344,q,3937162612,160,90,30,2642874,3651,true,cpu,20.244,107.237,18.247,0,2,libvpx,false,L1T3,150000
+ab-file-2L-off,2,2026-10-06T02:45:29.815,q,3595569711,320,180,20,879723,447,true,none,12.246,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,2,2026-10-06T02:45:29.815,h,467612004,1280,720,31,1701125,349,true,none,12.246,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,4,2026-10-06T02:45:31.840,q,3595569711,320,180,20,920202,487,true,none,14.271,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,144832
+ab-file-2L-off,4,2026-10-06T02:45:31.840,h,467612004,1280,720,29,2145444,409,true,none,14.271,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1659625
+ab-file-2L-off,6.1,2026-10-06T02:45:33.873,q,3595569711,320,180,20,954083,528,true,none,16.308,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,6.1,2026-10-06T02:45:33.873,h,467612004,1280,720,31,2539906,469,true,none,16.308,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,8.1,2026-10-06T02:45:35.915,q,3595569711,320,180,20,992349,569,true,none,18.349,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,8.1,2026-10-06T02:45:35.915,h,467612004,1280,720,31,2983304,531,true,none,18.349,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,10.2,2026-10-06T02:45:37.952,q,3595569711,320,180,19,1028409,609,true,none,20.384,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,10.2,2026-10-06T02:45:37.952,h,467612004,1280,720,30,3407502,592,true,none,20.384,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,12.2,2026-10-06T02:45:39.972,q,3595569711,320,180,21,1066983,650,true,none,22.403,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,12.2,2026-10-06T02:45:39.972,h,467612004,1280,720,30,3838107,652,true,none,22.403,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,14.2,2026-10-06T02:45:42.000,q,3595569711,320,180,19,1104664,690,true,none,24.431,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,142337
+ab-file-2L-off,14.2,2026-10-06T02:45:42.000,h,467612004,1280,720,29,4268478,713,true,none,24.431,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,16.3,2026-10-06T02:45:44.053,q,3595569711,320,180,20,1143760,732,true,none,26.55,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,16.3,2026-10-06T02:45:44.053,h,467612004,1280,720,20,4593897,758,true,none,26.55,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,18.4,2026-10-06T02:45:46.204,q,3595569711,320,180,20,1183800,770,true,none,28.646,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,149665
+ab-file-2L-off,18.4,2026-10-06T02:45:46.204,h,467612004,1280,720,26,4923806,802,true,none,28.646,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,20.5,2026-10-06T02:45:48.251,q,3595569711,320,180,20,1219017,812,true,none,30.684,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,145673
+ab-file-2L-off,20.5,2026-10-06T02:45:48.251,h,467612004,1280,720,31,5335986,864,true,none,30.684,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,22.5,2026-10-06T02:45:50.288,q,3595569711,320,180,21,1256896,853,true,none,32.719,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,22.5,2026-10-06T02:45:50.288,h,467612004,1280,720,28,5726672,919,true,none,32.719,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,24.5,2026-10-06T02:45:52.315,q,3595569711,320,180,20,1291358,893,true,none,34.746,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,24.5,2026-10-06T02:45:52.315,h,467612004,1280,720,30,6157474,980,true,none,34.746,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,26.6,2026-10-06T02:45:54.347,q,3595569711,320,180,21,1330333,934,true,none,36.781,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,26.6,2026-10-06T02:45:54.347,h,467612004,1280,720,29,6587029,1040,true,none,36.781,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,28.6,2026-10-06T02:45:56.380,q,3595569711,320,180,20,1367268,974,true,none,38.811,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,28.6,2026-10-06T02:45:56.380,h,467612004,1280,720,31,7040993,1102,true,none,38.811,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,30.6,2026-10-06T02:45:58.411,q,3595569711,320,180,20,1404992,1015,true,none,40.846,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,30.6,2026-10-06T02:45:58.411,h,467612004,1280,720,29,7439498,1161,true,none,40.846,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,32.6,2026-10-06T02:46:00.441,q,3595569711,320,180,19,1441767,1054,true,none,42.845,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,149943
+ab-file-2L-off,32.6,2026-10-06T02:46:00.441,h,467612004,1280,720,29,7856684,1220,true,none,42.845,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,34.7,2026-10-06T02:46:02.468,q,3595569711,320,180,21,1482207,1097,true,none,44.899,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,34.7,2026-10-06T02:46:02.468,h,467612004,1280,720,30,8285793,1282,true,none,44.899,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,36.7,2026-10-06T02:46:04.497,q,3595569711,320,180,21,1526273,1137,true,none,46.917,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,135252
+ab-file-2L-off,36.7,2026-10-06T02:46:04.497,h,467612004,1280,720,29,8746701,1342,true,none,46.917,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1601667
+ab-file-2L-off,38.7,2026-10-06T02:46:06.515,q,3595569711,320,180,21,1552705,1177,true,none,48.916,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,38.7,2026-10-06T02:46:06.515,h,467612004,1280,720,31,9116551,1403,true,none,48.916,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,40.7,2026-10-06T02:46:08.547,q,3595569711,320,180,20,1593154,1218,true,none,50.978,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,40.7,2026-10-06T02:46:08.547,h,467612004,1280,720,30,9562886,1464,true,none,50.978,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,42.8,2026-10-06T02:46:10.578,q,3595569711,320,180,20,1632000,1258,true,none,53.012,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,144727
+ab-file-2L-off,42.8,2026-10-06T02:46:10.578,h,467612004,1280,720,30,10003751,1525,true,none,53.012,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1684340
+ab-file-2L-off,44.8,2026-10-06T02:46:12.605,q,3595569711,320,180,20,1671209,1299,true,none,55.038,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,44.8,2026-10-06T02:46:12.605,h,467612004,1280,720,31,10449912,1587,true,none,55.038,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1689153
+ab-file-2L-off,46.8,2026-10-06T02:46:14.634,q,3595569711,320,180,21,1708705,1340,true,none,57.064,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,46.8,2026-10-06T02:46:14.634,h,467612004,1280,720,30,10865701,1647,true,none,57.064,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,48.9,2026-10-06T02:46:16.663,q,3595569711,320,180,20,1747080,1380,true,none,59.095,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,148612
+ab-file-2L-off,48.9,2026-10-06T02:46:16.663,h,467612004,1280,720,30,11298737,1708,true,none,59.095,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,50.9,2026-10-06T02:46:18.698,q,3595569711,320,180,20,1779794,1421,true,none,61.131,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,50.9,2026-10-06T02:46:18.698,h,467612004,1280,720,30,11716900,1769,true,none,61.131,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,52.9,2026-10-06T02:46:20.727,q,3595569711,320,180,21,1822931,1462,true,none,63.16,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,52.9,2026-10-06T02:46:20.727,h,467612004,1280,720,29,12153159,1829,true,none,63.16,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,55,2026-10-06T02:46:22.758,q,3595569711,320,180,19,1859667,1502,true,none,65.188,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,146780
+ab-file-2L-off,55,2026-10-06T02:46:22.758,h,467612004,1280,720,30,12582459,1890,true,none,65.188,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,57,2026-10-06T02:46:24.776,q,3595569711,320,180,19,1898429,1542,true,none,67.209,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,143913
+ab-file-2L-off,57,2026-10-06T02:46:24.776,h,467612004,1280,720,30,13006679,1950,true,none,67.209,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1678325
+ab-file-2L-off,59,2026-10-06T02:46:26.797,q,3595569711,320,180,19,1932531,1583,true,none,69.232,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,59,2026-10-06T02:46:26.797,h,467612004,1280,720,30,13422965,2011,true,none,69.232,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,61,2026-10-06T02:46:28.827,q,3595569711,320,180,21,1971585,1624,true,none,71.26,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,61,2026-10-06T02:46:28.827,h,467612004,1280,720,30,13857139,2071,true,none,71.26,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1695920
+ab-file-2L-off,63.1,2026-10-06T02:46:30.858,q,3595569711,320,180,20,2011974,1664,true,none,73.291,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,144983
+ab-file-2L-off,63.1,2026-10-06T02:46:30.858,h,467612004,1280,720,29,14299319,2132,true,none,73.291,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1699630
+ab-file-2L-off,65.1,2026-10-06T02:46:32.891,q,3595569711,320,180,20,2048578,1705,true,none,75.321,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,145413
+ab-file-2L-off,65.1,2026-10-06T02:46:32.891,h,467612004,1280,720,30,14731436,2193,true,none,75.321,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1680247
+ab-file-2L-off,67.1,2026-10-06T02:46:34.918,q,3595569711,320,180,20,2085100,1745,true,none,77.349,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,67.1,2026-10-06T02:46:34.918,h,467612004,1280,720,31,15156402,2254,true,none,77.349,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,69.1,2026-10-06T02:46:36.946,q,3595569711,320,180,20,2123532,1786,true,none,79.377,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,69.1,2026-10-06T02:46:36.946,h,467612004,1280,720,31,15573440,2315,true,none,79.377,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,71.2,2026-10-06T02:46:38.975,q,3595569711,320,180,20,2158073,1826,true,none,81.41,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,71.2,2026-10-06T02:46:38.975,h,467612004,1280,720,30,15996288,2375,true,none,81.41,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,73.2,2026-10-06T02:46:41.009,q,3595569711,320,180,19,2199197,1867,true,none,83.44,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,73.2,2026-10-06T02:46:41.009,h,467612004,1280,720,31,16450990,2437,true,none,83.44,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1679660
+ab-file-2L-off,75.2,2026-10-06T02:46:43.034,q,3595569711,320,180,20,2235101,1908,true,none,85.465,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,75.2,2026-10-06T02:46:43.034,h,467612004,1280,720,30,16866621,2497,true,none,85.465,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,77.3,2026-10-06T02:46:45.064,q,3595569711,320,180,21,2273910,1949,true,none,87.496,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,77.3,2026-10-06T02:46:45.064,h,467612004,1280,720,30,17295813,2558,true,none,87.496,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,79.3,2026-10-06T02:46:47.095,q,3595569711,320,180,20,2314553,1989,true,none,89.528,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,149150
+ab-file-2L-off,79.3,2026-10-06T02:46:47.095,h,467612004,1280,720,30,17739942,2619,true,none,89.528,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1668093
+ab-file-2L-off,81.3,2026-10-06T02:46:49.127,q,3595569711,320,180,20,2349322,2029,true,none,91.56,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,81.3,2026-10-06T02:46:49.127,h,467612004,1280,720,30,18165317,2680,true,none,91.56,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,83.4,2026-10-06T02:46:51.153,q,3595569711,320,180,19,2390031,2070,true,none,93.584,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,83.4,2026-10-06T02:46:51.153,h,467612004,1280,720,30,18606370,2740,true,none,93.584,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1669190
+ab-file-2L-off,85.4,2026-10-06T02:46:53.185,q,3595569711,320,180,21,2423124,2111,true,none,95.617,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,85.4,2026-10-06T02:46:53.185,h,467612004,1280,720,30,19012326,2801,true,none,95.617,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,87.4,2026-10-06T02:46:55.217,q,3595569711,320,180,20,2459058,2151,true,none,97.649,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,87.4,2026-10-06T02:46:55.217,h,467612004,1280,720,31,19445760,2863,true,none,97.649,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,89.5,2026-10-06T02:46:57.247,q,3595569711,320,180,20,2498629,2192,true,none,99.678,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,89.5,2026-10-06T02:46:57.247,h,467612004,1280,720,30,19875298,2923,true,none,99.678,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1686275
+ab-file-2L-off,91.5,2026-10-06T02:46:59.278,q,3595569711,320,180,21,2536433,2233,true,none,101.709,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,149905
+ab-file-2L-off,91.5,2026-10-06T02:46:59.278,h,467612004,1280,720,31,20308547,2985,true,none,101.709,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,93.5,2026-10-06T02:47:01.307,q,3595569711,320,180,19,2573902,2273,true,none,103.738,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,93.5,2026-10-06T02:47:01.307,h,467612004,1280,720,30,20736476,3045,true,none,103.738,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,95.6,2026-10-06T02:47:03.352,q,3595569711,320,180,20,2616037,2314,true,none,105.782,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,148600
+ab-file-2L-off,95.6,2026-10-06T02:47:03.352,h,467612004,1280,720,30,21180805,3107,true,none,105.782,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,97.6,2026-10-06T02:47:05.365,q,3595569711,320,180,21,2653485,2355,true,none,107.796,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,145680
+ab-file-2L-off,97.6,2026-10-06T02:47:05.365,h,467612004,1280,720,30,21598350,3167,true,none,107.796,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1693732
+ab-file-2L-off,99.6,2026-10-06T02:47:07.387,q,3595569711,320,180,20,2686792,2395,true,none,109.817,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,99.6,2026-10-06T02:47:07.387,h,467612004,1280,720,30,22011850,3227,true,none,109.817,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,101.6,2026-10-06T02:47:09.418,q,3595569711,320,180,19,2725879,2435,true,none,111.85,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,145132
+ab-file-2L-off,101.6,2026-10-06T02:47:09.418,h,467612004,1280,720,31,22455938,3288,true,none,111.85,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1671403
+ab-file-2L-off,103.6,2026-10-06T02:47:11.445,q,3595569711,320,180,20,2763499,2476,true,none,113.876,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,149305
+ab-file-2L-off,103.6,2026-10-06T02:47:11.445,h,467612004,1280,720,30,22876220,3348,true,none,113.876,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,105.7,2026-10-06T02:47:13.488,q,3595569711,320,180,20,2801724,2517,true,none,115.918,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,105.7,2026-10-06T02:47:13.488,h,467612004,1280,720,29,23301320,3409,true,none,115.918,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,107.7,2026-10-06T02:47:15.516,q,3595569711,320,180,20,2842746,2558,true,none,117.949,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,148160
+ab-file-2L-off,107.7,2026-10-06T02:47:15.516,h,467612004,1280,720,31,23752943,3471,true,none,117.949,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1692760
+ab-file-2L-off,109.8,2026-10-06T02:47:17.547,q,3595569711,320,180,20,2878240,2599,true,none,119.979,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,109.8,2026-10-06T02:47:17.547,h,467612004,1280,720,30,24168177,3531,true,none,119.979,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1687208
+ab-file-2L-off,111.8,2026-10-06T02:47:19.568,q,3595569711,320,180,20,2913832,2639,true,none,121.998,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,111.8,2026-10-06T02:47:19.568,h,467612004,1280,720,30,24597404,3592,true,none,121.998,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,113.8,2026-10-06T02:47:21.588,q,3595569711,320,180,20,2951394,2679,true,none,124.019,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,147655
+ab-file-2L-off,113.8,2026-10-06T02:47:21.588,h,467612004,1280,720,31,25025586,3653,true,none,124.019,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,115.8,2026-10-06T02:47:23.636,q,3595569711,320,180,19,2991416,2719,true,none,126.066,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,149148
+ab-file-2L-off,115.8,2026-10-06T02:47:23.636,h,467612004,1280,720,30,25465691,3714,true,none,126.066,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1684605
+ab-file-2L-off,117.9,2026-10-06T02:47:25.653,q,3595569711,320,180,19,3028332,2760,true,none,128.083,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,117.9,2026-10-06T02:47:25.653,h,467612004,1280,720,31,25881456,3775,true,none,128.083,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,119.9,2026-10-06T02:47:27.686,q,3595569711,320,180,20,3063217,2801,true,none,130.119,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-off,119.9,2026-10-06T02:47:27.686,h,467612004,1280,720,30,26302709,3835,true,none,130.119,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-off,121.9,2026-10-06T02:47:29.726,q,3595569711,320,180,20,3103036,2842,true,none,132.157,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,149578
+ab-file-2L-off,121.9,2026-10-06T02:47:29.726,h,467612004,1280,720,30,26748302,3897,true,none,132.157,0,15.16,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1676930
+ab-file-2L-on,2.2,2026-10-06T02:48:12.005,h,1258544998,1280,720,25,5371190,787,true,none,27.408,0,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,2.2,2026-10-06T02:48:12.005,q,3398306016,320,180,20,631593,550,true,none,27.408,0,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,144762
+ab-file-2L-on,4.3,2026-10-06T02:48:14.097,h,1258544998,1280,720,22,5747926,838,true,none,29.491,0,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1105196
+ab-file-2L-on,4.3,2026-10-06T02:48:14.097,q,3398306016,320,180,19,671445,591,true,none,29.491,0,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,118308
+ab-file-2L-on,6.4,2026-10-06T02:48:16.164,h,1258544998,1280,720,30,6074179,893,true,none,31.547,0,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,6.4,2026-10-06T02:48:16.164,q,3398306016,320,180,20,704844,633,true,none,31.547,0,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,8.5,2026-10-06T02:48:18.214,h,1258544998,1280,720,28,6463320,949,true,none,33.599,0,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,8.5,2026-10-06T02:48:18.214,q,3398306016,320,180,20,742639,674,true,none,33.599,0,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,10.5,2026-10-06T02:48:20.280,h,1258544998,960,540,31,6822588,1009,true,cpu,35.187,0.477,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1416667
+ab-file-2L-on,10.5,2026-10-06T02:48:20.280,q,3398306016,240,135,20,777906,716,true,cpu,35.187,0.477,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,125000
+ab-file-2L-on,12.6,2026-10-06T02:48:22.312,h,1258544998,960,540,29,7193555,1069,true,cpu,35.187,2.508,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,12.6,2026-10-06T02:48:22.312,q,3398306016,240,135,20,811278,757,true,cpu,35.187,2.508,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,14.6,2026-10-06T02:48:24.353,h,1258544998,960,540,28,7638267,1129,true,cpu,35.187,4.546,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1638248
+ab-file-2L-on,14.6,2026-10-06T02:48:24.353,q,3398306016,240,135,19,850446,797,true,cpu,35.187,4.546,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,149958
+ab-file-2L-on,16.6,2026-10-06T02:48:26.402,h,1258544998,960,540,31,8083937,1188,true,cpu,35.187,6.595,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,16.6,2026-10-06T02:48:26.402,q,3398306016,240,135,21,891209,839,true,cpu,35.187,6.595,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,148005
+ab-file-2L-on,18.7,2026-10-06T02:48:28.440,h,1258544998,960,540,28,8505314,1243,true,cpu,35.187,8.606,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,18.7,2026-10-06T02:48:28.440,q,3398306016,240,135,19,930406,878,true,cpu,35.187,8.606,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,143580
+ab-file-2L-on,20.7,2026-10-06T02:48:30.486,h,1258544998,960,540,30,8924707,1305,true,cpu,35.187,10.689,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,20.7,2026-10-06T02:48:30.486,q,3398306016,240,135,19,965293,920,true,cpu,35.187,10.689,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,22.8,2026-10-06T02:48:32.535,h,1258544998,960,540,30,9392905,1365,true,cpu,35.187,12.732,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1687100
+ab-file-2L-on,22.8,2026-10-06T02:48:32.535,q,3398306016,240,135,20,1008676,962,true,cpu,35.187,12.732,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,24.8,2026-10-06T02:48:34.575,h,1258544998,960,540,26,9767287,1423,true,cpu,35.187,14.786,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,24.8,2026-10-06T02:48:34.575,q,3398306016,240,135,19,1039530,1002,true,cpu,35.187,14.786,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,26.9,2026-10-06T02:48:36.639,h,1258544998,960,540,31,10199348,1485,true,cpu,35.187,16.833,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,26.9,2026-10-06T02:48:36.639,q,3398306016,240,135,19,1077108,1043,true,cpu,35.187,16.833,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,28.9,2026-10-06T02:48:38.682,h,1258544998,960,540,30,10636896,1546,true,cpu,35.187,18.875,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1685957
+ab-file-2L-on,28.9,2026-10-06T02:48:38.682,q,3398306016,240,135,20,1117399,1084,true,cpu,35.187,18.875,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,31,2026-10-06T02:48:40.716,h,1258544998,960,540,30,11057476,1607,true,cpu,35.187,20.918,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,31,2026-10-06T02:48:40.716,q,3398306016,240,135,20,1154949,1125,true,cpu,35.187,20.918,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,148168
+ab-file-2L-on,33,2026-10-06T02:48:42.763,h,1258544998,960,540,29,11490132,1667,true,cpu,35.187,22.958,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1695838
+ab-file-2L-on,33,2026-10-06T02:48:42.763,q,3398306016,240,135,21,1193430,1166,true,cpu,35.187,22.958,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,35,2026-10-06T02:48:44.786,h,1258544998,960,540,29,11881460,1724,true,cpu,35.187,24.986,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,35,2026-10-06T02:48:44.786,q,3398306016,240,135,19,1234449,1206,true,cpu,35.187,24.986,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,37.1,2026-10-06T02:48:46.840,h,1258544998,960,540,31,12340514,1784,true,cpu,35.187,27.044,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,37.1,2026-10-06T02:48:46.840,q,3398306016,240,135,20,1275644,1248,true,cpu,35.187,27.044,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,140640
+ab-file-2L-on,39.1,2026-10-06T02:48:48.883,h,1258544998,960,540,30,12736218,1845,true,cpu,35.187,29.077,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,39.1,2026-10-06T02:48:48.883,q,3398306016,240,135,20,1303855,1289,true,cpu,35.187,29.077,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,41.2,2026-10-06T02:48:50.914,h,1258544998,960,540,28,13160596,1904,true,cpu,35.187,31.111,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,41.2,2026-10-06T02:48:50.914,q,3398306016,240,135,20,1343356,1329,true,cpu,35.187,31.111,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,43.2,2026-10-06T02:48:52.943,h,1258544998,960,540,30,13584209,1964,true,cpu,35.187,33.139,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,43.2,2026-10-06T02:48:52.943,q,3398306016,240,135,21,1383220,1370,true,cpu,35.187,33.139,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,146095
+ab-file-2L-on,45.2,2026-10-06T02:48:54.975,h,1258544998,960,540,29,14017563,2024,true,cpu,35.187,35.168,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,45.2,2026-10-06T02:48:54.975,q,3398306016,240,135,20,1421562,1410,true,cpu,35.187,35.168,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,145952
+ab-file-2L-on,47.2,2026-10-06T02:48:56.990,h,1258544998,960,540,30,14417446,2081,true,cpu,35.187,37.189,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,47.2,2026-10-06T02:48:56.990,q,3398306016,240,135,20,1459107,1451,true,cpu,35.187,37.189,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,49.3,2026-10-06T02:48:59.026,h,1258544998,960,540,27,14822474,2138,true,cpu,35.187,39.225,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,49.3,2026-10-06T02:48:59.026,q,3398306016,240,135,20,1497040,1491,true,cpu,35.187,39.225,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,148155
+ab-file-2L-on,51.3,2026-10-06T02:49:01.058,h,1258544998,960,540,31,15242784,2199,true,cpu,35.187,41.252,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,51.3,2026-10-06T02:49:01.058,q,3398306016,240,135,20,1530718,1532,true,cpu,35.187,41.252,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,53.3,2026-10-06T02:49:03.076,h,1258544998,960,540,29,15669431,2258,true,cpu,35.187,43.273,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1684025
+ab-file-2L-on,53.3,2026-10-06T02:49:03.076,q,3398306016,240,135,21,1572459,1573,true,cpu,35.187,43.273,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,148450
+ab-file-2L-on,55.4,2026-10-06T02:49:05.113,h,1258544998,960,540,30,16106906,2320,true,cpu,35.187,45.312,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1688025
+ab-file-2L-on,55.4,2026-10-06T02:49:05.113,q,3398306016,240,135,21,1608989,1614,true,cpu,35.187,45.312,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,145352
+ab-file-2L-on,57.4,2026-10-06T02:49:07.163,h,1258544998,960,540,28,16489029,2374,true,cpu,35.187,47.361,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,57.4,2026-10-06T02:49:07.163,q,3398306016,240,135,21,1648482,1655,true,cpu,35.187,47.361,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,146023
+ab-file-2L-on,59.4,2026-10-06T02:49:09.197,h,1258544998,960,540,29,16900265,2433,true,cpu,35.187,49.399,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,59.4,2026-10-06T02:49:09.197,q,3398306016,240,135,20,1683182,1695,true,cpu,35.187,49.399,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,61.5,2026-10-06T02:49:11.243,h,1258544998,960,540,31,17328153,2493,true,cpu,35.187,51.442,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,61.5,2026-10-06T02:49:11.243,q,3398306016,240,135,20,1722844,1736,true,cpu,35.187,51.442,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,63.5,2026-10-06T02:49:13.282,h,1258544998,960,540,30,17774049,2554,true,cpu,35.187,53.475,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1694938
+ab-file-2L-on,63.5,2026-10-06T02:49:13.282,q,3398306016,240,135,21,1763697,1777,true,cpu,35.187,53.475,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,148380
+ab-file-2L-on,65.6,2026-10-06T02:49:15.313,h,1258544998,960,540,30,18198034,2615,true,cpu,35.187,55.509,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1696940
+ab-file-2L-on,65.6,2026-10-06T02:49:15.313,q,3398306016,240,135,21,1801074,1818,true,cpu,35.187,55.509,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,147713
+ab-file-2L-on,67.6,2026-10-06T02:49:17.347,h,1258544998,960,540,30,18594794,2672,true,cpu,35.187,57.544,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,67.6,2026-10-06T02:49:17.347,q,3398306016,240,135,21,1835899,1858,true,cpu,35.187,57.544,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,69.6,2026-10-06T02:49:19.375,h,1258544998,960,540,29,19006447,2731,true,cpu,35.187,59.571,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,69.6,2026-10-06T02:49:19.375,q,3398306016,240,135,21,1874089,1899,true,cpu,35.187,59.571,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,71.7,2026-10-06T02:49:21.416,h,1258544998,960,540,30,19453952,2793,true,cpu,35.187,61.617,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,71.7,2026-10-06T02:49:21.416,q,3398306016,240,135,21,1913167,1940,true,cpu,35.187,61.617,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,73.7,2026-10-06T02:49:23.450,h,1258544998,960,540,30,19888394,2854,true,cpu,35.187,63.652,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1665195
+ab-file-2L-on,73.7,2026-10-06T02:49:23.450,q,3398306016,240,135,20,1951028,1980,true,cpu,35.187,63.652,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,145810
+ab-file-2L-on,75.7,2026-10-06T02:49:25.498,h,1258544998,960,540,31,20315231,2916,true,cpu,35.187,65.695,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,75.7,2026-10-06T02:49:25.498,q,3398306016,240,135,20,1987271,2021,true,cpu,35.187,65.695,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,77.8,2026-10-06T02:49:27.520,h,1258544998,960,540,28,20729428,2973,true,cpu,35.187,67.716,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,77.8,2026-10-06T02:49:27.520,q,3398306016,240,135,20,2025367,2061,true,cpu,35.187,67.716,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,79.8,2026-10-06T02:49:29.540,h,1258544998,960,540,28,21126088,3029,true,cpu,35.187,69.735,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,79.8,2026-10-06T02:49:29.540,q,3398306016,240,135,19,2064869,2101,true,cpu,35.187,69.735,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,144095
+ab-file-2L-on,81.8,2026-10-06T02:49:31.574,h,1258544998,960,540,30,21559024,3090,true,cpu,35.187,71.775,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,81.8,2026-10-06T02:49:31.574,q,3398306016,240,135,21,2102907,2143,true,cpu,35.187,71.775,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,149443
+ab-file-2L-on,83.9,2026-10-06T02:49:33.625,h,1258544998,960,540,30,21988190,3151,true,cpu,35.187,73.829,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,83.9,2026-10-06T02:49:33.625,q,3398306016,240,135,20,2140639,2184,true,cpu,35.187,73.829,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,85.9,2026-10-06T02:49:35.673,h,1258544998,960,540,29,22383061,3208,true,cpu,35.187,75.869,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,85.9,2026-10-06T02:49:35.673,q,3398306016,240,135,21,2175518,2224,true,cpu,35.187,75.869,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,87.9,2026-10-06T02:49:37.698,h,1258544998,960,540,28,22786254,3265,true,cpu,35.187,77.893,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,87.9,2026-10-06T02:49:37.698,q,3398306016,240,135,19,2212802,2265,true,cpu,35.187,77.893,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,149528
+ab-file-2L-on,90,2026-10-06T02:49:39.720,h,1258544998,960,540,30,23218537,3326,true,cpu,35.187,79.913,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,90,2026-10-06T02:49:39.720,q,3398306016,240,135,20,2250927,2305,true,cpu,35.187,79.913,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,148247
+ab-file-2L-on,92,2026-10-06T02:49:41.750,h,1258544998,960,540,27,23640225,3385,true,cpu,35.187,81.955,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,92,2026-10-06T02:49:41.750,q,3398306016,240,135,19,2288071,2346,true,cpu,35.187,81.955,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,94.1,2026-10-06T02:49:43.808,h,1258544998,960,540,29,24068954,3445,true,cpu,35.187,84.013,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,94.1,2026-10-06T02:49:43.808,q,3398306016,240,135,21,2328195,2388,true,cpu,35.187,84.013,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,149758
+ab-file-2L-on,96.1,2026-10-06T02:49:45.865,h,1258544998,960,540,30,24521507,3508,true,cpu,35.187,86.062,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,96.1,2026-10-06T02:49:45.865,q,3398306016,240,135,20,2368269,2428,true,cpu,35.187,86.062,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,98.1,2026-10-06T02:49:47.899,h,1258544998,960,540,30,24919596,3568,true,cpu,35.187,88.094,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,98.1,2026-10-06T02:49:47.899,q,3398306016,240,135,19,2404417,2469,true,cpu,35.187,88.094,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,142048
+ab-file-2L-on,100.2,2026-10-06T02:49:49.919,h,1258544998,960,540,29,25340878,3626,true,cpu,35.187,90.114,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,100.2,2026-10-06T02:49:49.919,q,3398306016,240,135,20,2438787,2509,true,cpu,35.187,90.114,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,102.2,2026-10-06T02:49:51.952,h,1258544998,960,540,30,25777732,3688,true,cpu,35.187,92.149,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1670470
+ab-file-2L-on,102.2,2026-10-06T02:49:51.952,q,3398306016,240,135,21,2478974,2551,true,cpu,35.187,92.149,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,104.2,2026-10-06T02:49:53.974,h,1258544998,960,540,27,26182862,3746,true,cpu,35.187,94.173,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,104.2,2026-10-06T02:49:53.974,q,3398306016,240,135,21,2517030,2591,true,cpu,35.187,94.173,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,143227
+ab-file-2L-on,106.3,2026-10-06T02:49:56.038,h,1258544998,960,540,30,26617189,3807,true,cpu,35.187,96.234,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,106.3,2026-10-06T02:49:56.038,q,3398306016,240,135,20,2555917,2632,true,cpu,35.187,96.234,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,108.3,2026-10-06T02:49:58.087,h,1258544998,960,540,26,27025936,3864,true,cpu,35.187,98.295,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,108.3,2026-10-06T02:49:58.087,q,3398306016,240,135,19,2594282,2673,true,cpu,35.187,98.295,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,110.4,2026-10-06T02:50:00.157,h,1258544998,960,540,30,27435068,3924,true,cpu,35.187,100.356,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,110.4,2026-10-06T02:50:00.157,q,3398306016,240,135,20,2630020,2714,true,cpu,35.187,100.356,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,147778
+ab-file-2L-on,112.4,2026-10-06T02:50:02.202,h,1258544998,960,540,30,27879998,3986,true,cpu,35.187,102.399,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,112.4,2026-10-06T02:50:02.202,q,3398306016,240,135,20,2668248,2755,true,cpu,35.187,102.399,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,114.5,2026-10-06T02:50:04.232,h,1258544998,960,540,31,28317625,4047,true,cpu,35.187,104.427,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1693072
+ab-file-2L-on,114.5,2026-10-06T02:50:04.232,q,3398306016,240,135,21,2708622,2796,true,cpu,35.187,104.427,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,144220
+ab-file-2L-on,116.5,2026-10-06T02:50:06.257,h,1258544998,960,540,28,28724165,4106,true,cpu,35.187,106.453,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,116.5,2026-10-06T02:50:06.257,q,3398306016,240,135,20,2744302,2836,true,cpu,35.187,106.453,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000
+ab-file-2L-on,118.5,2026-10-06T02:50:08.288,h,1258544998,960,540,30,29153756,4166,true,cpu,35.187,108.485,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,118.5,2026-10-06T02:50:08.288,q,3398306016,240,135,19,2782833,2877,true,cpu,35.187,108.485,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,147905
+ab-file-2L-on,120.6,2026-10-06T02:50:10.331,h,1258544998,960,540,28,29573069,4224,true,cpu,35.187,110.528,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,1700000
+ab-file-2L-on,120.6,2026-10-06T02:50:10.331,q,3398306016,240,135,20,2821945,2918,true,cpu,35.187,110.528,0.274,0,1,"SimulcastEncoderAdapter (libvpx, libvpx)",false,L1T3,150000

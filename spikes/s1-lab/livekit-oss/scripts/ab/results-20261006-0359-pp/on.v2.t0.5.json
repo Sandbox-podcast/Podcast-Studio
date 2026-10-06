@@ -1,0 +1,40 @@
+{
+  "threshold": 0.5,
+  "size_mode": "native",
+  "videos": [
+    {
+      "path": "ab-file-2L-on-pp-sub-hi-rx.webm",
+      "size_mode": "native",
+      "size_segments": [
+        "1280x720:340f",
+        "960x540:709f",
+        "640x360:2490f"
+      ],
+      "size_changes": 2,
+      "total_frames": 3539,
+      "duration_s": 121.047,
+      "container_fps_pts": 29.236,
+      "near_dup_threshold": 0.5,
+      "distinct_frames_exact": 3539,
+      "distinct_fps_exact": 29.237,
+      "distinct_frames_near": 3279,
+      "distinct_fps_near": 27.089,
+      "longest_repeat_run_frames": 1,
+      "longest_repeat_run_ms": 0.0,
+      "longest_neardup_run_frames": 12,
+      "longest_neardup_run_ms": 398.0,
+      "windows_1s_count": 122,
+      "windows_1s_basis": "near",
+      "windows_1s_share_ge24": 0.8361,
+      "windows_1s_lt24_count": 20,
+      "windows_1s_min": 1,
+      "windows_1s_p5": 15.0,
+      "windows_1s_median": 29.0,
+      "windows_1s_share_ge24_exact": 0.9508,
+      "windows_1s_lt24_count_exact": 6,
+      "windows_1s_min_exact": 1,
+      "windows_1s_p5_exact": 24.0,
+      "windows_1s_median_exact": 30.0
+    }
+  ]
+}

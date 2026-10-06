@@ -1,0 +1,181 @@
+{
+  "T": {
+    "cond": "regie-5pub-2L-vp8",
+    "room": "s1-regie-5pub-2L-vp8-020452",
+    "src": "take4-pingpong.webm",
+    "join_at": "2026-10-06T04:05:17.810",
+    "window_start": "2026-10-06T04:05:38.037",
+    "window_end": "2026-10-06T04:07:40.001",
+    "status": "DONE"
+  },
+  "config": {
+    "N_PUB": 5,
+    "LAYERS": 2,
+    "SRC": "take4-pingpong.webm",
+    "WARMUP_S": 20,
+    "WIN_S": 120,
+    "SAMPLE_MS": 2000
+  },
+  "regie_tracks": {
+    "rg-pub-1": {
+      "n": 50,
+      "w_med": 240,
+      "h_med": 135,
+      "fps_med": 13,
+      "framesDecoded_delta": 1556,
+      "decode_ms_per_frame": 0.65,
+      "framesDropped_delta": 0,
+      "freeze_delta": 9,
+      "freezeDur_delta_s": 3.64,
+      "decoderImplementation": [
+        "libvpx"
+      ],
+      "share_720p": 0
+    },
+    "rg-pub-3": {
+      "n": 50,
+      "w_med": 320,
+      "h_med": 180,
+      "fps_med": 12,
+      "framesDecoded_delta": 1279,
+      "decode_ms_per_frame": 0.91,
+      "framesDropped_delta": 0,
+      "freeze_delta": 21,
+      "freezeDur_delta_s": 9.36,
+      "decoderImplementation": [
+        "libvpx"
+      ],
+      "share_720p": 0
+    },
+    "rg-pub-4": {
+      "n": 50,
+      "w_med": 240,
+      "h_med": 135,
+      "fps_med": 13,
+      "framesDecoded_delta": 1547,
+      "decode_ms_per_frame": 0.63,
+      "framesDropped_delta": 0,
+      "freeze_delta": 9,
+      "freezeDur_delta_s": 3.35,
+      "decoderImplementation": [
+        "libvpx"
+      ],
+      "share_720p": 0
+    },
+    "rg-pub-5": {
+      "n": 50,
+      "w_med": 240,
+      "h_med": 135,
+      "fps_med": 13,
+      "framesDecoded_delta": 1488,
+      "decode_ms_per_frame": 0.69,
+      "framesDropped_delta": 0,
+      "freeze_delta": 17,
+      "freezeDur_delta_s": 7.39,
+      "decoderImplementation": [
+        "libvpx"
+      ],
+      "share_720p": 0
+    },
+    "rg-pub-2": {
+      "n": 50,
+      "w_med": 160,
+      "h_med": 90,
+      "fps_med": 15,
+      "framesDecoded_delta": 1588,
+      "decode_ms_per_frame": 0.44,
+      "framesDropped_delta": 1,
+      "freeze_delta": 8,
+      "freezeDur_delta_s": 3.55,
+      "decoderImplementation": [
+        "libvpx"
+      ],
+      "share_720p": 0
+    }
+  },
+  "publishers": {
+    "rg-pub-1": {
+      "hd_rid": "h",
+      "w_med": null,
+      "h_med": null,
+      "fps_med": null,
+      "share_720p": 0,
+      "qlr_counts": {
+        "bandwidth": 50
+      },
+      "qlrDurations_delta_s": {
+        "bandwidth": 119.7,
+        "cpu": 0,
+        "none": 0,
+        "other": 0
+      }
+    },
+    "rg-pub-2": {
+      "hd_rid": "h",
+      "w_med": 640,
+      "h_med": 360,
+      "fps_med": 1,
+      "share_720p": 0,
+      "qlr_counts": {
+        "bandwidth": 39,
+        "cpu": 11
+      },
+      "qlrDurations_delta_s": {
+        "bandwidth": 94.6,
+        "cpu": 25,
+        "none": 0,
+        "other": 0
+      }
+    },
+    "rg-pub-3": {
+      "hd_rid": "h",
+      "w_med": null,
+      "h_med": null,
+      "fps_med": null,
+      "share_720p": 0,
+      "qlr_counts": {
+        "bandwidth": 50
+      },
+      "qlrDurations_delta_s": {
+        "bandwidth": 119.6,
+        "cpu": 0,
+        "none": 0,
+        "other": 0
+      }
+    },
+    "rg-pub-4": {
+      "hd_rid": "h",
+      "w_med": null,
+      "h_med": null,
+      "fps_med": null,
+      "share_720p": 0,
+      "qlr_counts": {
+        "bandwidth": 50
+      },
+      "qlrDurations_delta_s": {
+        "bandwidth": 119.5,
+        "cpu": 0,
+        "none": 0,
+        "other": 0
+      }
+    },
+    "rg-pub-5": {
+      "hd_rid": "h",
+      "w_med": 960,
+      "h_med": 540,
+      "fps_med": 3,
+      "share_720p": 0,
+      "qlr_counts": {
+        "bandwidth": 48,
+        "cpu": 2
+      },
+      "qlrDurations_delta_s": {
+        "bandwidth": 114.1,
+        "cpu": 5.4,
+        "none": 0,
+        "other": 0
+      }
+    }
+  },
+  "cpu_csv": "regie-5pub-2L-vp8-cpu.csv"
+}

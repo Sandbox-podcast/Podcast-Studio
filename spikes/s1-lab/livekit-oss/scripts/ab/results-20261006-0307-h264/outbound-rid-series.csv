@@ -1,0 +1,596 @@
+cond,t_rel_s,at_paris,rid,ssrc,w,h,fps,bytesSent,framesSent,active,qlr,qlrDur_none,qlrDur_cpu,qlrDur_bandwidth,qlrDur_other,qlrResChanges,encoderImplementation,powerEfficientEncoder,scalabilityMode,targetBitrate,codec
+ab-file-3L-off-h264,2,2026-10-06T03:07:39.445,h,131894674,640,360,20,2212113,560,true,bandwidth,1.372,0,28.132,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,450000,video/H264
+ab-file-3L-off-h264,2,2026-10-06T03:07:39.445,f,2005724044,,,,112556,16,true,bandwidth,1.372,0,28.132,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,,,video/H264
+ab-file-3L-off-h264,2,2026-10-06T03:07:39.445,q,822809586,320,180,20,667102,565,true,bandwidth,1.372,0,28.132,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149673,video/H264
+ab-file-3L-off-h264,4,2026-10-06T03:07:41.472,h,131894674,640,360,20,2377399,600,true,bandwidth,1.372,0,30.156,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,450000,video/H264
+ab-file-3L-off-h264,4,2026-10-06T03:07:41.472,f,2005724044,,,,112556,16,true,bandwidth,1.372,0,30.156,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,,,video/H264
+ab-file-3L-off-h264,4,2026-10-06T03:07:41.472,q,822809586,320,180,19,716244,605,true,bandwidth,1.372,0,30.156,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,6.1,2026-10-06T03:07:43.492,h,131894674,640,360,21,2545790,641,true,bandwidth,1.372,0,32.177,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,450000,video/H264
+ab-file-3L-off-h264,6.1,2026-10-06T03:07:43.492,f,2005724044,,,,112556,16,true,bandwidth,1.372,0,32.177,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,,,video/H264
+ab-file-3L-off-h264,6.1,2026-10-06T03:07:43.492,q,822809586,320,180,21,766307,646,true,bandwidth,1.372,0,32.177,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,8.1,2026-10-06T03:07:45.524,h,131894674,640,360,19,2723162,681,true,bandwidth,1.372,0,34.211,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,448675,video/H264
+ab-file-3L-off-h264,8.1,2026-10-06T03:07:45.524,f,2005724044,,,,112556,16,true,bandwidth,1.372,0,34.211,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,,,video/H264
+ab-file-3L-off-h264,8.1,2026-10-06T03:07:45.524,q,822809586,320,180,19,811483,686,true,bandwidth,1.372,0,34.211,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149088,video/H264
+ab-file-3L-off-h264,10.1,2026-10-06T03:07:47.557,h,131894674,640,360,21,2904104,722,true,bandwidth,1.372,0,36.243,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,447978,video/H264
+ab-file-3L-off-h264,10.1,2026-10-06T03:07:47.557,f,2005724044,,,,112556,16,true,bandwidth,1.372,0,36.243,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,,,video/H264
+ab-file-3L-off-h264,10.1,2026-10-06T03:07:47.557,q,822809586,320,180,20,852070,727,true,bandwidth,1.372,0,36.243,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149660,video/H264
+ab-file-3L-off-h264,12.2,2026-10-06T03:07:49.586,h,131894674,640,360,20,3080776,763,true,bandwidth,1.372,0,38.27,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,444600,video/H264
+ab-file-3L-off-h264,12.2,2026-10-06T03:07:49.586,f,2005724044,,,,112556,16,true,bandwidth,1.372,0,38.27,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,,,video/H264
+ab-file-3L-off-h264,12.2,2026-10-06T03:07:49.586,q,822809586,320,180,20,900719,768,true,bandwidth,1.372,0,38.27,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,148773,video/H264
+ab-file-3L-off-h264,14.2,2026-10-06T03:07:51.608,h,131894674,640,360,20,3256922,803,true,bandwidth,1.372,0,40.292,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,443898,video/H264
+ab-file-3L-off-h264,14.2,2026-10-06T03:07:51.608,f,2005724044,,,,112556,16,true,bandwidth,1.372,0,40.292,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,,,video/H264
+ab-file-3L-off-h264,14.2,2026-10-06T03:07:51.608,q,822809586,320,180,19,947173,808,true,bandwidth,1.372,0,40.292,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149222,video/H264
+ab-file-3L-off-h264,16.2,2026-10-06T03:07:53.625,h,131894674,640,360,21,3438207,844,true,bandwidth,1.372,0,42.31,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,450000,video/H264
+ab-file-3L-off-h264,16.2,2026-10-06T03:07:53.625,f,2005724044,,,,112556,16,true,bandwidth,1.372,0,42.31,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,,,video/H264
+ab-file-3L-off-h264,16.2,2026-10-06T03:07:53.625,q,822809586,320,180,20,994659,849,true,bandwidth,1.372,0,42.31,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,18.2,2026-10-06T03:07:55.653,h,131894674,640,360,20,3629817,884,true,bandwidth,1.372,0,44.338,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,449828,video/H264
+ab-file-3L-off-h264,18.2,2026-10-06T03:07:55.653,f,2005724044,,,,112556,16,true,bandwidth,1.372,0,44.338,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,,,video/H264
+ab-file-3L-off-h264,18.2,2026-10-06T03:07:55.653,q,822809586,320,180,19,1037963,889,true,bandwidth,1.372,0,44.338,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149428,video/H264
+ab-file-3L-off-h264,20.3,2026-10-06T03:07:57.684,h,131894674,640,360,20,3856335,925,true,bandwidth,1.372,0,46.369,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,450000,video/H264
+ab-file-3L-off-h264,20.3,2026-10-06T03:07:57.684,f,2005724044,,,,112556,16,true,bandwidth,1.372,0,46.369,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,,,video/H264
+ab-file-3L-off-h264,20.3,2026-10-06T03:07:57.684,q,822809586,320,180,20,1085256,930,true,bandwidth,1.372,0,46.369,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,22.3,2026-10-06T03:07:59.717,h,131894674,640,360,18,4100260,963,true,none,1.635,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,375000,video/H264
+ab-file-3L-off-h264,22.3,2026-10-06T03:07:59.717,f,2005724044,1280,720,4,136319,20,true,none,1.635,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,602500,video/H264
+ab-file-3L-off-h264,22.3,2026-10-06T03:07:59.717,q,822809586,320,180,17,1144200,968,true,none,1.635,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,125000,video/H264
+ab-file-3L-off-h264,24.3,2026-10-06T03:08:01.742,h,131894674,640,360,19,4189548,1000,true,none,3.658,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,274173,video/H264
+ab-file-3L-off-h264,24.3,2026-10-06T03:08:01.742,f,2005724044,1280,720,26,341021,73,true,none,3.658,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,627595,video/H264
+ab-file-3L-off-h264,24.3,2026-10-06T03:08:01.742,q,822809586,320,180,19,1175785,1005,true,none,3.658,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,92470,video/H264
+ab-file-3L-off-h264,26.3,2026-10-06T03:08:03.760,h,131894674,640,360,21,4279338,1039,true,none,5.677,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,318121,video/H264
+ab-file-3L-off-h264,26.3,2026-10-06T03:08:03.760,f,2005724044,1280,720,29,553121,129,true,none,5.677,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,903491,video/H264
+ab-file-3L-off-h264,26.3,2026-10-06T03:08:03.760,q,822809586,320,180,19,1207709,1044,true,none,5.677,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,109191,video/H264
+ab-file-3L-off-h264,28.4,2026-10-06T03:08:05.793,h,131894674,640,360,18,4358111,1076,true,none,7.719,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,320457,video/H264
+ab-file-3L-off-h264,28.4,2026-10-06T03:08:05.793,f,2005724044,1280,720,29,818508,188,true,none,7.719,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1230313,video/H264
+ab-file-3L-off-h264,28.4,2026-10-06T03:08:05.793,q,822809586,320,180,18,1231857,1080,true,none,7.719,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,112117,video/H264
+ab-file-3L-off-h264,30.4,2026-10-06T03:08:07.833,h,131894674,640,360,20,4441165,1116,true,none,9.753,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,344667,video/H264
+ab-file-3L-off-h264,30.4,2026-10-06T03:08:07.833,f,2005724044,1280,720,31,1140925,247,true,none,9.753,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1452102,video/H264
+ab-file-3L-off-h264,30.4,2026-10-06T03:08:07.833,q,822809586,320,180,19,1258710,1119,true,none,9.753,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,116231,video/H264
+ab-file-3L-off-h264,32.4,2026-10-06T03:08:09.864,h,131894674,640,360,19,4532874,1155,true,none,11.783,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,431356,video/H264
+ab-file-3L-off-h264,32.4,2026-10-06T03:08:09.864,f,2005724044,1280,720,26,1509045,304,true,none,11.783,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1651807,video/H264
+ab-file-3L-off-h264,32.4,2026-10-06T03:08:09.864,q,822809586,320,180,19,1285599,1158,true,none,11.783,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,143913,video/H264
+ab-file-3L-off-h264,34.5,2026-10-06T03:08:11.920,h,131894674,640,360,21,4641341,1192,true,none,13.839,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,450000,video/H264
+ab-file-3L-off-h264,34.5,2026-10-06T03:08:11.920,f,2005724044,1280,720,29,1901519,362,true,none,13.839,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,34.5,2026-10-06T03:08:11.920,q,822809586,320,180,20,1320551,1198,true,none,13.839,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,36.5,2026-10-06T03:08:13.952,h,131894674,640,360,19,4751786,1231,true,none,15.865,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,450000,video/H264
+ab-file-3L-off-h264,36.5,2026-10-06T03:08:13.952,f,2005724044,1280,720,24,2248113,413,true,none,15.865,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,36.5,2026-10-06T03:08:13.952,q,822809586,320,180,19,1355942,1237,true,none,15.865,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,38.6,2026-10-06T03:08:16.009,h,131894674,640,360,20,4870153,1273,true,none,17.926,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,441058,video/H264
+ab-file-3L-off-h264,38.6,2026-10-06T03:08:16.009,f,2005724044,1280,720,26,2609343,465,true,none,17.926,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,38.6,2026-10-06T03:08:16.009,q,822809586,320,180,20,1395090,1279,true,none,17.926,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,40.6,2026-10-06T03:08:18.052,h,131894674,640,360,20,4982603,1314,true,none,19.972,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,450000,video/H264
+ab-file-3L-off-h264,40.6,2026-10-06T03:08:18.052,f,2005724044,1280,720,28,3014597,522,true,none,19.972,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,40.6,2026-10-06T03:08:18.052,q,822809586,320,180,19,1433149,1320,true,none,19.972,0,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,42.7,2026-10-06T03:08:20.103,h,131894674,480,270,19,5092464,1354,true,cpu,21.509,0.551,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,291667,video/H264
+ab-file-3L-off-h264,42.7,2026-10-06T03:08:20.103,f,2005724044,960,540,25,3365731,574,true,cpu,21.509,0.551,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1416667,video/H264
+ab-file-3L-off-h264,42.7,2026-10-06T03:08:20.103,q,822809586,240,135,20,1470635,1361,true,cpu,21.509,0.551,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,125000,video/H264
+ab-file-3L-off-h264,44.8,2026-10-06T03:08:22.222,h,131894674,480,270,20,5178439,1395,true,cpu,21.509,2.631,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,44.8,2026-10-06T03:08:22.222,f,2005724044,960,540,30,3788247,635,true,cpu,21.509,2.631,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,44.8,2026-10-06T03:08:22.222,q,822809586,240,135,20,1506765,1402,true,cpu,21.509,2.631,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,46.8,2026-10-06T03:08:24.265,h,131894674,480,270,20,5268689,1436,true,cpu,21.509,4.674,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,347343,video/H264
+ab-file-3L-off-h264,46.8,2026-10-06T03:08:24.265,f,2005724044,960,540,30,4223689,697,true,cpu,21.509,4.674,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,46.8,2026-10-06T03:08:24.265,q,822809586,240,135,19,1545091,1443,true,cpu,21.509,4.674,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,148954,video/H264
+ab-file-3L-off-h264,48.9,2026-10-06T03:08:26.291,h,131894674,480,270,20,5356723,1477,true,cpu,21.509,6.699,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,48.9,2026-10-06T03:08:26.291,f,2005724044,960,540,29,4636442,756,true,cpu,21.509,6.699,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,48.9,2026-10-06T03:08:26.291,q,822809586,240,135,20,1580762,1484,true,cpu,21.509,6.699,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,50.9,2026-10-06T03:08:28.336,h,131894674,480,270,20,5447687,1518,true,cpu,21.509,8.749,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,50.9,2026-10-06T03:08:28.336,f,2005724044,960,540,28,5044443,815,true,cpu,21.509,8.749,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,50.9,2026-10-06T03:08:28.336,q,822809586,240,135,20,1620496,1525,true,cpu,21.509,8.749,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,52.9,2026-10-06T03:08:30.380,h,131894674,480,270,20,5537523,1559,true,cpu,21.509,10.788,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,52.9,2026-10-06T03:08:30.380,f,2005724044,960,540,31,5459454,873,true,cpu,21.509,10.788,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,52.9,2026-10-06T03:08:30.380,q,822809586,240,135,20,1657981,1566,true,cpu,21.509,10.788,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,55,2026-10-06T03:08:32.402,h,131894674,480,270,20,5624485,1599,true,cpu,21.509,12.81,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,55,2026-10-06T03:08:32.402,f,2005724044,960,540,26,5862317,930,true,cpu,21.509,12.81,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,55,2026-10-06T03:08:32.402,q,822809586,240,135,20,1695524,1606,true,cpu,21.509,12.81,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,57,2026-10-06T03:08:34.450,h,131894674,480,270,20,5713474,1640,true,cpu,21.509,14.856,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,57,2026-10-06T03:08:34.450,f,2005724044,960,540,31,6295083,991,true,cpu,21.509,14.856,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,57,2026-10-06T03:08:34.450,q,822809586,240,135,19,1732726,1647,true,cpu,21.509,14.856,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,59.1,2026-10-06T03:08:36.489,h,131894674,480,270,21,5802979,1681,true,cpu,21.509,16.897,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,347848,video/H264
+ab-file-3L-off-h264,59.1,2026-10-06T03:08:36.489,f,2005724044,960,540,28,6673091,1045,true,cpu,21.509,16.897,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,59.1,2026-10-06T03:08:36.489,q,822809586,240,135,20,1771019,1688,true,cpu,21.509,16.897,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,149521,video/H264
+ab-file-3L-off-h264,61.1,2026-10-06T03:08:38.519,h,131894674,480,270,20,5889666,1721,true,cpu,21.509,18.927,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,61.1,2026-10-06T03:08:38.519,f,2005724044,960,540,30,7096403,1106,true,cpu,21.509,18.927,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,61.1,2026-10-06T03:08:38.519,q,822809586,240,135,20,1807519,1728,true,cpu,21.509,18.927,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,63.1,2026-10-06T03:08:40.549,h,131894674,480,270,20,5979269,1762,true,cpu,21.509,20.959,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,63.1,2026-10-06T03:08:40.549,f,2005724044,960,540,31,7529199,1167,true,cpu,21.509,20.959,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,63.1,2026-10-06T03:08:40.549,q,822809586,240,135,20,1845411,1769,true,cpu,21.509,20.959,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,65.1,2026-10-06T03:08:42.578,h,131894674,480,270,20,6066641,1802,true,cpu,21.509,22.987,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,65.1,2026-10-06T03:08:42.578,f,2005724044,960,540,28,7913886,1222,true,cpu,21.509,22.987,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,65.1,2026-10-06T03:08:42.578,q,822809586,240,135,20,1882416,1809,true,cpu,21.509,22.987,48.14,0,3,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,67.2,2026-10-06T03:08:44.605,h,131894674,320,180,20,6160418,1843,true,cpu,21.509,25.016,48.14,0,3,OpenH264,false,L1T1,375000,video/H264
+ab-file-3L-off-h264,67.2,2026-10-06T03:08:44.605,f,2005724044,,,30,8339653,1283,true,cpu,21.509,25.016,48.14,0,3,OpenH264,false,,,video/H264
+ab-file-3L-off-h264,67.2,2026-10-06T03:08:44.605,q,822809586,160,90,20,1921761,1850,true,cpu,21.509,25.016,48.14,0,3,OpenH264,false,L1T1,125000,video/H264
+ab-file-3L-off-h264,69.2,2026-10-06T03:08:46.632,h,131894674,320,180,30,6261875,1904,true,cpu,21.509,27.039,48.14,0,3,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-off-h264,69.2,2026-10-06T03:08:46.632,f,2005724044,,,,8339653,1283,true,cpu,21.509,27.039,48.14,0,3,OpenH264,false,,,video/H264
+ab-file-3L-off-h264,69.2,2026-10-06T03:08:46.632,q,822809586,160,90,30,1954794,1911,true,cpu,21.509,27.039,48.14,0,3,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-off-h264,71.2,2026-10-06T03:08:48.663,h,131894674,320,180,30,6373301,1965,true,cpu,21.509,29.073,48.14,0,3,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-off-h264,71.2,2026-10-06T03:08:48.663,f,2005724044,,,,8339653,1283,true,cpu,21.509,29.073,48.14,0,3,OpenH264,false,,,video/H264
+ab-file-3L-off-h264,71.2,2026-10-06T03:08:48.663,q,822809586,160,90,30,1989531,1972,true,cpu,21.509,29.073,48.14,0,3,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-off-h264,73.3,2026-10-06T03:08:50.690,h,131894674,320,180,30,6485400,2026,true,cpu,21.509,31.097,48.14,0,3,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-off-h264,73.3,2026-10-06T03:08:50.690,f,2005724044,,,,8339653,1283,true,cpu,21.509,31.097,48.14,0,3,OpenH264,false,,,video/H264
+ab-file-3L-off-h264,73.3,2026-10-06T03:08:50.690,q,822809586,160,90,30,2027131,2033,true,cpu,21.509,31.097,48.14,0,3,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-off-h264,75.3,2026-10-06T03:08:52.721,h,131894674,320,180,30,6600869,2087,true,cpu,21.509,33.129,48.14,0,3,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-off-h264,75.3,2026-10-06T03:08:52.721,f,2005724044,,,,8339653,1283,true,cpu,21.509,33.129,48.14,0,3,OpenH264,false,,,video/H264
+ab-file-3L-off-h264,75.3,2026-10-06T03:08:52.721,q,822809586,160,90,31,2063868,2094,true,cpu,21.509,33.129,48.14,0,3,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-off-h264,77.3,2026-10-06T03:08:54.742,h,131894674,320,180,30,6711721,2147,true,cpu,21.509,35.15,48.14,0,3,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-off-h264,77.3,2026-10-06T03:08:54.742,f,2005724044,,,,8339653,1283,true,cpu,21.509,35.15,48.14,0,3,OpenH264,false,,,video/H264
+ab-file-3L-off-h264,77.3,2026-10-06T03:08:54.742,q,822809586,160,90,30,2099893,2154,true,cpu,21.509,35.15,48.14,0,3,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-off-h264,79.3,2026-10-06T03:08:56.760,h,131894674,320,180,30,6823979,2208,true,cpu,21.509,37.168,48.14,0,3,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-off-h264,79.3,2026-10-06T03:08:56.760,f,2005724044,,,,8339653,1283,true,cpu,21.509,37.168,48.14,0,3,OpenH264,false,,,video/H264
+ab-file-3L-off-h264,79.3,2026-10-06T03:08:56.760,q,822809586,160,90,28,2137132,2214,true,cpu,21.509,37.168,48.14,0,3,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-off-h264,81.4,2026-10-06T03:08:58.791,h,131894674,320,180,30,6941413,2269,true,cpu,21.509,39.198,48.14,0,3,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-off-h264,81.4,2026-10-06T03:08:58.791,f,2005724044,,,,8339653,1283,true,cpu,21.509,39.198,48.14,0,3,OpenH264,false,,,video/H264
+ab-file-3L-off-h264,81.4,2026-10-06T03:08:58.791,q,822809586,160,90,30,2176065,2274,true,cpu,21.509,39.198,48.14,0,3,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-off-h264,83.4,2026-10-06T03:09:00.821,h,131894674,480,270,13,7035271,2312,true,cpu,21.509,41.206,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,83.4,2026-10-06T03:09:00.821,f,2005724044,960,540,30,8524728,1314,true,cpu,21.509,41.206,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,83.4,2026-10-06T03:09:00.821,q,822809586,240,135,17,2211600,2321,true,cpu,21.509,41.206,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,85.4,2026-10-06T03:09:02.851,h,131894674,480,270,20,7123793,2353,true,cpu,21.509,43.235,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,85.4,2026-10-06T03:09:02.851,f,2005724044,960,540,28,8922008,1370,true,cpu,21.509,43.235,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,85.4,2026-10-06T03:09:02.851,q,822809586,240,135,20,2248504,2360,true,cpu,21.509,43.235,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,87.5,2026-10-06T03:09:04.895,h,131894674,480,270,20,7210531,2394,true,cpu,21.509,45.279,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,87.5,2026-10-06T03:09:04.895,f,2005724044,960,540,29,9347444,1430,true,cpu,21.509,45.279,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,87.5,2026-10-06T03:09:04.895,q,822809586,240,135,19,2282260,2398,true,cpu,21.509,45.279,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,89.5,2026-10-06T03:09:06.924,h,131894674,480,270,20,7293831,2434,true,cpu,21.509,47.308,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,89.5,2026-10-06T03:09:06.924,f,2005724044,960,540,30,9771755,1491,true,cpu,21.509,47.308,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,89.5,2026-10-06T03:09:06.924,q,822809586,240,135,18,2307356,2436,true,cpu,21.509,47.308,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,91.5,2026-10-06T03:09:08.950,h,131894674,480,270,20,7379852,2475,true,cpu,21.509,49.335,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,91.5,2026-10-06T03:09:08.950,f,2005724044,960,540,29,10186308,1550,true,cpu,21.509,49.335,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,91.5,2026-10-06T03:09:08.950,q,822809586,240,135,20,2334140,2477,true,cpu,21.509,49.335,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,93.6,2026-10-06T03:09:10.995,h,131894674,480,270,18,7469059,2514,true,cpu,21.509,51.379,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,342779,video/H264
+ab-file-3L-off-h264,93.6,2026-10-06T03:09:10.995,f,2005724044,960,540,29,10632204,1612,true,cpu,21.509,51.379,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1681876,video/H264
+ab-file-3L-off-h264,93.6,2026-10-06T03:09:10.995,q,822809586,240,135,21,2357445,2517,true,cpu,21.509,51.379,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,95.6,2026-10-06T03:09:13.021,h,131894674,480,270,20,7553288,2555,true,cpu,21.509,53.404,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,349605,video/H264
+ab-file-3L-off-h264,95.6,2026-10-06T03:09:13.021,f,2005724044,960,540,30,11026266,1670,true,cpu,21.509,53.404,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,95.6,2026-10-06T03:09:13.021,q,822809586,240,135,20,2393643,2556,true,cpu,21.509,53.404,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,97.6,2026-10-06T03:09:15.054,h,131894674,480,270,20,7642790,2596,true,cpu,21.509,55.446,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,97.6,2026-10-06T03:09:15.054,f,2005724044,960,540,28,11444468,1729,true,cpu,21.509,55.446,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,97.6,2026-10-06T03:09:15.054,q,822809586,240,135,20,2432026,2597,true,cpu,21.509,55.446,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,99.7,2026-10-06T03:09:17.111,h,131894674,480,270,20,7732414,2637,true,cpu,21.509,57.496,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,348667,video/H264
+ab-file-3L-off-h264,99.7,2026-10-06T03:09:17.111,f,2005724044,960,540,29,11860772,1789,true,cpu,21.509,57.496,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,99.7,2026-10-06T03:09:17.111,q,822809586,240,135,19,2468682,2638,true,cpu,21.509,57.496,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,101.7,2026-10-06T03:09:19.139,h,131894674,480,270,20,7820574,2678,true,cpu,21.509,59.523,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,349373,video/H264
+ab-file-3L-off-h264,101.7,2026-10-06T03:09:19.139,f,2005724044,960,540,29,12286668,1850,true,cpu,21.509,59.523,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,101.7,2026-10-06T03:09:19.139,q,822809586,240,135,21,2505452,2679,true,cpu,21.509,59.523,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,103.7,2026-10-06T03:09:21.162,h,131894674,480,270,20,7908083,2718,true,cpu,21.509,61.546,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,103.7,2026-10-06T03:09:21.162,f,2005724044,960,540,30,12723046,1911,true,cpu,21.509,61.546,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,103.7,2026-10-06T03:09:21.162,q,822809586,240,135,20,2543336,2719,true,cpu,21.509,61.546,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,148405,video/H264
+ab-file-3L-off-h264,105.8,2026-10-06T03:09:23.190,h,131894674,480,270,21,7997259,2759,true,cpu,21.509,63.573,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,346307,video/H264
+ab-file-3L-off-h264,105.8,2026-10-06T03:09:23.190,f,2005724044,960,540,30,13139103,1970,true,cpu,21.509,63.573,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,105.8,2026-10-06T03:09:23.190,q,822809586,240,135,21,2581766,2760,true,cpu,21.509,63.573,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,148213,video/H264
+ab-file-3L-off-h264,107.8,2026-10-06T03:09:25.217,h,131894674,480,270,20,8082835,2799,true,cpu,21.509,65.601,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,107.8,2026-10-06T03:09:25.217,f,2005724044,960,540,29,13543595,2028,true,cpu,21.509,65.601,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,107.8,2026-10-06T03:09:25.217,q,822809586,240,135,21,2619583,2801,true,cpu,21.509,65.601,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,109.8,2026-10-06T03:09:27.249,h,131894674,480,270,20,8172815,2840,true,cpu,21.509,67.632,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,109.8,2026-10-06T03:09:27.249,f,2005724044,960,540,31,13988146,2090,true,cpu,21.509,67.632,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,109.8,2026-10-06T03:09:27.249,q,822809586,240,135,19,2656927,2841,true,cpu,21.509,67.632,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,111.8,2026-10-06T03:09:29.277,h,131894674,480,270,21,8262823,2881,true,cpu,21.509,69.665,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-off-h264,111.8,2026-10-06T03:09:29.277,f,2005724044,960,540,28,14357053,2143,true,cpu,21.509,69.665,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-off-h264,111.8,2026-10-06T03:09:29.277,q,822809586,240,135,21,2694948,2882,true,cpu,21.509,69.665,48.164,0,4,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-off-h264,113.9,2026-10-06T03:09:31.326,h,131894674,320,180,30,8361527,2936,true,cpu,21.509,71.709,48.164,0,4,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-off-h264,113.9,2026-10-06T03:09:31.326,f,2005724044,,,,14492996,2163,true,cpu,21.509,71.709,48.164,0,4,OpenH264,false,,,video/H264
+ab-file-3L-off-h264,113.9,2026-10-06T03:09:31.326,q,822809586,160,90,30,2730638,2937,true,cpu,21.509,71.709,48.164,0,4,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-off-h264,115.9,2026-10-06T03:09:33.351,h,131894674,320,180,30,8476205,2997,true,cpu,21.509,73.733,48.164,0,4,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-off-h264,115.9,2026-10-06T03:09:33.351,f,2005724044,,,,14492996,2163,true,cpu,21.509,73.733,48.164,0,4,OpenH264,false,,,video/H264
+ab-file-3L-off-h264,115.9,2026-10-06T03:09:33.351,q,822809586,160,90,31,2768430,2998,true,cpu,21.509,73.733,48.164,0,4,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-off-h264,117.9,2026-10-06T03:09:35.374,h,131894674,320,180,30,8587171,3057,true,cpu,21.509,75.759,48.164,0,4,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-off-h264,117.9,2026-10-06T03:09:35.374,f,2005724044,,,,14492996,2163,true,cpu,21.509,75.759,48.164,0,4,OpenH264,false,,,video/H264
+ab-file-3L-off-h264,117.9,2026-10-06T03:09:35.374,q,822809586,160,90,30,2804595,3058,true,cpu,21.509,75.759,48.164,0,4,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-off-h264,120,2026-10-06T03:09:37.403,h,131894674,320,180,30,8702002,3119,true,cpu,21.509,77.786,48.164,0,4,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-off-h264,120,2026-10-06T03:09:37.403,f,2005724044,,,,14492996,2163,true,cpu,21.509,77.786,48.164,0,4,OpenH264,false,,,video/H264
+ab-file-3L-off-h264,120,2026-10-06T03:09:37.403,q,822809586,160,90,31,2840253,3118,true,cpu,21.509,77.786,48.164,0,4,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-off-h264,122,2026-10-06T03:09:39.421,h,131894674,320,180,30,8809546,3178,true,cpu,21.509,79.807,48.164,0,4,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-off-h264,122,2026-10-06T03:09:39.421,f,2005724044,,,,14492996,2163,true,cpu,21.509,79.807,48.164,0,4,OpenH264,false,,,video/H264
+ab-file-3L-off-h264,122,2026-10-06T03:09:39.421,q,822809586,160,90,28,2876018,3176,true,cpu,21.509,79.807,48.164,0,4,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,2.3,2026-10-06T03:10:22.517,q,31061954,320,180,19,708543,561,true,none,22.261,0,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-on-h264,2.3,2026-10-06T03:10:22.517,h,3732171471,640,360,17,1620216,551,true,none,22.261,0,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,450000,video/H264
+ab-file-3L-on-h264,2.3,2026-10-06T03:10:22.517,f,838034087,1280,720,19,3827753,622,true,none,22.261,0,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-on-h264,4.4,2026-10-06T03:10:24.566,q,31061954,320,180,17,743162,598,true,none,24.308,0,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-on-h264,4.4,2026-10-06T03:10:24.566,h,3732171471,640,360,16,1725403,588,true,none,24.308,0,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,450000,video/H264
+ab-file-3L-on-h264,4.4,2026-10-06T03:10:24.566,f,838034087,1280,720,17,4097522,659,true,none,24.308,0,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-on-h264,6.4,2026-10-06T03:10:26.622,q,31061954,320,180,21,780875,638,true,none,26.356,0,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-on-h264,6.4,2026-10-06T03:10:26.622,h,3732171471,640,360,21,1835986,628,true,none,26.356,0,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,450000,video/H264
+ab-file-3L-on-h264,6.4,2026-10-06T03:10:26.622,f,838034087,1280,720,21,4397922,702,true,none,26.356,0,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-on-h264,8.4,2026-10-06T03:10:28.656,q,31061954,320,180,16,813297,673,true,none,28.386,0,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-on-h264,8.4,2026-10-06T03:10:28.656,h,3732171471,640,360,16,1938002,664,true,none,28.386,0,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,450000,video/H264
+ab-file-3L-on-h264,8.4,2026-10-06T03:10:28.656,f,838034087,1280,720,17,4654317,738,true,none,28.386,0,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-on-h264,10.5,2026-10-06T03:10:30.689,q,31061954,240,135,21,851524,712,true,cpu,30.202,0.215,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,125000,video/H264
+ab-file-3L-on-h264,10.5,2026-10-06T03:10:30.689,h,3732171471,480,270,18,2048213,701,true,cpu,30.202,0.215,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,291667,video/H264
+ab-file-3L-on-h264,10.5,2026-10-06T03:10:30.689,f,838034087,960,540,23,4962274,781,true,cpu,30.202,0.215,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1416667,video/H264
+ab-file-3L-on-h264,12.5,2026-10-06T03:10:32.726,q,31061954,240,135,20,886730,752,true,cpu,30.202,2.255,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-on-h264,12.5,2026-10-06T03:10:32.726,h,3732171471,480,270,20,2128756,742,true,cpu,30.202,2.255,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-on-h264,12.5,2026-10-06T03:10:32.726,f,838034087,960,540,26,5320745,835,true,cpu,30.202,2.255,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-on-h264,14.6,2026-10-06T03:10:34.764,q,31061954,240,135,18,922636,791,true,cpu,30.202,4.295,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-on-h264,14.6,2026-10-06T03:10:34.764,h,3732171471,480,270,19,2215939,782,true,cpu,30.202,4.295,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-on-h264,14.6,2026-10-06T03:10:34.764,f,838034087,960,540,21,5684269,887,true,cpu,30.202,4.295,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-on-h264,16.6,2026-10-06T03:10:36.811,q,31061954,240,135,20,961102,832,true,cpu,30.202,6.338,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-on-h264,16.6,2026-10-06T03:10:36.811,h,3732171471,480,270,20,2305812,823,true,cpu,30.202,6.338,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-on-h264,16.6,2026-10-06T03:10:36.811,f,838034087,960,540,28,6075266,943,true,cpu,30.202,6.338,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-on-h264,18.6,2026-10-06T03:10:38.843,q,31061954,240,135,20,998102,872,true,cpu,30.202,8.368,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-on-h264,18.6,2026-10-06T03:10:38.843,h,3732171471,480,270,20,2393245,863,true,cpu,30.202,8.368,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-on-h264,18.6,2026-10-06T03:10:38.843,f,838034087,960,540,29,6474357,1000,true,cpu,30.202,8.368,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-on-h264,20.7,2026-10-06T03:10:40.872,q,31061954,240,135,20,1035943,913,true,cpu,30.202,10.402,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-on-h264,20.7,2026-10-06T03:10:40.872,h,3732171471,480,270,20,2482300,904,true,cpu,30.202,10.402,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,348022,video/H264
+ab-file-3L-on-h264,20.7,2026-10-06T03:10:40.872,f,838034087,960,540,27,6871029,1056,true,cpu,30.202,10.402,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-on-h264,22.8,2026-10-06T03:10:42.968,q,31061954,240,135,20,1073063,955,true,cpu,30.202,12.495,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-on-h264,22.8,2026-10-06T03:10:42.968,h,3732171471,480,270,20,2568779,945,true,cpu,30.202,12.495,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-on-h264,22.8,2026-10-06T03:10:42.968,f,838034087,960,540,24,7216746,1104,true,cpu,30.202,12.495,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-on-h264,24.8,2026-10-06T03:10:45.003,q,31061954,240,135,19,1110390,995,true,cpu,30.202,14.531,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-on-h264,24.8,2026-10-06T03:10:45.003,h,3732171471,480,270,19,2655981,985,true,cpu,30.202,14.531,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-on-h264,24.8,2026-10-06T03:10:45.003,f,838034087,960,540,21,7543931,1149,true,cpu,30.202,14.531,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-on-h264,26.8,2026-10-06T03:10:47.056,q,31061954,240,135,20,1142779,1037,true,cpu,30.202,16.583,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-on-h264,26.8,2026-10-06T03:10:47.056,h,3732171471,480,270,20,2747992,1027,true,cpu,30.202,16.583,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-on-h264,26.8,2026-10-06T03:10:47.056,f,838034087,960,540,28,7921711,1202,true,cpu,30.202,16.583,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-on-h264,28.9,2026-10-06T03:10:49.086,q,31061954,240,135,20,1160804,1077,true,cpu,30.202,18.615,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-on-h264,28.9,2026-10-06T03:10:49.086,h,3732171471,480,270,19,2836436,1068,true,cpu,30.202,18.615,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-on-h264,28.9,2026-10-06T03:10:49.086,f,838034087,960,540,30,8300683,1257,true,cpu,30.202,18.615,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-on-h264,30.9,2026-10-06T03:10:51.148,q,31061954,240,135,20,1175366,1118,true,cpu,30.202,20.675,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-on-h264,30.9,2026-10-06T03:10:51.148,h,3732171471,480,270,20,2922618,1109,true,cpu,30.202,20.675,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-on-h264,30.9,2026-10-06T03:10:51.148,f,838034087,960,540,28,8704663,1314,true,cpu,30.202,20.675,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-on-h264,33,2026-10-06T03:10:53.206,q,31061954,240,135,21,1191774,1160,true,cpu,30.202,22.733,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-on-h264,33,2026-10-06T03:10:53.206,h,3732171471,480,270,21,3011318,1150,true,cpu,30.202,22.733,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-on-h264,33,2026-10-06T03:10:53.206,f,838034087,960,540,27,9044661,1362,true,cpu,30.202,22.733,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-on-h264,35,2026-10-06T03:10:55.249,q,31061954,240,135,19,1214028,1200,true,cpu,30.202,24.794,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-3L-on-h264,35,2026-10-06T03:10:55.249,h,3732171471,480,270,20,3095659,1190,true,cpu,30.202,24.794,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,350000,video/H264
+ab-file-3L-on-h264,35,2026-10-06T03:10:55.249,f,838034087,960,540,23,9403637,1413,true,cpu,30.202,24.794,6.497,0,2,"SimulcastEncoderAdapter (OpenH264, OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-3L-on-h264,37.1,2026-10-06T03:10:57.322,q,31061954,160,90,29,1249209,1258,true,cpu,30.202,26.846,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,37.1,2026-10-06T03:10:57.322,h,3732171471,320,180,29,3199455,1249,true,cpu,30.202,26.846,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,37.1,2026-10-06T03:10:57.322,f,838034087,,,,9445053,1419,true,cpu,30.202,26.846,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,39.1,2026-10-06T03:10:59.343,q,31061954,160,90,30,1276875,1319,true,cpu,30.202,28.867,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,39.1,2026-10-06T03:10:59.343,h,3732171471,320,180,31,3305391,1310,true,cpu,30.202,28.867,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,39.1,2026-10-06T03:10:59.343,f,838034087,,,,9445053,1419,true,cpu,30.202,28.867,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,41.2,2026-10-06T03:11:01.376,q,31061954,160,90,31,1303902,1380,true,cpu,30.202,30.902,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,41.2,2026-10-06T03:11:01.376,h,3732171471,320,180,31,3417106,1371,true,cpu,30.202,30.902,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,41.2,2026-10-06T03:11:01.376,f,838034087,,,,9445053,1419,true,cpu,30.202,30.902,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,43.2,2026-10-06T03:11:03.394,q,31061954,160,90,29,1335212,1440,true,cpu,30.202,32.919,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,43.2,2026-10-06T03:11:03.394,h,3732171471,320,180,29,3525611,1431,true,cpu,30.202,32.919,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,43.2,2026-10-06T03:11:03.394,f,838034087,,,,9445053,1419,true,cpu,30.202,32.919,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,45.2,2026-10-06T03:11:05.413,q,31061954,160,90,31,1371449,1500,true,cpu,30.202,34.939,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,45.2,2026-10-06T03:11:05.413,h,3732171471,320,180,31,3641645,1492,true,cpu,30.202,34.939,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,45.2,2026-10-06T03:11:05.413,f,838034087,,,,9445053,1419,true,cpu,30.202,34.939,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,47.3,2026-10-06T03:11:07.459,q,31061954,160,90,29,1410424,1560,true,cpu,30.202,36.985,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,47.3,2026-10-06T03:11:07.459,h,3732171471,320,180,30,3759729,1553,true,cpu,30.202,36.985,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,47.3,2026-10-06T03:11:07.459,f,838034087,,,,9445053,1419,true,cpu,30.202,36.985,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,49.3,2026-10-06T03:11:09.481,q,31061954,160,90,30,1447008,1621,true,cpu,30.202,39.006,6.497,0,2,OpenH264,false,L1T1,149654,video/H264
+ab-file-3L-on-h264,49.3,2026-10-06T03:11:09.481,h,3732171471,320,180,30,3873794,1614,true,cpu,30.202,39.006,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,49.3,2026-10-06T03:11:09.481,f,838034087,,,,9445053,1419,true,cpu,30.202,39.006,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,51.3,2026-10-06T03:11:11.507,q,31061954,160,90,30,1474354,1682,true,cpu,30.202,41.033,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,51.3,2026-10-06T03:11:11.507,h,3732171471,320,180,31,3980547,1675,true,cpu,30.202,41.033,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,51.3,2026-10-06T03:11:11.507,f,838034087,,,,9445053,1419,true,cpu,30.202,41.033,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,53.3,2026-10-06T03:11:13.534,q,31061954,160,90,30,1509259,1742,true,cpu,30.202,43.06,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,53.3,2026-10-06T03:11:13.534,h,3732171471,320,180,30,4091354,1736,true,cpu,30.202,43.06,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,53.3,2026-10-06T03:11:13.534,f,838034087,,,,9445053,1419,true,cpu,30.202,43.06,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,55.4,2026-10-06T03:11:15.566,q,31061954,160,90,30,1546008,1801,true,cpu,30.202,45.098,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,55.4,2026-10-06T03:11:15.566,h,3732171471,320,180,30,4202990,1796,true,cpu,30.202,45.098,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,55.4,2026-10-06T03:11:15.566,f,838034087,,,,9445053,1419,true,cpu,30.202,45.098,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,57.4,2026-10-06T03:11:17.600,q,31061954,160,90,29,1583697,1862,true,cpu,30.202,47.125,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,57.4,2026-10-06T03:11:17.600,h,3732171471,320,180,29,4315953,1857,true,cpu,30.202,47.125,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,57.4,2026-10-06T03:11:17.600,f,838034087,,,,9445053,1419,true,cpu,30.202,47.125,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,59.4,2026-10-06T03:11:19.630,q,31061954,160,90,30,1620122,1923,true,cpu,30.202,49.159,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,59.4,2026-10-06T03:11:19.630,h,3732171471,320,180,31,4428016,1919,true,cpu,30.202,49.159,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,59.4,2026-10-06T03:11:19.630,f,838034087,,,,9445053,1419,true,cpu,30.202,49.159,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,61.5,2026-10-06T03:11:21.662,q,31061954,160,90,30,1655167,1982,true,cpu,30.202,51.187,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,61.5,2026-10-06T03:11:21.662,h,3732171471,320,180,30,4537958,1979,true,cpu,30.202,51.187,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,61.5,2026-10-06T03:11:21.662,f,838034087,,,,9445053,1419,true,cpu,30.202,51.187,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,63.5,2026-10-06T03:11:23.691,q,31061954,160,90,29,1693916,2041,true,cpu,30.202,53.22,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,63.5,2026-10-06T03:11:23.691,h,3732171471,320,180,30,4653158,2041,true,cpu,30.202,53.22,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,63.5,2026-10-06T03:11:23.691,f,838034087,,,,9445053,1419,true,cpu,30.202,53.22,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,65.5,2026-10-06T03:11:25.720,q,31061954,160,90,31,1731056,2101,true,cpu,30.202,55.246,6.497,0,2,OpenH264,false,L1T1,149195,video/H264
+ab-file-3L-on-h264,65.5,2026-10-06T03:11:25.720,h,3732171471,320,180,31,4765272,2101,true,cpu,30.202,55.246,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,65.5,2026-10-06T03:11:25.720,f,838034087,,,,9445053,1419,true,cpu,30.202,55.246,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,67.5,2026-10-06T03:11:27.749,q,31061954,160,90,30,1768466,2161,true,cpu,30.202,57.278,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,67.5,2026-10-06T03:11:27.749,h,3732171471,320,180,30,4879385,2162,true,cpu,30.202,57.278,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,67.5,2026-10-06T03:11:27.749,f,838034087,,,,9445053,1419,true,cpu,30.202,57.278,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,69.6,2026-10-06T03:11:29.790,q,31061954,160,90,30,1805597,2221,true,cpu,30.202,59.303,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,69.6,2026-10-06T03:11:29.790,h,3732171471,320,180,31,4990571,2223,true,cpu,30.202,59.303,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,69.6,2026-10-06T03:11:29.790,f,838034087,,,,9445053,1419,true,cpu,30.202,59.303,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,71.6,2026-10-06T03:11:31.822,q,31061954,160,90,29,1838719,2280,true,cpu,30.202,61.304,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,71.6,2026-10-06T03:11:31.822,h,3732171471,320,180,29,5097927,2282,true,cpu,30.202,61.304,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,71.6,2026-10-06T03:11:31.822,f,838034087,,,,9445053,1419,true,cpu,30.202,61.304,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,73.6,2026-10-06T03:11:33.858,q,31061954,160,90,30,1876130,2342,true,cpu,30.202,63.389,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,73.6,2026-10-06T03:11:33.858,h,3732171471,320,180,30,5211165,2345,true,cpu,30.202,63.389,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,73.6,2026-10-06T03:11:33.858,f,838034087,,,,9445053,1419,true,cpu,30.202,63.389,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,75.7,2026-10-06T03:11:35.905,q,31061954,160,90,30,1912941,2403,true,cpu,30.202,65.432,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,75.7,2026-10-06T03:11:35.905,h,3732171471,320,180,31,5327014,2407,true,cpu,30.202,65.432,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,75.7,2026-10-06T03:11:35.905,f,838034087,,,,9445053,1419,true,cpu,30.202,65.432,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,77.7,2026-10-06T03:11:37.936,q,31061954,160,90,29,1950879,2463,true,cpu,30.202,67.461,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,77.7,2026-10-06T03:11:37.936,h,3732171471,320,180,29,5436116,2467,true,cpu,30.202,67.461,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,77.7,2026-10-06T03:11:37.936,f,838034087,,,,9445053,1419,true,cpu,30.202,67.461,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,79.8,2026-10-06T03:11:39.966,q,31061954,160,90,29,1988453,2524,true,cpu,30.202,69.497,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,79.8,2026-10-06T03:11:39.966,h,3732171471,320,180,31,5553650,2529,true,cpu,30.202,69.497,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,79.8,2026-10-06T03:11:39.966,f,838034087,,,,9445053,1419,true,cpu,30.202,69.497,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,81.8,2026-10-06T03:11:41.997,q,31061954,160,90,30,2024837,2584,true,cpu,30.202,71.521,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,81.8,2026-10-06T03:11:41.997,h,3732171471,320,180,29,5662384,2589,true,cpu,30.202,71.521,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,81.8,2026-10-06T03:11:41.997,f,838034087,,,,9445053,1419,true,cpu,30.202,71.521,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,83.8,2026-10-06T03:11:44.026,q,31061954,160,90,31,2060388,2645,true,cpu,30.202,73.557,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,83.8,2026-10-06T03:11:44.026,h,3732171471,320,180,31,5775817,2651,true,cpu,30.202,73.557,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,83.8,2026-10-06T03:11:44.026,f,838034087,,,,9445053,1419,true,cpu,30.202,73.557,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,85.9,2026-10-06T03:11:46.071,q,31061954,160,90,31,2086334,2706,true,cpu,30.202,75.605,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,85.9,2026-10-06T03:11:46.071,h,3732171471,320,180,31,5888144,2712,true,cpu,30.202,75.605,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,85.9,2026-10-06T03:11:46.071,f,838034087,,,,9445053,1419,true,cpu,30.202,75.605,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,87.9,2026-10-06T03:11:48.134,q,31061954,160,90,29,2104967,2767,true,cpu,30.202,77.66,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,87.9,2026-10-06T03:11:48.134,h,3732171471,320,180,29,5983438,2773,true,cpu,30.202,77.66,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,87.9,2026-10-06T03:11:48.134,f,838034087,,,,9445053,1419,true,cpu,30.202,77.66,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,90,2026-10-06T03:11:50.192,q,31061954,160,90,29,2115378,2829,true,cpu,30.202,79.721,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,90,2026-10-06T03:11:50.192,h,3732171471,320,180,30,6037827,2835,true,cpu,30.202,79.721,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,90,2026-10-06T03:11:50.192,f,838034087,,,,9445053,1419,true,cpu,30.202,79.721,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,92,2026-10-06T03:11:52.223,q,31061954,160,90,30,2126984,2890,true,cpu,30.202,81.75,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,92,2026-10-06T03:11:52.223,h,3732171471,320,180,30,6092554,2896,true,cpu,30.202,81.75,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,92,2026-10-06T03:11:52.223,f,838034087,,,,9445053,1419,true,cpu,30.202,81.75,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,94,2026-10-06T03:11:54.257,q,31061954,160,90,31,2137477,2952,true,cpu,30.202,83.785,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,94,2026-10-06T03:11:54.257,h,3732171471,320,180,30,6140616,2958,true,cpu,30.202,83.785,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,94,2026-10-06T03:11:54.257,f,838034087,,,,9445053,1419,true,cpu,30.202,83.785,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,96.1,2026-10-06T03:11:56.276,q,31061954,160,90,29,2164999,3010,true,cpu,30.202,85.802,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,96.1,2026-10-06T03:11:56.276,h,3732171471,320,180,31,6237953,3018,true,cpu,30.202,85.802,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,96.1,2026-10-06T03:11:56.276,f,838034087,,,,9445053,1419,true,cpu,30.202,85.802,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,98.1,2026-10-06T03:11:58.291,q,31061954,160,90,30,2196322,3069,true,cpu,30.202,87.818,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,98.1,2026-10-06T03:11:58.291,h,3732171471,320,180,29,6344340,3078,true,cpu,30.202,87.818,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,98.1,2026-10-06T03:11:58.291,f,838034087,,,,9445053,1419,true,cpu,30.202,87.818,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,100.1,2026-10-06T03:12:00.328,q,31061954,160,90,30,2225642,3130,true,cpu,30.202,89.856,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,100.1,2026-10-06T03:12:00.328,h,3732171471,320,180,30,6458882,3139,true,cpu,30.202,89.856,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,100.1,2026-10-06T03:12:00.328,f,838034087,,,,9445053,1419,true,cpu,30.202,89.856,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,102.1,2026-10-06T03:12:02.357,q,31061954,160,90,30,2255445,3191,true,cpu,30.202,91.882,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,102.1,2026-10-06T03:12:02.357,h,3732171471,320,180,29,6571726,3200,true,cpu,30.202,91.882,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,102.1,2026-10-06T03:12:02.357,f,838034087,,,,9445053,1419,true,cpu,30.202,91.882,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,104.2,2026-10-06T03:12:04.374,q,31061954,160,90,30,2289529,3252,true,cpu,30.202,93.903,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,104.2,2026-10-06T03:12:04.374,h,3732171471,320,180,30,6683074,3261,true,cpu,30.202,93.903,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,104.2,2026-10-06T03:12:04.374,f,838034087,,,,9445053,1419,true,cpu,30.202,93.903,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,106.2,2026-10-06T03:12:06.420,q,31061954,160,90,30,2324265,3313,true,cpu,30.202,95.945,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,106.2,2026-10-06T03:12:06.420,h,3732171471,320,180,31,6797410,3322,true,cpu,30.202,95.945,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,106.2,2026-10-06T03:12:06.420,f,838034087,,,,9445053,1419,true,cpu,30.202,95.945,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,108.2,2026-10-06T03:12:08.451,q,31061954,160,90,29,2360987,3373,true,cpu,30.202,97.979,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,108.2,2026-10-06T03:12:08.451,h,3732171471,320,180,30,6907355,3383,true,cpu,30.202,97.979,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,108.2,2026-10-06T03:12:08.451,f,838034087,,,,9445053,1419,true,cpu,30.202,97.979,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,110.3,2026-10-06T03:12:10.474,q,31061954,160,90,31,2391169,3434,true,cpu,30.202,100.001,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,110.3,2026-10-06T03:12:10.474,h,3732171471,320,180,31,7017315,3444,true,cpu,30.202,100.001,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,110.3,2026-10-06T03:12:10.474,f,838034087,,,,9445053,1419,true,cpu,30.202,100.001,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,112.3,2026-10-06T03:12:12.493,q,31061954,160,90,28,2425994,3493,true,cpu,30.202,102.019,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,112.3,2026-10-06T03:12:12.493,h,3732171471,320,180,29,7128696,3504,true,cpu,30.202,102.019,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,112.3,2026-10-06T03:12:12.493,f,838034087,,,,9445053,1419,true,cpu,30.202,102.019,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,114.3,2026-10-06T03:12:14.522,q,31061954,160,90,29,2461184,3553,true,cpu,30.202,104.048,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,114.3,2026-10-06T03:12:14.522,h,3732171471,320,180,30,7243892,3565,true,cpu,30.202,104.048,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,114.3,2026-10-06T03:12:14.522,f,838034087,,,,9445053,1419,true,cpu,30.202,104.048,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,116.3,2026-10-06T03:12:16.557,q,31061954,160,90,30,2499039,3614,true,cpu,30.202,106.083,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,116.3,2026-10-06T03:12:16.557,h,3732171471,320,180,30,7357256,3626,true,cpu,30.202,106.083,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,116.3,2026-10-06T03:12:16.557,f,838034087,,,,9445053,1419,true,cpu,30.202,106.083,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,118.4,2026-10-06T03:12:18.587,q,31061954,160,90,30,2535114,3675,true,cpu,30.202,108.114,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,118.4,2026-10-06T03:12:18.587,h,3732171471,320,180,30,7469597,3687,true,cpu,30.202,108.114,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,118.4,2026-10-06T03:12:18.587,f,838034087,,,,9445053,1419,true,cpu,30.202,108.114,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-3L-on-h264,120.4,2026-10-06T03:12:20.607,q,31061954,160,90,29,2571164,3734,true,cpu,30.202,110.133,6.497,0,2,OpenH264,false,L1T1,150000,video/H264
+ab-file-3L-on-h264,120.4,2026-10-06T03:12:20.607,h,3732171471,320,180,31,7585193,3748,true,cpu,30.202,110.133,6.497,0,2,OpenH264,false,L1T1,450000,video/H264
+ab-file-3L-on-h264,120.4,2026-10-06T03:12:20.607,f,838034087,,,,9445053,1419,true,cpu,30.202,110.133,6.497,0,2,OpenH264,false,,,video/H264
+ab-file-2L-off-h264,2,2026-10-06T03:13:04.618,q,3335168593,320,180,20,659604,576,true,none,28.67,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,2,2026-10-06T03:13:04.618,h,733451767,1280,720,31,5730098,841,true,none,28.67,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,4.1,2026-10-06T03:13:06.673,q,3335168593,320,180,20,698418,617,true,none,30.715,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,148741,video/H264
+ab-file-2L-off-h264,4.1,2026-10-06T03:13:06.673,h,733451767,1280,720,30,6165593,902,true,none,30.715,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,6.1,2026-10-06T03:13:08.697,q,3335168593,320,180,20,735193,657,true,none,32.738,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,6.1,2026-10-06T03:13:08.697,h,733451767,1280,720,30,6597252,963,true,none,32.738,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,8.1,2026-10-06T03:13:10.724,q,3335168593,320,180,20,772547,698,true,none,34.767,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,8.1,2026-10-06T03:13:10.724,h,733451767,1280,720,30,7014836,1023,true,none,34.767,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,10.1,2026-10-06T03:13:12.750,q,3335168593,320,180,20,809435,738,true,none,36.792,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,10.1,2026-10-06T03:13:12.750,h,733451767,1280,720,29,7448300,1084,true,none,36.792,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1695801,video/H264
+ab-file-2L-off-h264,12.2,2026-10-06T03:13:14.784,q,3335168593,320,180,20,846397,779,true,none,38.828,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,12.2,2026-10-06T03:13:14.784,h,733451767,1280,720,30,7874276,1145,true,none,38.828,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,14.2,2026-10-06T03:13:16.813,q,3335168593,320,180,20,883662,819,true,none,40.855,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,14.2,2026-10-06T03:13:16.813,h,733451767,1280,720,30,8309430,1206,true,none,40.855,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,16.2,2026-10-06T03:13:18.829,q,3335168593,320,180,20,921963,860,true,none,42.871,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,148045,video/H264
+ab-file-2L-off-h264,16.2,2026-10-06T03:13:18.829,h,733451767,1280,720,31,8727772,1267,true,none,42.871,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,18.3,2026-10-06T03:13:20.857,q,3335168593,320,180,21,958945,901,true,none,44.904,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,18.3,2026-10-06T03:13:20.857,h,733451767,1280,720,30,9155415,1327,true,none,44.904,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,20.3,2026-10-06T03:13:22.901,q,3335168593,320,180,20,997455,941,true,none,46.944,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149868,video/H264
+ab-file-2L-off-h264,20.3,2026-10-06T03:13:22.901,h,733451767,1280,720,28,9579928,1387,true,none,46.944,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,22.3,2026-10-06T03:13:24.933,q,3335168593,320,180,20,1034674,982,true,none,48.981,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,22.3,2026-10-06T03:13:24.933,h,733451767,1280,720,30,10016655,1449,true,none,48.981,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,24.4,2026-10-06T03:13:26.962,q,3335168593,320,180,21,1072857,1023,true,none,51.003,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,24.4,2026-10-06T03:13:26.962,h,733451767,1280,720,29,10440360,1509,true,none,51.003,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1698576,video/H264
+ab-file-2L-off-h264,26.4,2026-10-06T03:13:28.991,q,3335168593,320,180,20,1108720,1063,true,none,53.033,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,26.4,2026-10-06T03:13:28.991,h,733451767,1280,720,30,10872319,1570,true,none,53.033,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,28.4,2026-10-06T03:13:31.021,q,3335168593,320,180,20,1138265,1103,true,none,55.063,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,28.4,2026-10-06T03:13:31.021,h,733451767,1280,720,30,11302014,1631,true,none,55.063,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,30.4,2026-10-06T03:13:33.051,q,3335168593,320,180,20,1168759,1144,true,none,57.093,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,30.4,2026-10-06T03:13:33.051,h,733451767,1280,720,29,11733091,1692,true,none,57.093,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,32.5,2026-10-06T03:13:35.080,q,3335168593,320,180,20,1199573,1185,true,none,59.126,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,32.5,2026-10-06T03:13:35.080,h,733451767,1280,720,30,12164850,1753,true,none,59.126,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,34.5,2026-10-06T03:13:37.130,q,3335168593,320,180,20,1233529,1226,true,none,61.174,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,34.5,2026-10-06T03:13:37.130,h,733451767,1280,720,30,12589215,1812,true,none,61.174,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,36.6,2026-10-06T03:13:39.180,q,3335168593,320,180,20,1271688,1267,true,none,63.224,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,36.6,2026-10-06T03:13:39.180,h,733451767,1280,720,30,13024592,1874,true,none,63.224,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,38.6,2026-10-06T03:13:41.236,q,3335168593,320,180,20,1309617,1308,true,none,65.28,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149643,video/H264
+ab-file-2L-off-h264,38.6,2026-10-06T03:13:41.236,h,733451767,1280,720,29,13456393,1935,true,none,65.28,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1695977,video/H264
+ab-file-2L-off-h264,40.7,2026-10-06T03:13:43.265,q,3335168593,320,180,20,1348228,1349,true,none,67.31,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,40.7,2026-10-06T03:13:43.265,h,733451767,1280,720,29,13883084,1996,true,none,67.31,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,42.7,2026-10-06T03:13:45.306,q,3335168593,320,180,20,1385386,1389,true,none,69.352,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149973,video/H264
+ab-file-2L-off-h264,42.7,2026-10-06T03:13:45.306,h,733451767,1280,720,30,14323407,2058,true,none,69.352,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,44.8,2026-10-06T03:13:47.365,q,3335168593,320,180,20,1423991,1431,true,none,71.41,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,44.8,2026-10-06T03:13:47.365,h,733451767,1280,720,30,14743739,2119,true,none,71.41,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,46.8,2026-10-06T03:13:49.412,q,3335168593,320,180,21,1462282,1472,true,none,73.454,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,46.8,2026-10-06T03:13:49.412,h,733451767,1280,720,30,15184545,2181,true,none,73.454,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1682555,video/H264
+ab-file-2L-off-h264,48.8,2026-10-06T03:13:51.439,q,3335168593,320,180,20,1498625,1512,true,none,75.48,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,48.8,2026-10-06T03:13:51.439,h,733451767,1280,720,30,15611049,2242,true,none,75.48,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,50.9,2026-10-06T03:13:53.454,q,3335168593,320,180,20,1536803,1552,true,none,77.494,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149454,video/H264
+ab-file-2L-off-h264,50.9,2026-10-06T03:13:53.454,h,733451767,1280,720,29,16037910,2302,true,none,77.494,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1691705,video/H264
+ab-file-2L-off-h264,52.9,2026-10-06T03:13:55.483,q,3335168593,320,180,20,1574284,1593,true,none,79.528,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,52.9,2026-10-06T03:13:55.483,h,733451767,1280,720,30,16466992,2363,true,none,79.528,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1699887,video/H264
+ab-file-2L-off-h264,54.9,2026-10-06T03:13:57.505,q,3335168593,320,180,20,1611499,1633,true,none,81.548,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,54.9,2026-10-06T03:13:57.505,h,733451767,1280,720,29,16891130,2423,true,none,81.548,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,56.9,2026-10-06T03:13:59.534,q,3335168593,320,180,20,1649525,1674,true,none,83.58,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149478,video/H264
+ab-file-2L-off-h264,56.9,2026-10-06T03:13:59.534,h,733451767,1280,720,30,17323938,2485,true,none,83.58,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,59,2026-10-06T03:14:01.562,q,3335168593,320,180,21,1687705,1715,true,none,85.605,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149516,video/H264
+ab-file-2L-off-h264,59,2026-10-06T03:14:01.562,h,733451767,1280,720,29,17737659,2544,true,none,85.605,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,61,2026-10-06T03:14:03.592,q,3335168593,320,180,20,1724828,1755,true,none,87.633,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,61,2026-10-06T03:14:03.592,h,733451767,1280,720,31,18165446,2605,true,none,87.633,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,63,2026-10-06T03:14:05.624,q,3335168593,320,180,19,1761613,1795,true,none,89.656,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149818,video/H264
+ab-file-2L-off-h264,63,2026-10-06T03:14:05.624,h,733451767,1280,720,30,18583314,2665,true,none,89.656,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,65,2026-10-06T03:14:07.650,q,3335168593,320,180,19,1799247,1835,true,none,91.656,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,65,2026-10-06T03:14:07.650,h,733451767,1280,720,30,19009082,2725,true,none,91.656,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,67.1,2026-10-06T03:14:09.696,q,3335168593,320,180,20,1838300,1877,true,none,93.738,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,67.1,2026-10-06T03:14:09.696,h,733451767,1280,720,30,19450290,2788,true,none,93.738,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,69.1,2026-10-06T03:14:11.743,q,3335168593,320,180,20,1876153,1918,true,none,95.783,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149892,video/H264
+ab-file-2L-off-h264,69.1,2026-10-06T03:14:11.743,h,733451767,1280,720,30,19875264,2848,true,none,95.783,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,71.2,2026-10-06T03:14:13.777,q,3335168593,320,180,19,1913912,1958,true,none,97.82,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,71.2,2026-10-06T03:14:13.777,h,733451767,1280,720,30,20308595,2909,true,none,97.82,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,73.2,2026-10-06T03:14:15.803,q,3335168593,320,180,20,1950671,1999,true,none,99.846,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,147655,video/H264
+ab-file-2L-off-h264,73.2,2026-10-06T03:14:15.803,h,733451767,1280,720,30,20733304,2970,true,none,99.846,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1696250,video/H264
+ab-file-2L-off-h264,75.2,2026-10-06T03:14:17.850,q,3335168593,320,180,20,1988995,2040,true,none,101.892,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149891,video/H264
+ab-file-2L-off-h264,75.2,2026-10-06T03:14:17.850,h,733451767,1280,720,29,21153520,3031,true,none,101.892,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,77.3,2026-10-06T03:14:19.895,q,3335168593,320,180,20,2028106,2081,true,none,103.936,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149416,video/H264
+ab-file-2L-off-h264,77.3,2026-10-06T03:14:19.895,h,733451767,1280,720,31,21594462,3093,true,none,103.936,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1698063,video/H264
+ab-file-2L-off-h264,79.3,2026-10-06T03:14:21.925,q,3335168593,320,180,21,2066068,2122,true,none,105.973,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,79.3,2026-10-06T03:14:21.925,h,733451767,1280,720,29,22009205,3153,true,none,105.973,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1694993,video/H264
+ab-file-2L-off-h264,81.4,2026-10-06T03:14:23.969,q,3335168593,320,180,19,2103230,2162,true,none,108.011,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,148829,video/H264
+ab-file-2L-off-h264,81.4,2026-10-06T03:14:23.969,h,733451767,1280,720,30,22435247,3213,true,none,108.011,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,83.4,2026-10-06T03:14:25.998,q,3335168593,320,180,20,2141285,2203,true,none,110.04,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,83.4,2026-10-06T03:14:25.998,h,733451767,1280,720,31,22862167,3274,true,none,110.04,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,85.4,2026-10-06T03:14:28.029,q,3335168593,320,180,20,2178560,2243,true,none,112.072,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,85.4,2026-10-06T03:14:28.029,h,733451767,1280,720,29,23279786,3334,true,none,112.072,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,87.5,2026-10-06T03:14:30.060,q,3335168593,320,180,21,2214034,2285,true,none,114.105,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,87.5,2026-10-06T03:14:30.060,h,733451767,1280,720,30,23696634,3393,true,none,114.105,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,89.5,2026-10-06T03:14:32.094,q,3335168593,320,180,22,2241767,2326,true,none,116.137,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,89.5,2026-10-06T03:14:32.094,h,733451767,1280,720,29,24125171,3454,true,none,116.137,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,91.5,2026-10-06T03:14:34.128,q,3335168593,320,180,20,2271767,2366,true,none,118.169,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,91.5,2026-10-06T03:14:34.128,h,733451767,1280,720,31,24561738,3516,true,none,118.169,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1691554,video/H264
+ab-file-2L-off-h264,93.6,2026-10-06T03:14:36.161,q,3335168593,320,180,20,2301916,2407,true,none,120.208,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,93.6,2026-10-06T03:14:36.161,h,733451767,1280,720,30,24980026,3576,true,none,120.208,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,95.6,2026-10-06T03:14:38.201,q,3335168593,320,180,21,2340241,2448,true,none,122.243,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,95.6,2026-10-06T03:14:38.201,h,733451767,1280,720,29,25409029,3637,true,none,122.243,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,97.6,2026-10-06T03:14:40.231,q,3335168593,320,180,20,2377093,2488,true,none,124.273,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,97.6,2026-10-06T03:14:40.231,h,733451767,1280,720,31,25845238,3699,true,none,124.273,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,99.6,2026-10-06T03:14:42.247,q,3335168593,320,180,20,2414240,2528,true,none,126.288,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,99.6,2026-10-06T03:14:42.247,h,733451767,1280,720,30,26263302,3759,true,none,126.288,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,101.7,2026-10-06T03:14:44.273,q,3335168593,320,180,20,2452561,2569,true,none,128.315,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149528,video/H264
+ab-file-2L-off-h264,101.7,2026-10-06T03:14:44.273,h,733451767,1280,720,30,26698310,3820,true,none,128.315,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,103.7,2026-10-06T03:14:46.305,q,3335168593,320,180,20,2489908,2609,true,none,130.347,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,103.7,2026-10-06T03:14:46.305,h,733451767,1280,720,30,27117961,3881,true,none,130.347,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,105.7,2026-10-06T03:14:48.335,q,3335168593,320,180,20,2527861,2650,true,none,132.377,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,105.7,2026-10-06T03:14:48.335,h,733451767,1280,720,31,27552890,3942,true,none,132.377,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1671092,video/H264
+ab-file-2L-off-h264,107.8,2026-10-06T03:14:50.362,q,3335168593,320,180,20,2566107,2691,true,none,134.408,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,107.8,2026-10-06T03:14:50.362,h,733451767,1280,720,30,27972218,4002,true,none,134.408,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,109.8,2026-10-06T03:14:52.396,q,3335168593,320,180,20,2604289,2731,true,none,136.438,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,109.8,2026-10-06T03:14:52.396,h,733451767,1280,720,30,28406032,4063,true,none,136.438,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1685147,video/H264
+ab-file-2L-off-h264,111.8,2026-10-06T03:14:54.424,q,3335168593,320,180,20,2641233,2772,true,none,138.466,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,111.8,2026-10-06T03:14:54.424,h,733451767,1280,720,30,28838950,4124,true,none,138.466,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,113.9,2026-10-06T03:14:56.452,q,3335168593,320,180,20,2678068,2812,true,none,140.494,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149749,video/H264
+ab-file-2L-off-h264,113.9,2026-10-06T03:14:56.452,h,733451767,1280,720,30,29270178,4185,true,none,140.494,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,115.9,2026-10-06T03:14:58.478,q,3335168593,320,180,21,2717293,2854,true,none,142.528,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149757,video/H264
+ab-file-2L-off-h264,115.9,2026-10-06T03:14:58.478,h,733451767,1280,720,30,29693575,4246,true,none,142.528,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,117.9,2026-10-06T03:15:00.518,q,3335168593,320,180,20,2754048,2894,true,none,144.563,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,148972,video/H264
+ab-file-2L-off-h264,117.9,2026-10-06T03:15:00.518,h,733451767,1280,720,30,30114374,4307,true,none,144.563,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,120,2026-10-06T03:15:02.556,q,3335168593,320,180,20,2792090,2935,true,none,146.6,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,120,2026-10-06T03:15:02.556,h,733451767,1280,720,30,30541084,4368,true,none,146.6,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-off-h264,122,2026-10-06T03:15:04.584,q,3335168593,320,180,21,2830044,2976,true,none,148.627,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-off-h264,122,2026-10-06T03:15:04.584,h,733451767,1280,720,30,30974452,4429,true,none,148.627,0,0.349,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,2.3,2026-10-06T03:15:48.338,h,1522424795,1280,720,27,5731357,824,true,none,28.449,0,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,2.3,2026-10-06T03:15:48.338,q,2572989514,320,180,21,649552,574,true,none,28.449,0,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,4.3,2026-10-06T03:15:50.380,h,1522424795,1280,720,25,6109338,877,true,none,30.499,0,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,4.3,2026-10-06T03:15:50.380,q,2572989514,320,180,21,687385,615,true,none,30.499,0,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,6.4,2026-10-06T03:15:52.434,h,1522424795,1280,720,29,6517112,934,true,none,32.544,0,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,6.4,2026-10-06T03:15:52.434,q,2572989514,320,180,20,725974,656,true,none,32.544,0,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149726,video/H264
+ab-file-2L-on-h264,8.4,2026-10-06T03:15:54.476,h,1522424795,1280,720,25,6889731,987,true,none,34.592,0,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,8.4,2026-10-06T03:15:54.476,q,2572989514,320,180,21,763947,697,true,none,34.592,0,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,10.5,2026-10-06T03:15:56.541,h,1522424795,1280,720,29,7302214,1045,true,none,36.647,0,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,10.5,2026-10-06T03:15:56.541,q,2572989514,320,180,20,802038,738,true,none,36.647,0,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,148994,video/H264
+ab-file-2L-on-h264,12.5,2026-10-06T03:15:58.581,h,1522424795,1280,720,25,7681973,1100,true,none,38.691,0,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,12.5,2026-10-06T03:15:58.581,q,2572989514,320,180,20,838952,778,true,none,38.691,0,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,14.6,2026-10-06T03:16:00.648,h,1522424795,960,540,28,8060115,1156,true,cpu,40.166,0.587,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1416667,video/H264
+ab-file-2L-on-h264,14.6,2026-10-06T03:16:00.648,q,2572989514,240,135,20,877037,820,true,cpu,40.166,0.587,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,125000,video/H264
+ab-file-2L-on-h264,16.6,2026-10-06T03:16:02.674,h,1522424795,960,540,31,8488713,1217,true,cpu,40.166,2.612,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,16.6,2026-10-06T03:16:02.674,q,2572989514,240,135,19,914742,861,true,cpu,40.166,2.612,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,18.6,2026-10-06T03:16:04.702,h,1522424795,960,540,30,8913286,1277,true,cpu,40.166,4.648,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,18.6,2026-10-06T03:16:04.702,q,2572989514,240,135,20,952603,902,true,cpu,40.166,4.648,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,20.7,2026-10-06T03:16:06.741,h,1522424795,960,540,28,9338130,1337,true,cpu,40.166,6.682,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1661566,video/H264
+ab-file-2L-on-h264,20.7,2026-10-06T03:16:06.741,q,2572989514,240,135,19,990272,942,true,cpu,40.166,6.682,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,22.7,2026-10-06T03:16:08.789,h,1522424795,960,540,29,9757995,1397,true,cpu,40.166,8.727,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,22.7,2026-10-06T03:16:08.789,q,2572989514,240,135,20,1028517,984,true,cpu,40.166,8.727,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149900,video/H264
+ab-file-2L-on-h264,24.8,2026-10-06T03:16:10.814,h,1522424795,960,540,31,10198379,1459,true,cpu,40.166,10.755,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,24.8,2026-10-06T03:16:10.814,q,2572989514,240,135,20,1064433,1024,true,cpu,40.166,10.755,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,26.8,2026-10-06T03:16:12.847,h,1522424795,960,540,29,10619489,1519,true,cpu,40.166,12.786,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,26.8,2026-10-06T03:16:12.847,q,2572989514,240,135,20,1099563,1065,true,cpu,40.166,12.786,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,28.8,2026-10-06T03:16:14.864,h,1522424795,960,540,31,11054610,1581,true,cpu,40.166,14.802,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,28.8,2026-10-06T03:16:14.864,q,2572989514,240,135,20,1117522,1105,true,cpu,40.166,14.802,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,30.8,2026-10-06T03:16:16.887,h,1522424795,960,540,30,11461356,1639,true,cpu,40.166,16.827,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,30.8,2026-10-06T03:16:16.887,q,2572989514,240,135,21,1132508,1146,true,cpu,40.166,16.827,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,32.9,2026-10-06T03:16:18.934,h,1522424795,960,540,30,11891829,1701,true,cpu,40.166,18.872,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,32.9,2026-10-06T03:16:18.934,q,2572989514,240,135,19,1147408,1186,true,cpu,40.166,18.872,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,34.9,2026-10-06T03:16:20.970,h,1522424795,960,540,30,12308819,1762,true,cpu,40.166,20.92,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,34.9,2026-10-06T03:16:20.970,q,2572989514,240,135,21,1171127,1228,true,cpu,40.166,20.92,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,37,2026-10-06T03:16:23.029,h,1522424795,960,540,30,12748608,1824,true,cpu,40.166,22.981,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,37,2026-10-06T03:16:23.029,q,2572989514,240,135,21,1208805,1269,true,cpu,40.166,22.981,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,39,2026-10-06T03:16:25.089,h,1522424795,960,540,29,13165450,1884,true,cpu,40.166,25.03,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,39,2026-10-06T03:16:25.089,q,2572989514,240,135,19,1246647,1309,true,cpu,40.166,25.03,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,41.1,2026-10-06T03:16:27.141,h,1522424795,960,540,30,13596450,1945,true,cpu,40.166,27.087,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,41.1,2026-10-06T03:16:27.141,q,2572989514,240,135,20,1284186,1351,true,cpu,40.166,27.087,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,148196,video/H264
+ab-file-2L-on-h264,43.1,2026-10-06T03:16:29.182,h,1522424795,960,540,28,14012701,2005,true,cpu,40.166,29.12,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,43.1,2026-10-06T03:16:29.182,q,2572989514,240,135,20,1322297,1392,true,cpu,40.166,29.12,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,45.2,2026-10-06T03:16:31.250,h,1522424795,960,540,31,14454380,2068,true,cpu,40.166,31.193,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,45.2,2026-10-06T03:16:31.250,q,2572989514,240,135,20,1360091,1433,true,cpu,40.166,31.193,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,47.2,2026-10-06T03:16:33.284,h,1522424795,960,540,30,14870632,2128,true,cpu,40.166,33.223,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,47.2,2026-10-06T03:16:33.284,q,2572989514,240,135,21,1398870,1474,true,cpu,40.166,33.223,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149228,video/H264
+ab-file-2L-on-h264,49.3,2026-10-06T03:16:35.327,h,1522424795,960,540,30,15312269,2190,true,cpu,40.166,35.265,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,49.3,2026-10-06T03:16:35.327,q,2572989514,240,135,19,1437191,1515,true,cpu,40.166,35.265,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,51.3,2026-10-06T03:16:37.362,h,1522424795,960,540,30,15742393,2251,true,cpu,40.166,37.309,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1688395,video/H264
+ab-file-2L-on-h264,51.3,2026-10-06T03:16:37.362,q,2572989514,240,135,21,1474048,1556,true,cpu,40.166,37.309,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,53.4,2026-10-06T03:16:39.409,h,1522424795,960,540,30,16175195,2312,true,cpu,40.166,39.352,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1696861,video/H264
+ab-file-2L-on-h264,53.4,2026-10-06T03:16:39.409,q,2572989514,240,135,20,1512509,1597,true,cpu,40.166,39.352,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,147784,video/H264
+ab-file-2L-on-h264,55.4,2026-10-06T03:16:41.432,h,1522424795,960,540,30,16602780,2373,true,cpu,40.166,41.372,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,55.4,2026-10-06T03:16:41.432,q,2572989514,240,135,20,1548333,1638,true,cpu,40.166,41.372,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,57.4,2026-10-06T03:16:43.461,h,1522424795,960,540,30,17025354,2434,true,cpu,40.166,43.405,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,57.4,2026-10-06T03:16:43.461,q,2572989514,240,135,20,1585077,1678,true,cpu,40.166,43.405,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,59.4,2026-10-06T03:16:45.506,h,1522424795,960,540,29,17449688,2496,true,cpu,40.166,45.475,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,59.4,2026-10-06T03:16:45.506,q,2572989514,240,135,19,1623648,1719,true,cpu,40.166,45.475,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149667,video/H264
+ab-file-2L-on-h264,61.5,2026-10-06T03:16:47.596,h,1522424795,960,540,30,17873057,2558,true,cpu,40.166,47.546,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,61.5,2026-10-06T03:16:47.596,q,2572989514,240,135,19,1661025,1760,true,cpu,40.166,47.546,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,63.6,2026-10-06T03:16:49.648,h,1522424795,960,540,30,18305458,2619,true,cpu,40.166,49.587,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,63.6,2026-10-06T03:16:49.648,q,2572989514,240,135,21,1700458,1802,true,cpu,40.166,49.587,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,147309,video/H264
+ab-file-2L-on-h264,65.6,2026-10-06T03:16:51.678,h,1522424795,960,540,31,18733061,2681,true,cpu,40.166,51.617,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,65.6,2026-10-06T03:16:51.678,q,2572989514,240,135,19,1737561,1842,true,cpu,40.166,51.617,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,67.6,2026-10-06T03:16:53.703,h,1522424795,960,540,30,19146766,2741,true,cpu,40.166,53.646,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,67.6,2026-10-06T03:16:53.703,q,2572989514,240,135,21,1776035,1883,true,cpu,40.166,53.646,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,69.7,2026-10-06T03:16:55.767,h,1522424795,960,540,30,19583798,2803,true,cpu,40.166,55.708,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,69.7,2026-10-06T03:16:55.767,q,2572989514,240,135,20,1814156,1924,true,cpu,40.166,55.708,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,71.8,2026-10-06T03:16:57.809,h,1522424795,960,540,29,20003013,2863,true,cpu,40.166,57.755,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,71.8,2026-10-06T03:16:57.809,q,2572989514,240,135,20,1852364,1965,true,cpu,40.166,57.755,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149160,video/H264
+ab-file-2L-on-h264,73.8,2026-10-06T03:16:59.862,h,1522424795,960,540,30,20434382,2924,true,cpu,40.166,59.808,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,73.8,2026-10-06T03:16:59.862,q,2572989514,240,135,20,1889324,2006,true,cpu,40.166,59.808,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,75.9,2026-10-06T03:17:01.942,h,1522424795,960,540,30,20861932,2986,true,cpu,40.166,61.886,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,75.9,2026-10-06T03:17:01.942,q,2572989514,240,135,19,1928851,2047,true,cpu,40.166,61.886,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149500,video/H264
+ab-file-2L-on-h264,77.9,2026-10-06T03:17:03.993,h,1522424795,960,540,30,21296808,3048,true,cpu,40.166,63.94,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,77.9,2026-10-06T03:17:03.993,q,2572989514,240,135,20,1966854,2089,true,cpu,40.166,63.94,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,80,2026-10-06T03:17:06.049,h,1522424795,960,540,30,21723323,3109,true,cpu,40.166,65.99,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,80,2026-10-06T03:17:06.049,q,2572989514,240,135,21,2005077,2130,true,cpu,40.166,65.99,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,82.1,2026-10-06T03:17:08.112,h,1522424795,960,540,30,22158656,3171,true,cpu,40.166,68.052,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,82.1,2026-10-06T03:17:08.112,q,2572989514,240,135,19,2041704,2170,true,cpu,40.166,68.052,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149773,video/H264
+ab-file-2L-on-h264,84.1,2026-10-06T03:17:10.156,h,1522424795,960,540,31,22584603,3233,true,cpu,40.166,70.102,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,84.1,2026-10-06T03:17:10.156,q,2572989514,240,135,20,2080920,2212,true,cpu,40.166,70.102,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149831,video/H264
+ab-file-2L-on-h264,86.1,2026-10-06T03:17:12.189,h,1522424795,960,540,29,23012103,3293,true,cpu,40.166,72.127,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,86.1,2026-10-06T03:17:12.189,q,2572989514,240,135,21,2117129,2253,true,cpu,40.166,72.127,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,88.2,2026-10-06T03:17:14.232,h,1522424795,960,540,29,23449784,3355,true,cpu,40.166,74.187,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,88.2,2026-10-06T03:17:14.232,q,2572989514,240,135,20,2143119,2294,true,cpu,40.166,74.187,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,90.2,2026-10-06T03:17:16.303,h,1522424795,960,540,30,23887700,3417,true,cpu,40.166,76.244,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,90.2,2026-10-06T03:17:16.303,q,2572989514,240,135,20,2155086,2335,true,cpu,40.166,76.244,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,92.3,2026-10-06T03:17:18.335,h,1522424795,960,540,29,24312857,3478,true,cpu,40.166,78.293,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,92.3,2026-10-06T03:17:18.335,q,2572989514,240,135,20,2171755,2376,true,cpu,40.166,78.293,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,94.4,2026-10-06T03:17:20.451,h,1522424795,960,540,30,24755511,3542,true,cpu,40.166,80.394,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,94.4,2026-10-06T03:17:20.451,q,2572989514,240,135,20,2188888,2418,true,cpu,40.166,80.394,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,96.4,2026-10-06T03:17:22.497,h,1522424795,960,540,30,25182602,3603,true,cpu,40.166,82.44,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,96.4,2026-10-06T03:17:22.497,q,2572989514,240,135,20,2228117,2459,true,cpu,40.166,82.44,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,98.5,2026-10-06T03:17:24.521,h,1522424795,960,540,30,25600291,3663,true,cpu,40.166,84.469,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,98.5,2026-10-06T03:17:24.521,q,2572989514,240,135,20,2266624,2500,true,cpu,40.166,84.469,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149552,video/H264
+ab-file-2L-on-h264,100.5,2026-10-06T03:17:26.566,h,1522424795,960,540,30,26031867,3725,true,cpu,40.166,86.509,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,100.5,2026-10-06T03:17:26.566,q,2572989514,240,135,21,2304424,2541,true,cpu,40.166,86.509,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,102.5,2026-10-06T03:17:28.605,h,1522424795,960,540,30,26461976,3787,true,cpu,40.166,88.59,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,102.5,2026-10-06T03:17:28.605,q,2572989514,240,135,20,2341943,2582,true,cpu,40.166,88.59,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,104.7,2026-10-06T03:17:30.787,h,1522424795,960,540,30,26910762,3850,true,cpu,40.166,90.729,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,104.7,2026-10-06T03:17:30.787,q,2572989514,240,135,21,2380110,2625,true,cpu,40.166,90.729,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,106.8,2026-10-06T03:17:32.854,h,1522424795,960,540,30,27350743,3912,true,cpu,40.166,92.801,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,106.8,2026-10-06T03:17:32.854,q,2572989514,240,135,20,2418564,2666,true,cpu,40.166,92.801,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,108.8,2026-10-06T03:17:34.888,h,1522424795,960,540,31,27775398,3973,true,cpu,40.166,94.835,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,108.8,2026-10-06T03:17:34.888,q,2572989514,240,135,20,2456565,2707,true,cpu,40.166,94.835,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,110.9,2026-10-06T03:17:36.935,h,1522424795,960,540,29,28209760,4034,true,cpu,40.166,96.88,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,110.9,2026-10-06T03:17:36.935,q,2572989514,240,135,19,2492151,2747,true,cpu,40.166,96.88,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,112.9,2026-10-06T03:17:38.967,h,1522424795,960,540,30,28635143,4095,true,cpu,40.166,98.91,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1694777,video/H264
+ab-file-2L-on-h264,112.9,2026-10-06T03:17:38.967,q,2572989514,240,135,21,2531383,2789,true,cpu,40.166,98.91,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149074,video/H264
+ab-file-2L-on-h264,115,2026-10-06T03:17:41.013,h,1522424795,960,540,30,29065325,4156,true,cpu,40.166,100.952,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,115,2026-10-06T03:17:41.013,q,2572989514,240,135,20,2568230,2829,true,cpu,40.166,100.952,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,117,2026-10-06T03:17:43.032,h,1522424795,960,540,30,29486768,4217,true,cpu,40.166,102.974,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,117,2026-10-06T03:17:43.032,q,2572989514,240,135,20,2606288,2870,true,cpu,40.166,102.974,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,149207,video/H264
+ab-file-2L-on-h264,119,2026-10-06T03:17:45.068,h,1522424795,960,540,30,29911996,4278,true,cpu,40.166,105.013,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,119,2026-10-06T03:17:45.068,q,2572989514,240,135,20,2644252,2911,true,cpu,40.166,105.013,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264
+ab-file-2L-on-h264,121,2026-10-06T03:17:47.097,h,1522424795,960,540,28,30331007,4337,true,cpu,40.166,107.037,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,1700000,video/H264
+ab-file-2L-on-h264,121,2026-10-06T03:17:47.097,q,2572989514,240,135,20,2680978,2951,true,cpu,40.166,107.037,0.421,0,1,"SimulcastEncoderAdapter (OpenH264, OpenH264)",false,L1T1,150000,video/H264

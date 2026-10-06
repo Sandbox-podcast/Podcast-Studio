@@ -1,0 +1,3 @@
+cond,status,join_at,window_start_paris,window_end_paris,rec_start_paris,rec_stop_paris,rec_result,note,subrec_start_paris,subrec_stop_paris,subrec_file,subrec_bytes
+ab-file-2L-off-pp,DONE,2026-10-06T03:59:16.314,2026-10-06T03:59:43.945,2026-10-06T04:01:44.646,,,,,2026-10-06T03:59:43.951,2026-10-06T04:01:44.090,ab-file-2L-off-pp-sub-hi-rx.webm,37497623
+ab-file-2L-on-pp,DONE,2026-10-06T04:01:59.446,2026-10-06T04:02:27.353,2026-10-06T04:04:30.787,2026-10-06T04:02:27.758,2026-10-06T04:04:30.780,stopped+exported,,2026-10-06T04:02:27.362,2026-10-06T04:04:28.433,ab-file-2L-on-pp-sub-hi-rx.webm,37529901

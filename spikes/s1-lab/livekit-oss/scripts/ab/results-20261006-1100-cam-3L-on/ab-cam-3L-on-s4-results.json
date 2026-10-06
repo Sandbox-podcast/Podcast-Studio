@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "stoppedAtMs": 1791277423248,
+  "results": {
+    "ok": true,
+    "resultsKey": "spike/s4-dropin/ab-cam-3L-on-raw-1791277301460.results.json",
+    "localPath": "out/ab-cam-3L-on-raw-1791277301460.results.json"
+  }
+}

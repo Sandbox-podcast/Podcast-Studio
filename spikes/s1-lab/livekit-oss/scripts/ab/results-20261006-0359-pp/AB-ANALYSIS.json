@@ -1,0 +1,155 @@
+{
+  "ab-file-2L-off-pp": {
+    "status": "DONE",
+    "window": [
+      "2026-10-06T03:59:43.945",
+      "2026-10-06T04:01:44.646"
+    ],
+    "rec": "OFF",
+    "hd_layer": "h",
+    "hd_sent": {
+      "w_med": 1280.0,
+      "h_med": 720.0,
+      "fps_med": 30.0,
+      "samples": 59,
+      "samples_with_dims": 59
+    },
+    "qlr_share_top": {
+      "none": 1.0
+    },
+    "qlrDurations_delta_s": {
+      "none": 118.1,
+      "cpu": 0.0,
+      "bandwidth": 0.0,
+      "other": 0.0
+    },
+    "qlrDurations_share": {
+      "none": 1.0,
+      "cpu": 0.0,
+      "bandwidth": 0.0,
+      "other": 0.0
+    },
+    "qlrResChanges_delta": 0.0,
+    "encoderImplementation": [
+      "SimulcastEncoderAdapter (libvpx, libvpx)"
+    ],
+    "per_rid": {
+      "h": {
+        "w_med": 1280.0,
+        "h_med": 720.0,
+        "fps_med": 30.0,
+        "n": 59,
+        "n_with_dims": 59
+      },
+      "q": {
+        "w_med": 320.0,
+        "h_med": 180.0,
+        "fps_med": 20.0,
+        "n": 59,
+        "n_with_dims": 59
+      }
+    },
+    "cpu": {
+      "pub": {
+        "machine_pct_med": 14.7,
+        "machine_pct_max": 37.7,
+        "one_core_pct_med": 117.7,
+        "n": 57
+      },
+      "sub": {
+        "machine_pct_med": 4.6,
+        "machine_pct_max": 30.4,
+        "one_core_pct_med": 37.2,
+        "n": 57
+      },
+      "total_cpu_pct_med": 48.0,
+      "gpu_videoencode_pct_med": 0.0,
+      "nvenc_util_pct_med": 0.0,
+      "nvenc_util_pct_max": 0.0
+    },
+    "sub_hi_rx": {
+      "w_med": 1280.0,
+      "h_med": 720.0,
+      "fps_med": 30.0,
+      "freeze_delta": 1.0
+    },
+    "distinct_fps": null
+  },
+  "ab-file-2L-on-pp": {
+    "status": "DONE",
+    "window": [
+      "2026-10-06T04:02:27.353",
+      "2026-10-06T04:04:30.787"
+    ],
+    "rec": "stopped+exported",
+    "hd_layer": "h",
+    "hd_sent": {
+      "w_med": 640.0,
+      "h_med": 360.0,
+      "fps_med": 30.0,
+      "samples": 59,
+      "samples_with_dims": 59
+    },
+    "qlr_share_top": {
+      "none": 0.1,
+      "cpu": 0.9
+    },
+    "qlrDurations_delta_s": {
+      "none": 10.5,
+      "cpu": 108.1,
+      "bandwidth": 0.0,
+      "other": 0.0
+    },
+    "qlrDurations_share": {
+      "none": 0.09,
+      "cpu": 0.91,
+      "bandwidth": 0.0,
+      "other": 0.0
+    },
+    "qlrResChanges_delta": 0.0,
+    "encoderImplementation": [
+      "SimulcastEncoderAdapter (libvpx, libvpx)"
+    ],
+    "per_rid": {
+      "h": {
+        "w_med": 640.0,
+        "h_med": 360.0,
+        "fps_med": 30.0,
+        "n": 59,
+        "n_with_dims": 59
+      },
+      "q": {
+        "w_med": 160.0,
+        "h_med": 90.0,
+        "fps_med": 20.0,
+        "n": 59,
+        "n_with_dims": 59
+      }
+    },
+    "cpu": {
+      "pub": {
+        "machine_pct_med": 22.8,
+        "machine_pct_max": 44.7,
+        "one_core_pct_med": 182.4,
+        "n": 59
+      },
+      "sub": {
+        "machine_pct_med": 4.0,
+        "machine_pct_max": 19.4,
+        "one_core_pct_med": 32.0,
+        "n": 59
+      },
+      "total_cpu_pct_med": 62.0,
+      "gpu_videoencode_pct_med": 0.0,
+      "nvenc_util_pct_med": 0.0,
+      "nvenc_util_pct_max": 0.0
+    },
+    "sub_hi_rx": {
+      "w_med": 640.0,
+      "h_med": 360.0,
+      "fps_med": 30.0,
+      "freeze_delta": 1.0
+    },
+    "distinct_fps": null
+  }
+}

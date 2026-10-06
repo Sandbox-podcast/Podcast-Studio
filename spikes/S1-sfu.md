@@ -1,0 +1,711 @@
+# Spike S1 — SFU self-host (RTC serveur interne) + diagnostics
+
+| | |
+| --- | --- |
+| **Date** | 2026-10-05 (pivot Loïc via lead) |
+| **Auteur** | Podcast RTC |
+| **Statut** | **LAB DEV LOCAL UP** + **LAN laptop host-local UP** (2026-10-05) — stack **LiveKit OSS (B)** |
+| **Décision stack POC** | **B — LiveKit OSS self-host** (vote locked 2026-10-05, lead / Loïc) ; A/C/D non retenus |
+| **D-04** | Override **POC uniquement** — voir [`S1-D04-POC-override.md`](S1-D04-POC-override.md) |
+| **Plafond SFU €/h** | **N/A (POC self-host)** — Loïc via lead, 2026-10-05 ; plafond **cloud** reporté post-POC |
+| **Verdict POC** | **DRAFT ready for review** — [`S1-verdict.md`](S1-verdict.md) |
+
+> **Pivot Loïc (explicite)**  
+> - **Stop** tout push cloud SFU SaaS : pas de clés / comptes / runs LiveKit Cloud, Daily, Agora.  
+> - POC = **RTC serveur interne self-host** sur infra Sandbox (**LAN** et/ou **VPS EU**). Participants en **France**.  
+> - **D-04** : le SFU cloud managé reste l’**hypothèse produit post-POC** ; override POC documenté, pas d’effacement de D-04.  
+> - **Vote B** : lab via [`s1-lab/livekit-oss/`](s1-lab/livekit-oss/). **Q2** : **LAN Sandbox first** — hôte Loïc **LAPTOP-BI8P2KF3** @ **192.168.1.68** (Wi‑Fi, 2026-10-05) ; multi-device LAN + SSH **à suivre**.
+
+---
+
+## Hypothèse testée
+
+Un **SFU LiveKit OSS self-hosté** sur infra Sandbox (**LAN** et/ou **VPS EU**) permet de :
+
+1. Tenir **≥ 5 participants** A/V simultanés stables ≥ 20 min (AC-RTC-001), clients en **France**.
+2. Exposer les métriques AC-RTC-002 (**bitrate, packet loss, jitter, RTT, résolution, FPS**) via `getStats()` navigateur + instrumentation serveur si besoin.
+3. Rester compatible **local-first masters** (AC-RTC-003) : egress serveur = bonus, jamais seul master.
+4. Garder le **trafic média sur infra Sandbox** (LAN ou VPS EU) — pas de minutes SFU SaaS en POC.
+
+Coût POC : **plafond SFU €/h = N/A** pour self-host (lock Loïc) — poursuivre lab local multi-pax / getStats **sans gate budget €/h**. Observations VPS optionnelles plus tard ; **pas de pass/fail coût inventé**. Plafond **cloud** €/h = **hors scope POC** (à fixer si retour SFU managé post-POC / D-04).
+
+---
+
+## État des phases
+
+| Phase | Contenu | Statut |
+| --- | --- | --- |
+| **PREP SaaS (archivé)** | Desk LiveKit Cloud / Daily / Agora | **Superseded** — POC SaaS abandonné ([annexe](#annexe--desk-saas-superseded)) |
+| **PREP self-host** | Grille comparatif (historique) + QCM | Vote **B** |
+| **LAB LiveKit OSS** | `docker compose` + harnais [`livekit-oss/`](s1-lab/livekit-oss/) | **DEV local UP** + **LAN laptop host-local UP** (`192.168.1.68`) ; multi-device LAN **à faire** |
+
+**Interdit** : **SFU SaaS** (Cloud/Daily/Agora) ; code Phase 1 produit dans ce repo spike.
+
+---
+
+## Setup (LAB — à remplir pendant le lab)
+
+*(Ne pas inventer de chiffres.)*
+
+**Cible lab** : participants en **France** ; SFU sur **LAN Sandbox en priorité** (VPS EU en repli). **Dev local** : poste partagé (loopback). **LAN laptop Loïc** : **192.168.1.68** (host-local validé 2026-10-05) ; **multi-machine LAN** (pare-feu) pas encore validé.
+
+| Champ | Valeur |
+| --- | --- |
+| Hôte SFU (LAN IP / VPS EU FQDN) | **dev box** : `127.0.0.1` · **LAN laptop** : `192.168.1.68` (`LAPTOP-BI8P2KF3`, Wi‑Fi) |
+| Région / datacenter VPS | n/a (dev local) |
+| TURN / STUN (coturn, LiveKit TURN, autre) | non testé (dev localhost) |
+| Devices / OS clients | Poste dev partagé (« Grok Bot computer ») — smoke local |
+| Navigateurs (versions) | |
+| Nb machines physiques (≥ 2) | 1 (dev smoke) — **≥2 requis pour protocole 5 pax** |
+| Réseau clients (fibre / Wi‑Fi / VPN) | localhost |
+| Stack | **LiveKit OSS (B)** |
+| Versions serveur + SDK client | `livekit/livekit-server:v1.8.4` ; `livekit-client` (harnais esm) |
+| Ports hôte | TCP **7880**, **7881** ; UDP **50000–50200** (pas de conflit MinIO **9000/9001** sur même machine) |
+| Room par défaut | `s1-lab` |
+| Clés | Placeholders `.env.example` (non prod) |
+| Smoke 2026-10-05 | Token mint + HTTP **200** LiveKit vérifiés |
+| Répertoire sur la box | `/workspace/s1-livekit-oss` (équivalent [`s1-lab/livekit-oss/`](s1-lab/livekit-oss/)) |
+| Date début / fin lab | début dev **2026-10-05** ; fin — |
+
+### LAB LAN LAPTOP (Loïc — 2026-10-05, Europe/Paris)
+
+Hôte verrouillé : **`LAPTOP-BI8P2KF3`**. Déploiement : `C:\Users\azero\s1-livekit-oss`.
+
+| Item | Valeur |
+| --- | --- |
+| IPv4 LAN utilisée | **192.168.1.68** (Wi‑Fi) |
+| Adresses ignorées | 169.254.x (APIPA), **192.168.56.1** (VirtualBox), **172.30.144.1** (WSL/Hyper-V) |
+| LiveKit | Docker `livekit/livekit-server:v1.8.4` — TCP **7880/7881**, UDP **50000–50200** ; config **`rtc.node_ip: 192.168.1.68`** |
+| MinIO (Media) | Déjà sur l’hôte **9000/9001** — LiveKit évite ces ports |
+| Harnais | Conteneur Docker **`s1-harness`** (`node:20-bookworm`), écoute **0.0.0.0:5190** (npm hôte cassé sur la machine) |
+| URLs | Harness `http://192.168.1.68:5190` · SFU `ws://192.168.1.68:7880` · room **`s1-lab`** |
+| Smoke RTC | Harness HTTP **200** ; token mint → `ws://192.168.1.68:7880` + JWT ; LiveKit HTTP **200** ; log serveur **`nodeIP=192.168.1.68`** |
+| Vision (même laptop, synth — pas de caméra) | **Publish PASS** `vision-s3-laptop` / track `vision-s3-synth` ; **pub+sub PASS** `vision-s3-pub` → `vision-s3-sub`, track reçu, **22 frames**, `connection_quality=2` |
+| Inventaire | **MID** (i7 + RTX3070) — **pas** un pass LOW-END i5 |
+| MediaPipe / FPS | **Reporté** jusqu’à caméra réelle |
+| Pare-feu | Chemin **host-local** : pas besoin d’ouvrir le pare-feu Windows (profil Private). **Multi-appareils LAN** : règles Private — TCP **7880/7881/5190** + UDP **50000–50200** (+ Media TCP **9000/9001** MinIO noté) |
+| CORS harnais | DEV : `localhost` + **`192.168.x.x`** — [`server.mjs`](s1-lab/livekit-oss/server.mjs) |
+
+#### Edge `vision-s3` → harness subscribe getStats (laptop loopback, room `s1-lab`)
+
+##### Take 1 (2026-10-05 ~23:05 Europe/Paris)
+
+| Item | Valeur |
+| --- | --- |
+| Publisher | **`vision-s3`** — Loïc a confirmé publish LiveKit sur harness Vision Edge **:8088** |
+| Côté serveur (publish) | **audio/opus** + **video/VP8 1280×720** simulcast LOW/MED/HIGH |
+| Subscriber | Harnais **`mode=none`**, identité **`rtc-sub-getstats`**, Playwright → `http://127.0.0.1:5190` (depuis Docker **`host.docker.internal`**) |
+| Join | Connecté subscribe-only **~2046 ms** |
+| Échantillons | **9** sur **~25 s** (table AC-RTC-002 harnais) |
+| Inbound getStats | Audio **~1 kbps**, loss **0 %**, RTT **~2 ms** ; vidéo **0 bps**, loss **0 %**, RTT **~2 ms**, **320×180** (dynacast LOW), fps **—** |
+| Verdict doc | **Connectivité PASS** ; vidéo active **NOT VALIDATED** — cause racine Take 2 : **onglet Edge en arrière-plan** (pause `rAF` / `captureStream`) |
+
+##### Take 2 (2026-10-05 23:29–23:36 Europe/Paris, Edge tab foreground, matted canvas publish `vision-s3`, room `s1-lab`, laptop loopback)
+
+| Item | Valeur |
+| --- | --- |
+| Publisher | Edge **au premier plan** ; publish matted canvas **`vision-s3`** |
+| Subscriber | Headless Chromium, harnais **`mode=none`** (getStats) |
+| Join | **1872 ms** |
+| Échantillons | **140** (intervalle **3 s**) ; **0** erreurs console ; seuls les **derniers échantillons par piste** conservés — continuité pleine minute **non** prouvée par RTC (enregistrements côté Media) |
+| Inbound getStats | Vidéo **121–178 kbps**, **20 fps**, **320×180** (dynacast LOW), loss **0 %**, RTT **2–3 ms** ; audio **~1 kbps** |
+| Verdict doc | **Vidéo cam/matted active via SFU = PASS** (foreground) ; couche **HD** simulcast et **LAN/WAN** toujours **NOT VALIDATED** |
+
+*(Les mesures multi-pax **loopback** du poste dev restent dans [§ Mesures](#mesures-lab) — couche de validation distincte.)*
+
+---
+
+## Comparatif principal — self-host POC
+
+Comparaison **historique** (pré-vote). **POC retenu : colonne LiveKit OSS (B).**
+
+| Critère | **mediasoup** (self-host) | **LiveKit OSS** (self-host) | **DIY WebRTC** (note) |
+| --- | --- | --- | --- |
+| **DX Node/TS** | Bibliothèque C++/Node ; API rooms/producers/consumers ; courbe d’apprentissage | Stack LiveKit complète ; `livekit-server` + `livekit-client` ; similaire au modèle cloud mais ops à nous | Signalisation + SFU maison — **risque élevé**, effort important |
+| **Déploiement VPS/LAN** | Process Node + workers ; Docker communautaire ; config ports UDP/TCP | Binaire/docker `livekit-server` ; config YAML ; Redis optionnel selon topo | À concevoir entièrement |
+| **TURN / ICE** | Besoin **coturn** (ou équivalent) pour clients derrière NAT ; à documenter en lab | TURN intégré / documenté côté OSS ; même besoin réseau | Idem, sans guide produit |
+| **CPU / bande passante 5×720p** | Charge SFU sur CPU (simulcast/SVC selon config) ; dimensionner VPS — **à mesurer** | Idem ; dépend config room et codecs | Imprévisible |
+| **Diagnostics AC-RTC-002** | `getStats()` WebRTC côté client ; stats mediasoup côté serveur (à brancher UI lab) | `getStats()` + events LiveKit ; proche harnais client existant (archivé SaaS) | Variable |
+| **Recording / egress vs local-first** | Pas d’egress managé ; enregistrement **client** (S4) ; egress serveur = bonus optionnel | Egress OSS possible (composite/track) — traiter comme **bonus**, pas master unique | Dépend implémentation |
+| **Charge ops** | Nous : patch, scale, monitoring, certifs TLS, TURN | Nous : idem + config LiveKit ; docs OSS | Maximale |
+| **Licence** | ISC (mediasoup) | Apache 2.0 (serveur OSS) | N/A |
+| **Données EU** | Trafic sur **notre** VPS EU / LAN — pas de tiers SFU SaaS en POC | Idem | Idem |
+| **Coût POC** | **EST.** coût **VPS €/h** + bande passante (pas de minutes SaaS) — chiffres **non inventés** ici | Idem | Idem |
+| **Risques** | Expertise SFU ; NAT/TURN mal configuré | Complexité déploiement ; dérive vs Cloud si on confond POC et prod | **Hors défaut** — seulement si vote **C** |
+
+**Option DIY** : ligne fine uniquement — à n’envisager que si le salon coche **C** ; sinon hors chemin par défaut.
+
+---
+
+## Protocole de lab — LiveKit OSS uniquement
+
+> Harnais : [`s1-lab/livekit-oss/README.md`](s1-lab/livekit-oss/README.md). **LAN laptop** : **192.168.1.68** (host-local OK) — **multi-device LAN** + pare-feu + **≥2 machines** encore à exécuter.
+
+### Jour 1 — Déploiement minimal
+
+- [ ] `docker compose up` sur hôte **LAN Sandbox** (IP fournie par Loïc)
+- [ ] `.env` : `LIVEKIT_URL` pointe vers `ws://<host>:7880` (host fourni par lead)
+- [ ] `npm run dev` harnais ; 2 navigateurs join (2 machines si possible)
+- [ ] Publier cam/mic 720p ; subscribe croisé
+- [ ] Tableau AC-RTC-002 (`getStats()`)
+
+### Jour 2 — 3 pax + diag
+
+- [ ] 3 pax (France) ≥ 20 min stable
+- [ ] RTT baseline vers hôte SFU
+- [ ] Noter versions `livekit-server` + `livekit-client`
+
+### Jour 3 — 5 pax + dégradation
+
+- [ ] 5 clients, ≥ 2 machines, **France**
+- [ ] Session ≥ 20 min (AC-RTC-001)
+- [ ] Chrome throttling ; option `tc`
+- [ ] Masters locaux intacts (smoke AC-RTC-003)
+
+### Jour 4 — TURN / egress (optionnel)
+
+- [ ] Documenter TURN si requis (clients FR NAT)
+- [ ] Egress OSS composite/track → fichier test ; egress ≠ master unique
+- [ ] CPU / bande passante observée (pas de chiffres inventés)
+
+### Jour 5 — Synthèse
+
+- [ ] Remplir grilles mesures
+- [ ] Documenter TURN si requis une fois IP LAN connue
+
+---
+
+## Mesures (LAB)
+
+### Multi-pax local smoke — PASS connectivité (re-run post-`pickRtpReport`, 2026-10-05 18:40:56–18:41:51 Europe/Paris)
+
+Script : [`s1-lab/livekit-oss/scripts/multi-pax-smoke.mjs`](s1-lab/livekit-oss/scripts/multi-pax-smoke.mjs) · artefacts : `multi-pax-results.md` / `.json`.
+
+| Fait mesuré | Valeur |
+| --- | --- |
+| Hôte | **localhost** (`127.0.0.1`) — dev box, pas LAN Sandbox |
+| Room | `s1-lab` (clean — **4** remotes script / client) |
+| Clients script | **5/5** connectés (mode **canvas**, ~**1,4–1,5 s** join) |
+| Durée hold | **50 s** (pas 20 min AC-RTC-001) |
+| Verdict doc | **PASS** critères **connectivité** uniquement (pas de seuils perf inventés) |
+
+**Outbound video `getStats` (harnais, n=48)** : bitrate **73 / 115 / 2410** kbps min/med/max — fix **`pickRtpReport`** validé (plus bloqué à 0 bps).
+
+**Inbound video `getStats` (agrégat, 200 lignes)** : bitrate **73 / 112 / 164** kbps min/med/max ; loss **0 %** ; jitter **0 / 0 / 9** ms ; FPS **14 / 15 / 16** ; résolution **320×180**.
+
+**RTT** (harnais, ICE loopback) : **0–3 ms** — localhost uniquement, pas WAN France.
+
+**Caveats** : vidéo **canvas synthétique ~15 fps**, **pas d’audio** ; **une** machine, Chrome headless ; **pas** LAN / **pas** 5 vraies caméras.
+
+### Stabilité
+
+| Run | Stack | Hôte (LAN/VPS EU) | Pax | Durée | A/V OK ? | Décos | Notes |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| multi-pax-smoke 2026-10-05 (re-run 18:40) | LiveKit OSS | localhost dev | 5 script | 50 s | connectivité OK | 0 | voir ci-dessus ; AC-RTC-001 20 min **non** exécuté |
+| | | | | | | | |
+
+### Diagnostics AC-RTC-002
+
+| Stack | Pax | Bitrate ↓/↑ | Packet loss % | Jitter | RTT | Résolution | FPS | Source |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| LiveKit OSS | 5 local smoke | ↓ 73–164 / ↑ 73–2410 kbps (in/out vid.) | 0 % (in) | 0–9 ms (in) | 0–3 ms loopback | 320×180 (in) | ~15 (in/out) | harness `getStats` + script |
+| | | | | | | | | |
+
+### Dégradation réseau
+
+| Condition | Stack | Effet live | Masters locaux intacts ? | Notes |
+| --- | --- | --- | --- | --- |
+| Throttle Chrome | | | | |
+| tc / loss simulé | | | | |
+
+### Coût infra (EST. / observé — VPS uniquement)
+
+| Stack | VPS spec | €/h EST. | € observés session | Notes |
+| --- | --- | --- | --- | --- |
+| | | | | |
+
+---
+
+## Pass / Fail
+
+**Verdict consolidé (draft)** : [`S1-verdict.md`](S1-verdict.md) — **connectivity POC PASS** ; prod / WAN / LAN / 20 min / real A/V **INCOMPLETE ou NOT VALIDATED** ; coût **N/A**.
+
+### Pass (techniques uniquement)
+
+- [ ] 5 pax A/V stables ≥ 20 min (AC-RTC-001)
+- [x] AC-RTC-002 exposé (6 métriques) — **harnais local** ; WAN **non**
+- [ ] Compatible local-first (egress serveur = bonus) — **non testé** en lab S1
+
+### Fail
+
+- [ ] Instabilité > 3 pax non résolue
+- [ ] Incompatible local-first
+
+### Coût / plafond SFU €/h
+
+| Périmètre | Décision (Loïc via lead, **2026-10-05**) |
+| --- | --- |
+| **POC self-host (S1 lab)** | Plafond SFU **€/h = N/A** — **aucun pass/fail coût** ; ne pas bloquer multi-pax / AC-RTC-002 sur un seuil €/h |
+| **Cloud managé (post-POC)** | Plafond €/h **reporté** — à traiter si / quand hypothèse D-04 cloud est réévaluée |
+| **Mesures** | Tableaux coût infra : **vides** tant qu’aucun chiffre observé (ne pas inventer) |
+
+---
+
+## Décision
+
+- **Stack POC (locked)** : **B — LiveKit OSS self-host** (2026-10-05, lead / Loïc).
+- **Non retenus POC** : A mediasoup, C DIY, D cloud managé (hors POC actuel ; OK Loïc explicite pour SaaS).
+- **Infra** : **LAN Sandbox first** — laptop **`192.168.1.68`** (2026-10-05) ; VPS EU si besoin plus tard.
+- **D-04 produit** : cloud public managé = hypothèse **post-POC** ; override POC = [`S1-D04-POC-override.md`](S1-D04-POC-override.md).
+
+---
+
+## Blockers
+
+| ID | Blocker | Owner | Statut |
+| --- | --- | --- | --- |
+| B1 | Vote stack POC | — | **Fermé** — **B LiveKit OSS** |
+| B2 | **LAN multi-device** + pare-feu + lab **multi-pax France** (≥2 machines) | Loïc | **Partiel** — hôte **192.168.1.68** host-local **PASS** ; peers LAN + SSH **ouverts** |
+| B3 | Go formel post-S0 ([PR #5](https://github.com/Sandbox-podcast/Podcast-Studio/pull/5)) pour enchaînement produit | Lead | Ouvert (parallèle prep OK) |
+| B4 | ~~SFU SaaS free tier~~ | — | **Annulé** — SaaS stop per Loïc |
+| B5 | Plafond **€/h** SFU (gate lab) | Loïc | **Fermé** — **N/A POC self-host** ; cloud €/h plus tard |
+
+---
+
+## Plan phasé
+
+```text
+┌─────────────────────────────────────────────────────────────┐
+│ PIVOT (actuel)                                              │
+│  ✓ Stop SaaS SFU (pas de clés / runs cloud)                 │
+│  ✓ Doc self-host + D-04 override POC only                   │
+│  ✓ Vote B — LiveKit OSS                                     │
+└───────────────────────────┬─────────────────────────────────┘
+                            │ LAB GO (LAN first; IP TBD)
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│ LAB LiveKit OSS (livekit-oss/, participants FR)             │
+│  5 pax · ≥20 min · throttling · grilles mesures             │
+└───────────────────────────┬─────────────────────────────────┘
+                            │ post-POC produit (hors ce spike)
+                            ▼
+┌─────────────────────────────────────────────────────────────┐
+│ Produit : hypothèse D-04 cloud public sauf nouvel OK Loïc   │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Suite
+
+| Étape | Action |
+| --- | --- |
+| Maintenant | Lead + salon : QCM self-host ; ping avec PR #3 |
+| Après vote | Déployer stack choisie sur VPS/LAN ; exécuter protocole lab |
+| Post-POC | ADR / D-04 : cloud managé reste hypothèse produit sauf amendement Loïc |
+
+---
+
+
+
+---
+
+## Take 2 correction + Take 4 (2026-10-06, Europe/Paris) — WIP
+
+### Take 2 correction (Media RUN2)
+
+Media remux of take 2 **matted** WebM showed **S3 synthetic smoke** (“no camera”), not MediaPipe detourage. The LiveKit publish measured in Take 2 getStats was therefore the **same smoke canvas**.
+
+| Claim | Corrected |
+| --- | --- |
+| SFU forwards video (bitrate/fps > 0, loss ~0, loopback) | **PASS** (transport) |
+| Content = real matted camera | **NOT VALIDATED** (smoke) |
+
+### Take 4 — matted content through SFU
+
+| Item | Value |
+| --- | --- |
+| When | ~**00:47** Paris · harness `?v=s4-matfix7` · Edge foreground · publisher **`vision-s3`** · room **`s1-lab`** |
+| Subscriber | **`rtc-sub-take4`** · harness `mode=none` · join **1589 ms** · **594** samples @ 3 s · JSON written **01:13:41** |
+| Screenshots | `sub-shot-66..116` (**00:47:00–00:49:32**) — matted silhouette on dark green (live, not freeze-frame) |
+| Active numeric window | **00:46:53–00:48:28**: video **94 / 155 / 196** kbps · fps **12 / 14 / 20** · **320×180** LOW · **0** zero-kbps · loss **0 %** · RTT **~3 ms** |
+| Audio (last_rows) | inbound audio track **~2 kbps**, loss **0 %** (series is video-only) |
+| After 00:48:31 | table bitrate often dash — kbps **NOT VALIDATED** from table; screenshots still change until 00:49:32 |
+| Verdict | **content PASS** through SFU on **loopback**, **LOW** layer only · **HD** **NOT VALIDATED** on this sub |
+
+Artifacts: laptop `C:\Users\azero\s1-livekit-oss\scripts\cam-sub-getstats.json`, `take4-window-stats-refined.json`; box `/workspace/s1-soak/`.
+
+### Overnight soak 30 min — FINAL (loopback)
+
+| Item | Value |
+| --- | --- |
+| Window | **2026-10-06T01:14:11 → 01:44:34** Paris (HOLD 1800 s) |
+| Room | **`s1-soak`** (isolated from `vision-s3`) |
+| Load | **5** file pubs + **1** sub · sample **10 s** · all joins OK (1.6–3.5 s) |
+| Source | take4 raw → Y4M/WAV; harness **`file`** CaptureStream (gum blocked on non-secure `host.docker.internal`) |
+| Subscriber inbound | video samples **880** · res seen: 160×90 … **1280×720** · HD samples **3** (fps **8**) · mid **106** · low **595** · packetsLost last **0** |
+| **HD verdict** | **NOT VALIDATED** — **environment limit**, not product FAIL: 5 publish+subscribe on **one** laptop; LiveKit container CPU med **~25.3%** (min 1.8 / max 35.4, n=31) |
+| Connectivity | **PASS** 6/6 for full 30 min |
+| Caveat | **Single-machine loopback** — not LAN/WAN |
+
+#### Publisher outbound `qualityLimitationReason` (verbatim)
+
+**Capture limits (honest):**
+
+- `qualityLimitationDurations` → **NOT CAPTURED** (`soak-5pax-hd.mjs` never read that field).
+- Full 30 min per-sample per-rid raw series → **NOT CAPTURED** (only `samples-tail` last **5** samples/actor + final `publishers_outbound_last` snapshot).
+- CSV `out_qlr` / `out_res` / `out_fps` = **one “best” outbound row per publisher sample** (not full simulcast rid set).
+
+**CSV distribution (publisher rows, n=880 `out_qlr` non-empty):**
+
+| reason | count |
+| --- | --- |
+| **cpu** | **487** |
+| **none** | **362** |
+| **bandwidth** | **31** |
+
+**samples-tail** (t_s 1771–1811 only, last ~40 s): qlr **cpu 45 / none 30** (stable 9 cpu + 6 none per tick across 5 pubs × 3 layers).
+
+**Last snapshot per rid (sent dims/fps when present):**
+
+| pub | rid q | rid h | rid f | qlr |
+| --- | --- | --- | --- | --- |
+| soak-pub-1 | 240×135 @18 | 480×270 @18 | 960×540 @21 | all **cpu** |
+| soak-pub-2 | 160×90 @30 | 320×180 @30 | (wh/fps null, bytes>0) | all **cpu** |
+| soak-pub-3 | 160×90 @30 | 320×180 @30 | (wh/fps null) | all **cpu** |
+| soak-pub-4 | 320×180 @20 active | inactive | inactive | **none** |
+| soak-pub-5 | 320×180 @21 active | inactive | inactive | **none** |
+
+**Per-rid from samples-tail only** (min/med/max):
+
+| rid | width | height | fps | qlr mix |
+| --- | --- | --- | --- | --- |
+| q | 160 / 240 / 320 | 90 / 135 / 180 | 16 / 21 / 31 | cpu 15 / none 10 |
+| h | 320 / 320 / 480 | 180 / 180 / 270 | 17 / 30 / 31 | cpu 15 / none 10 |
+| f | 960 / 960 / 960 (n=5 with dims) | 540 / 540 / 540 | 21 / 25 / 30 | cpu 15 / none 10 |
+
+CSV “best layer” when labeled **1280×720**: n=11, fps **6 / 9 / 21**, qlr mostly **none** (10) + bandwidth (1) — rare; top sustained pub encode in tail was **960×540** under **cpu** limit.
+
+**Lead implication:** because QLR is dominated by **`cpu`**, real HD validation moves to a **multi-machine LAN** test after Loïc’s firewall OK — not another single-host soak (Vision holds the 3070).
+
+Artifact: laptop `scripts/soak-20261006-011411/QLR-ANALYSIS.json` · box `/workspace/s1-soak/docs/QLR-ANALYSIS.json`.
+
+### Audio speech soak 5 min — FINAL (take4 WAV)
+
+| Item | Value |
+| --- | --- |
+| Window | **01:45:08 → 01:50:19** Paris · room **`s1-soak-audio`** · **3** pubs + 1 sub |
+| Audio source | `/media/take4-20s.wav` (from take4 raw Opus) via harness file audio `captureStream`; Chrome `--use-file-for-fake-audio-capture` also set (unused for file mode) |
+| Inbound audio | **177** samples · **3** SSRCs · loss **0%** · jitter **2–13 ms** (med **6**) · audioLevel med **0.066** max **1.0** · totalAudioEnergy **0.13 → 7.35** (grew) · concealedSamples last **1440** / events **1** |
+| Bitrate kbps | **NOT VALIDATED** (NaN delta bug) — tracked in [#7](https://github.com/Sandbox-podcast/Podcast-Studio/issues/7) — do not invent / do not fix yet |
+| Speech verdict | **PASS** (energy + audioLevel proof of real speech on all 3 remotes) |
+| Video note (same run) | HD **23** samples, fps **14/22/30** — better than 5-pax 30 min |
+
+
+### Laptop A/B ± HQ rec — protocol (instrumentation ready, **NOT RUN**)
+
+> Tracked in [#9](https://github.com/Sandbox-podcast/Podcast-Studio/issues/9). **Measurement only — no product decision.** Do **not** run while Vision holds the 3070 (wrapper refuses without `-VisionFreeConfirmed`; runner refuses without `AB_GO=1`).
+
+| Item | Setup |
+| --- | --- |
+| Topology | Laptop only: **1** publisher (Edge, `http://localhost:5190/ab/index.html` = secure context) + **2** subscribers in a **separate** Edge instance (`ab-sub-hi` pinned HIGH, `ab-sub-lo` pinned LOW, `adaptive=0`) |
+| Sources | pass 1 **real camera** (`getUserMedia` 720p) · pass 2 **take4 raw** file loop (`/media/take4-raw.webm` + take4 WAV) as reference |
+| Simulcast | `?layers=3` → `[h180, h360]` + source (rids q/h/f; = livekit-client 720p default) · `?layers=2` → `[h180]` + source (rids **q/h**, `h` = top) |
+| HQ rec | **Media's `S4Recorder`** in the **publisher tab** on the **same published MediaStream** (`window.__publishedStream`): ON = `startSession({stream, label:'raw', participant:<cond>, apiBase:'http://127.0.0.1:3320', durationSec:120, timeslice:1000, vBitrate:2500000})`, end = `stopAll()` + `exportResults()`; OFF = never call `startSession`. Preflight `GET :3320/api/health`; on failure the ON conditions are **SKIPPED** and reported — Media's process is never restarted |
+| Matrix (default 5, lead order) | `ab-file-3L-off` → `ab-file-3L-on` → `ab-file-2L-off` → `ab-file-2L-on` → `ab-cam-3L-on` (`CONDS=full8` for all 8) · warmup **20 s** · window **120 s** (= rec window) · sample **2 s** · ~**3 min**/cond |
+| Received-track rec | `ab-sub-hi` (HD-pinned) records the **received** video track with MediaRecorder (VP8 2.5 Mbps, 1 s timeslice) over the same 120 s window → `<cond>-sub-hi-rx.webm` (Playwright download) → copy to box → `python3 /workspace/podcast-studio/tools/distinct_fps.py --threshold 0.5 --json-out r.json <file>`. Caveat: this encode runs in the sub Edge on the same laptop (same for every condition) |
+| Logged | per-rid outbound series (w/h/fps/bytes/active/**qualityLimitationReason + qualityLimitationDurations** / resolutionChanges / **encoderImplementation** / powerEfficientEncoder / scalabilityMode / targetBitrate) · subscriber inbound series (w/h/fps/bytes/loss/jitter/freeze) · **browser CPU** (pub vs sub Edge instance, by `--user-data-dir` marker; + total CPU + GPU VideoEncode %) · **precise Paris start/end** per condition (`AB-TIMESTAMPS.md`) |
+| Gotcha | Chromium hides `encoderImplementation` unless the page captures → file pass holds a **disabled, unpublished** mic track (`?unlockStats=1`, `UNLOCK_FILE=1` default) |
+
+Run (after lead go): stage `scripts/ab/*` + `public/harness.js` + `public/index.html` into `C:\Users\azero\s1-livekit-oss\scripts\ab\`, then
+`powershell -File scripts\ab\run-ab-laptop.ps1 -VisionFreeConfirmed [-Conds ab-cam-3L-off,ab-cam-3L-on]`. The wrapper deploys to `public\ab\` (root harness used by Vision untouched).
+
+**Box dry run** (02:03–02:06 Paris, isolated box LiveKit 1.8.4 on alt ports, Chromium fake devices, **mock** S4 server — wiring only, numbers not meaningful): 3L → rids q/h/f 320×180 / 640×360 / 1280×720; 2L → q/h 320×180 / 1280×720; `qualityLimitationDurations` deltas + `encoderImplementation` captured (`SimulcastEncoderAdapter (libvpx…)`); sub-hi 1280×720 / sub-lo 320×180 pins hold; S4 hook start/stop/export OK on cam and file streams; S4-down → ON conds SKIPPED. Laptop results: see **RESULTS** below.
+
+### Laptop A/B ± HQ rec — RESULTS (02:39–02:53 Paris, loopback, n=1 per condition)
+
+> **Measurement only — no product decision.** Laptop-only (1 pub + 2 subs on one machine), take4 raw file loop (60 s, looped ×2 per window) as reference source. Data: [`s1-lab/livekit-oss/scripts/ab/results-20261006-0239/`](s1-lab/livekit-oss/scripts/ab/results-20261006-0239/) (raw CSVs authoritative; `AB-ANALYSIS.json` via `analyze-ab.py`). Webm on box `/workspace/s1-soak/ab/run-003936/`. Pre-run `nvidia-smi`: no python/onnx compute process.
+
+**Timestamps (Paris, for Media/QLR alignment)**
+
+| cond | window start | window end | S4 rec start | S4 rec stop | S4 result key |
+| --- | --- | --- | --- | --- | --- |
+| ab-file-3L-off | 02:40:05.320 | 02:42:07.626 | — | — | OFF |
+| ab-file-3L-on | 02:42:47.024 | 02:44:47.853 | 02:42:47.326 | 02:44:47.848 | `spike/s4-dropin/ab-file-3L-on-raw-1791247367212.results.json` |
+| ab-file-2L-off | 02:45:27.797 | 02:47:30.350 | — | — | OFF |
+| ab-file-2L-on | 02:48:09.758 | 02:50:10.958 | 02:48:09.993 | 02:50:10.951 | `spike/s4-dropin/ab-file-2L-on-raw-1791247689896.results.json` |
+| ab-cam-3L-on | 02:50:49.757 | 02:52:50.636 | — (start failed) | — | **NOT RUN** — see below |
+
+**Per condition** (HD = top rid: `f` for 3L, `h` for 2L; medians over the 120 s window, 2 s samples)
+
+| cond | HD sent res @fps (samples w/ dims) | QLR share (HD rid samples) | `qualityLimitationDurations` Δ s | encoderImplementation | pub Edge CPU % machine med (max) | sub-hi received res @fps | distinct fps near · 1 s windows ≥24 · longest near-dup |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| file-3L-off | 960×540 @30 (60/60) | cpu 0.90 · none 0.10 | cpu 109.4 · none 10.4 · bw 0 | SimulcastEncoderAdapter (libvpx ×3) | 18.6 (23.0) | 960×540 @30 · freeze Δ0 | **25.95** · **1.00** · 283 ms |
+| file-3L-on | 960×540 @22 (**18/59** — `f` mostly not producing) | cpu 0.90 · none 0.10 | cpu 107.2 · none 10.8 · bw 0 | SEA (libvpx ×3) + libvpx | 20.0 (32.8) | **320×180** @30 · freeze Δ1 | **23.00** · **0.82** · 805 ms |
+| file-2L-off | **1280×720 @30** (60/60) | **none 1.00** | none 119.9 · cpu 0 · bw 0 | SEA (libvpx ×2) | 15.9 (22.0) | **1280×720 @30** · freeze Δ1 | **26.26** · **0.975** · 341 ms |
+| file-2L-on | 960×540 @30 (59/59) | cpu 0.93 · none 0.07 | cpu 110.5 · none 7.8 · bw 0 | SEA (libvpx ×2) | 24.6 (31.2) | 960×540 @29 · freeze Δ0 | **25.28** · **0.984** · 651 ms |
+
+Reference: source `take4-raw.webm` itself = distinct near **29.84**, windows ≥24 **1.00**. Total laptop CPU med: 51 / 55 / 51 / 62.5 %. GPU VideoEncode engine: **0 %** in all conditions (VP8 encode is software libvpx; observation only).
+
+**Rec ON vs OFF (same layers)**
+
+| | 3L | 2L |
+| --- | --- | --- |
+| HD sent | 960×540@30 → 960×540@22, `f` active in only 31 % of samples | 1280×720@30 → 960×540@30 |
+| QLR | cpu-limited in both (≈0.9) | **none 1.00 → cpu 0.93** |
+| pub Edge CPU (machine %) | +1.4 pt med (+9.8 max) | +8.7 pt med (+9.2 max) |
+| sub-hi received | 960×540 → **320×180** | 1280×720 → 960×540 |
+| distinct near / ≥24 share | 25.95 / 1.00 → **23.00 / 0.82** | 26.26 / 0.975 → 25.28 / 0.984 |
+
+**Reading (no decision):** on this single laptop, 2 layers without local HQ rec is the only condition where the HD layer was sent at 1280×720@30 with no quality limit. Local HQ rec (S4Recorder, VP8 2.5 Mbps software encode in the publisher tab) pushes the encoder into `cpu` limitation in both layer configurations. With 3L + rec, the HD subscriber fell back to the low layer for most of the window (distinct ≥24 share 0.82).
+
+**ab-cam-3L-on — NOT RUN (blocker):** `getUserMedia` → `NotReadableError: Could not start video source`. Windows reports the webcam (Microsoft LifeCam Cinema) **in use by `msedge.exe`** (the user's own Edge, not the A/B instance). Nothing was killed. The runner wrongly marked it DONE (status "connected" is set before publish). Fixed afterwards: a condition now FAILs when the publisher has no published video. gUM+rec coexistence: **NOT VALIDATED**.
+
+**Distinct fps, corrected (native per-frame-size decode, `scripts/ab/distinct_fps_varsize.py`, threshold 0.5)**
+
+| cond | tool near | **native near** | ≥24 share: exact = frames delivered/s (tool) | **≥24 share, near-distinct** | longest near-dup (native) |
+| --- | --- | --- | --- | --- | --- |
+| file-3L-off | 25.95 | **26.09** | 1.00 | **0.85** | 8 f |
+| file-3L-on | 23.00 | **23.31** | 0.82 | **0.60** | 23 f |
+| file-2L-off | 26.26 | **26.26** | 0.975 | **0.88** | 12 f |
+| file-2L-on | 25.28 | **25.48** | 0.984 | **0.84** | 20 f |
+
+The ON vs OFF direction is unchanged. The near-distinct ≥24 share is the stricter reading. Near-dup MAD depends on the received resolution: downscaling everything to 320×180 lowers every value (see `varsize-all.json`), so cross-resolution comparisons stay approximate.
+
+**Caveats:** n=1 × 120 s per condition. Everything on one laptop (loopback, not LAN). The sub-hi received-track MediaRecorder runs in the sub Edge in every condition. The received-track webm **changes resolution mid-stream** whenever the SFU switches layers (ffprobe: 3L-off 1280×720→960×540 at ~12 s · 3L-on 1280×720→960×540 at ~13 s→**320×180 from ~39 s to the end** · 2L-off constant 1280×720 · 2L-on 1280×720→960×540 at ~10 s). An earlier version of this caveat wrongly said it was a constant 1280×720 upscale. `distinct_fps.py` lets ffmpeg autoscale every frame to the first frame's size before the MAD diff, so near-dup values are slightly biased. Its 1 s windows use exact hashes, so they count frames delivered per second. See [#10](https://github.com/Sandbox-podcast/Podcast-Studio/issues/10) and the corrected table below. Source loops at 60 s inside each window. Two earlier attempts (02:23, 02:33) died after cond 1 (wrapper `ErrorActionPreference=Stop` killed node on a benign stderr line; Playwright `TargetClosedError` on close) and are excluded.
+
+### Laptop A/B ± HQ rec — H.264 publisher (03:07–03:18 Paris, loopback, n=1 per condition)
+
+> **Measurement only — no product decision.** Same matrix and timings as the VP8 run (file conditions only, 20 s warm-up, 120 s window, 2 s sampling). Publisher `videoCodec: 'h264'` (`CODEC=h264`, VP8 stays the default). Media's S4Recorder unchanged (VP8 WebM 2.5 Mbps, 1 s timeslice). Data: [`scripts/ab/results-20261006-0307-h264/`](s1-lab/livekit-oss/scripts/ab/results-20261006-0307-h264/). Webm on box `/workspace/s1-soak/ab/run-010706-h264/`. Pre-run `nvidia-smi`: GPU 0 %, encoder 0 %.
+
+**Encoder:** Edge uses **OpenH264 (software)** on every layer: `SimulcastEncoderAdapter (OpenH264, OpenH264[, OpenH264])`. **No hardware encoder:** no MediaFoundation/NVENC implementation was reported, `nvidia-smi utilization.encoder` = **0 %** (max 0) in every 2 s sample of all 4 conditions, and the Windows GPU VideoEncode engine = 0 %.
+
+**Timestamps (Paris)**
+
+| cond | window start | window end | S4 rec start | S4 rec stop | S4 result key |
+| --- | --- | --- | --- | --- | --- |
+| ab-file-3L-off-h264 | 03:07:37.434 | 03:09:39.812 | — | — | OFF |
+| ab-file-3L-on-h264 | 03:10:20.209 | 03:12:21.129 | 03:10:20.501 | 03:12:21.124 | `spike/s4-dropin/ab-file-3L-on-h264-raw-1791249020406.results.json` |
+| ab-file-2L-off-h264 | 03:13:02.602 | 03:15:05.126 | — | — | OFF |
+| ab-file-2L-on-h264 | 03:15:46.058 | 03:17:47.609 | 03:15:46.311 | 03:17:47.594 | `spike/s4-dropin/ab-file-2L-on-h264-raw-1791249346198.results.json` |
+
+**Per condition** (distinct fps from the native per-frame-size decode, see #10; the Media tool's value is in brackets)
+
+| cond | HD sent res @fps (samples w/ dims) | QLR share (HD rid) | `qualityLimitationDurations` Δ s | pub Edge CPU % machine med (max) | sub-hi received | distinct near [tool] · ≥24 near · ≥24 exact |
+| --- | --- | --- | --- | --- | --- | --- |
+| 3L-off | 960×540 @29 (37/60) | cpu 0.67 · bw 0.17 · none 0.17 | cpu 79.8 · bw 20.0 · none 20.1 | 13.1 (18.4) | 640×360 @28 · freeze Δ2 | 20.92 [20.57] · 0.47 · 0.61 |
+| 3L-on | 960×540 @24 (17/59) | cpu 0.93 · none 0.07 | cpu 110.1 · none 7.9 | 18.0 (29.5) | 320×180 @30 · freeze Δ1 | 20.17 [19.67] · 0.36 · 0.84 |
+| 2L-off | **1280×720 @30** (60/60) | **none 1.00** | none 120.0 | 12.4 (17.8) | **1280×720 @30** · freeze Δ0 | **26.93** [26.93] · **0.96** · 1.00 |
+| 2L-on | 960×540 @30 (59/59) | cpu 0.90 · none 0.10 | cpu 107.0 · none 11.7 | 24.8 (31.8) | 960×540 @30 · freeze Δ0 | 24.91 [24.62] · 0.78 · 0.99 |
+
+3L-off-h264 was unstable. The encoder was reconfigured during the window (plain `OpenH264`, SEA ×2 and SEA ×3 all appear), `bandwidth` limitation showed up early, and the received webm has **7** resolution segments (640×360 → 1280×720 → 960×540 → 320×180 → 480×270 → 960×540 → 320×180).
+
+**VP8 vs H.264 (same conditions; VP8 values from the 02:39 run, native distinct)**
+
+| cond | pub CPU med VP8 → H.264 | HD sent VP8 → H.264 | QLR (HD rid) VP8 → H.264 | sub-hi rx VP8 → H.264 | distinct near · ≥24 near, VP8 → H.264 |
+| --- | --- | --- | --- | --- | --- |
+| 3L-off | 18.6 → 13.1 | 960×540@30 → 960×540@29 (top layer 37/60 samples) | cpu .90 → cpu .67 / bw .17 | 960×540 → 640×360 | 26.09 · 0.85 → 20.92 · 0.47 |
+| 3L-on | 20.0 → 18.0 | 960×540@22 (18/59) → @24 (17/59) | cpu .90 → cpu .93 | 320×180 → 320×180 | 23.31 · 0.60 → 20.17 · 0.36 |
+| 2L-off | 15.9 → 12.4 | 1280×720@30 → 1280×720@30 | none 1.0 → none 1.0 | 1280×720 → 1280×720 | 26.26 · 0.88 → 26.93 · 0.96 |
+| 2L-on | 24.6 → 24.8 | 960×540@30 → 960×540@30 | cpu .93 → cpu .90 | 960×540 → 960×540 | 25.48 · 0.84 → 24.91 · 0.78 |
+
+**Reading (no decision):** H.264 here means OpenH264 software, so there is no GPU offload. The publisher Edge used about 3–5 pt less CPU without rec. With rec ON, CPU is about the same and `cpu` limitation dominates for both codecs, so the HQ rec effect is unchanged. 2 layers without rec is again the only clean 1280×720@30 condition (both codecs). With 3 layers, H.264 delivered fewer distinct frames than VP8 in this n=1 run.
+
+**Caveats:** n=1 × 120 s per condition, loopback on one laptop, take4 file loop. The VP8 and H.264 runs are about 25 min apart (thermal/background state not controlled). The received-track recorder is VP8 in the sub Edge (it re-encodes the decoded H.264). Near-dup MAD depends on the received resolution, so 3L rows (mostly ≤960×540 or 320×180) are not directly comparable with 2L rows.
+
+## Annexe — desk SaaS (superseded)
+
+> **Statut : superseded** — recherche desk 2026-10-05 sur LiveKit Cloud, Daily, Agora. Le POC SaaS (free tier) est **abandonné** ; conservé comme contexte historique uniquement. **Ne pas** créer de comptes ni exécuter [`s1-lab/livekit/`](s1-lab/livekit/) (Cloud), [`daily/`](s1-lab/daily/), [`agora/`](s1-lab/agora/) contre les vendeurs.
+
+Résumé archivé :
+
+- Comparatif pricing participant-minute et free tiers (Build / 10k min) — voir commit git antérieur ou PR #3 historique.
+- AC-RTC-002 : Daily `getNetworkStats` proche ; LiveKit/Agora via getStats + SDK.
+- **Aucune** de ces options n’est le chemin POC actuel.
+
+Harnais navigateur SaaS : **gelés** sous `spikes/s1-lab/` — voir [`s1-lab/README.md`](s1-lab/README.md).
+
+### RESULTS — ping-pong source + régie floor (laptop, 2026-10-06 03:58–04:08 Paris)
+
+Measurements only, no verdict. n=1, loopback on one laptop, VP8. Raw data: `spikes/s1-lab/livekit-oss/scripts/ab/results-20261006-0359-pp/` and `…/results-20261006-0404-regie/`.
+
+**Source.** `take4-pingpong.webm` = forward + reversed + forward, 179.8 s, 5394 frames, VP8 1280×720 at 30 fps. There is no loop seam inside a 120 s window. Source ceiling (Media v2 `distinct_fps.py` @ac839af, native size):
+
+| threshold | near fps | 1 s windows ≥24 | p5 | windows <24 | longest near-dup | freezes >200 ms |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0.5 | 28.565 | 0.9889 | 26 | 2/180 | 9 f / 266 ms | 1 (300 ms) |
+| 0.3 | 28.738 | 0.9944 | 27 | 1/180 | 6 f / 167 ms | 1 (200 ms) |
+
+**Timestamps (Paris)**
+
+| cond | window start | window end | Media rec | S4 results key |
+| --- | --- | --- | --- | --- |
+| ab-file-2L-off-pp | 03:59:43.945 | 04:01:44.646 | — (OFF) | — |
+| ab-file-2L-on-pp | 04:02:27.353 | 04:04:30.787 | 04:02:27.758 → 04:04:30.780, stopped+exported | `spike/s4-dropin/ab-file-2L-on-pp-raw-1791252147566.results.json` |
+| regie-5pub-2L-vp8 | 04:05:38.037 | 04:07:40.001 | — (no Media rec) | — |
+
+The first régie attempt (03:58:39 → 03:59:03) failed with "rg-pub-4 has no published video" because the publish check only waited 2 s. Fix `db2f373` gives each publisher up to 45 s. The run above is the rerun.
+
+**PP A/B (2L, file publisher → sub-hi received-track webm)**
+
+| cond | HD rid (h) med | QLR durations (s) | pub tree CPU % machine med (1-core) | total CPU med | sub-hi rx (webm frames) |
+| --- | --- | --- | --- | --- | --- |
+| 2L-off-pp | 1280×720 @30 · 1688 kbps | none 118.1 | 14.7 (117.7) | 48 | 1280×720 × 3562 f |
+| 2L-on-pp | 640×360 @30 · 1682 kbps | cpu 108.1 · none 10.5 | 22.8 (182.4) | 62 | 1280×720 340 f → 960×540 709 f → 640×360 2490 f |
+
+Distinct fps on the received webm, native size. v2 = Media's tool. varsize = `distinct_fps_varsize.py`. Freezes = gaps >200 ms between near-distinct frames (from the v2 pairs).
+
+| cond | thr | v2 near fps | v2 ≥24 | v2 p5 | v2 windows <24 | v2 longest near-dup | varsize ≥24 (near / exact) | freezes >200 ms |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2L-off-pp | 0.5 | 26.489 | 0.8678 | 14 | 16/121 | 9 f / 265 ms | 0.8678 / 0.9752 | 3 (764 ms total, max 299) |
+| 2L-off-pp | 0.3 | 28.662 | 0.9752 | 25 | 3/121 | 7 f / 199 ms | 0.9752 / 0.9752 | 1 (232 ms) |
+| 2L-on-pp | 0.5 | 27.089 | 0.8361 | 15 | 20/122 | 12 f / 398 ms | 0.8361 / 0.9508 | 1 (432 ms) |
+| 2L-on-pp | 0.3 | 28.914 | 0.9262 | 23 | 9/122 | 3 f / 67 ms | 0.9262 / 0.9508 | 0 |
+| *source* | 0.5 / 0.3 | 28.565 / 28.738 | 0.9889 / 0.9944 | 26 / 27 | 2/180 · 1/180 | 9 f · 6 f | — | 1 · 1 |
+
+2L-on-pp is 70 % 640×360 frames. Near-dup MAD depends on resolution, so its near-dup values are not directly comparable with 2L-off-pp (constant 720p) or the source. Exact-hash minimum window: off 3 fps, on 1 fps.
+
+**Régie floor (5 file publishers, 2L VP8, in one test Edge + régie subscriber in a separate test Edge, adaptive=0, pinned HIGH, 120 s)**
+
+Received by the régie (medians over 2 s samples; deltas over the window):
+
+| track | res med | fps med | framesDecoded Δ | decode ms/frame | decoder | freezes Δ (s) | keyframes Δ | kbps |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| rg-pub-1 | 240×135 | 13 | 1556 | 0.65 | libvpx | 9 (3.64) | 197 | 121 |
+| rg-pub-2 | 160×90 | 15 | 1588 | 0.44 | libvpx | 8 (3.55) | 199 | 105 |
+| rg-pub-3 | 320×180 | 12 | 1279 | 0.91 | libvpx | 21 (9.36) | 198 | 106 |
+| rg-pub-4 | 240×135 | 13 | 1547 | 0.63 | libvpx | 9 (3.35) | 198 | 114 |
+| rg-pub-5 | 240×135 | 13 | 1488 | 0.69 | libvpx | 17 (7.39) | 198 | 106 |
+
+`powerEfficientDecoder=false` on every track. No 720p frame reached the régie (`share_720p` = 0 on all tracks). packetsLost Δ = 0.
+
+**Publisher side.** The HD layer did NOT reach 720p.
+
+| pub | h layer | q layer | QLR durations (s) |
+| --- | --- | --- | --- |
+| rg-pub-1 | no frames (0 kbps) | 240×135 @13, 121 kbps | bandwidth 119.7 |
+| rg-pub-2 | 640×360 in 13/50 samples @1, 37 kbps | 160×90 mostly, 103 kbps | bandwidth 94.6 · cpu 25.0 |
+| rg-pub-3 | no frames (0 kbps) | 320×180 @12, 121 kbps | bandwidth 119.6 |
+| rg-pub-4 | no frames (0 kbps) | 240×135 @13, 114 kbps | bandwidth 119.5 |
+| rg-pub-5 | 960×540 in 4/50 samples @3, 7 kbps | 240×135 / 320×180, 109 kbps | bandwidth 114.1 · cpu 5.4 |
+
+The dominant limitation was **bandwidth** (not cpu): about 110–120 kbps per publisher, about 0.6 Mbps total. Each régie track also received about 1.65 keyframes/s. The cause was not investigated in this run (NOT VALIDATED: per-pub BWE vs SFU allocation vs PLI behaviour). `encoderImplementation` was empty in the publisher stats.
+
+**CPU (sampler, 2 s, window only, n=37 samples per tree)**
+
+| tree | procs | % machine mean / med / max | % one core mean |
+| --- | --- | --- | --- |
+| publishers Edge (5 pubs) | 14 | 41.3 / 40.6 / 56.8 | 330 |
+| régie sub Edge | 10 | 4.4 / 4.1 / 7.3 | 35 |
+| machine total (`total_cpu_pct`) | — | 99.9 / 100 / 100 | — |
+
+The machine total read 100 at every sample in the window (it was 48 / 62 median in the PP runs).
+
+**GPU engines (Windows GPU Engine perf counters, French class names, all instances, per adapter; machine-wide, so the two trees read the same values)**
+
+| adapter luid / phys | engine | mean | max |
+| --- | --- | --- | --- |
+| 0x00000000_0x0001163E / p0 | VideoDecode | 0.86 | 1 |
+| 0x00000000_0x0001163E / p0 | VideoProcessing | 0.95 | 1 |
+| 0x00000000_0x00012950 / p0 | VideoDecode | 0 | 0 |
+| 0x00000000_0x00012950 / p0 | VideoProcessing | 0 | 0 |
+| 0x00000000_0x00012950 / p0 | VideoEncode | 0 | 0 |
+
+`nvdec_util_pct` and `nvenc_util_pct` were 0 for the whole window. Luid 0x1163E exposes no VideoEncode engine. Only 0x12950 has one.
+
+**Caveats.**
+- The publishers' encoders (5× libvpx simulcast) and the régie decode share the same laptop. The machine total was saturated, and the publisher HD layers collapsed (bandwidth QLR). So this run measures the régie decoding 5 low-res tiles at about 13 fps, not 5×720p. A régie decode floor at 720p is NOT VALIDATED.
+- n=1, loopback.
+- The mic is opened via `unlockStats=1` in the test Edge only (needed for decoderImplementation). Loïc's own Edge and the webcam were not touched.
+- The régie's first attempt failed and was rerun.
+- The PP runs use the VP8 ping-pong source, so they are not directly comparable with the earlier take4-raw loop runs (02:39 / 03:07), which had a 60 s loop seam inside the window.
+
+### RESULTS — 2L-on ping-pong with the S4 rec forced to H.264 (laptop, 2026-10-06 04:37–04:41 Paris) — *indicatif, option d'amendement S4*
+
+Measurements only. No PASS/FAIL here (the Designer judges). n=1 × 120 s, loopback on one laptop. Raw data: `spikes/s1-lab/livekit-oss/scripts/ab/results-20261006-0437-pp-rech264/`. Received webm on the box: `/workspace/s1-soak/ab/run-023754-pp-rech264/ab-file-2L-on-pp-rech264-sub-hi-rx.webm`.
+
+The condition `ab-file-2L-on-pp-rech264` matches the 04:00 `ab-file-2L-on-pp` run: VP8 2L live publish, take4 ping-pong source, warmup 20 s, window 120 s, rec ON. Only the rec call changed: Media drop-in v2.2 `__s4.startSession({stream, apiBase, durationSec:120, label:'raw', participant:'ab-file-2L-on-pp-h264', mimeType:'video/webm;codecs=h264', vBitrate:2500000, timeslice:1000})`. A guard aborts the condition if `recorderMimeType` lacks h264/avc1. It did not trigger.
+
+| item | value |
+| --- | --- |
+| run | wrapper 04:37:54 → 04:41:03 (exit 0) · single run, no retry |
+| pre-run idle CPU (15 s, no Edge) | WMI `_Total` median **18 %** (samples 10–45) · node os.cpus median **21 %** (04:37:56 → 04:38:15) |
+| window / rec | 04:38:45.622 → 04:40:46.771 · rec 04:38:45.898 → 04:40:46.767 stopped+exported |
+| recorderMimeType | requested / picked / actual = **`video/webm;codecs=h264`** · s4Errors [] |
+| S4 object (MinIO `podcast-recordings-poc`) | **`spike/s4-dropin/ab-file-2L-on-pp-h264-raw-1791254325802.webm`**. Multipart complete ok: 8 parts, 40 194 443 B local = remote, sha256 `6ed7ecdf…051cabed`, 118 chunks, measured ≈ 2.68 Mb/s. Results key `…-1791254325802.results.json` |
+| HW encode | NVENC 0 % and adapter 0x12950 VideoEncode 0 over the window. Adapter 0x1163E has no VideoEncode engine. So the H.264 rec encode did not use a GPU encode engine (software encoder implied; implementation name not exposed) |
+
+**Side by side** (publisher HD rid `h`; received = HD-pinned sub; distinct fps on the received webm, native size, threshold **0.3**; source ceiling 0.9944):
+
+| | 2L-off-pp (03:59) | 2L-on-pp, rec VP8 (04:02) | **2L-on-pp, rec H.264 (04:38)** |
+| --- | --- | --- | --- |
+| publisher HD med | 1280×720 @30 | 640×360 @30 | **640×360 @29** |
+| publisher QLR durations (s) | none 118.1 | cpu 108.1 · none 10.5 | **cpu 108.9 · none 9.4** |
+| received HD res (2 s samples, n=59) | 1280×720 ×59 | 640×360 ×41 · 960×540 ×12 · 1280×720 ×6 | **640×360 ×42 · 960×540 ×12 · 1280×720 ×5** |
+| received webm frames | 3562 (all 720p) | 3539 (720p 340 · 540p 709 · 360p 2490) | **3089 (720p 293 · 540p 730 · 360p 2066)** |
+| varsize ≥24 share, near / exact | 0.9752 / 0.9752 | 0.9262 / 0.9508 | **0.7025 / 0.7190** |
+| ratio to source ceiling 0.9944 | 0.981 | 0.931 | **0.706** |
+| Media v2: near fps · p5 · windows <24 | 28.662 · 25 · 3/121 | 28.914 · 23 · 9/122 | **25.224 · 15 · 36/121** |
+| getStats freezes Δ (count / s), sub-hi | 1 / 0.235 | 1 / 0.218 | **0 / 0** |
+| near-distinct gaps >200 ms (v2) | 1 (232 ms) | 0 | **0** |
+| publisher Edge CPU % machine med (1-core) | 14.7 (117.7) | 22.8 (182.4) | **18.9 (151.2)** |
+| machine total CPU med | 48 | 62 | **61** |
+| idle CPU before run | n/a | n/a | **18 (WMI) / 21 (node)** |
+
+**Where the lower ≥24 share comes from:** in the last ~30 s of the window (2 s samples 45–59, about 04:40:16 → 04:40:46), the publisher's HD layer encoded at **15 fps**: `framesPerSecond` was 15–16 on the publisher `h` rid and on the received track, with QLR = cpu. Before that it ran at 29–31 fps. The received webm follows the same pattern (exact-hash ≥24 share 0.719). Machine total CPU was 70–85 % around 04:40:00–04:40:20, then 46–58 %. In the 04:00 VP8-rec run the HD layer stayed at 29–31 fps for the whole window. With n=1, the cause is NOT VALIDATED: it could be the software H.264 rec encode in the publisher tab, other host load, or thermal state.
+
+**Caveats:** n=1 × 120 s; loopback; runs are 35–39 min apart, and thermal and background state were not controlled. Near-dup MAD depends on resolution, and the 2L-on rows are mostly 640×360. The received-track recorder is VP8 in the subscriber Edge in all three runs. The mic is opened via `unlockStats` in the test Edge only. Loïc's Edge, the webcam and the firewall were not touched.
+
+### RESULTS — ab-cam-3L-on (real webcam, laptop, 2026-10-06 11:00–11:04 Paris)
+
+Measurements only. No PASS/FAIL (the Designer judges). n=1 × 120 s, loopback on one laptop. Webcam: Microsoft LifeCam Cinema. Loïc freed it at 10:59; Windows showed its last use by `msedge.exe` ending at 10:57:56. The run used test Edge instances only. Raw data: `spikes/s1-lab/livekit-oss/scripts/ab/results-20261006-1100-cam-3L-on/`. Received HD webm on the box: `/workspace/s1-soak/ab/run-090049-cam-3L-on/ab-cam-3L-on-sub-hi-rx.webm`.
+
+| item | value |
+| --- | --- |
+| run | wrapper 11:00:43 → 11:04:00 (node exit 0 at 11:03:55) · single run |
+| pre-run idle CPU (15 s, no test Edge) | WMI `_Total` median **28 %** (samples 10–64) · node os.cpus median **29.7 %** (11:00:50 → 11:01:09) |
+| window / rec | 11:01:41.267 → 11:03:43.318 · rec 11:01:41.554 → 11:03:43.316 stopped+exported |
+| gUM capture | 1280×720 @30.4 (track settings) |
+| S4 recorder | `recorderMimeType` = **`video/webm;codecs=vp8,opus`** (default path, no forced mime) · errors [] |
+| S4 object (MinIO `podcast-recordings-poc`) | **`spike/s4-dropin/ab-cam-3L-on-raw-1791277301460.webm`**. Multipart complete ok: 8 parts, 39 263 728 B local = remote, 118 chunks, ≈ 2.62 Mb/s. Results key `…-1791277301460.results.json` |
+
+**Publisher (3 layers, VP8, `SimulcastEncoderAdapter (libvpx, libvpx, libvpx)`, scalabilityMode L1T3, powerEfficientEncoder false):**
+
+| rid | res (59/59 samples) | fps med | kbps med | QLR durations Δ (s) |
+| --- | --- | --- | --- | --- |
+| f (HD) | **1280×720** | **30** | 1674 | **none 118.8** · cpu 0 · bw 0 |
+| h | 640×360 | 20 | 447 | none 118.8 |
+| q | 320×180 | 20 | 147 | none 118.8 |
+
+qualityLimitationResolutionChanges Δ 0. NVENC 0 %.
+
+**Received (HD-pinned sub):** **1280×720 in 59/59 samples**, fps med 30 (min sample 19). getStats freezes Δ **2 / 0.41 s**. The LOW-pinned sub got 320×180 ×59, freezes Δ 1. The received webm is 3484 frames, all 1280×720 (no layer switch).
+
+**Distinct fps on the received webm** (native size; there is no source ceiling for a live cam, so values are raw):
+
+| tool | threshold | near fps | ≥24 share (near) | ≥24 share (exact) | p5 | windows <24 | longest near-dup | near-distinct gaps >200 ms |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| varsize | **0.3** | 28.718 | **0.918** | 0.918 | — | — | 2 f | — |
+| Media v2 | **0.3** | 28.718 | 0.918 | 0.918 | 21.05 | 10/122 | 2 f / 32 ms | 2 (207 + 225 ms at ~31 s) |
+| varsize | 0.5 | 27.463 | 0.877 | 0.918 | — | — | 4 f | — |
+| Media v2 | 0.5 | 27.463 | 0.877 | 0.918 | 20 | 15/122 | 4 f / 94 ms | 2 (432 ms total) |
+
+**CPU:** publisher Edge **18.9 %** machine median (max 45.2; 151 % of one core). Sub Edge 7.2 % (max 27.0). Machine total median **66 %**.
+
+**Compared with file-3L-on (02:42, take4 file loop):**
+
+| | file-3L-on (02:42) | **cam-3L-on (11:01)** |
+| --- | --- | --- |
+| HD rid `f` sent | 960×540 @22, only 18/59 samples with dims | **1280×720 @30, 59/59** |
+| QLR Δ (s) | cpu 107.2 · none 10.8 | **none 118.8** |
+| sub-hi received | **320×180** (from ~39 s) | **1280×720** ×59 |
+| ≥24 share exact / near | 0.82 / 0.60 (thr 0.5) | **0.918 / 0.877 (thr 0.5) · 0.918 / 0.918 (thr 0.3)** |
+| pub Edge CPU % machine med (max) | 20.0 (32.8) | **18.9 (45.2)** |
+| getStats freezes Δ (sub-hi) | 1 | **2 (0.41 s)** |
+
+**Caveats:**
+- n=1; loopback; the runs are 8 h apart, and thermal and background state were not controlled. The idle CPU before this run was already 28 %.
+- The sources differ: live camera content vs take4 file loop. The near-dup share depends on scene motion, and a live cam has no ceiling, so the near rows are not comparable with the file rows.
+- The file-3L-on reference values are at threshold 0.5 (the tool default at 02:42).
+- The file publisher opens a disabled mic via `unlockStats`. The cam publisher uses the real camera and mic in the test Edge, so the S4 rec includes opus audio.
+- The received-track recorder is VP8 in the subscriber Edge.
