@@ -524,3 +524,98 @@ Résumé archivé :
 - **Aucune** de ces options n’est le chemin POC actuel.
 
 Harnais navigateur SaaS : **gelés** sous `spikes/s1-lab/` — voir [`s1-lab/README.md`](s1-lab/README.md).
+
+### RESULTS — ping-pong source + régie floor (laptop, 2026-10-06 03:58–04:08 Paris)
+
+Measurements only, no verdict. n=1, loopback on one laptop, VP8. Raw data: `spikes/s1-lab/livekit-oss/scripts/ab/results-20261006-0359-pp/` and `…/results-20261006-0404-regie/`.
+
+**Source.** `take4-pingpong.webm` = forward + reversed + forward, 179.8 s, 5394 frames, VP8 1280×720 at 30 fps. There is no loop seam inside a 120 s window. Source ceiling (Media v2 `distinct_fps.py` @ac839af, native size):
+
+| threshold | near fps | 1 s windows ≥24 | p5 | windows <24 | longest near-dup | freezes >200 ms |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0.5 | 28.565 | 0.9889 | 26 | 2/180 | 9 f / 266 ms | 1 (300 ms) |
+| 0.3 | 28.738 | 0.9944 | 27 | 1/180 | 6 f / 167 ms | 1 (200 ms) |
+
+**Timestamps (Paris)**
+
+| cond | window start | window end | Media rec | S4 results key |
+| --- | --- | --- | --- | --- |
+| ab-file-2L-off-pp | 03:59:43.945 | 04:01:44.646 | — (OFF) | — |
+| ab-file-2L-on-pp | 04:02:27.353 | 04:04:30.787 | 04:02:27.758 → 04:04:30.780, stopped+exported | `spike/s4-dropin/ab-file-2L-on-pp-raw-1791252147566.results.json` |
+| regie-5pub-2L-vp8 | 04:05:38.037 | 04:07:40.001 | — (no Media rec) | — |
+
+The first régie attempt (03:58:39 → 03:59:03) failed with "rg-pub-4 has no published video" because the publish check only waited 2 s. Fix `db2f373` gives each publisher up to 45 s. The run above is the rerun.
+
+**PP A/B (2L, file publisher → sub-hi received-track webm)**
+
+| cond | HD rid (h) med | QLR durations (s) | pub tree CPU % machine med (1-core) | total CPU med | sub-hi rx (webm frames) |
+| --- | --- | --- | --- | --- | --- |
+| 2L-off-pp | 1280×720 @30 · 1688 kbps | none 118.1 | 14.7 (117.7) | 48 | 1280×720 × 3562 f |
+| 2L-on-pp | 640×360 @30 · 1682 kbps | cpu 108.1 · none 10.5 | 22.8 (182.4) | 62 | 1280×720 340 f → 960×540 709 f → 640×360 2490 f |
+
+Distinct fps on the received webm, native size. v2 = Media's tool. varsize = `distinct_fps_varsize.py`. Freezes = gaps >200 ms between near-distinct frames (from the v2 pairs).
+
+| cond | thr | v2 near fps | v2 ≥24 | v2 p5 | v2 windows <24 | v2 longest near-dup | varsize ≥24 (near / exact) | freezes >200 ms |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2L-off-pp | 0.5 | 26.489 | 0.8678 | 14 | 16/121 | 9 f / 265 ms | 0.8678 / 0.9752 | 3 (764 ms total, max 299) |
+| 2L-off-pp | 0.3 | 28.662 | 0.9752 | 25 | 3/121 | 7 f / 199 ms | 0.9752 / 0.9752 | 1 (232 ms) |
+| 2L-on-pp | 0.5 | 27.089 | 0.8361 | 15 | 20/122 | 12 f / 398 ms | 0.8361 / 0.9508 | 1 (432 ms) |
+| 2L-on-pp | 0.3 | 28.914 | 0.9262 | 23 | 9/122 | 3 f / 67 ms | 0.9262 / 0.9508 | 0 |
+| *source* | 0.5 / 0.3 | 28.565 / 28.738 | 0.9889 / 0.9944 | 26 / 27 | 2/180 · 1/180 | 9 f · 6 f | — | 1 · 1 |
+
+2L-on-pp is 70 % 640×360 frames. Near-dup MAD depends on resolution, so its near-dup values are not directly comparable with 2L-off-pp (constant 720p) or the source. Exact-hash minimum window: off 3 fps, on 1 fps.
+
+**Régie floor (5 file publishers, 2L VP8, in one test Edge + régie subscriber in a separate test Edge, adaptive=0, pinned HIGH, 120 s)**
+
+Received by the régie (medians over 2 s samples; deltas over the window):
+
+| track | res med | fps med | framesDecoded Δ | decode ms/frame | decoder | freezes Δ (s) | keyframes Δ | kbps |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| rg-pub-1 | 240×135 | 13 | 1556 | 0.65 | libvpx | 9 (3.64) | 197 | 121 |
+| rg-pub-2 | 160×90 | 15 | 1588 | 0.44 | libvpx | 8 (3.55) | 199 | 105 |
+| rg-pub-3 | 320×180 | 12 | 1279 | 0.91 | libvpx | 21 (9.36) | 198 | 106 |
+| rg-pub-4 | 240×135 | 13 | 1547 | 0.63 | libvpx | 9 (3.35) | 198 | 114 |
+| rg-pub-5 | 240×135 | 13 | 1488 | 0.69 | libvpx | 17 (7.39) | 198 | 106 |
+
+`powerEfficientDecoder=false` on every track. No 720p frame reached the régie (`share_720p` = 0 on all tracks). packetsLost Δ = 0.
+
+**Publisher side.** The HD layer did NOT reach 720p.
+
+| pub | h layer | q layer | QLR durations (s) |
+| --- | --- | --- | --- |
+| rg-pub-1 | no frames (0 kbps) | 240×135 @13, 121 kbps | bandwidth 119.7 |
+| rg-pub-2 | 640×360 in 13/50 samples @1, 37 kbps | 160×90 mostly, 103 kbps | bandwidth 94.6 · cpu 25.0 |
+| rg-pub-3 | no frames (0 kbps) | 320×180 @12, 121 kbps | bandwidth 119.6 |
+| rg-pub-4 | no frames (0 kbps) | 240×135 @13, 114 kbps | bandwidth 119.5 |
+| rg-pub-5 | 960×540 in 4/50 samples @3, 7 kbps | 240×135 / 320×180, 109 kbps | bandwidth 114.1 · cpu 5.4 |
+
+The dominant limitation was **bandwidth** (not cpu): about 110–120 kbps per publisher, about 0.6 Mbps total. Each régie track also received about 1.65 keyframes/s. The cause was not investigated in this run (NOT VALIDATED: per-pub BWE vs SFU allocation vs PLI behaviour). `encoderImplementation` was empty in the publisher stats.
+
+**CPU (sampler, 2 s, window only, n=37 samples per tree)**
+
+| tree | procs | % machine mean / med / max | % one core mean |
+| --- | --- | --- | --- |
+| publishers Edge (5 pubs) | 14 | 41.3 / 40.6 / 56.8 | 330 |
+| régie sub Edge | 10 | 4.4 / 4.1 / 7.3 | 35 |
+| machine total (`total_cpu_pct`) | — | 99.9 / 100 / 100 | — |
+
+The machine total read 100 at every sample in the window (it was 48 / 62 median in the PP runs).
+
+**GPU engines (Windows GPU Engine perf counters, French class names, all instances, per adapter; machine-wide, so the two trees read the same values)**
+
+| adapter luid / phys | engine | mean | max |
+| --- | --- | --- | --- |
+| 0x00000000_0x0001163E / p0 | VideoDecode | 0.86 | 1 |
+| 0x00000000_0x0001163E / p0 | VideoProcessing | 0.95 | 1 |
+| 0x00000000_0x00012950 / p0 | VideoDecode | 0 | 0 |
+| 0x00000000_0x00012950 / p0 | VideoProcessing | 0 | 0 |
+| 0x00000000_0x00012950 / p0 | VideoEncode | 0 | 0 |
+
+`nvdec_util_pct` and `nvenc_util_pct` were 0 for the whole window. Luid 0x1163E exposes no VideoEncode engine. Only 0x12950 has one.
+
+**Caveats.**
+- The publishers' encoders (5× libvpx simulcast) and the régie decode share the same laptop. The machine total was saturated, and the publisher HD layers collapsed (bandwidth QLR). So this run measures the régie decoding 5 low-res tiles at about 13 fps, not 5×720p. A régie decode floor at 720p is NOT VALIDATED.
+- n=1, loopback.
+- The mic is opened via `unlockStats=1` in the test Edge only (needed for decoderImplementation). Loïc's own Edge and the webcam were not touched.
+- The régie's first attempt failed and was rerun.
+- The PP runs use the VP8 ping-pong source, so they are not directly comparable with the earlier take4-raw loop runs (02:39 / 03:07), which had a 60 s loop seam inside the window.

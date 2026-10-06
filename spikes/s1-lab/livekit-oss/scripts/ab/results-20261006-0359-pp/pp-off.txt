@@ -1,0 +1,6 @@
+ab-file-2L-off-pp-sub-hi-rx.webm: frames=3562 dur=120.126s size_mode=native segs=1 container_fps=29.652 distinct_fps_exact=29.652 distinct_fps_near=26.489 thresh=0.5 max_neardup=9f/265.0ms win(near)≥24=0.8678 median=28.0 p5=14.0 min=3 lt24=16/121
+ab-file-2L-off-pp-sub-hi-rx.webm [native] frames=3562 segs=['1280x720:3562f'] exact=29.652 near=26.489 ge24_exact=0.9752 ge24_near=0.8678 maxneardup=9f
+  freeze>200ms (gap between near-distinct frames): n=3 total=764ms max=299ms
+ab-file-2L-off-pp-sub-hi-rx.webm: frames=3562 dur=120.126s size_mode=native segs=1 container_fps=29.652 distinct_fps_exact=29.652 distinct_fps_near=28.662 thresh=0.3 max_neardup=7f/199.0ms win(near)≥24=0.9752 median=29.0 p5=25.0 min=3 lt24=3/121
+ab-file-2L-off-pp-sub-hi-rx.webm [native] frames=3562 segs=['1280x720:3562f'] exact=29.652 near=28.662 ge24_exact=0.9752 ge24_near=0.9752 maxneardup=7f
+  freeze>200ms (gap between near-distinct frames): n=1 total=232ms max=232ms

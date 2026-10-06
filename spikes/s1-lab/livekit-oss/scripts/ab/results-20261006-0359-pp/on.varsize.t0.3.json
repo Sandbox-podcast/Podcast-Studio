@@ -1,0 +1,22 @@
+[
+  {
+    "path": "ab-file-2L-on-pp-sub-hi-rx.webm",
+    "mode": "native",
+    "threshold": 0.3,
+    "total_frames": 3539,
+    "duration_s": 121.047,
+    "size_segments": [
+      "1280x720:340f",
+      "960x540:709f",
+      "640x360:2490f"
+    ],
+    "size_changes": 2,
+    "distinct_fps_exact": 29.237,
+    "distinct_fps_near": 28.914,
+    "longest_neardup_run_frames": 3,
+    "windows_1s_share_ge24_exact": 0.9508,
+    "windows_1s_min_exact": 1,
+    "windows_1s_share_ge24_near": 0.9262,
+    "windows_1s_median_near": 30
+  }
+]
