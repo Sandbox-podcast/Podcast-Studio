@@ -13,7 +13,13 @@
 | Remux proven in pass **2a** (~0.3 s CPU / 180 s; duration + Cues; 0 seek warnings) | Native seek in ffmpeg and `<video>` without repair |
 | OPFS crash recovery proven in pass **2b** (348 ms, 0 % loss vs delivered chunks) | — |
 
-Spike-level lock for the S4 POC; promote to [DECISIONS.md](../docs/DECISIONS.md) only if the lead wants a repo-wide ADR.
+Spike-level lock for the S4 POC; repo ADRs: [DECISIONS.md](../docs/DECISIONS.md) (**D-06**–**D-11**, [PR #13](https://github.com/Sandbox-podcast/Podcast-Studio/pull/13)).
+
+### Decisions 2026-10-06 (Loïc)
+
+- **D-06 — Master HQ:** raw camera + mic; delivery matte = **async server-side re-matting** with RVM (re-mattable master). Browser matted canvas = live / régie preview only.
+- **D-07 — Recording codec:** **MediaRecorder VP8/WebM** stays locked; **H.264 (QuickSync)** amendment **not adopted** — remains a **measured option only** in spike docs ([`AB-LAPTOP-RESULTS.md`](./s4/AB-LAPTOP-RESULTS.md) §2026-10-06 night).
+- **D-09 — Background tab:** recording gap when the tab is backgrounded → **Phase 1 UI criterion**; track via drop-in watchdog **`results.gaps`** ([#14](https://github.com/Sandbox-podcast/Podcast-Studio/issues/14)).
 
 ---
 
@@ -123,7 +129,7 @@ At part cut, the manifest was written with `byteCursor` advanced **without** reg
 
 **vs run 1:** Foreground tab — **no** **27.221** s `requestAnimationFrame` freeze reproduced; watchdog gaps empty.
 
-**Master-HQ decision:** see **run 4** below (still **open** — Loïc decides).
+**Master-HQ decision:** **[D-06](../docs/DECISIONS.md)** (Loïc **2026-10-06**); run 4 evidence below.
 
 ---
 
@@ -170,13 +176,13 @@ At part cut, the manifest was written with `byteCursor` advanced **without** reg
 | **Upload / Opus** | **0** byte loss; Opus; **923** audio samples | same (**916** samples) |
 | **Alpha** | opaque | **real** VP8 alpha (~**47** % transparent / **24** % opaque / **30** % partial mean, libvpx decode) |
 
-**Master-HQ (OPEN — team recommendation, not a lock; Loïc decides):** **raw cam+mic** = master HQ; **async server re-matting** with RVM on raw; browser **matted canvas** = live / régie preview only. Cost/throughput: [`spikes/s4/S5-RVM-COST.md`](./s4/S5-RVM-COST.md) — measured box **RVM mobilenetv3** CPU Xeon 8c **17.26** fps / **104** s per minute; Vision laptop ~**19.8** fps / ~**91** s per minute = **Iris Xe (iGPU) via DirectML, CPU-bound pipeline** (relabelled 2026-10-06 02:18: DML device 0 is the Iris Xe, not the 3070); clean **RTX 3070** DirectML run (variant C, ds 0.4) **113** s/min total / **69** inference-only, GPU 8–38 % util → all s/min are CPU-bound, €/episode = **pessimistic upper bound** (EU GPU list prices fetched **2026-10-06**; L4/L40S throughput rows are **unsourced estimates**, labelled in that doc).
+**Master-HQ ([D-06](../docs/DECISIONS.md), Loïc 2026-10-06):** **raw cam+mic** = master HQ; **async server re-matting** with RVM on raw; browser **matted canvas** = live / régie preview only. Cost/throughput: [`spikes/s4/S5-RVM-COST.md`](./s4/S5-RVM-COST.md) — measured box **RVM mobilenetv3** CPU Xeon 8c **17.26** fps / **104** s per minute; Vision laptop ~**19.8** fps / ~**91** s per minute = **Iris Xe (iGPU) via DirectML, CPU-bound pipeline** (relabelled 2026-10-06 02:18: DML device 0 is the Iris Xe, not the 3070); clean **RTX 3070** DirectML run (variant C, ds 0.4) **113** s/min total / **69** inference-only, GPU 8–38 % util → all s/min are CPU-bound, €/episode = **pessimistic upper bound** (EU GPU list prices fetched **2026-10-06**; L4/L40S throughput rows are **unsourced estimates**, labelled in that doc).
 
 **RVM checkerboard (Designer):** grade **near-PASS** (not a hard PASS) — halo on hair and a few leaks on arm/torso at **45** s visible on checker; hands OK; still clearly better than browser v8. Final quality call still **open** (flicker clip pending; Loïc decides). Assets: [`run4/media/server-matte/`](./s4/run4/media/server-matte/).
 
 **RVM variants (box CPU, Xeon 8c, no GPU — [`RESULT-RUN4.md` §8](./s4/RESULT-RUN4.md)):** mobilenetv3 ds0.375 **104** s/min; ds0.4 **112** s/min; resnet50 ~**191** s/min (extrapolated **15–55** s). Variant **E** (ds0.4 + white despill + 1 px alpha erosion) best on proxies: hair semi-transparent luma **−26** %, arm/torso gap alpha **0.61→0.56**, ~**+7** % compute vs baseline. **Designer (variants):** **E** confirmed best — hair halo clearly improved; arm/torso leak at **45** s still open → **near-PASS (improved)**, not a hard PASS. **D** resnet50 = **NO-GO** on cost/quality.
 
-**E2 colour (box CPU):** Loïc’s hair is naturally grey-white; E’s despill **darkens the semi-transparent band** (CIEDE2000 ΔE band **16.1** vs **5.6** for A at t=**45** s; opaque pixels unchanged, ΔE ~**1.46**) — the “halo luma” proxy conflates spill removal with real hair colour ([§8 E2](./s4/RESULT-RUN4.md)). **E2-fgr** (RVM `fgr` in band + erosion only where α&lt;0.5): ΔE band **5.2**, halo luma **163**, gap α **0.58**, ~**156** s/min box CPU (C **111.5** + **25** ms/frame post). **Designer (Akasha, 01:35, POC look only):** **E2-fgr** visual **LOCK** (“chrome POC”); **E** = colour **FAIL** (greyed hair fringe); **E2b** acceptable fallback; arm/torso leak @**45** s → backlog **P1**. **E2b** (temporal bg, no erosion): best ΔE band (**3.7**) at **213** s/min box CPU. [`run4/media/server-matte/variants/e2/`](./s4/run4/media/server-matte/variants/e2/) · [`rvm-variants/e2/`](./s4/rvm-variants/e2/). Master HQ still **open** (Loïc decides).
+**E2 colour (box CPU):** Loïc’s hair is naturally grey-white; E’s despill **darkens the semi-transparent band** (CIEDE2000 ΔE band **16.1** vs **5.6** for A at t=**45** s; opaque pixels unchanged, ΔE ~**1.46**) — the “halo luma” proxy conflates spill removal with real hair colour ([§8 E2](./s4/RESULT-RUN4.md)). **E2-fgr** (RVM `fgr` in band + erosion only where α&lt;0.5): ΔE band **5.2**, halo luma **163**, gap α **0.58**, ~**156** s/min box CPU (C **111.5** + **25** ms/frame post). **Designer (Akasha, 01:35, POC look only):** **E2-fgr** visual **LOCK** (“chrome POC”); **E** = colour **FAIL** (greyed hair fringe); **E2b** acceptable fallback; arm/torso leak @**45** s → backlog **P1**. **E2b** (temporal bg, no erosion): best ΔE band (**3.7**) at **213** s/min box CPU. [`run4/media/server-matte/variants/e2/`](./s4/run4/media/server-matte/variants/e2/) · [`rvm-variants/e2/`](./s4/rvm-variants/e2/). Master HQ: **[D-06](../docs/DECISIONS.md)**.
 
 **Designer flicker verdict (2026-10-06 02:25, clip 25–40 s, E2-fgr on checker):** E2-fgr **PASS on stills, FAIL in motion** — **ghost hand** during a fast gesture (~**33–34** s of source): palm semi-transparent, checkerboard visible through it, white patch of the original background leaking beside it. Hair edge shimmers slightly frame to frame (minor). Cause attributed to the **model under motion blur**, not the post-process → **E2-fgr stays the POC post-process**. **Fast gestures = P1**, blocking the quality of the **delivered matte** (same level as the **45** s arm/torso leak); **not** blocking a raw HQ master (argues for keeping raw so it can be re-matted later). **Next:** Vision CUDA run (tomorrow) compares `downsample_ratio` **0.4 / 0.6 / 1.0** on 25–40 s (same instants **32** s and **33.2–34.0** s side by side, with s/min per ds); **temporal mask** is the next lead if needed.
 

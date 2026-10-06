@@ -112,7 +112,15 @@ Tooling: [`h264-probe/v3/`](./h264-probe/v3/) (`hw-check-v3.mjs`, `sample-gpu-v3
 - **Edge output** for `video/webm;codecs=h264` is **Matroska/avc1 Constrained Baseline** (file still named `.webm`); remux to webm **fails**, mkv/mp4 **OK**; drop-in **v2.2** ([#11](https://github.com/Sandbox-podcast/Podcast-Studio/issues/11)) and [`analyze_ab.py`](./analyze_ab.py) handle it.
 - **S4 gates on the VP8 rec** of the back-and-forth 2L-on run (**04:02**): **PASS** (1280×720 VP8, **120.0 s**, loss **0.15 %**, **2.64 Mbps**, near-distinct **28.4 fps**, all 1 s windows ≥24).
 - **S4 gates on the H.264 rec** of the back-and-forth 2L-on run (**04:37**, `recorderMimeType` `video/webm;codecs=h264`): **PASS** on all measurable gates (1280×720 H.264 CB, **120.0 s**, loss **0.03 %**, max gap **52 ms**, **2.68 Mbps**, upload complete local=remote, all **120** one-second windows ≥28 exact-distinct frames incl. 90–120 s). Near-distinct at 0.5 = **26.5 fps** vs **28.4** for VP8 rec (cause unverified; exact-distinct **30.0**, no frame loss). A/V sync not measurable (no clean clap).
-- **Live side** of that run (measured by Podcast RTC, PR #3 `769e6b7`; judged by Designer): share≥24 at **0.3** = **0.70** vs **0.93** with VP8 rec; HD layer still **640×360** median; drop concentrated in last ~**30 s** with machine at **70–85 %** CPU, cause **NOT VALIDATED**. **Lead synthesis:** H.264 rec showed **no live benefit** on 1 run; the only argument for an S4 amendment is the **rec-only CPU gain**. **S4 lock (WebM VP8) unchanged**; any amendment is Loïc’s decision.
+- **Live side** of that run (measured by Podcast RTC, PR #3 `769e6b7`; judged by Designer): share≥24 at **0.3** = **0.70** vs **0.93** with VP8 rec; HD layer still **640×360** median; drop concentrated in last ~**30 s** with machine at **70–85 %** CPU, cause **NOT VALIDATED**. **Lead synthesis (pre-decision):** H.264 rec showed **no live benefit** on 1 run; the only argument for an S4 amendment is the **rec-only CPU gain**.
+
+### Decisions 2026-10-06 (Loïc)
+
+Recorded in [DECISIONS.md](../../docs/DECISIONS.md) via [PR #13](https://github.com/Sandbox-podcast/Podcast-Studio/pull/13) (**D-06**–**D-11**):
+
+- **D-06:** master HQ = **raw camera + mic**, re-mattable **async server-side RVM** matte.
+- **D-07:** recording codec stays **MediaRecorder VP8/WebM**; **H.264 (QuickSync) amendment not adopted** — documented here as a measured option only.
+- **D-09:** **background-tab** recording gap → **Phase 1 UI criterion**, tracked in [#14](https://github.com/Sandbox-podcast/Podcast-Studio/issues/14) using drop-in **`results.gaps`**.
 
 ---
 
@@ -122,3 +130,4 @@ Tooling: [`h264-probe/v3/`](./h264-probe/v3/) (`hw-check-v3.mjs`, `sample-gpu-v3
 - Distinct-frame tool fix: **Fixes #10** — [`tools/distinct_fps.py`](../../tools/distinct_fps.py)
 - Criterion doc: [`S4-recording.md`](../S4-recording.md) § Distinct-frame criterion
 - LAN multi-machine protocol (pending): same parent doc
+- H.264 hw-check v3: [`h264-probe/v3/`](./h264-probe/v3/)
