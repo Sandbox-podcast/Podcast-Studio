@@ -1,0 +1,68 @@
+{
+  "method": "mean abs diff on full-res gray 0-255 vs previous frame",
+  "default_threshold": 0.5,
+  "rationale": "Exact MD5 matches 0/30 lossy AA pairs after VP8 re-encode \u2014 near-dup required for RTC MediaRecorder. t=0.5 on full-res MAD: ~87% catch of intentional dups @VP8 1.5Mbps 720p, ~77% @150kbps 320x180; ~8.5% false-dup on 2s take4 talking-head consecutive frames (still keeps distinct fps \u226524 when true rate is ~30). Higher t improves catch but collapses static talking-head distinct fps below the live bar.",
+  "true_distinct_talking_head_2s_take4_raw": {
+    "source": "tools/testdata/raw_talk_2s_30.webm",
+    "n_pairs": 59,
+    "mad": {
+      "min": 0.1043,
+      "p50": 1.0186,
+      "p95": 2.8988,
+      "max": 4.3476,
+      "mean": 1.2485
+    },
+    "false_dup_rate_at_0.5": 0.085
+  },
+  "true_dup_AA_after_lossy_reenc": {
+    "vp8_150k_320x180": {
+      "file": "tools/testdata/dup_reenc_vp8_150k_320x180.webm",
+      "exact_hash_match_AA": "0/30",
+      "mad": {
+        "min": 0.0252,
+        "p50": 0.2594,
+        "p95": 1.2961,
+        "max": 2.8159,
+        "mean": 0.4223
+      },
+      "catch_rate_at_0.5": 0.77
+    },
+    "vp8_1p5M_720p": {
+      "file": "tools/testdata/dup_reenc_vp8_1p5M_720p.webm",
+      "exact_hash_match_AA": "0/30",
+      "mad": {
+        "min": 0.0026,
+        "p50": 0.3142,
+        "p95": 0.9167,
+        "max": 1.1271,
+        "mean": 0.3484
+      },
+      "catch_rate_at_0.5": 0.87,
+      "catch_rate_at_1.25": 1.0
+    }
+  },
+  "decode_note": "ffmpeg -fps_mode passthrough required: WebM VFR often has r_frame_rate=1000/1; default CFR conversion inflates frame count ~30\u00d7",
+  "take4_validation": {
+    "raw": {
+      "distinct_fps_exact": 29.875,
+      "distinct_fps_near": 29.842,
+      "frames": 1791
+    },
+    "matted": {
+      "distinct_fps_exact": 14.04,
+      "distinct_fps_near": 14.007,
+      "frames": 843
+    },
+    "synthetic_h264_AA": {
+      "distinct_fps_near": 15.0,
+      "note": "exact=30 (lossy not bit-identical); near catches dups"
+    },
+    "synthetic_vp8_1p5M_AA": {
+      "distinct_fps_near": 17.0,
+      "note": "t=0.5 catches ~87% of AA pairs"
+    },
+    "synthetic_vp8_150k_AA": {
+      "distinct_fps_near": 15.5
+    }
+  }
+}

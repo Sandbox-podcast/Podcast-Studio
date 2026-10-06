@@ -1,0 +1,80 @@
+{
+  "label": "localhost / headless / synthetic — NOT Sandbox-hardware pass",
+  "pass": "S4 pass 1b smoke (no cuts)",
+  "resumeDefinition": "reconnect (page setOnline(true) right after page.unroute of 127.0.0.1:9000) → every part not uploaded at reconnect is re-uploaded (ETag OK) = catch-up complete",
+  "thresholdMs": 15000,
+  "startedAt": "2026-10-05T16:43:05.378Z",
+  "finishedAt": "2026-10-05T16:43:21.427Z",
+  "browser": "131.0.6778.33",
+  "durationSecTarget": 15,
+  "networkCutMethod": "Playwright route.abort on **://127.0.0.1:9000/** (presigned PUTs only); lab API :3320 stays up",
+  "cutsRequested": [],
+  "cuts": [],
+  "resumeTiming": [],
+  "recording": {
+    "source": "canvas.captureStream(30) + WebAudio oscillator (sawtooth+LFO) via MediaStreamDestination",
+    "mimeType": "video/webm;codecs=vp8,opus",
+    "videoBitsPerSecond": 8000000,
+    "audioBitsPerSecond": 128000,
+    "timesliceMs": 1000,
+    "partSizeBytes": 5242880,
+    "durationSecTarget": 15,
+    "timeOrigin": 1791218585554.2,
+    "tStartPerf": 620,
+    "wallStartIso": "2026-10-05T16:43:06.174Z",
+    "firstChunkAt": 1677.199999988079,
+    "chromeFakeDeviceFlags": true,
+    "tStopPerf": 15660.799999982119,
+    "chunkCount": 15,
+    "totalBytesLocal": 8270821,
+    "elapsedMs": 15040.799999982119,
+    "measuredBitrateBps": 4399138.875596954
+  },
+  "parts": [
+    {
+      "partNumber": 1,
+      "byteStart": 0,
+      "byteEnd": 5242880,
+      "size": 5242880,
+      "etag": "\"09a4193cafca55969693c3f362c88163\"",
+      "status": "uploaded",
+      "uploadMs": 95.59999999403954,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "partNumber": 2,
+      "byteStart": 5242880,
+      "byteEnd": 8270821,
+      "size": 3027941,
+      "etag": "\"13e2b51995ceed56008724ebe3d56a78\"",
+      "status": "uploaded",
+      "uploadMs": 24.600000023841858,
+      "attempts": 1,
+      "error": null
+    }
+  ],
+  "integrity": {
+    "key": "spike/s4-lab/rec/lab-resume-smoke-1791218586174.webm",
+    "localSha256": "d641c4636ad68dd9b5b46b1cc1a5bc71d0c4c9e44f6f8f0ed767dc5af27802cb",
+    "localBytes": 8270821,
+    "remoteSha256": "d641c4636ad68dd9b5b46b1cc1a5bc71d0c4c9e44f6f8f0ed767dc5af27802cb",
+    "remoteBytes": 8270821,
+    "shaMatch": true,
+    "sizeMatch": true,
+    "remotePath": "artifacts/lab-resume-smoke-remote.webm"
+  },
+  "cleanup": {
+    "abortedIncomplete": [],
+    "abortedCount": 0,
+    "incompleteMpuCountAfter": 0
+  },
+  "verdict": {
+    "resume": "N/A (smoke)",
+    "integrity": "PASS",
+    "cleanup": "PASS",
+    "overall": "PASS"
+  },
+  "errors": [],
+  "events": []
+}

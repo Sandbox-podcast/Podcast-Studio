@@ -1,0 +1,50 @@
+[log] [s4] autoload probe {mime: Array(7), webCodecs: Object}
+[log] [s4] MediaRecorder.isTypeSupported: [video/webm;codecs=vp8,opus, video/webm;codecs=vp9,opus, video/webm;codecs=vp9, video/webm;codecs=vp8, video/webm, video/mp4, audio/webm;codecs=opus]
+[log] [s4] using mimeType video/webm;codecs=vp8,opus
+[log] [s4] WebCodecs probe {VideoEncoder: true, AudioEncoder: true, videoOk: Array(3), audioOk: Array(1)}
+[log] [s4] MPU created {key: spike/s4-lab/rec/lab-resume-1791218610366.webm, uploadId: MGEzMGExNDUtMjNkMi00MjU5LTlmNGItM2MwODI3NWRiZGNhLj…iOTQ3LTMzMzZlMDA5MjA4NXgxNzkxMjE4NjEwMzcxNDk4MjMw, bucket: podcast-recordings-poc}
+[log] [s4] recording started timeslice=1000ms partSize=5242880 durationSec=75
+[log] [s4] part 1 uploaded size=5242880 etag="10e1e0b55433dfcc6daaeb183ee5c23b" ms=42
+[log] [s4-ev] {"type":"cut-start","perf":11093.3,"wallMs":1791218620812,"iso":"2026-10-05T16:43:40.812Z","label":"cut-10s","notUploaded":[]}
+[log] [s4] network online=false
+[log] [s4] part 2 buffered offline (5242880 B)
+[log] [s4-ev] {"type":"reconnect","perf":21111,"wallMs":1791218630829,"iso":"2026-10-05T16:43:50.829Z","label":"cut-10s","online":true,"missingAtReconnect":[2],"offlineMs":10017.6}
+[log] [s4] network online=true
+[log] [s4] resume: list-parts…
+[log] [s4-ev] {"type":"list-parts-request","perf":21113,"wallMs":1791218630831,"iso":"2026-10-05T16:43:50.831Z","label":"cut-10s"}
+[log] [s4-ev] {"type":"list-parts-response","perf":21124.5,"wallMs":1791218630843,"iso":"2026-10-05T16:43:50.843Z","label":"cut-10s","remoteParts":[1],"ms":11.5}
+[log] [s4] resume: remote parts=[1]
+[log] [s4-ev] {"type":"resend-put-start","perf":21125.2,"wallMs":1791218630843,"iso":"2026-10-05T16:43:50.843Z","label":"cut-10s","partNumber":2,"attempt":2,"size":5242880}
+[log] [s4] part 2 uploaded size=5242880 etag="75d2af6e5f6706286b5022e53a6070b2" ms=33
+[log] [s4-ev] {"type":"resend-put-end","perf":21159.5,"wallMs":1791218630878,"iso":"2026-10-05T16:43:50.878Z","label":"cut-10s","partNumber":2,"ok":true,"ms":34.2}
+[log] [s4-ev] {"type":"catch-up-complete","perf":21159.7,"wallMs":1791218630878,"iso":"2026-10-05T16:43:50.878Z","label":"cut-10s","resumeMs":48.8,"partsResent":[2],"missingAtReconnect":[2],"reason":"part-uploaded"}
+[log] [s4-resume] {"label":"cut-10s","cutStartIso":"2026-10-05T16:43:40.811Z","reconnectIso":"2026-10-05T16:43:50.829Z","catchUpCompleteIso":"2026-10-05T16:43:50.878Z","resumeMs":48.8,"partsResent":[2],"missingAtReconnect":[2],"thresholdMs":15000,"verdict":"PASS"}
+[log] [s4] part 3 uploaded size=5242880 etag="6992762db227a3d0f7b0fbbfd12b6965" ms=53
+[log] [s4-ev] {"type":"cut-start","perf":33166.6,"wallMs":1791218642885,"iso":"2026-10-05T16:44:02.885Z","label":"cut-30s","notUploaded":[]}
+[log] [s4] network online=false
+[log] [s4] part 4 buffered offline (5242880 B)
+[log] [s4] part 5 buffered offline (5242880 B)
+[log] [s4] part 6 buffered offline (5242880 B)
+[log] [s4-ev] {"type":"reconnect","perf":63180.2,"wallMs":1791218672899,"iso":"2026-10-05T16:44:32.899Z","label":"cut-30s","online":true,"missingAtReconnect":[4,5,6],"offlineMs":30013.6}
+[log] [s4] network online=true
+[log] [s4] resume: list-parts…
+[log] [s4-ev] {"type":"list-parts-request","perf":63182.7,"wallMs":1791218672901,"iso":"2026-10-05T16:44:32.901Z","label":"cut-30s"}
+[log] [s4-ev] {"type":"list-parts-response","perf":63214.5,"wallMs":1791218672933,"iso":"2026-10-05T16:44:32.933Z","label":"cut-30s","remoteParts":[1,2,3],"ms":31.6}
+[log] [s4] resume: remote parts=[1,2,3]
+[log] [s4-ev] {"type":"resend-put-start","perf":63216.2,"wallMs":1791218672934,"iso":"2026-10-05T16:44:32.934Z","label":"cut-30s","partNumber":4,"attempt":2,"size":5242880}
+[log] [s4] part 4 uploaded size=5242880 etag="9e095858ae3ba2b29c7f14bd585cc49d" ms=40
+[log] [s4-ev] {"type":"resend-put-end","perf":63257.1,"wallMs":1791218672975,"iso":"2026-10-05T16:44:32.975Z","label":"cut-30s","partNumber":4,"ok":true,"ms":40.8}
+[log] [s4-ev] {"type":"resend-put-start","perf":63257.3,"wallMs":1791218672975,"iso":"2026-10-05T16:44:32.975Z","label":"cut-30s","partNumber":5,"attempt":2,"size":5242880}
+[log] [s4] part 5 uploaded size=5242880 etag="a01c00b2b91f76e167d19088d84386aa" ms=41
+[log] [s4-ev] {"type":"resend-put-end","perf":63299.1,"wallMs":1791218673017,"iso":"2026-10-05T16:44:33.017Z","label":"cut-30s","partNumber":5,"ok":true,"ms":41.7}
+[log] [s4-ev] {"type":"resend-put-start","perf":63299.2,"wallMs":1791218673017,"iso":"2026-10-05T16:44:33.017Z","label":"cut-30s","partNumber":6,"attempt":2,"size":5242880}
+[log] [s4] part 6 uploaded size=5242880 etag="e15e00c6b93cb6a1b871283cf747471d" ms=46
+[log] [s4-ev] {"type":"resend-put-end","perf":63345.7,"wallMs":1791218673064,"iso":"2026-10-05T16:44:33.064Z","label":"cut-30s","partNumber":6,"ok":true,"ms":46.5}
+[log] [s4-ev] {"type":"catch-up-complete","perf":63345.9,"wallMs":1791218673064,"iso":"2026-10-05T16:44:33.064Z","label":"cut-30s","resumeMs":165.6,"partsResent":[4,5,6],"missingAtReconnect":[4,5,6],"reason":"part-uploaded"}
+[log] [s4-resume] {"label":"cut-30s","cutStartIso":"2026-10-05T16:44:02.885Z","reconnectIso":"2026-10-05T16:44:32.898Z","catchUpCompleteIso":"2026-10-05T16:44:33.064Z","resumeMs":165.6,"partsResent":[4,5,6],"missingAtReconnect":[4,5,6],"thresholdMs":15000,"verdict":"PASS"}
+[log] [s4] part 7 uploaded size=5242880 etag="9a158b86ee9fd621144a2c3750de8e26" ms=43
+[log] [s4] recorder stopped; flushing uploads…
+[log] [s4] part 8 uploaded size=4950660 etag="bd0e0b6b9fc220f58ba52cf656d8d3f1" ms=45
+[log] [s4] resume: list-parts…
+[log] [s4] resume: remote parts=[1,2,3,4,5,6,7,8]
+[log] [s4] complete {ok: true, key: spike/s4-lab/rec/lab-resume-1791218610366.webm, contentLength: 41650820, etag: "8582e0869b6c80142c75f2edba383100-8"}

@@ -1,0 +1,33 @@
+{
+  "tag": "D_resnet50_ds0375",
+  "onnx": "rvm_resnet50_fp32.onnx",
+  "downsample_ratio": 0.375,
+  "machine": "box CPU Intel Xeon \u00b7 8 cores \u00b7 no GPU",
+  "note": "EXTRAPOLATED: timed frames 450..1649 (1200 frames, 40.0s video) after warm 0..450; s/min from timed segment only",
+  "frames_timed": 1200,
+  "warm_frames": 450,
+  "wall_seconds_timed": 127.5,
+  "wall_fps": 9.41,
+  "seconds_compute_per_min_footage": 191.3,
+  "extrapolated": true,
+  "metrics_t45": {
+    "partial_alpha_frac": 0.0427,
+    "gap45_mean_alpha": 0.5797,
+    "gap45_partial_frac": 0.2071,
+    "gap45_opaque_frac": 0.4748,
+    "hair_semitrans_mean_luma": 170.33,
+    "roi_gap": [
+      760,
+      200,
+      860,
+      300
+    ]
+  },
+  "partial_alpha_frac_mean_stills": 0.0354,
+  "stills": [
+    15,
+    25,
+    35,
+    45
+  ]
+}

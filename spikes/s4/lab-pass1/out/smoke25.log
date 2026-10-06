@@ -1,0 +1,151 @@
+CONSOLE log [s4] autoload probe {mime: Array(7), webCodecs: Object}
+PROBE {
+  "mime": [
+    "video/webm;codecs=vp9,opus",
+    "video/webm;codecs=vp8,opus",
+    "video/webm;codecs=vp9",
+    "video/webm;codecs=vp8",
+    "video/webm",
+    "video/mp4",
+    "audio/webm;codecs=opus"
+  ],
+  "webCodecs": {
+    "VideoEncoder": true,
+    "AudioEncoder": true,
+    "videoConfigs": [
+      {
+        "config": {
+          "codec": "vp8",
+          "width": 1280,
+          "height": 720,
+          "bitrate": 2500000,
+          "framerate": 30
+        },
+        "supported": true,
+        "configReturned": {
+          "alpha": "discard",
+          "bitrate": 2500000,
+          "bitrateMode": "variable",
+          "codec": "vp8",
+          "contentHint": "",
+          "framerate": 30,
+          "hardwareAcceleration": "no-preference",
+          "height": 720,
+          "latencyMode": "quality",
+          "width": 1280
+        }
+      },
+      {
+        "config": {
+          "codec": "vp09.00.10.08",
+          "width": 1280,
+          "height": 720,
+          "bitrate": 2500000,
+          "framerate": 30
+        },
+        "supported": true,
+        "configReturned": {
+          "alpha": "discard",
+          "bitrate": 2500000,
+          "bitrateMode": "variable",
+          "codec": "vp09.00.10.08",
+          "contentHint": "",
+          "framerate": 30,
+          "hardwareAcceleration": "no-preference",
+          "height": 720,
+          "latencyMode": "quality",
+          "width": 1280
+        }
+      },
+      {
+        "config": {
+          "codec": "avc1.42E01E",
+          "width": 1280,
+          "height": 720,
+          "bitrate": 2500000,
+          "framerate": 30
+        },
+        "supported": false,
+        "configReturned": {
+          "alpha": "discard",
+          "bitrate": 2500000,
+          "bitrateMode": "variable",
+          "codec": "avc1.42E01E",
+          "contentHint": "",
+          "framerate": 30,
+          "hardwareAcceleration": "no-preference",
+          "height": 720,
+          "latencyMode": "quality",
+          "width": 1280
+        }
+      },
+      {
+        "config": {
+          "codec": "av01.0.04M.08",
+          "width": 1280,
+          "height": 720,
+          "bitrate": 2500000,
+          "framerate": 30
+        },
+        "supported": true,
+        "configReturned": {
+          "alpha": "discard",
+          "bitrate": 2500000,
+          "bitrateMode": "variable",
+          "codec": "av01.0.04M.08",
+          "contentHint": "",
+          "framerate": 30,
+          "hardwareAcceleration": "no-preference",
+          "height": 720,
+          "latencyMode": "quality",
+          "width": 1280
+        }
+      }
+    ],
+    "audioConfigs": [
+      {
+        "config": {
+          "codec": "opus",
+          "numberOfChannels": 1,
+          "sampleRate": 48000,
+          "bitrate": 128000
+        },
+        "supported": true,
+        "configReturned": {
+          "bitrate": 128000,
+          "bitrateMode": "variable",
+          "codec": "opus",
+          "numberOfChannels": 1,
+          "sampleRate": 48000
+        }
+      },
+      {
+        "config": {
+          "codec": "mp4a.40.2",
+          "numberOfChannels": 1,
+          "sampleRate": 48000,
+          "bitrate": 128000
+        },
+        "supported": false,
+        "configReturned": {
+          "bitrate": 128000,
+          "bitrateMode": "variable",
+          "codec": "mp4a.40.2",
+          "numberOfChannels": 1,
+          "sampleRate": 48000
+        }
+      }
+    ]
+  }
+}
+CONSOLE log [s4] MediaRecorder.isTypeSupported: [video/webm;codecs=vp9,opus, video/webm;codecs=vp8,opus, video/webm;codecs=vp9, video/webm;codecs=vp8, video/webm, video/mp4, audio/webm;codecs=opus]
+CONSOLE log [s4] using mimeType video/webm;codecs=vp9,opus
+CONSOLE log [s4] WebCodecs probe {VideoEncoder: true, AudioEncoder: true, videoOk: Array(3), audioOk: Array(1)}
+CONSOLE log [s4] MPU created {key: spike/s4-lab/rec/smoke25-1791218024005.webm, uploadId: MGEzMGExNDUtMjNkMi00MjU5LTlmNGItM2MwODI3NWRiZGNhLj…iZTMyLWYxYjJjNjY2MzgzZngxNzkxMjE4MDI0MDMwODUzMzg5, bucket: podcast-recordings-poc}
+CONSOLE log [s4] recording started timeslice=1000ms partSize=5242880 durationSec=25
+CONSOLE log [s4] recorder stopped; flushing uploads…
+CONSOLE log [s4] part 1 uploaded size=5203793 etag="5eb8ae45fc30d4bbe8a0d24580eeedc1" ms=52
+CONSOLE log [s4] resume: list-parts…
+CONSOLE log [s4] resume: remote parts=[1]
+CONSOLE log [s4] complete {ok: true, key: spike/s4-lab/rec/smoke25-1791218024005.webm, contentLength: 5203793, etag: "54d6b0c570cf81f99e7188e884079448-1"}
+DONE mime= video/webm;codecs=vp9,opus chunks= 25 bytes= 5203793 parts= 1 errors= [] key= spike/s4-lab/rec/smoke25-1791218024005.webm remoteLen= 5203793

@@ -1,0 +1,42 @@
+[log] [s4] autoload probe {mime: Array(7), webCodecs: Object}
+[log] [s4] MediaRecorder.isTypeSupported: [video/webm;codecs=vp8,opus, video/webm;codecs=vp9,opus, video/webm;codecs=vp9, video/webm;codecs=vp8, video/webm, video/mp4, audio/webm;codecs=opus]
+[log] [s4] using mimeType video/webm;codecs=vp8,opus
+[log] [s4] WebCodecs probe {VideoEncoder: true, AudioEncoder: true, videoOk: Array(3), audioOk: Array(1)}
+[log] [s4] MPU created {key: spike/s4-lab/rec/lab-main-1791218096742.webm, uploadId: MGEzMGExNDUtMjNkMi00MjU5LTlmNGItM2MwODI3NWRiZGNhLj…hMGM5LTI4ZmYyODdlNWQ2OXgxNzkxMjE4MDk2NzQ4MzM2NzA2, bucket: podcast-recordings-poc}
+[log] [s4] recording started timeslice=1000ms partSize=5242880 durationSec=180
+[log] [s4] part 1 uploaded size=5242880 etag="d98aacae8d02d37c36cab9d087239596" ms=54
+[log] [s4] network online=false
+[log] [s4] part 2 buffered offline (5242880 B)
+[log] [s4] network online=true
+[log] [s4] resume: list-parts…
+[log] [s4] resume: remote parts=[1]
+[log] [s4] part 2 uploaded size=5242880 etag="67cbaf936fa4668f248bdc3599ed59f3" ms=53
+[log] [s4] part 3 uploaded size=5242880 etag="7abbaef1298b1880f4f0ff89c3cd946c" ms=36
+[log] [s4] network online=false
+[log] [s4] part 4 buffered offline (5242880 B)
+[log] [s4] part 5 buffered offline (5242880 B)
+[log] [s4] part 6 buffered offline (5242880 B)
+[log] [s4] network online=true
+[log] [s4] resume: list-parts…
+[log] [s4] resume: remote parts=[1,2,3]
+[log] [s4] part 4 uploaded size=5242880 etag="e46c87923a8db324cc7e3c98cf476924" ms=34
+[log] [s4] part 5 uploaded size=5242880 etag="baaf336681cb07a11c18aefe4b533e0d" ms=51
+[log] [s4] part 6 uploaded size=5242880 etag="85065738ef51d5bbbe1e7c7b4c7e9148" ms=45
+[log] [s4] part 7 uploaded size=5242880 etag="810cf0db7eebe97433c70599a6ff3ad1" ms=55
+[log] [s4] part 8 uploaded size=5242880 etag="90308ff6eacbd11a5ba72e3fc3113cba" ms=45
+[log] [s4] part 9 uploaded size=5242880 etag="d27abc4d967b84147c0f5822ef7bfd91" ms=47
+[log] [s4] part 10 uploaded size=5242880 etag="9581f5da790763426622260d461cb103" ms=44
+[log] [s4] part 11 uploaded size=5242880 etag="6955b6174a8c7b6e7f4c1b939d65f968" ms=51
+[log] [s4] part 12 uploaded size=5242880 etag="7bb3daffa225e21899c3a4d4e9fbce57" ms=53
+[log] [s4] part 13 uploaded size=5242880 etag="7cdfd04de3db9fcdcbf6c5ece5e12f6c" ms=39
+[log] [s4] part 14 uploaded size=5242880 etag="a886b8fbdc904c5dfc2252cf6edb47c5" ms=47
+[log] [s4] part 15 uploaded size=5242880 etag="1d0ee6c372e5a46bf47b1a370e7737b7" ms=53
+[log] [s4] part 16 uploaded size=5242880 etag="f553e347f65e5f0726dc8b099ac5f8c2" ms=46
+[log] [s4] part 17 uploaded size=5242880 etag="91d689897da2dd9a26d29d2266037a89" ms=36
+[log] [s4] part 18 uploaded size=5242880 etag="e11f416129a16070eba90594a7c6870c" ms=46
+[log] [s4] recorder stopped; flushing uploads…
+[log] [s4] part 19 uploaded size=5242880 etag="d7cdd3e4a2ede5a0baa2ecb6713cf4d6" ms=32
+[log] [s4] part 20 uploaded size=198047 etag="2cfabebb6d8a64393c52e3f73284b67d" ms=14
+[log] [s4] resume: list-parts…
+[log] [s4] resume: remote parts=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+[log] [s4] complete {ok: true, key: spike/s4-lab/rec/lab-main-1791218096742.webm, contentLength: 99812767, etag: "2225ec373385ed323222ff309473b0df-20"}

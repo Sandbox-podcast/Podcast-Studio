@@ -1,0 +1,30 @@
+{
+  "tag": "E_despill_erode_from_C",
+  "parent": "C",
+  "downsample_ratio": 0.4,
+  "machine": "box CPU Intel Xeon \u00b7 8 cores \u00b7 no GPU",
+  "note": "post on stills from C: white despill + 1px erode; parent s/min unchanged",
+  "frames_timed": 1798,
+  "wall_fps": 16.15,
+  "seconds_compute_per_min_footage": 111.5,
+  "metrics_t45": {
+    "partial_alpha_frac": 0.0354,
+    "gap45_mean_alpha": 0.559,
+    "gap45_partial_frac": 0.1886,
+    "gap45_opaque_frac": 0.4501,
+    "hair_semitrans_mean_luma": 125.67,
+    "roi_gap": [
+      760,
+      200,
+      860,
+      300
+    ],
+    "roi_hair": [
+      480,
+      40,
+      780,
+      180
+    ]
+  },
+  "partial_alpha_frac_mean_stills": 0.0259
+}

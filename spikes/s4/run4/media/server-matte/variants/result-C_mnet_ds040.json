@@ -1,0 +1,42 @@
+{
+  "tag": "C_mnet_ds040",
+  "onnx": "rvm_mobilenetv3_fp32.onnx",
+  "downsample_ratio": 0.4,
+  "machine": "box CPU Intel Xeon \u00b7 8 cores \u00b7 no GPU",
+  "note": "full 1798 frames",
+  "frames_timed": 1798,
+  "warm_frames": 0,
+  "video_seconds_timed": 59.93,
+  "wall_seconds_timed": 111.34,
+  "wall_fps": 16.15,
+  "seconds_compute_per_min_footage": 111.5,
+  "extrapolated": false,
+  "metrics_t45": {
+    "partial_alpha_frac": 0.0351,
+    "gap45_mean_alpha": 0.5937,
+    "gap45_partial_frac": 0.1872,
+    "gap45_opaque_frac": 0.4864,
+    "hair_semitrans_mean_luma": 163.8,
+    "roi_gap": [
+      760,
+      200,
+      860,
+      300
+    ],
+    "roi_hair": [
+      480,
+      40,
+      780,
+      180
+    ]
+  },
+  "partial_alpha_frac_mean_stills": 0.0257,
+  "stills": [
+    5,
+    15,
+    25,
+    35,
+    45,
+    55
+  ]
+}

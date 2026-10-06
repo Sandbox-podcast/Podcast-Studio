@@ -1,0 +1,14 @@
+{
+  "name": "podcast-studio-s4-webcodecs",
+  "private": true,
+  "version": "0.0.0-spike",
+  "type": "module",
+  "description": "S4 spike: WebCodecs + fragmented MP4 → presigned multipart MinIO (localhost / headless / synthetic)",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.1146.0",
+    "@aws-sdk/s3-request-presigner": "^3.1146.0",
+    "esbuild": "^0.28.2",
+    "mediabunny": "^1.61.3",
+    "playwright": "1.49"
+  }
+}

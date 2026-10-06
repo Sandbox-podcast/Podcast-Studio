@@ -17,6 +17,7 @@ Phase 0 — **architecture + roadmap + spikes**. Peu / pas de code produit tant 
 | [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md) | Architecture cible |
 | [docs/ROADMAP.md](./docs/ROADMAP.md) | Roadmap phasée |
 | [docs/SPIKES.md](./docs/SPIKES.md) | Spikes techniques go/no-go |
+| [spikes/S0-stack.md](./spikes/S0-stack.md) | Rapport spike S0 (stack + auth) |
 
 ## Décisions en une ligne
 
