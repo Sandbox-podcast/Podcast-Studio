@@ -180,6 +180,11 @@ for (const c of CONDS) {
     await pub.fill("#room", room); await pub.fill("#identity", "ab-pub");
     await pub.click("#join"); await waitConnected(pub);
     t.join_at = paris();
+    // "connected" is set before publish; a failed getUserMedia (e.g. NotReadableError, camera held by another
+    // app) must FAIL the condition instead of measuring an empty room (laptop 02:50 cam run).
+    await pub.waitForFunction(() => window.__publishedStream?.getVideoTracks().length > 0 || /error|disconnected/.test(document.querySelector("#status")?.textContent ?? ""), null, { timeout: 30000 }).catch(() => {});
+    const pubOk = await pub.evaluate(() => !!window.__publishedStream?.getVideoTracks().length);
+    if (!pubOk) throw new Error(`publisher has no published video (${(errs.at(-1) ?? "no console error").slice(0, 160)})`);
 
     subCtx = await launch(subMarker);
     const subs = [];

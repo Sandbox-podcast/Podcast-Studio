@@ -420,7 +420,48 @@ Artifact: laptop `scripts/soak-20261006-011411/QLR-ANALYSIS.json` · box `/works
 Run (after lead go): stage `scripts/ab/*` + `public/harness.js` + `public/index.html` into `C:\Users\azero\s1-livekit-oss\scripts\ab\`, then
 `powershell -File scripts\ab\run-ab-laptop.ps1 -VisionFreeConfirmed [-Conds ab-cam-3L-off,ab-cam-3L-on]`. The wrapper deploys to `public\ab\` (root harness used by Vision untouched).
 
-**Box dry run** (02:03–02:06 Paris, isolated box LiveKit 1.8.4 on alt ports, Chromium fake devices, **mock** S4 server — wiring only, numbers not meaningful): 3L → rids q/h/f 320×180 / 640×360 / 1280×720; 2L → q/h 320×180 / 1280×720; `qualityLimitationDurations` deltas + `encoderImplementation` captured (`SimulcastEncoderAdapter (libvpx…)`); sub-hi 1280×720 / sub-lo 320×180 pins hold; S4 hook start/stop/export OK on cam and file streams; S4-down → ON conds SKIPPED. **Laptop results: NOT VALIDATED (not run).**
+**Box dry run** (02:03–02:06 Paris, isolated box LiveKit 1.8.4 on alt ports, Chromium fake devices, **mock** S4 server — wiring only, numbers not meaningful): 3L → rids q/h/f 320×180 / 640×360 / 1280×720; 2L → q/h 320×180 / 1280×720; `qualityLimitationDurations` deltas + `encoderImplementation` captured (`SimulcastEncoderAdapter (libvpx…)`); sub-hi 1280×720 / sub-lo 320×180 pins hold; S4 hook start/stop/export OK on cam and file streams; S4-down → ON conds SKIPPED. Laptop results: see **RESULTS** below.
+
+### Laptop A/B ± HQ rec — RESULTS (02:39–02:53 Paris, loopback, n=1 per condition)
+
+> **Measurement only — no product decision.** Laptop-only (1 pub + 2 subs on one machine), take4 raw file loop (60 s, looped ×2 per window) as reference source. Data: [`s1-lab/livekit-oss/scripts/ab/results-20261006-0239/`](s1-lab/livekit-oss/scripts/ab/results-20261006-0239/) (raw CSVs authoritative; `AB-ANALYSIS.json` via `analyze-ab.py`). Webm on box `/workspace/s1-soak/ab/run-003936/`. Pre-run `nvidia-smi`: no python/onnx compute process.
+
+**Timestamps (Paris, for Media/QLR alignment)**
+
+| cond | window start | window end | S4 rec start | S4 rec stop | S4 result key |
+| --- | --- | --- | --- | --- | --- |
+| ab-file-3L-off | 02:40:05.320 | 02:42:07.626 | — | — | OFF |
+| ab-file-3L-on | 02:42:47.024 | 02:44:47.853 | 02:42:47.326 | 02:44:47.848 | `spike/s4-dropin/ab-file-3L-on-raw-1791247367212.results.json` |
+| ab-file-2L-off | 02:45:27.797 | 02:47:30.350 | — | — | OFF |
+| ab-file-2L-on | 02:48:09.758 | 02:50:10.958 | 02:48:09.993 | 02:50:10.951 | `spike/s4-dropin/ab-file-2L-on-raw-1791247689896.results.json` |
+| ab-cam-3L-on | 02:50:49.757 | 02:52:50.636 | — (start failed) | — | **NOT RUN** — see below |
+
+**Per condition** (HD = top rid: `f` for 3L, `h` for 2L; medians over the 120 s window, 2 s samples)
+
+| cond | HD sent res @fps (samples w/ dims) | QLR share (HD rid samples) | `qualityLimitationDurations` Δ s | encoderImplementation | pub Edge CPU % machine med (max) | sub-hi received res @fps | distinct fps near · 1 s windows ≥24 · longest near-dup |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| file-3L-off | 960×540 @30 (60/60) | cpu 0.90 · none 0.10 | cpu 109.4 · none 10.4 · bw 0 | SimulcastEncoderAdapter (libvpx ×3) | 18.6 (23.0) | 960×540 @30 · freeze Δ0 | **25.95** · **1.00** · 283 ms |
+| file-3L-on | 960×540 @22 (**18/59** — `f` mostly not producing) | cpu 0.90 · none 0.10 | cpu 107.2 · none 10.8 · bw 0 | SEA (libvpx ×3) + libvpx | 20.0 (32.8) | **320×180** @30 · freeze Δ1 | **23.00** · **0.82** · 805 ms |
+| file-2L-off | **1280×720 @30** (60/60) | **none 1.00** | none 119.9 · cpu 0 · bw 0 | SEA (libvpx ×2) | 15.9 (22.0) | **1280×720 @30** · freeze Δ1 | **26.26** · **0.975** · 341 ms |
+| file-2L-on | 960×540 @30 (59/59) | cpu 0.93 · none 0.07 | cpu 110.5 · none 7.8 · bw 0 | SEA (libvpx ×2) | 24.6 (31.2) | 960×540 @29 · freeze Δ0 | **25.28** · **0.984** · 651 ms |
+
+Reference: source `take4-raw.webm` itself = distinct near **29.84**, windows ≥24 **1.00**. Total laptop CPU med: 51 / 55 / 51 / 62.5 %. GPU VideoEncode engine: **0 %** in all conditions (VP8 encode is software libvpx; observation only).
+
+**Rec ON vs OFF (same layers)**
+
+| | 3L | 2L |
+| --- | --- | --- |
+| HD sent | 960×540@30 → 960×540@22, `f` active in only 31 % of samples | 1280×720@30 → 960×540@30 |
+| QLR | cpu-limited in both (≈0.9) | **none 1.00 → cpu 0.93** |
+| pub Edge CPU (machine %) | +1.4 pt med (+9.8 max) | +8.7 pt med (+9.2 max) |
+| sub-hi received | 960×540 → **320×180** | 1280×720 → 960×540 |
+| distinct near / ≥24 share | 25.95 / 1.00 → **23.00 / 0.82** | 26.26 / 0.975 → 25.28 / 0.984 |
+
+**Reading (no decision):** on this single laptop, 2 layers without local HQ rec is the only condition where the HD layer was sent at 1280×720@30 with no quality limit. Local HQ rec (S4Recorder, VP8 2.5 Mbps software encode in the publisher tab) pushes the encoder into `cpu` limitation in both layer configurations. With 3L + rec, the HD subscriber fell back to the low layer for most of the window (distinct ≥24 share 0.82).
+
+**ab-cam-3L-on — NOT RUN (blocker):** `getUserMedia` → `NotReadableError: Could not start video source`. Windows reports the webcam (Microsoft LifeCam Cinema) **in use by `msedge.exe`** (the user's own Edge, not the A/B instance). Nothing was killed. The runner wrongly marked it DONE (status "connected" is set before publish). Fixed afterwards: a condition now FAILs when the publisher has no published video. gUM+rec coexistence: **NOT VALIDATED**.
+
+**Caveats:** n=1 × 120 s per condition. Everything on one laptop (loopback, not LAN). The sub-hi received-track MediaRecorder runs in the sub Edge in every condition. Received-track webm container is fixed at 1280×720 (upscaled when a lower layer is received). Source loops at 60 s inside each window. Two earlier attempts (02:23, 02:33) died after cond 1 (wrapper `ErrorActionPreference=Stop` killed node on a benign stderr line; Playwright `TargetClosedError` on close) and are excluded.
 
 ## Annexe — desk SaaS (superseded)
 

@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "stoppedAtMs": 1791247810874,
+  "results": {
+    "ok": true,
+    "resultsKey": "spike/s4-dropin/ab-file-2L-on-raw-1791247689896.results.json",
+    "localPath": "out/ab-file-2L-on-raw-1791247689896.results.json"
+  }
+}

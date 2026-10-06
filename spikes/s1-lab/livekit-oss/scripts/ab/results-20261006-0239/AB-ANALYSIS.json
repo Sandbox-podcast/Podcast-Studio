@@ -1,0 +1,461 @@
+{
+  "ab-file-3L-off": {
+    "status": "DONE",
+    "window": [
+      "2026-10-06T02:40:05.320",
+      "2026-10-06T02:42:07.626"
+    ],
+    "rec": "OFF",
+    "hd_layer": "f",
+    "hd_sent": {
+      "w_med": 960.0,
+      "h_med": 540.0,
+      "fps_med": 30.0,
+      "samples": 60,
+      "samples_with_dims": 60
+    },
+    "qlr_share_top": {
+      "none": 0.1,
+      "cpu": 0.9
+    },
+    "qlrDurations_delta_s": {
+      "none": 10.4,
+      "cpu": 109.4,
+      "bandwidth": 0.0,
+      "other": 0.0
+    },
+    "qlrDurations_share": {
+      "none": 0.09,
+      "cpu": 0.91,
+      "bandwidth": 0.0,
+      "other": 0.0
+    },
+    "qlrResChanges_delta": 0.0,
+    "encoderImplementation": [
+      "SimulcastEncoderAdapter (libvpx, libvpx, libvpx)"
+    ],
+    "per_rid": {
+      "f": {
+        "w_med": 960.0,
+        "h_med": 540.0,
+        "fps_med": 30.0,
+        "n": 60,
+        "n_with_dims": 60
+      },
+      "h": {
+        "w_med": 480.0,
+        "h_med": 270.0,
+        "fps_med": 20.0,
+        "n": 60,
+        "n_with_dims": 60
+      },
+      "q": {
+        "w_med": 240.0,
+        "h_med": 135.0,
+        "fps_med": 20.0,
+        "n": 60,
+        "n_with_dims": 60
+      }
+    },
+    "cpu": {
+      "pub": {
+        "machine_pct_med": 18.6,
+        "machine_pct_max": 23.0,
+        "one_core_pct_med": 149.2,
+        "n": 41
+      },
+      "sub": {
+        "machine_pct_med": 7.4,
+        "machine_pct_max": 11.5,
+        "one_core_pct_med": 59.1,
+        "n": 41
+      },
+      "total_cpu_pct_med": 51.0,
+      "gpu_videoencode_pct_med": 0.0
+    },
+    "sub_hi_rx": {
+      "w_med": 960.0,
+      "h_med": 540.0,
+      "fps_med": 30.0,
+      "freeze_delta": 0
+    },
+    "distinct_fps": {
+      "threshold": 0.5,
+      "videos": [
+        {
+          "path": "ab-file-3L-off-sub-hi-rx.webm",
+          "width": 1280,
+          "height": 720,
+          "total_frames": 3623,
+          "duration_s": 121.808,
+          "container_fps_pts": 29.743,
+          "near_dup_threshold": 0.5,
+          "distinct_frames_exact": 3623,
+          "distinct_fps_exact": 29.744,
+          "distinct_frames_near": 3161,
+          "distinct_fps_near": 25.951,
+          "longest_repeat_run_frames": 1,
+          "longest_repeat_run_ms": 0.0,
+          "longest_neardup_run_frames": 8,
+          "longest_neardup_run_ms": 283.0,
+          "windows_1s_count": 122,
+          "windows_1s_share_ge24": 1.0,
+          "windows_1s_min_distinct": 24,
+          "windows_1s_median_distinct": 30
+        }
+      ]
+    }
+  },
+  "ab-file-3L-on": {
+    "status": "DONE",
+    "window": [
+      "2026-10-06T02:42:47.024",
+      "2026-10-06T02:44:47.853"
+    ],
+    "rec": "stopped+exported",
+    "hd_layer": "f",
+    "hd_sent": {
+      "w_med": 960.0,
+      "h_med": 540.0,
+      "fps_med": 22.0,
+      "samples": 59,
+      "samples_with_dims": 18
+    },
+    "qlr_share_top": {
+      "none": 0.1,
+      "cpu": 0.9
+    },
+    "qlrDurations_delta_s": {
+      "none": 10.8,
+      "cpu": 107.2,
+      "bandwidth": 0.0,
+      "other": 0.0
+    },
+    "qlrDurations_share": {
+      "none": 0.09,
+      "cpu": 0.91,
+      "bandwidth": 0.0,
+      "other": 0.0
+    },
+    "qlrResChanges_delta": 0.0,
+    "encoderImplementation": [
+      "SimulcastEncoderAdapter (libvpx, libvpx, libvpx)",
+      "libvpx"
+    ],
+    "per_rid": {
+      "f": {
+        "w_med": 960.0,
+        "h_med": 540.0,
+        "fps_med": 22.0,
+        "n": 59,
+        "n_with_dims": 18
+      },
+      "h": {
+        "w_med": 320.0,
+        "h_med": 180.0,
+        "fps_med": 30.0,
+        "n": 59,
+        "n_with_dims": 59
+      },
+      "q": {
+        "w_med": 160.0,
+        "h_med": 90.0,
+        "fps_med": 30.0,
+        "n": 59,
+        "n_with_dims": 59
+      }
+    },
+    "cpu": {
+      "pub": {
+        "machine_pct_med": 20.0,
+        "machine_pct_max": 32.8,
+        "one_core_pct_med": 159.8,
+        "n": 39
+      },
+      "sub": {
+        "machine_pct_med": 7.8,
+        "machine_pct_max": 12.0,
+        "one_core_pct_med": 62.6,
+        "n": 39
+      },
+      "total_cpu_pct_med": 55.0,
+      "gpu_videoencode_pct_med": 0.0
+    },
+    "sub_hi_rx": {
+      "w_med": 320.0,
+      "h_med": 180.0,
+      "fps_med": 30.0,
+      "freeze_delta": 1.0
+    },
+    "distinct_fps": {
+      "threshold": 0.5,
+      "videos": [
+        {
+          "path": "ab-file-3L-on-sub-hi-rx.webm",
+          "width": 1280,
+          "height": 720,
+          "total_frames": 3312,
+          "duration_s": 120.362,
+          "container_fps_pts": 27.516,
+          "near_dup_threshold": 0.5,
+          "distinct_frames_exact": 3312,
+          "distinct_fps_exact": 27.517,
+          "distinct_frames_near": 2768,
+          "distinct_fps_near": 22.997,
+          "longest_repeat_run_frames": 1,
+          "longest_repeat_run_ms": 0.0,
+          "longest_neardup_run_frames": 25,
+          "longest_neardup_run_ms": 805.0,
+          "windows_1s_count": 121,
+          "windows_1s_share_ge24": 0.8182,
+          "windows_1s_min_distinct": 4,
+          "windows_1s_median_distinct": 30
+        }
+      ]
+    }
+  },
+  "ab-file-2L-off": {
+    "status": "DONE",
+    "window": [
+      "2026-10-06T02:45:27.797",
+      "2026-10-06T02:47:30.350"
+    ],
+    "rec": "OFF",
+    "hd_layer": "h",
+    "hd_sent": {
+      "w_med": 1280.0,
+      "h_med": 720.0,
+      "fps_med": 30.0,
+      "samples": 60,
+      "samples_with_dims": 60
+    },
+    "qlr_share_top": {
+      "none": 1.0
+    },
+    "qlrDurations_delta_s": {
+      "none": 119.9,
+      "cpu": 0.0,
+      "bandwidth": 0.0,
+      "other": 0.0
+    },
+    "qlrDurations_share": {
+      "none": 1.0,
+      "cpu": 0.0,
+      "bandwidth": 0.0,
+      "other": 0.0
+    },
+    "qlrResChanges_delta": 0.0,
+    "encoderImplementation": [
+      "SimulcastEncoderAdapter (libvpx, libvpx)"
+    ],
+    "per_rid": {
+      "h": {
+        "w_med": 1280.0,
+        "h_med": 720.0,
+        "fps_med": 30.0,
+        "n": 60,
+        "n_with_dims": 60
+      },
+      "q": {
+        "w_med": 320.0,
+        "h_med": 180.0,
+        "fps_med": 20.0,
+        "n": 60,
+        "n_with_dims": 60
+      }
+    },
+    "cpu": {
+      "pub": {
+        "machine_pct_med": 15.9,
+        "machine_pct_max": 22.0,
+        "one_core_pct_med": 127.2,
+        "n": 40
+      },
+      "sub": {
+        "machine_pct_med": 6.7,
+        "machine_pct_max": 22.8,
+        "one_core_pct_med": 53.9,
+        "n": 40
+      },
+      "total_cpu_pct_med": 51.0,
+      "gpu_videoencode_pct_med": 0.0
+    },
+    "sub_hi_rx": {
+      "w_med": 1280.0,
+      "h_med": 720.0,
+      "fps_med": 30.0,
+      "freeze_delta": 1.0
+    },
+    "distinct_fps": {
+      "threshold": 0.5,
+      "videos": [
+        {
+          "path": "ab-file-2L-off-sub-hi-rx.webm",
+          "width": 1280,
+          "height": 720,
+          "total_frames": 3606,
+          "duration_s": 121.914,
+          "container_fps_pts": 29.578,
+          "near_dup_threshold": 0.5,
+          "distinct_frames_exact": 3606,
+          "distinct_fps_exact": 29.578,
+          "distinct_frames_near": 3202,
+          "distinct_fps_near": 26.264,
+          "longest_repeat_run_frames": 1,
+          "longest_repeat_run_ms": 0.0,
+          "longest_neardup_run_frames": 12,
+          "longest_neardup_run_ms": 341.0,
+          "windows_1s_count": 122,
+          "windows_1s_share_ge24": 0.9754,
+          "windows_1s_min_distinct": 16,
+          "windows_1s_median_distinct": 30
+        }
+      ]
+    }
+  },
+  "ab-file-2L-on": {
+    "status": "DONE",
+    "window": [
+      "2026-10-06T02:48:09.758",
+      "2026-10-06T02:50:10.958"
+    ],
+    "rec": "stopped+exported",
+    "hd_layer": "h",
+    "hd_sent": {
+      "w_med": 960.0,
+      "h_med": 540.0,
+      "fps_med": 30.0,
+      "samples": 59,
+      "samples_with_dims": 59
+    },
+    "qlr_share_top": {
+      "none": 0.07,
+      "cpu": 0.93
+    },
+    "qlrDurations_delta_s": {
+      "none": 7.8,
+      "cpu": 110.5,
+      "bandwidth": 0.0,
+      "other": 0.0
+    },
+    "qlrDurations_share": {
+      "none": 0.07,
+      "cpu": 0.93,
+      "bandwidth": 0.0,
+      "other": 0.0
+    },
+    "qlrResChanges_delta": 0.0,
+    "encoderImplementation": [
+      "SimulcastEncoderAdapter (libvpx, libvpx)"
+    ],
+    "per_rid": {
+      "h": {
+        "w_med": 960.0,
+        "h_med": 540.0,
+        "fps_med": 30.0,
+        "n": 59,
+        "n_with_dims": 59
+      },
+      "q": {
+        "w_med": 240.0,
+        "h_med": 135.0,
+        "fps_med": 20.0,
+        "n": 59,
+        "n_with_dims": 59
+      }
+    },
+    "cpu": {
+      "pub": {
+        "machine_pct_med": 24.6,
+        "machine_pct_max": 31.2,
+        "one_core_pct_med": 196.8,
+        "n": 38
+      },
+      "sub": {
+        "machine_pct_med": 6.7,
+        "machine_pct_max": 12.8,
+        "one_core_pct_med": 53.2,
+        "n": 38
+      },
+      "total_cpu_pct_med": 62.5,
+      "gpu_videoencode_pct_med": 0.0
+    },
+    "sub_hi_rx": {
+      "w_med": 960.0,
+      "h_med": 540.0,
+      "fps_med": 29.0,
+      "freeze_delta": 0
+    },
+    "distinct_fps": {
+      "threshold": 0.5,
+      "videos": [
+        {
+          "path": "ab-file-2L-on-sub-hi-rx.webm",
+          "width": 1280,
+          "height": 720,
+          "total_frames": 3496,
+          "duration_s": 120.578,
+          "container_fps_pts": 28.993,
+          "near_dup_threshold": 0.5,
+          "distinct_frames_exact": 3496,
+          "distinct_fps_exact": 28.994,
+          "distinct_frames_near": 3048,
+          "distinct_fps_near": 25.278,
+          "longest_repeat_run_frames": 1,
+          "longest_repeat_run_ms": 0.0,
+          "longest_neardup_run_frames": 20,
+          "longest_neardup_run_ms": 651.0,
+          "windows_1s_count": 121,
+          "windows_1s_share_ge24": 0.9835,
+          "windows_1s_min_distinct": 16,
+          "windows_1s_median_distinct": 29
+        }
+      ]
+    }
+  },
+  "ab-cam-3L-on": {
+    "status": "DONE",
+    "window": [
+      "2026-10-06T02:50:49.757",
+      "2026-10-06T02:52:50.636"
+    ],
+    "rec": "STOP FAIL not recording",
+    "hd_layer": "f",
+    "hd_sent": {
+      "w_med": null,
+      "h_med": null,
+      "fps_med": null,
+      "samples": 0,
+      "samples_with_dims": 0
+    },
+    "qlr_share_top": {},
+    "qlrDurations_delta_s": {},
+    "qlrDurations_share": {},
+    "qlrResChanges_delta": null,
+    "encoderImplementation": [],
+    "per_rid": {},
+    "cpu": {
+      "pub": {
+        "machine_pct_med": 0.0,
+        "machine_pct_max": 2.1,
+        "one_core_pct_med": 0.0,
+        "n": 43
+      },
+      "sub": {
+        "machine_pct_med": 0.3,
+        "machine_pct_max": 2.9,
+        "one_core_pct_med": 2.1,
+        "n": 43
+      },
+      "total_cpu_pct_med": 14.0,
+      "gpu_videoencode_pct_med": 0.0
+    },
+    "sub_hi_rx": {
+      "w_med": null,
+      "h_med": null,
+      "fps_med": null,
+      "freeze_delta": null
+    },
+    "distinct_fps": null
+  }
+}
