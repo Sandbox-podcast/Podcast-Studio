@@ -203,10 +203,15 @@ async function joinRoom() {
   setStatus("connecting…");
   els.join.disabled = true;
 
-  const roomName = els.room.value.trim() || "s1-lab";
+  let roomName = els.room.value.trim() || "s1-lab";
   const identity = els.identity.value.trim() || `lab-${Date.now()}`;
 
-  const { token, url } = await fetchToken(roomName, identity);
+  const tk = await fetchToken(roomName, identity);
+  const { token, url } = tk;
+  if (tk.room) roomName = tk.room; // tokenFile: the JWT grant decides the room
+  // ?subFrom=id1,id2 : subscribe ONLY to these remote identities (autoSubscribe off) — keeps an A/B subscriber
+  // from decoding a 2nd publisher (LAN pub2) it is not measuring.
+  const subFrom = (urlFlag("subFrom") ?? "").split(",").map((x) => x.trim()).filter(Boolean);
   if (!url) {
     setStatus("error: LIVEKIT_URL not configured on server");
     els.join.disabled = false;
@@ -219,6 +224,11 @@ async function joinRoom() {
     dynacast: true,
   });
 
+  if (subFrom.length) {
+    room.on(RoomEvent.TrackPublished, (pub, participant) => {
+      if (subFrom.includes(participant.identity)) pub.setSubscribed(true);
+    });
+  }
   room.on(RoomEvent.TrackSubscribed, (track, publication, participant) => {
     attachRemoteTrack(track, participant.identity);
   });
@@ -232,8 +242,14 @@ async function joinRoom() {
     setStatus("disconnected");
   });
 
-  await room.connect(url, token);
+  await room.connect(url, token, subFrom.length ? { autoSubscribe: false } : undefined);
   window.__lkRoom = room;
+  if (subFrom.length) {
+    for (const p of room.remoteParticipants.values()) {
+      if (!subFrom.includes(p.identity)) continue;
+      for (const pub of p.trackPublications.values()) pub.setSubscribed(true);
+    }
+  }
   setStatus(`connected — ${roomName}`);
 
   // Chromium hides encoderImplementation/decoderImplementation/powerEfficientEncoder unless the page is
@@ -392,6 +408,7 @@ window.__startSubRec = function __startSubRec(opts = {}) {
   if (subRec && subRec.state !== "inactive") return { ok: true, already: true };
   let mst = null, from = null;
   for (const p of room?.remoteParticipants.values() ?? []) {
+    if (opts.from && p.identity !== opts.from) continue; // record one given publisher only
     for (const pub of p.trackPublications.values()) {
       if (pub.kind === Track.Kind.Video && pub.track?.mediaStreamTrack) { mst = pub.track.mediaStreamTrack; from = p.identity; break; }
     }
@@ -481,6 +498,17 @@ function stopCanvas() {
 }
 
 async function fetchToken(roomName, identity) {
+  // ?tokenFile=/token.json : pre-minted token (no /api/token server, e.g. LAN pub2 on a 2nd machine served by a
+  // static localhost server). File = {url, room, identity, token}; it overrides the room/identity fields.
+  const tokenFile = urlFlag("tokenFile");
+  if (tokenFile) {
+    const r = await fetch(tokenFile, { cache: "no-store" });
+    if (!r.ok) throw new Error(`tokenFile HTTP ${r.status}`);
+    const j = await r.json();
+    if (j.room) els.room.value = j.room;
+    if (j.identity) els.identity.value = j.identity;
+    return j;
+  }
   const q = new URLSearchParams({ room: roomName, identity });
   const res = await fetch(`/api/token?${q}`);
   if (!res.ok) {

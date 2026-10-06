@@ -11,7 +11,7 @@ param(
 $ErrorActionPreference = 'SilentlyContinue'
 $markerList = $Markers -split ','
 $cores = [Environment]::ProcessorCount
-'ts_paris,marker,n_procs,cpu_pct_machine,cpu_pct_one_core,total_cpu_pct,gpu_videoencode_pct,nvenc_util_pct,gpu_videodecode_pct,nvdec_util_pct,gpu_engines_by_adapter' | Set-Content -Encoding utf8 $OutCsv
+'ts_paris,marker,n_procs,cpu_pct_machine,cpu_pct_one_core,total_cpu_pct,gpu_videoencode_pct,nvenc_util_pct,gpu_videodecode_pct,nvdec_util_pct,gpu_engines_by_adapter,nv_gpu_util_pct' | Set-Content -Encoding utf8 $OutCsv
 $prev = @{}; $pidMap = @{}; $i = 0
 $end = (Get-Date).AddSeconds($DurationSec)
 $sw = [Diagnostics.Stopwatch]::StartNew(); $lastMs = 0
@@ -23,7 +23,7 @@ while ((Get-Date) -lt $end) {
   $nowMs = $sw.ElapsedMilliseconds; $wall = [math]::Max(1, $nowMs - $lastMs); $lastMs = $nowMs
   $total = (Get-CimInstance Win32_PerfFormattedData_PerfOS_Processor -Filter "Name='_Total'").PercentProcessorTime
   # one GPU-engine query (WMI perf class names are English even on a French OS) + one nvidia-smi call
-  $gpu = ''; $dec = ''; $nvenc = ''; $nvdec = ''; $engDetail = ''
+  $gpu = ''; $dec = ''; $nvenc = ''; $nvdec = ''; $engDetail = ''; $nvgpu = ''
   try {
     $engAll = Get-CimInstance Win32_PerfFormattedData_GPUPerformanceCounters_GPUEngine
     $e = $engAll | Where-Object { $_.Name -like '*engtype_VideoEncode*' }; if ($e) { $gpu = ($e | Measure-Object -Property UtilizationPercentage -Sum).Sum }
@@ -38,8 +38,8 @@ while ((Get-Date) -lt $end) {
     $engDetail = (($grp.GetEnumerator() | Sort-Object Name | ForEach-Object { "$($_.Name)=$($_.Value)" }) -join ';')
   } catch {}
   try {
-    $nv = ((& nvidia-smi --query-gpu=utilization.encoder,utilization.decoder --format=csv,noheader,nounits 2>$null) | Select-Object -First 1) -split ','
-    $nvenc = $nv[0].Trim(); $nvdec = $nv[1].Trim()
+    $nv = ((& nvidia-smi --query-gpu=utilization.encoder,utilization.decoder,utilization.gpu --format=csv,noheader,nounits 2>$null) | Select-Object -First 1) -split ','
+    $nvenc = $nv[0].Trim(); $nvdec = $nv[1].Trim(); if ($nv.Count -gt 2) { $nvgpu = $nv[2].Trim() }
   } catch {}
   # keep the requested cadence: sleep only the remainder of IntervalMs
   $ts = Get-Date -Format 'yyyy-MM-ddTHH:mm:ss.fff'
@@ -53,7 +53,7 @@ while ((Get-Date) -lt $end) {
       $one = [math]::Round(100 * $d / $wall, 1); $mach = [math]::Round($one / $cores, 1)
     }
     $prev[$m] = $ms
-    Add-Content -Encoding utf8 $OutCsv "$ts,$m,$($ids.Count),$mach,$one,$total,$gpu,$nvenc,$dec,$nvdec,$engDetail"
+    Add-Content -Encoding utf8 $OutCsv "$ts,$m,$($ids.Count),$mach,$one,$total,$gpu,$nvenc,$dec,$nvdec,$engDetail,$nvgpu"
   }
   $i++
   $spent = $sw.ElapsedMilliseconds - $nowMs

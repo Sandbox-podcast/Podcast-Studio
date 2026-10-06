@@ -13,6 +13,12 @@
 //      CHANNEL (msedge) OUT_DIR  ON_S4_FAIL (skip|abort, default skip)
 //      IDLE_S (15; 0 = off) pre-run idle CPU sample, before any Edge launch -> preflight.idleCpu in ab-summary.json
 //      AB_DRY=1 parse CONDS + print the planned rec calls, then exit (no preflight, no Edge, no LiveKit)
+// LAN 2nd publisher: ROOM (fixed room for all conds, else per-cond room) PUB2_ID (identity of a publisher on another
+//      machine, e.g. pub2-desktop-ai): adds subscriber ab-sub-x pinned HIGH that subscribes ONLY to PUB2_ID and records
+//      <cond>-sub-x-rx.webm; ab-sub-hi/lo then subscribe only to ab-pub (?subFrom). PUB2_WAIT_S (60) wait for pub2 video.
+// Capture fps: every SAMPLE_MS the publisher's getStats() `media-source` (kind=video) reports are sampled ->
+//      media-source-series.csv (one row per video source) + src_* columns appended to outbound-rid-series.csv
+//      (joined via outbound-rtp.mediaSourceId) + per-condition `src` block in ab-summary.json (median/min).
 import { mkdirSync, appendFileSync, writeFileSync, existsSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { tmpdir, cpus } from "node:os";
@@ -40,6 +46,9 @@ const COOLDOWN_S = Number(process.env.COOLDOWN_S ?? 10);
 const SAMPLE_MS = Number(process.env.SAMPLE_MS ?? 2000);
 const S4_BASE = process.env.S4_BASE ?? "http://127.0.0.1:3320";
 const CHANNEL = process.env.CHANNEL ?? "msedge";
+const ROOM = process.env.ROOM ?? "";
+const PUB2_ID = process.env.PUB2_ID ?? "";
+const PUB2_WAIT_S = Number(process.env.PUB2_WAIT_S ?? 60);
 const ON_S4_FAIL = process.env.ON_S4_FAIL ?? "skip";
 const CHROME_PATH = process.env.CHROME_PATH ?? ""; // box dry-run only (else system Edge via CHANNEL)
 const FAKE_MEDIA = process.env.FAKE_MEDIA === "1";
@@ -90,6 +99,7 @@ const recStartOpts = (c) => c.recMime
   : { cond: c.name, durationSec: REC_S };
 if (AB_DRY) {
   for (const c of CONDS) console.log("[ab-dry]", JSON.stringify({ ...c, recStart: c.rec ? recStartOpts(c) : null }));
+  console.log("[ab-dry] timing", JSON.stringify({ WARMUP_S, REC_S, SAMPLE_MS, COOLDOWN_S, S4_BASE, CODEC, HARNESS, AB_PATH, SUB_REC, ROOM: ROOM || "(per-cond)", PUB2_ID: PUB2_ID || "(none)", PUB2_WAIT_S, srcSampling: "media-source video -> media-source-series.csv + outbound src_* + summary.src" }));
   console.log("[ab-dry] exit before preflight: nothing launched");
   process.exit(0);
 }
@@ -102,6 +112,7 @@ const paris = (ms = Date.now()) => {
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const med = (a) => { const s = a.filter(Number.isFinite).sort((x, y) => x - y); if (!s.length) return null; const m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
 const max = (a) => { const s = a.filter(Number.isFinite); return s.length ? Math.max(...s) : null; };
+const min = (a) => { const s = a.filter(Number.isFinite); return s.length ? Math.min(...s) : null; };
 const r1 = (x) => (x == null ? null : Math.round(x * 10) / 10);
 const csvq = (v) => (v == null ? "" : /[",\n]/.test(String(v)) ? JSON.stringify(String(v)) : String(v));
 const row = (arr) => arr.map(csvq).join(",") + "\n";
@@ -161,9 +172,14 @@ if (IDLE_S > 0) {
 const OUT_CSV = join(OUT_DIR, "outbound-rid-series.csv");
 const IN_CSV = join(OUT_DIR, "inbound-series.csv");
 const TIMES_CSV = join(OUT_DIR, "conditions-timestamps.csv");
-appendFileSync(OUT_CSV, row(["cond", "t_rel_s", "at_paris", "rid", "ssrc", "w", "h", "fps", "bytesSent", "framesSent", "active", "qlr", "qlrDur_none", "qlrDur_cpu", "qlrDur_bandwidth", "qlrDur_other", "qlrResChanges", "encoderImplementation", "powerEfficientEncoder", "scalabilityMode", "targetBitrate", "codec"]));
+appendFileSync(OUT_CSV, row(["cond", "t_rel_s", "at_paris", "rid", "ssrc", "w", "h", "fps", "bytesSent", "framesSent", "active", "qlr", "qlrDur_none", "qlrDur_cpu", "qlrDur_bandwidth", "qlrDur_other", "qlrResChanges", "encoderImplementation", "powerEfficientEncoder", "scalabilityMode", "targetBitrate", "codec", "src_fps", "src_frames", "src_w", "src_h", "framesEncoded", "totalEncodeTime", "keyFramesEncoded"]));
 appendFileSync(IN_CSV, row(["cond", "t_rel_s", "at_paris", "sub", "pin", "kind", "ssrc", "w", "h", "fps", "bytesReceived", "packetsLost", "jitter", "freezeCount", "totalFreezesDuration", "decoderImplementation"]));
-appendFileSync(TIMES_CSV, row(["cond", "status", "join_at", "window_start_paris", "window_end_paris", "rec_start_paris", "rec_stop_paris", "rec_result", "note", "subrec_start_paris", "subrec_stop_paris", "subrec_file", "subrec_bytes"]));
+// media-source (capture side, before the encoder): fps/frames = what the cam/captureStream delivered to WebRTC.
+// src_fps_frames = d(frames)/d(timestamp) between consecutive samples of the same source (independent of the
+// browser's 1 s framesPerSecond window).
+const SRC_CSV = join(OUT_DIR, "media-source-series.csv");
+appendFileSync(SRC_CSV, row(["cond", "t_rel_s", "at_paris", "source_id", "trackIdentifier", "src_fps", "src_frames", "src_w", "src_h", "src_fps_frames", "ts"]));
+appendFileSync(TIMES_CSV, row(["cond", "status", "join_at", "window_start_paris", "window_end_paris", "rec_start_paris", "rec_stop_paris", "rec_result", "note", "subrec_start_paris", "subrec_stop_paris", "subrec_file", "subrec_bytes", "pub2", "subx_file", "subx_bytes"]));
 
 const INIT_PC = () => {
   const Orig = window.RTCPeerConnection;
@@ -175,17 +191,23 @@ const INIT_PC = () => {
 
 async function stats(page) {
   return page.evaluate(async () => {
-    const out = [], inn = [];
+    const out = [], inn = [], src = [];
+    let pci = 0;
     for (const pc of window.__pcs ?? []) {
+      pci++;
       if (pc.connectionState === "closed") continue;
       const rep = await pc.getStats();
       for (const s of rep.values()) {
-        if (s.type === "outbound-rtp" && s.kind === "video") out.push({
+        if (s.type === "media-source" && s.kind === "video") src.push({
+          id: `pc${pci}:${s.id}`, trackIdentifier: s.trackIdentifier ?? null, fps: s.framesPerSecond ?? null,
+          frames: s.frames ?? null, w: s.width ?? null, h: s.height ?? null, ts: s.timestamp });
+        if (s.type === "outbound-rtp" && s.kind === "video") out.push({ srcId: s.mediaSourceId ? `pc${pci}:${s.mediaSourceId}` : null,
           rid: s.rid ?? null, ssrc: s.ssrc, w: s.frameWidth ?? null, h: s.frameHeight ?? null, fps: s.framesPerSecond ?? null,
           bytesSent: s.bytesSent, framesSent: s.framesSent, active: s.active ?? null, qlr: s.qualityLimitationReason ?? null,
           qlrDurations: s.qualityLimitationDurations ?? null, qlrResChanges: s.qualityLimitationResolutionChanges ?? null,
           encoderImplementation: s.encoderImplementation ?? null, powerEfficientEncoder: s.powerEfficientEncoder ?? null,
-          scalabilityMode: s.scalabilityMode ?? null, targetBitrate: s.targetBitrate ?? null, codec: rep.get(s.codecId)?.mimeType ?? null, ts: s.timestamp });
+          scalabilityMode: s.scalabilityMode ?? null, targetBitrate: s.targetBitrate ?? null, codec: rep.get(s.codecId)?.mimeType ?? null,
+          framesEncoded: s.framesEncoded ?? null, totalEncodeTime: s.totalEncodeTime ?? null, keyFramesEncoded: s.keyFramesEncoded ?? null, ts: s.timestamp });
         if (s.type === "inbound-rtp" && (s.kind === "video" || s.kind === "audio")) inn.push({
           kind: s.kind, ssrc: s.ssrc, w: s.frameWidth ?? null, h: s.frameHeight ?? null, fps: s.framesPerSecond ?? null,
           bytesReceived: s.bytesReceived, packetsLost: s.packetsLost ?? null, jitter: s.jitter ?? null,
@@ -193,7 +215,7 @@ async function stats(page) {
           decoderImplementation: s.decoderImplementation ?? null, ts: s.timestamp });
       }
     }
-    return { out, inn };
+    return { out, inn, src };
   });
 }
 
@@ -224,18 +246,19 @@ async function launch(marker) {
 const summaries = [];
 
 for (const c of CONDS) {
-  const room = `s1-${c.name}-${stamp.slice(-6)}`;
-  const t = { cond: c.name, status: "pending", join_at: null, ws: null, we: null, rs: null, re: null, rec_result: "", note: "", srs: null, sre: null, sfile: "", sbytes: "" };
+  const room = ROOM || `s1-${c.name}-${stamp.slice(-6)}`;
+  const t = { cond: c.name, status: "pending", join_at: null, ws: null, we: null, rs: null, re: null, rec_result: "", note: "", srs: null, sre: null, sfile: "", sbytes: "", pub2: PUB2_ID ? "pending" : "", xfile: "", xbytes: "" };
   if (c.rec && !s4Ok) {
     t.status = "SKIPPED"; t.note = "S4 health failed";
-    appendFileSync(TIMES_CSV, row([c.name, t.status, "", "", "", "", "", "", t.note, "", "", "", ""]));
+    appendFileSync(TIMES_CSV, row([c.name, t.status, "", "", "", "", "", "", t.note, "", "", "", "", "", "", ""]));
     log(`${c.name} SKIPPED (S4 health failed)`); continue;
   }
   log(`=== ${c.name} room=${room} src=${c.src} layers=${c.L} codec=${c.codec} file=${c.file} rec=${c.rec ? "ON" : "OFF"}${c.recMime ? ` recMime=${c.recMime} participant=${c.recParticipant}` : ""}`);
   const pubMarker = `s1ab-pub-${c.name}-${stamp}`, subMarker = `s1ab-sub-${c.name}-${stamp}`;
   const cpu = startCpuSampler(c.name, [pubMarker, subMarker], WARMUP_S + REC_S + 60);
   let pubCtx, subCtx;
-  const series = { out: [], inn: [] };
+  const series = { out: [], inn: [], src: [] };
+  const srcPrev = new Map();
   const t0 = Date.now();
   try {
     pubCtx = await launch(pubMarker);
@@ -246,6 +269,7 @@ for (const c of CONDS) {
     if (c.codec !== "vp8") q.set("codec", c.codec);
     if (c.src === "file") q.set("src", c.file);
     if (c.src === "file" && UNLOCK_FILE) q.set("unlockStats", "1");
+    if (PUB2_ID) q.set("subFrom", "__none__"); // publisher tab must not decode the LAN pub2 (not in the 11:01 baseline)
     await pub.goto(`${HARNESS}${AB_PATH}?${q}`, { waitUntil: "load", timeout: 45000 });
     await pub.fill("#room", room); await pub.fill("#identity", "ab-pub");
     await pub.click("#join"); await waitConnected(pub);
@@ -258,16 +282,27 @@ for (const c of CONDS) {
 
     subCtx = await launch(subMarker);
     const subs = [];
-    for (const [id, pin] of [["ab-sub-hi", "HIGH"], ["ab-sub-lo", "LOW"]]) {
+    const subDefs = [["ab-sub-hi", "HIGH", PUB2_ID ? "ab-pub" : ""], ["ab-sub-lo", "LOW", PUB2_ID ? "ab-pub" : ""]];
+    if (PUB2_ID) subDefs.push(["ab-sub-x", "HIGH", PUB2_ID]);
+    for (const [id, pin, from] of subDefs) {
       const pg = subs.length ? await subCtx.newPage() : (subCtx.pages()[0] ?? await subCtx.newPage());
-      await pg.goto(`${HARNESS}${AB_PATH}?adaptive=0&mode=none${UNLOCK_SUBS ? "&unlockStats=1" : ""}`, { waitUntil: "load", timeout: 45000 });
+      await pg.goto(`${HARNESS}${AB_PATH}?adaptive=0&mode=none${UNLOCK_SUBS ? "&unlockStats=1" : ""}${from ? `&subFrom=${encodeURIComponent(from)}` : ""}`, { waitUntil: "load", timeout: 45000 });
       await pg.fill("#room", room); await pg.fill("#identity", id);
       await pg.selectOption("#media-mode", "none");
       await pg.click("#join"); await waitConnected(pg);
-      subs.push({ id, pin, pg });
+      subs.push({ id, pin, from, pg });
     }
     const pinAll = () => Promise.all(subs.map((s) => s.pg.evaluate((q) => window.__pinLayer?.(q) ?? -1, s.pin).catch(() => -1)));
     await sleep(3000); await pinAll();
+    const x = subs.find((s) => s.id === "ab-sub-x");
+    if (x) {
+      const ok = await x.pg.waitForFunction((id) => [...(window.__lkRoom?.remoteParticipants.values() ?? [])].some((p) => p.identity === id &&
+        [...p.trackPublications.values()].some((pub) => pub.kind === "video" && pub.track?.mediaStreamTrack)), PUB2_ID, { timeout: PUB2_WAIT_S * 1000 }).then(() => true).catch(() => false);
+      t.pub2 = ok ? "present" : "ABSENT";
+      log(`${c.name} pub2 ${PUB2_ID} ${t.pub2}`);
+      if (!ok) t.note = `pub2 ${PUB2_ID} absent after ${PUB2_WAIT_S}s`;
+      await pinAll();
+    }
     log(`${c.name} joined; warmup ${WARMUP_S}s`);
     await sleep(WARMUP_S * 1000);
 
@@ -275,11 +310,16 @@ for (const c of CONDS) {
     const wsMs = Date.now(); t.ws = paris(wsMs);
     const hi = subs.find((s) => s.pin === "HIGH");
     if (SUB_REC && hi) {
-      const r = await hi.pg.evaluate((b) => window.__startSubRec({ vBitrate: b }), SUB_REC_BITRATE).catch((e) => ({ ok: false, error: String(e) }));
+      const r = await hi.pg.evaluate((o) => window.__startSubRec(o), { vBitrate: SUB_REC_BITRATE, ...(PUB2_ID ? { from: "ab-pub" } : {}) }).catch((e) => ({ ok: false, error: String(e) }));
       t.srs = paris();
       writeFileSync(join(OUT_DIR, `${c.name}-sub-hi-rec-start.json`), JSON.stringify(r, null, 2));
       if (!r.ok) t.note = `subrec start: ${r.error}`;
       log(`${c.name} sub-hi rec start ${JSON.stringify(r).slice(0, 160)}`);
+    }
+    if (SUB_REC && x && t.pub2 === "present") {
+      const r = await x.pg.evaluate((o) => window.__startSubRec(o), { vBitrate: SUB_REC_BITRATE, from: PUB2_ID }).catch((e) => ({ ok: false, error: String(e) }));
+      writeFileSync(join(OUT_DIR, `${c.name}-sub-x-rec-start.json`), JSON.stringify(r, null, 2));
+      log(`${c.name} sub-x rec start ${JSON.stringify(r).slice(0, 160)}`);
     }
     if (c.rec) {
       const r = await pub.evaluate((o) => window.__startHqRec(o), recStartOpts(c));
@@ -305,11 +345,22 @@ for (const c of CONDS) {
       await sleep(SAMPLE_MS);
       const tr = Math.round((Date.now() - wsMs) / 100) / 10, at = paris();
       await pinAll();
-      const ps = await stats(pub).catch(() => ({ out: [] }));
+      const ps = await stats(pub).catch(() => ({ out: [], src: [] }));
+      const srcById = new Map();
+      for (const m of ps.src ?? []) {
+        const p = srcPrev.get(m.id);
+        const dts = p ? (m.ts - p.ts) / 1000 : 0;
+        const fpsFrames = p && dts > 0 && m.frames != null && p.frames != null ? r1((m.frames - p.frames) / dts) : null;
+        srcPrev.set(m.id, m);
+        const e = { tr, ...m, fpsFrames };
+        srcById.set(m.id, e); series.src.push(e);
+        appendFileSync(SRC_CSV, row([c.name, tr, at, m.id, m.trackIdentifier, m.fps, m.frames, m.w, m.h, fpsFrames, m.ts]));
+      }
       for (const o of ps.out) {
-        series.out.push({ tr, ...o });
         const d = o.qlrDurations ?? {};
-        appendFileSync(OUT_CSV, row([c.name, tr, at, o.rid, o.ssrc, o.w, o.h, o.fps, o.bytesSent, o.framesSent, o.active, o.qlr, d.none, d.cpu, d.bandwidth, d.other, o.qlrResChanges, o.encoderImplementation, o.powerEfficientEncoder, o.scalabilityMode, o.targetBitrate, o.codec]));
+        const m = o.srcId ? srcById.get(o.srcId) : (srcById.size === 1 ? [...srcById.values()][0] : null);
+        series.out.push({ tr, ...o, srcFps: m?.fps ?? null, srcFpsFrames: m?.fpsFrames ?? null });
+        appendFileSync(OUT_CSV, row([c.name, tr, at, o.rid, o.ssrc, o.w, o.h, o.fps, o.bytesSent, o.framesSent, o.active, o.qlr, d.none, d.cpu, d.bandwidth, d.other, o.qlrResChanges, o.encoderImplementation, o.powerEfficientEncoder, o.scalabilityMode, o.targetBitrate, o.codec, m?.fps, m?.frames, m?.w, m?.h, o.framesEncoded, o.totalEncodeTime, o.keyFramesEncoded]));
       }
       for (const s of subs) {
         const ss = await stats(s.pg).catch(() => ({ inn: [] }));
@@ -333,6 +384,16 @@ for (const c of CONDS) {
         log(`${c.name} sub-hi rec stop ${JSON.stringify(r)}`);
       } catch (e) { t.note = `subrec save: ${String(e?.message ?? e).split("\n")[0]}`; log(`${c.name} ${t.note}`); }
     }
+    if (SUB_REC && x && t.pub2 === "present") {
+      const fname = `${c.name}-sub-x-rx.webm`;
+      try {
+        const dlP = x.pg.waitForEvent("download", { timeout: 60000 });
+        const r = await x.pg.evaluate((f) => window.__stopSubRec(f), fname);
+        if (r.ok) { const dl = await dlP; await dl.saveAs(join(OUT_DIR, fname)); t.xfile = fname; t.xbytes = r.bytes; }
+        else dlP.catch(() => {});
+        log(`${c.name} sub-x rec stop ${JSON.stringify(r)}`);
+      } catch (e) { log(`${c.name} sub-x rec save: ${String(e?.message ?? e).split("\n")[0]}`); }
+    }
     if (c.rec) {
       const r = await pub.evaluate(() => window.__stopHqRec());
       t.re = paris(); t.rec_result = r.ok ? "stopped+exported" : `STOP FAIL ${r.error}`;
@@ -352,7 +413,7 @@ for (const c of CONDS) {
     await closeT(pubCtx);
     try { cpu?.p.kill(); } catch {}
   }
-  appendFileSync(TIMES_CSV, row([c.name, t.status, t.join_at, t.ws, t.we, t.rs, t.re, t.rec_result, t.note, t.srs, t.sre, t.sfile, t.sbytes]));
+  appendFileSync(TIMES_CSV, row([c.name, t.status, t.join_at, t.ws, t.we, t.rs, t.re, t.rec_result, t.note, t.srs, t.sre, t.sfile, t.sbytes, t.pub2, t.xfile, t.xbytes]));
 
   // ---- per-condition summary (raw series stays authoritative) ----
   const rids = [...new Set(series.out.map((o) => o.rid ?? "single"))];
@@ -365,14 +426,42 @@ for (const c of CONDS) {
     const dDur = {};
     if (first && last) for (const k of Object.keys(last)) dDur[k] = r1(last[k] - (first[k] ?? 0));
     const qc = {}; for (const o of rs) qc[o.qlr ?? "null"] = (qc[o.qlr ?? "null"] ?? 0) + 1;
-    perRid[rid] = { n: rs.length, w_med: med(rs.map((o) => o.w)), h_med: med(rs.map((o) => o.h)), fps_med: r1(med(rs.map((o) => o.fps))), kbps_med: r1(med(kbps)), qlr_counts: qc, qlrDurations_delta_s: dDur, qlrResChanges_delta: (rs.at(-1)?.qlrResChanges ?? 0) - (rs[0]?.qlrResChanges ?? 0), encoderImplementation: [...new Set(rs.map((o) => o.encoderImplementation).filter(Boolean))] };
+    // Encoder-skip detector: encoded fps (d framesEncoded/dt) vs capture fps (media-source) on the same interval.
+    // ref = min(src fps, layer cap): livekit-client 2.9.1 presets cap h180/h360 at 20 fps, top layer at 30 fps.
+    const topRid = c.L === 2 ? "h" : "f", cap = rid === topRid || rid === "single" ? 30 : 20;
+    const encFps = [], encMs = [], srcRef = [], skips = [];
+    for (let i = 1; i < rs.length; i++) {
+      const a = rs[i - 1], b = rs[i], dt = (b.ts - a.ts) / 1000;
+      if (!(dt > 0) || b.framesEncoded == null || a.framesEncoded == null) continue;
+      const df = b.framesEncoded - a.framesEncoded, ef = df / dt; encFps.push(ef);
+      if (df > 0 && b.totalEncodeTime != null && a.totalEncodeTime != null) encMs.push((1000 * (b.totalEncodeTime - a.totalEncodeTime)) / df);
+      const src = b.srcFpsFrames ?? b.srcFps; if (!Number.isFinite(src)) continue;
+      const ref = Math.min(src, cap); srcRef.push(ref);
+      if (ef < ref - 3 && b.qlr === "none") skips.push({ t_rel_s: b.tr, enc_fps: r1(ef), src_fps: r1(src), ref_fps: r1(ref) });
+    }
+    const enc = { layer_cap_fps: cap, top: rid === topRid, enc_fps_med: r1(med(encFps)), enc_fps_min: r1(min(encFps)),
+                  src_ref_fps_med: r1(med(srcRef)), encode_ms_per_frame_med: r1(med(encMs)),
+                  keyFrames_delta: rs.length > 1 && rs.at(-1).keyFramesEncoded != null && rs[0].keyFramesEncoded != null ? rs.at(-1).keyFramesEncoded - rs[0].keyFramesEncoded : null,
+                  n_intervals: encFps.length, n_enc_lt_src_minus3_qlr_none: skips.length, samples_enc_lt_src_minus3_qlr_none: skips };
+    perRid[rid] = { n: rs.length, w_med: med(rs.map((o) => o.w)), h_med: med(rs.map((o) => o.h)), fps_med: r1(med(rs.map((o) => o.fps))), kbps_med: r1(med(kbps)), qlr_counts: qc, qlrDurations_delta_s: dDur, qlrResChanges_delta: (rs.at(-1)?.qlrResChanges ?? 0) - (rs[0]?.qlrResChanges ?? 0), encoderImplementation: [...new Set(rs.map((o) => o.encoderImplementation).filter(Boolean))], enc };
+  }
+  // capture side (media-source, video): one block per source; NOT CAPTURED if the browser exposed none
+  const srcSum = {};
+  for (const id of [...new Set(series.src.map((m) => m.id))]) {
+    const ms = series.src.filter((m) => m.id === id);
+    const fps = ms.map((m) => m.fps), ff = ms.map((m) => m.fpsFrames);
+    srcSum[id] = { n: ms.length, trackIdentifier: ms[0]?.trackIdentifier ?? null,
+                   src_fps_med: r1(med(fps)), src_fps_min: r1(min(fps)), src_fps_lt24: fps.filter((x) => Number.isFinite(x) && x < 24).length,
+                   src_fps_frames_med: r1(med(ff)), src_fps_frames_min: r1(min(ff)),
+                   src_w_med: med(ms.map((m) => m.w)), src_h_med: med(ms.map((m) => m.h)),
+                   src_frames_delta: ms.length > 1 && ms.at(-1).frames != null && ms[0].frames != null ? ms.at(-1).frames - ms[0].frames : null };
   }
   const subSum = {};
-  for (const sid of ["ab-sub-hi", "ab-sub-lo"]) {
+  for (const sid of PUB2_ID ? ["ab-sub-hi", "ab-sub-lo", "ab-sub-x"] : ["ab-sub-hi", "ab-sub-lo"]) {
     const v = series.inn.filter((i) => i.sub === sid && i.kind === "video");
     subSum[sid] = { n: v.length, w_med: med(v.map((i) => i.w)), h_med: med(v.map((i) => i.h)), fps_med: r1(med(v.map((i) => i.fps))), freeze_delta: v.length ? (v.at(-1).freezeCount ?? 0) - (v[0].freezeCount ?? 0) : null, decoder: [...new Set(v.map((i) => i.decoderImplementation).filter(Boolean))] };
   }
-  summaries.push({ cond: c.name, status: t.status, note: t.note || undefined, window: [t.ws, t.we], rec: c.rec ? [t.rs, t.re, t.rec_result] : "OFF", ...(c.recMime ? { recMime: t.recMime ?? { requested: c.recMime, recorder: null }, recParticipant: c.recParticipant } : {}), perRid, subs: subSum, cpu_csv: cpu ? `${c.name}-cpu.csv` : "NOT CAPTURED", elapsed_s: Math.round((Date.now() - t0) / 1000) });
+  summaries.push({ cond: c.name, status: t.status, note: t.note || undefined, window: [t.ws, t.we], rec: c.rec ? [t.rs, t.re, t.rec_result] : "OFF", ...(c.recMime ? { recMime: t.recMime ?? { requested: c.recMime, recorder: null }, recParticipant: c.recParticipant } : {}), perRid, src: Object.keys(srcSum).length ? srcSum : "NOT CAPTURED (no media-source video stats)", subs: subSum, ...(PUB2_ID ? { pub2: { id: PUB2_ID, status: t.pub2, rx: t.xfile || null } } : {}), cpu_csv: cpu ? `${c.name}-cpu.csv` : "NOT CAPTURED", elapsed_s: Math.round((Date.now() - t0) / 1000) });
   writeFileSync(join(OUT_DIR, "ab-summary.json"), JSON.stringify({ preflight: pre, summaries }, null, 2));
   log(`${c.name} ${t.status} window ${t.ws} → ${t.we}`);
   await sleep(COOLDOWN_S * 1000);
@@ -386,6 +475,6 @@ for (const line of readFileSync(TIMES_CSV, "utf8").trim().split("\n").slice(1)) 
   md += `| ${f[0]} | ${f[1]} | ${f[3] || "—"} | ${f[4] || "—"} | ${f[5] || "—"} | ${f[6] || "—"} | ${f[7] || (f[8] ? f[8] : "OFF")} | ${f[11] ? `${f[11]} (${f[12]} B)` : "—"} |\n`;
 }
 md += `\nDistinct fps (box): \`python3 /workspace/podcast-studio/tools/distinct_fps.py --threshold 0.5 --json-out r.json <cond>-sub-hi-rx.webm\`\n`;
-md += `\nRaw: outbound-rid-series.csv · inbound-series.csv · <cond>-cpu.csv · <cond>-s4-results.json · ab-summary.json\n`;
+md += `\nRaw: outbound-rid-series.csv (src_* = media-source) · media-source-series.csv · inbound-series.csv · <cond>-cpu.csv · <cond>-s4-results.json · ab-summary.json\n`;
 writeFileSync(join(OUT_DIR, "AB-TIMESTAMPS.md"), md);
 log("done", OUT_DIR);
