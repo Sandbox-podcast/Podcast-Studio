@@ -165,3 +165,42 @@ Box analysis, one run per condition and pass. **Measured numbers only.** Report:
 **Capture-relative loss — report net (lead adoption 17:45).** Clipped at 1 s sampling equals the noise floor (0.812 / 1.065 / 0.981 / 1.262 %) and **must not be used as a gate** (boundary ±1-frame bias ~2× larger than at 2 s; 3L clipped >1 % with zero frames missing). **Net:** −0.084…0.000 % (2L-a 0.000, 3L-a 0.000, 2L-b −0.056, 3L-b −0.084). Matches RTC. Camera dips <24: 0/480 samples.
 
 **Lead D-12 = 3L for live (indicatif, N=2).** Both 3L runs clean (720p30, QLR none); both 2L runs started with low/slow BWE (2L-a QLR bandwidth ≈54 s, 2L-b under target to t≈50). S4 HQ master validated indicative on this sequence (decoupled from live).
+
+---
+
+## 2026-10-07 morning: desktop-ai credential-free headless recordings (synthetic + take4 file-fed, indicative, N=1 each)
+
+Edge 155 headless on desktop-ai with the Chromium fake device; recorder.js v2.2 unchanged
+([`dropin/public/recorder.js`](./dropin/public/recorder.js)). The box only handed over presigned URLs: **no MinIO credentials
+on desktop-ai**, nothing installed. Parts went browser → MinIO direct. Bench:
+[`desktop-nocreds/RUNBOOK.md`](./desktop-nocreds/RUNBOOK.md). Box analysis with [`analyze_ab.py`](./analyze_ab.py) and
+[`../../tools/distinct_fps.py`](../../tools/distinct_fps.py) v2. No camera footage committed.
+
+**Synthetic (09:24, key `…desktop-ai-synth-1791357738106`; source synthétique, indicatif)**
+- Report: [`ab-reports/2026-10-07-desktop-ai-synth.md`](./ab-reports/2026-10-07-desktop-ai-synth.md).
+- Recording:
+  - loss 0.03 %, max gap 50 ms, 0 holes > 200 ms;
+  - distinct fps v2 exact = near 30.001 at 0.3 and 0.5, 120/120 windows ≥ 24;
+  - 1280×720 vp8 + opus; remux with Cues OK.
+- Bitrate 0.916 Mbps: FAIL vs the 1 Mbps gate. The fake pattern compresses well; synthetic source.
+- **Upload FAIL at record time: `completeOk=false`.** Cause: a bench bug in `server-nocreds.mjs`. MinIO's ListParts returns
+  the ETag as `&#34;…&#34;`, which the server did not decode, so Complete got `InvalidPart`. The 3 parts were intact.
+  - **Post-hoc fix:** a manual Complete with the fixed server gave a byte-exact object (sha256 = page localSha256).
+  - results.json was left as recorded and not rewritten.
+- The fix is in the committed bench.
+
+**Take4 file-fed (09:37, key `…desktop-ai-take4-1791358605161`; source fichier take4 (vraie cam en boucle), indicatif)**
+- Report: [`ab-reports/2026-10-07-desktop-ai-take4.md`](./ab-reports/2026-10-07-desktop-ai-take4.md).
+- **`completeOk=true` on the first try** (8/8 parts, 1 attempt each), 39 510 469 B, sha256 = page.
+- All gates PASS, both on the full file and with ±3 s excluded around the 6 measured loop points (19.437 … 119.603 s):
+  - loss 0.01 % / 0.0 %, max gap 48 ms;
+  - 2.633 Mbps;
+  - distinct fps v2 near 29.970 (0.3) / 29.953 (0.5), share ≥ 24 = 1.0 (min 29 / 28);
+  - no near-dup freeze > 200 ms.
+- **A/V sync N/A:** the take4 audio file is a constant 300 Hz tone, not speech.
+- **Audio level drop of about 10 dB within 3 s: NON VALIDÉ.** Tone source only, cause unverified (browser AGC/NS/EC suspected).
+  Tracked in [issue #15](https://github.com/Sandbox-podcast/Podcast-Studio/issues/15); no recorder change before that test.
+
+**Tool label correction.** The box copy of `tools/distinct_fps.py` used by the box `analyze_ab.py` is the older v1 (blob
+`33c21ac`, exact-hash windows). The v2 numbers above come from main's `tools/distinct_fps.py` (blob `23bd6aa`). v1 and v2 agree
+on both runs.
