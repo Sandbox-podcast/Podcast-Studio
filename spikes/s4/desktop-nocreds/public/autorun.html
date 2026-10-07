@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>S4 desktop-ai autorun</title>
+  <style>body{font:13px system-ui;background:#111;color:#eee;margin:12px} #log{white-space:pre-wrap;font:12px monospace}</style>
+</head>
+<body>
+  <h1>S4 desktop-ai autorun (fake camera + mic)</h1>
+  <div id="status">idle</div>
+  <video id="preview" muted playsinline autoplay width="320" height="180"></video>
+  <div id="log"></div>
+  <!-- /recorder.js is served by server-nocreds.mjs from the unchanged spikes/s4/dropin/public/recorder.js (v2.2);
+       not vendored in this folder (see RUNBOOK.md and S4_RECORDER_JS). -->
+  <script type="module" src="/recorder.js"></script>
+  <script type="module">
+    // Params: ?mode=smoke|record &dur=120 &w=1280 &h=720 &fps=30 &vbr=2500000 &mime=video/webm;codecs=vp8,opus &label=synth
+    const qp = new URLSearchParams(location.search);
+    const mode = qp.get('mode') || 'smoke';
+    const dur = Number(qp.get('dur') || 120);
+    const W = Number(qp.get('w') || 1280), H = Number(qp.get('h') || 720), FPS = Number(qp.get('fps') || 30);
+    const VBR = Number(qp.get('vbr') || 2500000);
+    const MIME = qp.get('mime') || 'video/webm;codecs=vp8,opus';
+    const LABEL = qp.get('label') || 'synth';   // 2026-10-07 runs (synth and take4) both used the default 'synth'
+    const statusEl = document.getElementById('status');
+    const post = (p, body) => fetch(p, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).catch(() => {});
+    const log = (msg, data) => {
+      document.getElementById('log').textContent += msg + (data ? ' ' + JSON.stringify(data) : '') + '\n';
+      post('/api/autorun/log', { msg, data, t: new Date().toISOString() });
+    };
+    const pageErrors = [];
+    window.addEventListener('error', (e) => { pageErrors.push(String(e.message)); log('pageerror', { m: String(e.message) }); });
+    window.addEventListener('unhandledrejection', (e) => { pageErrors.push(String(e.reason)); log('unhandledrejection', { r: String(e.reason) }); });
+
+    function trackInfo(stream) {
+      return stream.getTracks().map((t) => ({ kind: t.kind, label: t.label, readyState: t.readyState, muted: t.muted, settings: t.getSettings() }));
+    }
+    async function openFake() {
+      const t0 = performance.now();
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { width: { ideal: W }, height: { ideal: H }, frameRate: { ideal: FPS } }, audio: true,
+      });
+      const ms = Math.round(performance.now() - t0);
+      document.getElementById('preview').srcObject = stream;
+      return { stream, gumMs: ms };
+    }
+
+    async function smoke() {
+      const out = { mode: 'smoke', ok: false, ua: navigator.userAgent, isSecureContext, origin: location.origin, uploads: 'none' };
+      try {
+        await new Promise((r) => { const iv = setInterval(() => { if (window.S4Recorder) { clearInterval(iv); r(); } }, 20); });
+        out.s4RecorderLoaded = !!window.S4Recorder?.startSession;
+        const { stream, gumMs } = await openFake();
+        out.gumMs = gumMs; out.tracks = trackInfo(stream);
+        out.mimeSupported = ['video/webm;codecs=vp8,opus', 'video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8', 'video/webm;codecs=h264', 'video/mp4']
+          .map((m) => [m, MediaRecorder.isTypeSupported(m)]);
+        // 2 s LOCAL MediaRecorder only (no upload), same options as recorder.js
+        const rec = new MediaRecorder(stream, { mimeType: MIME, videoBitsPerSecond: VBR, audioBitsPerSecond: 128000, bitsPerSecond: VBR + 128000 });
+        let chunks = 0, bytes = 0;
+        rec.ondataavailable = (e) => { if (e.data?.size) { chunks++; bytes += e.data.size; } };
+        const stopped = new Promise((r) => { rec.onstop = r; });
+        rec.start(500);
+        await new Promise((r) => setTimeout(r, 2000));
+        rec.stop(); await stopped;
+        out.localRecorder = { requested: MIME, actual: rec.mimeType, chunks, bytes, seconds: 2 };
+        // Optional read-only CORS probe against MinIO (HEAD on presigned URLs, if probe.json present)
+        const probe = await (await fetch('/api/autorun/probe')).json();
+        out.cors = [];
+        for (const [key, u] of Object.entries(probe)) {
+          const one = { key };
+          try { const r = await fetch(u.head, { method: 'HEAD' }); one.simple = { status: r.status, etagReadable: r.headers.get('ETag'), len: r.headers.get('Content-Length') }; }
+          catch (e) { one.simple = { error: String(e.message || e) }; }
+          try { const r = await fetch(u.head, { method: 'HEAD', headers: { 'Content-Type': 'video/webm;codecs=vp8,opus' } }); one.preflighted = { status: r.status, etagReadable: r.headers.get('ETag') }; }
+          catch (e) { one.preflighted = { error: String(e.message || e) }; }
+          out.cors.push(one);
+        }
+        stream.getTracks().forEach((t) => t.stop());
+        out.ok = out.s4RecorderLoaded && bytes > 0 && out.tracks.some((t) => t.kind === 'video') && out.tracks.some((t) => t.kind === 'audio');
+      } catch (e) { out.error = String(e.message || e); }
+      out.pageErrors = pageErrors;
+      return out;
+    }
+
+    async function record() {
+      const out = { mode: 'record', ok: false, dur, W, H, FPS, VBR, MIME, ua: navigator.userAgent, origin: location.origin };
+      let stream;
+      try {
+        await new Promise((r) => { const iv = setInterval(() => { if (window.S4Recorder) { clearInterval(iv); r(); } }, 20); });
+        const o = await openFake(); stream = o.stream; out.gumMs = o.gumMs; out.tracks = trackInfo(stream);
+        log('gum ok', out.tracks.map((t) => [t.kind, t.settings.width, t.settings.height, t.settings.frameRate]));
+        const gaps = [], audioIssues = [];
+        const h = await window.S4Recorder.startSession({
+          stream, label: LABEL, apiBase: '', participant: 'desktop-ai', durationSec: dur,
+          partMiB: 5, timeslice: 1000, vBitrate: VBR, mimeType: MIME, opfs: true,
+          onGap: (g) => { gaps.push(g); log('gap', g); },
+          onAudioIssue: (i) => { audioIssues.push(i); log('audioIssue', i); },
+        });
+        log('session started', { id: h.id });
+        const iv = setInterval(() => {
+          const r = h.results();
+          log('progress', { parts: r.parts.map((p) => [p.partNumber, p.status]), errors: r.errors.length });
+        }, 10000);
+        const res = await h.done;
+        clearInterval(iv);
+        let exp = null;
+        try { exp = await h.exportResults(); } catch (e) { exp = { error: String(e.message || e) }; }
+        Object.assign(out, {
+          key: res.integrity?.key, uploadId: res.integrity?.uploadId, localBytes: res.integrity?.localBytes,
+          localSha256: res.integrity?.localSha256, remoteContentLength: res.integrity?.remoteContentLength,
+          completeOk: res.completeOk, errors: res.errors, gaps, audioIssues, audioMissing: res.audioMissing,
+          recorderMimeType: res.recorderMimeType, elapsedMs: res.recording?.elapsedMs, chunkCount: res.recording?.chunkCount,
+          measuredBitrateBps: res.recording?.measuredBitrateBps, watchdogMode: res.watchdogMode,
+          parts: res.parts.map((p) => ({ n: p.partNumber, size: p.size, status: p.status, ms: p.uploadMs && Math.round(p.uploadMs), attempts: p.attempts })),
+          exportResults: exp,
+        });
+        out.ok = !!res.completeOk && res.integrity?.localBytes === res.integrity?.remoteContentLength;
+      } catch (e) { out.error = String(e.message || e); }
+      try { stream?.getTracks().forEach((t) => t.stop()); } catch (_) {}
+      out.pageErrors = pageErrors;
+      return out;
+    }
+
+    (async () => {
+      statusEl.textContent = 'running:' + mode;
+      log('autorun start', { mode, dur, href: location.href });
+      const out = mode === 'record' ? await record() : await smoke();
+      statusEl.textContent = 'done:' + (out.ok ? 'ok' : 'fail');
+      await post('/api/autorun/done', out);
+    })();
+  </script>
+</body>
+</html>

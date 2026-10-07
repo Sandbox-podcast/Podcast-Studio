@@ -363,3 +363,19 @@ Incomplete MPUs under `spike/s4-lab/rec/` after run: **0**.
 - **Pass 2 (hardware):** real camera/mic, **multi-machine**, low-end **i5** laptop; **re-measure resumeMs** against `192.168.1.68` or production LAN uplink.
 - **Productionize remux:** server job using pass **2a** `ffmpeg` recipe; OPFS path from pass **2b** (per locked POC path).
 - Remove “preliminary” when Sandbox hardware pass is complete.
+
+---
+
+**Update 2026-10-07 (morning, indicative, N=1 per source):** desktop-ai headless recordings (Edge 155, Chromium fake device),
+credential-free: presigned URLs only on the recording machine, recorder.js v2.2 unchanged.
+- **Synthetic:** completeOk=false at record time because of a bench bug: the MinIO ETag came back as `&#34;`, so Complete
+  returned `InvalidPart`. It was fixed, then completed post hoc byte-exact. The bitrate gate FAILs on the fake pattern
+  (0.916 Mbps).
+- **Take4 file-fed (real cam looped):** completeOk=true on the first try, all S4 gates PASS on the full file and with the loops
+  excluded (loss 0.01 %, ~29.97 distinct fps, 2.63 Mbps). A/V sync N/A (300 Hz tone).
+- An audio drop of about 10 dB is **NON VALIDÉ**, tracked in
+  [#15](https://github.com/Sandbox-podcast/Podcast-Studio/issues/15).
+- See [`AB-LAPTOP-RESULTS.md`](./s4/AB-LAPTOP-RESULTS.md) § 2026-10-07 morning,
+  [`ab-reports/2026-10-07-desktop-ai-synth.md`](./s4/ab-reports/2026-10-07-desktop-ai-synth.md),
+  [`ab-reports/2026-10-07-desktop-ai-take4.md`](./s4/ab-reports/2026-10-07-desktop-ai-take4.md) and the bench
+  [`s4/desktop-nocreds/`](./s4/desktop-nocreds/RUNBOOK.md).
